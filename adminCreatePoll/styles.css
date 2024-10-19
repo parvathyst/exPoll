@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    margin: 2rem 3rem;
+}
+
+.create-poll-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.create-poll-main-left {
+    height: 90vh;
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 3;
+}
+
+.create-poll-main-right {
+    background-color: rgb(0, 24, 24);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 2;
+}
+
+
+
+.create-poll-main-left-heading {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333333;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container input,
+.input-container textarea {
+    border: 1.5px solid #A1C3D1;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    color: #333333;
+    resize: none;
+}
+
+.input-container input::placeholder,
+.input-container textarea::placeholder {
+    color: #8D99AE;
+}
+
+.input-container input:focus,
+.input-container textarea:focus {
+    border-color: #A1C3D1;
+}
+
+textarea::-webkit-scrollbar {
+    width: 12px;
+}
+
+textarea::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: #333333;
+    border-radius: 10px;
+    width: 12px;
+}
+
+textarea {
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+}
+
+textarea::-webkit-scrollbar-button {
+    display: none;
+}
+
+.create-poll-main-left-date {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.create-poll-main-left-date-start {
+    background-color: aquamarine;
+    flex: 1;
+}
+
+.create-poll-main-left-date-end {
+    background-color: chartreuse;
+    flex: 1;
+}
