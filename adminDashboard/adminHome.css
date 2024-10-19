@@ -1,0 +1,150 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; 
+}
+
+body {
+     background-color: #ffff; 
+    font-family: "Montserrat", sans-serif;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+.home {
+    display: flex;
+    margin-left: 5%;
+    gap: 5%; 
+    height: 100%; 
+}
+
+.menuBar {
+    background-color: #0D2335; 
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; 
+}
+
+
+.menuItems {
+    display: flex;
+    padding-left: 3rem;
+    align-items: center;    
+}
+
+.menuItems ul{
+    list-style-type: none; 
+    padding: 0;          
+    margin: 0;   
+
+}
+
+.menuItems li{
+    margin-bottom: 3rem;
+    color: whitesmoke;
+}
+
+
+.logoDiv {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center;    /
+}
+
+.logo {
+    height: 30px;
+    width: 150px;
+    display: block;
+}
+
+.contentSection {
+    width: 65%;
+    display: flex;
+    flex-direction: column; 
+}
+
+.iconNav {
+    height: 10%;
+    display: flex;
+    align-items: center;  
+    justify-content: flex-end;
+}
+
+.iconNav .userIcon{
+ padding-top: 2px;
+ height: 30px;
+ width: 30px;
+}
+.headingSection {
+    height: 10%;
+}
+
+.titleOfActivitySection{
+    line-height: 5rem;
+    height: 10%;
+}
+
+
+.activitySection {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+   
+}
+
+.scrollable-div{
+    height: 80%;
+    border: solid 1px #137dd3;
+    border-radius: 5px;
+    gap: 1rem;
+    padding: 10px;       
+   
+}
+.activityBoxContainer{
+    height: 96%; 
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;   
+    direction: rtl; 
+    padding-top: 0;
+    
+}
+
+.activityBox{   
+    background-color: #F2F5FA;
+    border-radius: 5px;
+    min-height: 23%;
+    max-width: 98%;
+    display:flex;
+    justify-content:left;
+    padding: 10px 20px;
+    gap: 0.5rem; 
+
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+}
+
+.activityBoxContainer::-webkit-scrollbar {
+    width: 7px; 
+    
+}
+.activityBoxContainer::-webkit-scrollbar-track {
+    background: #ffffff; 
+   
+}
+.activityBoxContainer::-webkit-scrollbar-thumb {
+    background-color: #0D2335; 
+    border-radius: 6px;
+}
+
+
+
+
