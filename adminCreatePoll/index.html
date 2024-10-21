@@ -5,31 +5,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <script src="script.js"></script>
+    <title>Create a Poll</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </head>
 
 <body>
-    <div class="create-poll-main">
-        <div class="create-poll-main-left">
-            <div class="create-poll-main-left-heading">Create a Poll</div>
-            <div class="input-container title">
-                <input type="text" placeholder="Title">
-            </div>
-            <div class="input-container description">
-                <textarea placeholder="Description" rows="4"></textarea>
-            </div>
-            <div class="create-poll-main-left-date">
-                <div class="create-poll-main-left-date-start input-container">
-                    <input type="datetime" placeholder="Start Date and Time">
+    <div class="main-container">
+        <div class="main-container-left">
+            <h2>Create a Poll</h2>
+
+            <input type="text" id="title" placeholder="Title">
+
+            <textarea id="description" placeholder="Description"></textarea>
+
+
+            <div class="main-container-left-date">
+
+                <div class="main-container-left-date-tile">
+                    <label for="start">Start Date & Time</label>
+                    <input type="datetime-local" id="start">
+
                 </div>
-                <div class="create-poll-main-left-date-end input-container">
-                    <input type="datetime" placeholder="End Date and Time">
+                <div class="main-container-left-date-tile">
+                    <label for="end">End Date & Time</label>
+                    <input type="datetime-local" id="end-date">
                 </div>
             </div>
-            <div class="create-poll-main-left-options"></div>
+
+            <div class="options-container">
+                <div class="options-container-top">
+                    <label for="options">Options</label>
+                    <div class="options-container-top import-excel button">
+                        <p>Import Excel</p>
+                        <img src="" alt="">
+                    </div>
+                </div>
+                <div class="options-container-bottom"></div>
+                <div class="option-item">
+                    <input type="text" value="option 1">
+                    <button onclick="removeOption(this)">Delete</button>
+                </div>
+                <div class="option-item">
+                    <input type="text" value="option 2">
+                    <button onclick="removeOption(this)">Delete</button>
+                </div>
+                <button onclick="addOption()">+ Add Option</button>
+            </div>
         </div>
-        <div class="create-poll-main-right"></div>
+        <div class="main-container-right">
+            <div class="recipients-container">
+                <label for="recipients">Recipients</label>
+                <div class="recipient-item">
+                    <input type="email" value="abc@xyz">
+                    <button onclick="removeRecipient(this)">Delete</button>
+                </div>
+                <div class="recipient-item">
+                    <input type="email" value="example@xyz">
+                    <button onclick="removeRecipient(this)">Delete</button>
+                </div>
+                <button onclick="addRecipient()">+ Add Email</button>
+            </div>
+
+            <div class="private-poll-toggle">
+                <input type="checkbox" id="private-poll">
+                <label for="private-poll" class="toggle-label">Private Poll</label>
+            </div>
+
+            <div class="button-container">
+                <button>Cancel</button>
+                <button>Generate Link</button>
+            </div>
+        </div>
     </div>
 </body>
 
