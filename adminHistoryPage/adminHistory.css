@@ -107,7 +107,7 @@ width: 100px;
     border-radius: 6px;
 }
 
-.search-box {
+.searchBox {
     display: flex;
     align-items: center;
     border: 1px solid #137dd3;
@@ -117,7 +117,7 @@ width: 100px;
     background-color: #fff;
   }
   
-  .search-input {
+  .searchInput {
     border: none;
     outline: none;
     font-size: 14px;
@@ -125,7 +125,7 @@ width: 100px;
     width: 100%;
   }
   
-  .search-input::placeholder {
+  .searchInput::placeholder {
     color: #a6b0b3;
   }
   
@@ -158,8 +158,8 @@ width: 100px;
 
   .container {
     display: flex;
-    justify-content: space-between; /* Space between the icons */
-    align-items: center; /* Align items vertically */
+    justify-content: space-between; 
+    align-items: center; 
 }
 
 .menuIcon{
@@ -168,10 +168,9 @@ width: 100px;
 
 .navBarDiv {
     display: flex;
-    justify-content: space-between; /* Space between the icons */
-    align-items: center; /* Align items vertically */
+    justify-content: space-between; 
+    align-items: center; 
 }
-
 
 .menuIconDiv{
     display: flex;
@@ -181,3 +180,73 @@ width: 100px;
 .userIcon{
    margin-right: 5%;
 }
+
+  .dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-top: 2%;
+    background-color: #a3a9b8;
+    color: white;
+    border: none;
+    border-radius: 8px 8px 8px 8px;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  .dropdownContainer::after {
+    right: 10px;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none;
+  }
+  
+  .sortingDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem; 
+   
+  }
+
+
+.timePeriodContainer{
+    height: 40%;
+    width: 100%;
+    border-radius: 8px;
+    border: solid 1px #137dd3;
+    margin-top: 2%;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 10px; 
+    width: 30vw; 
+    margin: 0 auto;
+    margin-top: 2%;
+  }
+  
+  .clearButton {
+    padding: 10px 20px;
+    background-color: #a3a9b8; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+     width: 50%;
+  }
+  
+  .applyButton {
+    padding: 10px 20px;
+    background-color: #0c1e31;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 50%;
+
+  }
+  
+  .clearButton:hover, .applyButton:hover {
+    opacity: 0.9; 
+  }
