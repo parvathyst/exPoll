@@ -1,25 +1,66 @@
-body{
-    padding: 0px;
-    margin: 0px;
+body {
+  padding: 0px;
+  margin: 0px;
+  background-color: #EEEEEE;
 }
 
-.navBar{
-    background-color: #000000;
-    width: 100vw;
-    height: 68px;
+.navBar {
+  background-color: #000000;
+  width: 100vw;
+  height: 68px;
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  height: 20px;
+  width: 100px;
+  margin-left: 50px;
+}
+
+.pollHeading {
+  margin-top: 31px;
+  margin-left: 70px;
+  color: #8061c3;
+}
+
+.poll-central-div {
+    border-radius: 8px;
+    margin-left: 70px;
+    margin-top: 20px;
+    margin-right: 30px;
+    background-color: white;
+    height: 400px;
+    padding-top: 30px;
+    padding-left: 40px;
+}
+
+.search-bar {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    border-radius: 8px; 
+    background-color: rgba(128, 97, 195, 0.35);
+    overflow: hidden;
+    width: fit-content;
+    height: 45px;
+    gap: 0;
+    padding-left: 5px;
+    padding-right: 10px;
 }
 
-.logoImage{
-    height: 20px;
-    width: 100px;
-    margin-left: 50px;
+.search-bar input {
+    border: none; 
+    width: 300px;
+    outline: none; 
+    background-color: transparent;
 }
 
-.pollHeading{
-    margin-top: 31px;
-    margin-left: 70px;
-    color: #8061C3;
-    font-size: 40;
+.search-bar input::placeholder {
+    color: #0D2335; 
+}
+
+.searchIcon{
+    height: 24px;
+    width: 24px;
 }
