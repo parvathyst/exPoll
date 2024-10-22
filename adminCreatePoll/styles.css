@@ -4,14 +4,16 @@ body {
     padding: 0;
     box-sizing: border-box;
     font: #333333;
+
 }
 
-.heading{
+.heading {
     margin: 0 5rem;
     margin-top: 5rem
 }
 
 .main-container {
+    height: 100%;
     margin: 0 5rem;
     display: flex;
     gap: 2rem;
@@ -24,6 +26,7 @@ body {
 }
 
 .main-container-left {
+    height: 100%;
     display: flex;
     flex-direction: column;
     flex: 3;
@@ -52,8 +55,6 @@ body {
     width: 100%;
 }
 
-
-
 button {
     width: 100%;
     padding: 10px;
@@ -61,53 +62,10 @@ button {
     border: 1.5px solid #A1C3D1;
 }
 
-.D-border {
-    /* width: 100%; */
-    padding: 8px 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: 1.5px solid #A1C3D1;
-}
-
-.D-white {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: none;
-    background-color: #F2F5FA;
-    color: #333333;
-}
-
-.D-black {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: none;
-    background-color: #0D2335;
-    color: #FFFFFF;
-}
-
-.D-black input::placeholder{
-    color: #ffffff9c
-}
-.D-black input {
-    color: #FFFFFF;
-}
-
-.D-no-border {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    width: 100%;
-}
-
-.D-small-field {
-    height: 1rem;
-}
 
 .main-container-left .options-container {
+    height: 100%;
     padding: 10px;
-    display: flex;
     flex-direction: column;
     border: 1.5px solid #A1C3D1;
     border-radius: 8px;
@@ -118,7 +76,8 @@ button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: start;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .private-poll-toggle {
@@ -138,13 +97,13 @@ button {
     margin-bottom: 5px;
 }
 
-.option-item img, .recipient-item img{
+.option-item img,
+.recipient-item img {
     cursor: pointer;
     background-color: transparent;
     width: 24px;
     height: auto;
-    fill: #FFFFFF;
-    color: #FFFFFF;
+
 }
 
 .option-item button,
@@ -155,10 +114,4 @@ button {
 .button-container {
     display: flex;
     justify-content: space-between;
-}
-
-.options-container-bottom {
-    overflow-y: auto;
-    direction: ltr;
-    height: 100%;
 }

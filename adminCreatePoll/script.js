@@ -3,8 +3,8 @@ function addOption() {
     optionContainer.classList.add('option-item');
     optionContainer.classList.add('D-black');
     optionContainer.innerHTML = `
-                    <input type="text" placeholder="Enter Option" class="D-no-border">
-                    <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+            <input type="text" placeholder="Enter Option" class="D-no-border">
+            <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
 `;
     document.querySelector('.options-container-bottom').insertBefore(optionContainer, document.querySelector('.options-container button'));
 }
