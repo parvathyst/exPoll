@@ -51,7 +51,7 @@ width: 100px;
 .adminHistoryDiv{
     margin-left: 5%;
     margin-right:5%;
-    height: 92%;
+    height: 95%;
     width: 90%;
     display: flex;
     gap:1%;
@@ -76,25 +76,24 @@ width: 100px;
     height: 80%;
     border: solid 1px #137dd3;
     border-radius: 5px;
-    gap: 1rem;
+    display: flex;
+    gap: 6rem;
     padding: 10px;  
     width: 100%;     
    
 }
-
 .activityBox{   
     background-color: #F2F5FA;
     border-radius: 5px;
-    min-height: 18%;
+    margin-top: 10px;
+    width: 98%;
     display:flex;
-    justify-content:left;
     padding: 10px 20px;
     gap: 1rem; 
 
 }
 
  
-
 .activityBoxContainer::-webkit-scrollbar {
     width: 7px; 
     
@@ -138,18 +137,47 @@ width: 100px;
     font-size: 16px;
   }
   
-  .search-button:hover {
-    color: #343a40;
-  }
+  
   
   .search-button img {
     height:  18px;
     width: 18px;
   }
   
-  .userIcon{
+ .navBarDiv .userIcon{
     height: 30px;
     width: 30px;
+ 
   }
 
+  .menuIcon{
+    height: 20px;
+    width: 20px;
 
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between; /* Space between the icons */
+    align-items: center; /* Align items vertically */
+}
+
+.menuIcon{
+    margin-left: 4rem;
+}
+
+.navBarDiv {
+    display: flex;
+    justify-content: space-between; /* Space between the icons */
+    align-items: center; /* Align items vertically */
+}
+
+
+.menuIconDiv{
+    display: flex;
+    gap: 1rem;
+}
+
+.userIcon{
+   margin-right: 5%;
+}
