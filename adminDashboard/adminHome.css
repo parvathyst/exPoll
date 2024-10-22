@@ -118,7 +118,7 @@ body {
 .activityBox{   
     background-color: #F2F5FA;
     border-radius: 5px;
-    min-height: 23%;
+    min-height: 10%;
     max-width: 98%;
     display:flex;
     justify-content:left;
