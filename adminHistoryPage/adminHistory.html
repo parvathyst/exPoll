@@ -54,6 +54,30 @@
             <div class="activityBox">
               <div class="icon">
                 <img
+                  src="adminHistoryImages/solid_poll.png"
+                  alt="icon"
+                />
+              </div>
+              <div class="content">
+                <h5>Leader of the day</h5>
+                <h6>17-06-2024</h6>
+              </div>
+            </div>
+            <div class="activityBox">
+              <div class="icon">
+                <img
+                  src="adminHistoryImages/solid_poll.png"
+                  alt="icon"
+                />
+              </div>
+              <div class="content">
+                <h5>Leader of the day</h5>
+                <h6>17-06-2024</h6>
+              </div>
+            </div>
+            <div class="activityBox">
+              <div class="icon">
+                <img
                 src="adminHistoryImages/solid_poll.png"
                 alt="icon"
                 />
@@ -139,13 +163,48 @@
             </div>
           </div>
         </div>
-        <div class="sortingDiv">
-          <div class="search-box">
-            <input type="text" placeholder="Search" class="search-input" />
+        <div class="sortingDiv" >
+          <div class="searchBox" >
+            <input type="text" placeholder="Search" class="searchInput" />
             <button class="search-button">
               <img src="adminHistoryImages\iconamoon_search-bold.png" alt="" />
             </button>
           </div>
+        
+          <div class="dropdownContainer">
+            <select id="activityType" class="dropdown">
+              <option value="meeting">Activity Type</option>
+              <option value="workshop">Workshop</option>
+              <option value="training">Training</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="dropdownContainer">
+            <select id="activityType" class="dropdown">
+              <option value="meeting">Date</option>
+              <option value="workshop">Workshop</option>
+              <option value="training">Training</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="dropdownContainer">
+            <select id="activityType" class="dropdown">
+              <option value="meeting">Sort By</option>
+              <option value="workshop">Workshop</option>
+              <option value="training">Training</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="timePeriodContainer">
+
+          </div>
+          <div class="buttonContainer">
+            <button class="clearButton">Clear Filters</button>
+            <button class="applyButton">Apply Filters</button>
+          </div>
+
+
         </div>
       </div>
     </div>
