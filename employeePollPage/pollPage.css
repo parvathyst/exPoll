@@ -1,0 +1,19 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    
+}
+
+.navBar{
+    background-color: #000000;
+    width: 100vw;
+    height: 68px;
+    display: flex;
+    align-items: center;
+}
+
+.logoImage{
+    height: 20px;
+    width: 100px;
+    margin-left: 50px;
+}
