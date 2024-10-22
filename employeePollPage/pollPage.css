@@ -1,7 +1,6 @@
 body{
     padding: 0px;
     margin: 0px;
-    
 }
 
 .navBar{
@@ -16,4 +15,11 @@ body{
     height: 20px;
     width: 100px;
     margin-left: 50px;
+}
+
+.pollHeading{
+    margin-top: 31px;
+    margin-left: 70px;
+    color: #8061C3;
+    font-size: 40;
 }
