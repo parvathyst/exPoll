@@ -3,17 +3,22 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: 0D2335;
+    font: #333333;
+}
+
+.heading{
+    margin: 0 5rem;
+    margin-top: 5rem
 }
 
 .main-container {
-    margin: 2rem;
+    margin: 0 5rem;
     display: flex;
-    gap: 3rem;
-    align-items: center;
+    gap: 2rem;
+    align-items: start;
 }
 
-.main-container h2{
+.main-container h2 {
     color: #333333;
     font-size: 2rem;
 }
@@ -31,7 +36,7 @@ body {
     flex: 2;
 }
 
-.main-container-left-date{
+.main-container-left-date {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -40,7 +45,7 @@ body {
     font-weight: 500;
 }
 
-.main-container-left-date-tile{
+.main-container-left-date-tile {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
@@ -49,26 +54,67 @@ body {
 
 
 
-input,
-textarea,
 button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 1.5px solid #A1C3D1;
 }
 
-.main-container .options-container{
+.D-border {
+    /* width: 100%; */
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1.5px solid #A1C3D1;
+}
+
+.D-white {
     padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #F2F5FA;
+    color: #333333;
+}
+
+.D-black {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #0D2335;
+    color: #FFFFFF;
+}
+
+.D-black input::placeholder{
+    color: #ffffff9c
+}
+.D-black input {
+    color: #FFFFFF;
+}
+
+.D-no-border {
+    border: none;
+    outline: none;
+    background-color: transparent;
     width: 100%;
+}
+
+.D-small-field {
+    height: 1rem;
+}
+
+.main-container-left .options-container {
+    padding: 10px;
     display: flex;
     flex-direction: column;
     border: 1.5px solid #A1C3D1;
     border-radius: 8px;
+    flex: 1;
 }
 
-.options-container-top{
+.options-container-top {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -88,7 +134,17 @@ button {
 .recipient-item {
     display: flex;
     justify-content: space-between;
+    gap: 0.5rem;
     margin-bottom: 5px;
+}
+
+.option-item img, .recipient-item img{
+    cursor: pointer;
+    background-color: transparent;
+    width: 24px;
+    height: auto;
+    fill: #FFFFFF;
+    color: #FFFFFF;
 }
 
 .option-item button,
@@ -101,3 +157,8 @@ button {
     justify-content: space-between;
 }
 
+.options-container-bottom {
+    overflow-y: auto;
+    direction: ltr;
+    height: 100%;
+}

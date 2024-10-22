@@ -6,36 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
-    <title>Create a Poll</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        .flatpickr-calendar {
+            background-color: #0D2335;
+            border: 2px solid #FFFFFF;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #FFFFFF;
+            width: auto;
+        }
 
+        .flatpickr-day {
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 50%;
+        }
+
+        .flatpickr-day:hover {
+            background-color: #ffffff6e;
+            color: #0D2335;
+        }
+
+        .flatpickr-time {
+            background-color: #e9ecef;
+            border: none;
+        }
+
+        .flatpickr-hour,
+        .flatpickr-minute {
+            color: #333;
+            font-size: 12px;
+            padding: 5px;
+        }
+    </style>
+    <title>Create a Poll</title>
 </head>
 
 <body>
+    <div class="heading">
+        <h2>Create a Poll</h2>
+    </div>
     <div class="main-container">
         <div class="main-container-left">
-            <h2>Create a Poll</h2>
 
-            <input type="text" id="title" placeholder="Title">
+            <input type="text" id="title" placeholder="Title" class="D-border D-small-field">
 
-            <textarea id="description" placeholder="Description"></textarea>
-
-
+            <textarea id="description" placeholder="Description" rows="3" class="D-border D-small-field"
+                style="resize: none;"></textarea>
             <div class="main-container-left-date">
-
                 <div class="main-container-left-date-tile">
-                    <label for="start">Start Date & Time</label>
-                    <input type="datetime-local" id="start">
-
+                    <!-- <input type="datetime-local" id="start"> -->
+                    <input type="text" id="datetimepicker" placeholder="Start Date and Time"
+                        class="D-border D-small-field">
                 </div>
                 <div class="main-container-left-date-tile">
-                    <label for="end">End Date & Time</label>
-                    <input type="datetime-local" id="end-date">
+                    <input type="text" id="datetimepicker" placeholder="End Date and Time"
+                        class="D-border D-small-field">
                 </div>
             </div>
-
-            <div class="options-container">
+            <div class="options-container D-border">
                 <div class="options-container-top">
                     <label for="options">Options</label>
                     <div class="options-container-top import-excel button">
@@ -43,30 +74,31 @@
                         <img src="" alt="">
                     </div>
                 </div>
-                <div class="options-container-bottom"></div>
-                <div class="option-item">
-                    <input type="text" value="option 1">
-                    <button onclick="removeOption(this)">Delete</button>
+                <div class="options-container-bottom">
+                    <div class="option-item D-black">
+                        <input type="text" placeholder="Enter Option" class="D-no-border">
+                        <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                    </div>
+                    <div class="option-item D-black">
+                        <input type="text" placeholder="Enter Option" class="D-no-border">
+                        <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                    </div>
+                    <button onclick="addOption()" class="D-black">+ Add Option</button>
                 </div>
-                <div class="option-item">
-                    <input type="text" value="option 2">
-                    <button onclick="removeOption(this)">Delete</button>
-                </div>
-                <button onclick="addOption()">+ Add Option</button>
             </div>
         </div>
         <div class="main-container-right">
-            <div class="recipients-container">
+            <div class="recipients-container D-border">
                 <label for="recipients">Recipients</label>
-                <div class="recipient-item">
-                    <input type="email" value="abc@xyz">
-                    <button onclick="removeRecipient(this)">Delete</button>
+                <div class="recipient-item D-white">
+                    <input type="email" value="abc@xyz" class="D-no-border">
+                    <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
                 </div>
-                <div class="recipient-item">
-                    <input type="email" value="example@xyz">
-                    <button onclick="removeRecipient(this)">Delete</button>
+                <div class="recipient-item D-white">
+                    <input type="email" value="abc@xyz" class="D-no-border">
+                    <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
                 </div>
-                <button onclick="addRecipient()">+ Add Email</button>
+                <button onclick="addRecipient()" class="D-white">+ Add Email</button>
             </div>
 
             <div class="private-poll-toggle">
@@ -80,6 +112,25 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#datetimepicker", {
+            enableTime: true,          // Enable time selection
+            dateFormat: "Y-m-d H:i",   // Set date format
+            minDate: "today",          // Disable past dates
+            time_24hr: false,           // Use 24-hour format
+            minuteIncrement: 5,        // Increment minutes by 5
+            altInput: true,            // Show alternate input field
+            altFormat: "F j, Y h:i K", // Custom format for display (optional)
+            disableMobile: true,       // Force desktop version of picker on mobile
+            onOpen: function () {
+                console.log("Picker opened!");
+            }
+        });
+    </script>
+
+
 </body>
 
 </html>
