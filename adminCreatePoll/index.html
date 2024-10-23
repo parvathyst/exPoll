@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="D.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="
+https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <style>
+        .flatpickr-calendar {
+            background-color: #0D2335;
+            border: 2px solid #FFFFFF;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #FFFFFF;
+            width: auto;
+        }
+
+        .flatpickr-day {
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 50%;
+        }
+
+        .flatpickr-day:hover {
+            background-color: #ffffff6e;
+            color: #0D2335;
+        }
+
+        .flatpickr-time {
+            background-color: #e9ecef;
+            border: none;
+        }
+
+        .flatpickr-hour,
+        .flatpickr-minute {
+            color: #333;
+            font-size: 12px;
+            padding: 5px;
+        }
+    </style>
+    <title>Create a Poll</title>
+</head>
+
+<body>
+    <div class="heading">
+        <h2>Create a Poll</h2>
+    </div>
+    <div class="main-container">
+        <div class="main-container-left">
+
+            <input type="text" id="title" placeholder="Title" class="D-border D-small-field">
+
+            <textarea id="description" placeholder="Description" rows="3" class="D-border D-small-field"
+                style="resize: none;"></textarea>
+            <div class="main-container-left-date">
+                <div class="main-container-left-date-tile">
+                    <input type="date" id="datetimepicker" placeholder="Start Date and Time"
+                        class="D-border D-small-field">
+                </div>
+                <div class="main-container-left-date-tile">
+                    <input type="text" id="datetimepicker" placeholder="End Date and Time"
+                        class="D-border D-small-field">
+                </div>
+            </div>
+            <div class="options-container D-border">
+                <div class="options-container-top">
+                    <label for="options">Options</label>
+                    <div class="D-import-excel button" id="upload">
+                        <input type="file" id="upload-options" class="D-no-border" accept=".xlsx, .xls" />
+                        <img src="icons/import_icon.svg" alt="" class="D-small-icon"></img>
+                    </div>
+                </div>
+                <div class="options-container-bottom">
+                    <div class="option-item D-black">
+                        <input type="text" placeholder="Enter Option" class="D-no-border">
+                        <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                    </div>
+                    <div class="option-item D-black">
+                        <input type="text" placeholder="Enter Option" class="D-no-border">
+                        <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                    </div>
+                    <button onclick="addOption()" class="D-black">+ Add Option</button>
+                </div>
+            </div>
+        </div>
+        <div class="main-container-right">
+            <div class="recipients-container D-border">
+                <label for="recipients">Recipients</label>
+                <div class="recipient-item D-white">
+                    <input type="email" value="abc@xyz" class="D-no-border">
+                    <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                </div>
+                <div class="recipient-item D-white">
+                    <input type="email" value="abc@xyz" class="D-no-border">
+                    <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                </div>
+                <button onclick="addRecipient()" class="D-white">+ Add Email</button>
+            </div>
+
+            <div class="private-poll-toggle">
+                <input type="checkbox" id="private-poll">
+                <label for="private-poll" class="toggle-label">Private Poll</label>
+            </div>
+
+            <div class="button-container">
+                <button>Cancel</button>
+                <button>Generate Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#datetimepicker", {
+            enableTime: true,          // Enable time selection
+            dateFormat: "Y-m-d H:i",   // Set date format
+            minDate: "today",          // Disable past dates
+            time_24hr: false,           // Use 24-hour format
+            minuteIncrement: 5,        // Increment minutes by 5
+            altInput: true,            // Show alternate input field
+            altFormat: "F j, Y h:i K", // Custom format for display (optional)
+            disableMobile: true,       // Force desktop version of picker on mobile
+            onOpen: function () {
+                console.log("Picker opened!");
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
