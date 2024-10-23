@@ -55,12 +55,15 @@
     align-items: center;
     background-color: #8D99AE;
     border-radius: 8px;
-    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
     margin: 0;
     color: #FFFFFF;
+    height: 28px;
 }
 
 .D-import-excel svg{
     fill: #FFFFFF;
     color: #FFFFFF;
+    stroke: #FFFFFF;
 }
