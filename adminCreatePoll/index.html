@@ -9,6 +9,8 @@
     <script src="script.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="
+https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <style>
         .flatpickr-calendar {
             background-color: #0D2335;
@@ -69,19 +71,19 @@
             <div class="options-container D-border">
                 <div class="options-container-top">
                     <label for="options">Options</label>
-                    <div class="D-import-excel button">
-                        <p>Import Excel</p>
+                    <div class="D-import-excel button" id="upload">
+                        <input type="file" id="upload-options" class="D-no-border" accept=".xlsx, .xls" />
                         <img src="icons/import_icon.svg" alt="" class="D-small-icon"></img>
                     </div>
                 </div>
                 <div class="options-container-bottom">
                     <div class="option-item D-black">
                         <input type="text" placeholder="Enter Option" class="D-no-border">
-                        <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                        <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
                     </div>
                     <div class="option-item D-black">
                         <input type="text" placeholder="Enter Option" class="D-no-border">
-                        <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                        <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
                     </div>
                     <button onclick="addOption()" class="D-black">+ Add Option</button>
                 </div>
@@ -92,11 +94,11 @@
                 <label for="recipients">Recipients</label>
                 <div class="recipient-item D-white">
                     <input type="email" value="abc@xyz" class="D-no-border">
-                    <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                    <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
                 </div>
                 <div class="recipient-item D-white">
                     <input type="email" value="abc@xyz" class="D-no-border">
-                    <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                    <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
                 </div>
                 <button onclick="addRecipient()" class="D-white">+ Add Email</button>
             </div>

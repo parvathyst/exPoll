@@ -4,6 +4,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font: #333333;
+    /* height: 100vh; */
 
 }
 
@@ -114,4 +115,9 @@ button {
 .button-container {
     display: flex;
     justify-content: space-between;
+}
+
+.options-container-bottom{
+    overflow-y: auto;
+    
 }
