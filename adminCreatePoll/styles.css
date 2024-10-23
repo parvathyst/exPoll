@@ -1,0 +1,117 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font: #333333;
+
+}
+
+.heading {
+    margin: 0 5rem;
+    margin-top: 5rem
+}
+
+.main-container {
+    height: 100%;
+    margin: 0 5rem;
+    display: flex;
+    gap: 2rem;
+    align-items: start;
+}
+
+.main-container h2 {
+    color: #333333;
+    font-size: 2rem;
+}
+
+.main-container-left {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+    justify-content: space-between;
+}
+
+.main-container-right {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+.main-container-left-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.main-container-left-date-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1.5px solid #A1C3D1;
+}
+
+
+.main-container-left .options-container {
+    height: 100%;
+    padding: 10px;
+    flex-direction: column;
+    border: 1.5px solid #A1C3D1;
+    border-radius: 8px;
+    flex: 1;
+}
+
+.options-container-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.private-poll-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-label {
+    margin-left: 10px;
+}
+
+.option-item,
+.recipient-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 5px;
+}
+
+.option-item img,
+.recipient-item img {
+    cursor: pointer;
+    background-color: transparent;
+    width: 24px;
+    height: auto;
+
+}
+
+.option-item button,
+.recipient-item button {
+    padding: 5px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
