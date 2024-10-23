@@ -1,0 +1,158 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333333;
+    margin-top: 2rem;
+}
+
+.super-admin-container{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0 5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.super-admin-container-top{
+    display: flex;
+    justify-content: end;
+}
+
+.super-admin-container-middle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.super-admin-container-bottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    overflow-y: auto;
+    direction: ltr;
+}
+
+.add-admin {
+    background-color: #6c7ae0;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.admin-item {
+    width: 96%;
+    margin: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F2F5FA;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.admin-details {
+    font-size: 18px;
+}
+
+.admin-details span {
+    font-size: 14px;
+    color: gray;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-buttons button img {
+    width: 18px;
+    height: auto;
+}
+
+.action-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #8D99AE;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-buttons button:hover {
+    background-color: #595959;
+}
+
+.action-buttons button.delete {
+    background-color: #0D2335;
+    color: white;
+}
+
+.action-buttons button.delete:hover {
+    background-color: #000000;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 300px;
+    background-color: white;
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    font-size: 16px;
+    color: #7b8794;
+}
+
+.search-container input::placeholder {
+    color: #a0aec0;
+}
+
+.search-container button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-container button img {
+    width: 20px;
+    height: 20px;
+}
+
+
+.add-admin-btn {
+    display: flex;
+    align-items: center;
+    background-color: #8D99AE; /* Button background color */
+    color: white;
+    padding: 5px 20px;
+    height: 34px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.add-admin-btn img {
+    width: 18px;
+    height: auto;
+    margin-left: 10px;
+    color: #FFFFFF;
+}
+
+.add-admin-btn:hover {
+    background-color: #7480a5;
+}
