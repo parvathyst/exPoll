@@ -28,20 +28,20 @@ window.addEventListener('click', function (event) {
     }
 });
 
-function displayAdmin(value) {
-    const adminItem = document.createElement('div');
-    adminItem.classList.add('admin-item');
-    adminItem.innerHTML = `
-        <div class="admin-details">
-                    <strong>${value.name}</strong><br>
-                    <span>${value.email}</span>
-                </div>
-                <div class="action-buttons">
-                    <button class="view"><img src="icons/pen.png" alt="edit icon"></button>
-                    <button class="delete"><img src="icons/trash.png" alt="delete icon"></button>
-                </div>
-        `;
-    document.querySelector('.options-container-bottom').insertBefore(optionContainer, document.querySelector('.options-container button'));
-}
+// function displayAdmin(value) {
+//     const adminItem = document.createElement('div');
+//     adminItem.classList.add('admin-item');
+//     adminItem.innerHTML = `
+//         <div class="admin-details">
+//                     <strong>${value.name}</strong><br>
+//                     <span>${value.email}</span>
+//                 </div>
+//                 <div class="action-buttons">
+//                     <button class="view"><img src="icons/pen.png" alt="edit icon"></button>
+//                     <button class="delete"><img src="icons/trash.png" alt="delete icon"></button>
+//                 </div>
+//         `;
+//     document.querySelector('.options-container-bottom').insertBefore(optionContainer, document.querySelector('.options-container button'));
+// }
 
-export { displayAdmin };
+// export default displayAdmin;
