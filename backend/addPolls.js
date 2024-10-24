@@ -26,9 +26,9 @@ let topic ={
         {
           topicId: 2,
           name: "Awards which Experion Received - Explain what are they and what made us receive it",
-          assignedEmployee: "abc@gmail.com",
-          status: "true",
-          selectedTime: "08:00:00"
+          assignedEmployee: "",
+          status: "false",
+          selectedTime: ""
         },
         {
           topicId: 3,
