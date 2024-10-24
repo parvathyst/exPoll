@@ -1,5 +1,19 @@
 
 
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    height: 100vh;
+    overflow: hidden;
+  
+}
+
 .heading {
     margin: 0 5rem;
     margin-top: 5rem
@@ -8,55 +22,76 @@
 .main-container {
     /* background-color: red; */
     height: 100%;
-    margin: 0 5rem;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
     display: flex;
     gap: 2rem;
-    align-items: start;
-}
-
-.main-container h2 {
-    color: #333333;
-    font-size: 2rem;
 }
 
 .main-container-left {
-    /* background-color: #0D2335; */
+    /* background-color: #2684d1; */
     height: 80%;
-    display: flex;
-    flex-direction: column;
-    flex: 3;
-    justify-content: space-between;
+    width: 70%;
+
 }
 
 .main-container-right {
     /* background-color: blueviolet; */
-    display: flex;
-    flex-direction: column;
-    flex: 2;
-    height: 100%;
+    width: 30%;
+    height: 80%;
+   
 }
 
 .main-container-left-date {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 2.5rem;
-    font-size: 0.8rem;
-    font-weight: 500;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .main-container-left-date-tile {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
-    width: 100%;
+    gap: 0.5rem;
+    width: 15%;
+    height: 10%;
+    /* background-color: darkorange; */
+
 }
 
-button {
+
+
+
+#addButton{
+  width: 50%;
+  
+}
+
+/* button {
     width: 100%;
     padding: 10px;
     border-radius: 8px;
     border: 1.5px solid #A1C3D1;
+} */
+
+.options-container{
+    max-height: 65%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: rgb(148, 114, 76); */
+ 
+}
+
+
+.options-container-top {
+    /* background-color: #333333; */
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; */
+    /* margin-bottom: 1rem; */
 }
 
 
@@ -64,19 +99,11 @@ button {
     height: 100%;
     padding: 10px;
     flex-direction: column;
-    border: 1.5px solid #A1C3D1;
+    border: 1.5px solid #0f5471;
     border-radius: 8px;
     flex: 1;
 }
 
-.options-container-top {
-    /* background-color: #333333; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
 
 
 .options-floating-button {
@@ -87,13 +114,6 @@ button {
     z-index: 10;   /* Ensures it's above other elements */
 }
 
-.options-container{
-    max-height: 60%;
-    display: flex;
-    flex-direction: column;
-    /* background-color: chartreuse; */
-    /* margin-bottom: 2REM; */
-}
 
 .private-poll-toggle {
     display: flex;
@@ -104,7 +124,7 @@ button {
     margin-left: 10px;
 }
 .option-item, .options-container-bottom button{
-    width: 97%
+    width: 98%
 }
 
 .options-container button{
@@ -152,6 +172,21 @@ button {
     
 }
 
+
+.recipient-container-bottom {
+    height: 70%; 
+    overflow-y: auto;  
+    flex: 1;
+    /* background-color: darkblue;  */
+    margin-bottom: 0.5rem;
+
+    
+}
+.recipient-container-buttons{
+    /* background-color: rgb(156, 19, 156); */
+    height: 10% ;
+  
+}
  
 .options-container-bottom::-webkit-scrollbar {
     width: 7px; 
@@ -167,20 +202,25 @@ button {
 }
 
 .recipients-container{
-    height: 40%; 
-    overflow-y: auto;   
+    height: 70%; 
+    /* background-color: rgb(83, 220, 20); */
 }
 
 
-.recipients-container::-webkit-scrollbar {
+
+#addRecipientButton{
+    
+}
+
+.recipient-container-bottom::-webkit-scrollbar {
     width: 7px; 
     
 }
-.recipients-container::-webkit-scrollbar-track {
+.recipient-container-bottom::-webkit-scrollbar-track {
     background: #ffffff; 
    
 }
-.recipients-container::-webkit-scrollbar-thumb {
+.recipient-container-bottom::-webkit-scrollbar-thumb {
     background-color: #0D2335; 
     border-radius: 6px;
 }
@@ -192,25 +232,15 @@ button {
 
 
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; 
-}
-
-body {
-    font-family: "Montserrat", sans-serif;
-    height: 100vh;
-    overflow: hidden;
-  
-}
 
 .mainDiv{
+    /* background-color: aqua; */
     width: 100%;
     gap: 5%; 
     height: 100%; 
-
 }
+
+
 
 .headingDiv{
     margin-left: 5%;
@@ -327,7 +357,7 @@ width: 100px;
   }
   
   .cancelButton {
-    padding: 10px 20px;
+    padding: 10px;
     background-color: #a3a9b8; 
     color: white;
     border: none;
@@ -335,6 +365,8 @@ width: 100px;
     cursor: pointer;
     font-size: 14px;
      width: 50%;
+     height: 70%;
+     /* margin-bottom: 2rem; */
   }
   
   .generateButton {
@@ -363,31 +395,26 @@ width: 100px;
     display: flex;
     flex-direction: row;
     gap: 5rem;
-    padding-bottom: 4%;
+  padding-bottom: 4%; 
+      /* background-color: aquamarine; */
+    
 }
-
-
-
+.recipient-container-bottom{
+    /* background-color: darkkhaki; */
+}
 
 .headingOption{
     padding-left: 0px;
 }
 
-
-
-
   .options-container-top {
     display: flex;
     align-items: center;
-    justify-content: end;
-    gap: 0.1rem ;
+    gap: 25rem ;
     padding: 10px;
+    height: 15%;
 }
 
-.custom-label {
-    font-weight: bold;
-    margin-right: 20px;
-}
 
 #upload {
     position: relative;
@@ -397,6 +424,7 @@ width: 100px;
 .custom-upload-button {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
     background-color: #8D99AE;
     color: white;
     padding: 10px 20px;
@@ -406,16 +434,23 @@ width: 100px;
     border: none;
     transition: background-color 0.3s ease;
     height: 28px;
-    width: 190px;
 }
 
+.addOptionButtonContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .custom-upload-button img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+   
 }
-
+.uploadImportButtons{
+    display: flex;
+    gap: 1rem;
+}
 #upload-options {
     position: absolute;
     left: 0;
@@ -484,3 +519,53 @@ input[type="file"] {
   a{
     text-decoration: none;
   }
+
+  .toggle-and-cancel-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+
+
+  
+.ButtonContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.generate-link-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0f2a3f; /* dark background color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px; /* rounded corners */
+    font-size: 14px;
+    cursor: pointer;
+    gap: 10px; /* space between elements */
+    width: 100%;
+    height: 90%;
+}
+
+.separator {
+    height: 24px; /* adjust the height of the separator */
+    width: 1px;
+    background-color: white; /* line color */
+}
+
+.icon-copy {
+    content: url('icons/tabler_copy.svg'); /* or use a Unicode copy icon if preferred */
+    font-size: 14px;
+}
+
+/* Optional: Add hover effect */
+.generate-link-button:hover {
+    background-color: #132f47;
+}

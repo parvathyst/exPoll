@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function addRecipient(value) {
     const recipientContainer = document.createElement('div');
-    recipientContainer.classList.add('recipient-item', 'D-white');
+    recipientContainer.classList.add('recipient-item', 'D-card');
 
     if (value === undefined) {
         recipientContainer.innerHTML = `
-            <input type="email" placeholder="Enter Email" class="D-no-border">
+            <input type="email" placeholder="Enter Email"  class="D-no-border">
             <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     } else {
@@ -22,7 +22,10 @@ function addRecipient(value) {
         `;
     }
 
-    document.querySelector('.recipients-container').insertBefore(recipientContainer, document.querySelector('.recipients-container button'));
+    // document.querySelector('.recipients-container').insertBefore(recipientContainer, document.querySelector('.recipients-container button'));
+    document.querySelector('.recipient-container-none').insertAdjacentElement('afterend', recipientContainer);
+
+
 }
 
 function removeRecipient(button) {

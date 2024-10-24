@@ -13,7 +13,7 @@ function addOption(value) {
     optionContainer.classList.add('D-black');
     if (value === undefined) {
         optionContainer.innerHTML = `
-        <input type="text" placeholder="Enter Option" class="D-no-border">
+        <input type="text" placeholder="Enter Option"  class="D-no-border">
         <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)" />
         `;
     } else {
@@ -43,6 +43,8 @@ function handleFile(event) {
             const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
             const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
             
+
+            console.log(jsonData);
             console.log(jsonData[0]);
             console.log(jsonData[1]);
 
