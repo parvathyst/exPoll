@@ -3,14 +3,16 @@
     "pollId": 1,
     "title": "Leader of the Day",
     "description": "Select topic for your leader of the day presentation.",
-    "startDate": "2024-10-25",
-    "endDate": "2024-10-25",
-    "startTime": "09:00:00",
-    "endTime": "10:00:00",
+    "startDate": "08-09-2024",
+    "endDate": "08-09-2024",
+    "startTime": "09:00",
+    "endTime": "10:00",
     "topics": [
       {
         "topicId": 1,
-        "name": "About Experion - What we are + Our Journey till date"
+        "name": "About Experion - What we are + Our Journey till date",
+        "assignedEmployee":"abc@gmail.com",
+        "status": "true"
       },
       {
         "topicId": 2,
