@@ -22,7 +22,7 @@
         </div>
         <div class="super-admin-container-middle">
             <h2>Admins</h2>
-            <button class="add-admin-btn" id="openPopupBtn">
+            <button class="add-admin-btn" id="add-admin-button">
                 + Add Admin
                 <img src="https://img.icons8.com/ios-filled/50/user.png" alt="User Icon">
             </button>
@@ -62,14 +62,38 @@
         </div>
     </div>
 
-    <div id="popupForm" class="popup-form">
+    <div id="add-admin-popup" class="popup-form">
         <div class="popup-content">
-            <form id="adminForm">
+            <form id="add-admin-form">
+                <input type="text" id="addAdminfullName" name="fullName" placeholder="Full Name">
+                <input type="email" id="addAdminemail" name="email" placeholder="email">
+                <input type="password" id="AddAdminpassword" name="password" placeholder="default password">
+                <div class="popup-buttons">
+                    <button type="button" class="btn cancel-button" id="" onclick="cancel()">Cancel</button>
+                    <button type="submit" class="btn add-admin">Add Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-admin-popup" class="popup-form">
+        <div class="popup-content">
+            <form id="edit-admin-form">
                 <input type="text" id="fullName" name="fullName" placeholder="Full Name">
-                <input type="email" id="email" name="email" placeholder="email">
-                <input type="password" id="password" name="password" placeholder="default password">
                 <div class="popup-buttons">
                     <button type="button" class="btn cancel" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn add-admin">Add Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="delete-admin-popup" class="popup-form">
+        <div class="popup-content">
+            <form id="delete-admin-form">
+                <input type="text" id="fullName" name="fullName" placeholder="confirm">
+                <div class="popup-buttons">
+                    <button type="button" class="btn cancel" id="" onclick="cancel()">Cancel</button>
                     <button type="submit" class="btn add-admin">Add Admin</button>
                 </div>
             </form>
