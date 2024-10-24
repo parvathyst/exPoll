@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="D.css">
-    <script src="script.js"></script>
-    <script src="script2.js"></script>
+    <link rel="stylesheet" href="adminCreatePageCss.css">
+    <link rel="stylesheet" href="adminCreatePageCommon.css">
+    <script src="adminCreatePollPage.js"></script>
+    <script src="adminCreatePoll.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -94,27 +94,31 @@ https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
                     <div class="options-container-top">
 
                         <div class="headingOption">
-                            <label for="upload-options" class="custom-label">Options</label>
-
+                            <!-- <label for="upload-options" class="custom-label">Options</label> -->
+                            <h4>Options</h4>
                         </div>
 
-
-                        <div id="downloadTemplate">
-                            <a href="templates/Poll Options Template.xlsx" download>
-                                <label class="custom-upload-button">
-                                    <img src="icons/import_icon.svg" alt="download" class="">
-                                    Download Template
+                        <div class="uploadImportButtons">
+                            <div id="downloadTemplate">
+                                <a href="templates/Poll Options Template.xlsx" download>
+                                    <label class="custom-upload-button">
+                                        <img src="icons/downloadIcon.png" alt="download" class="">
+                                        Template
+                                    </label>
+                                </a>
+                            </div>
+                            <div id="upload2">
+                                <label for="upload-options" class="custom-upload-button">
+                                    <img src="icons/importIcon.png" alt="Upload" class="">
+                                    Import excel
                                 </label>
-                            </a>
+                                <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
+                            </div>
                         </div>
-                        <div id="upload2">
-                            <label for="upload-options" class="custom-upload-button">
-                                <img src="icons/importIcon.png" alt="Upload" class="">
-                                Import excel
-                            </label>
-                            <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
-                        </div>
+
                     </div>
+
+
                     <div class="options-container-bottom">
                         <div class="options-container-none"></div>
                         <!-- <div class="option-item D-black">
@@ -122,7 +126,12 @@ https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
                             <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
                         </div> -->
                     </div>
-                    <button onclick="addOption()" class="D-black">+ Options</button>
+                    <div>
+                        <div class="ButtonContainer">
+                            <button onclick="addOption()" class="D-black" id="addButton"> Add Options</button>
+                        </div>
+                    </div>
+                   
                 </div>
                 <!-- <button onclick="addOption()" class="D-black">+ Add Option</button> -->
             </div>
@@ -134,14 +143,12 @@ https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
             <div class="main-container-right">
                 <h4>Recipients</h4>
                 <div class="recipients-container D-border">
-
-
                     <div class="recipientsButtonDiv">
                         <div id="downloadTemplate">
                             <a href="templates\User List Template.xlsx" download>
                                 <label class="custom-upload-button">
-                                    <img src="icons/import_icon.svg" alt="download" class="">
-                                    Download Template
+                                    <img src="icons/downloadIcon.png" alt="download" class="">
+                                    Template
                                 </label>
                             </a>
                         </div>
@@ -152,46 +159,52 @@ https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
                             </label>
                             <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
                         </div>
-
                     </div>
 
+                    <div class="recipient-container-bottom">
+                        <div class="recipient-container-none">
 
-                    <div class="recipient-item D-white">
-                        <input type="email" value="Enter Email" class="D-no-border">
-                        <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
-                    </div>
-
-
-                </div>
-
-
-
-                <div class="buttonContainer">
-                    <!-- Button to add recipient -->
-                    <button onclick="addRecipient()" class="D-white">+ Add Email</button>
-
-
-
-                    <!-- Action buttons -->
-                    <button class="cancelButton">Cancel</button>
-
-                    <!-- Toggle switch container -->
-                    <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
-                        <!-- Label for the toggle switch -->
-                        <div>
-                            <span id="toggleLabel">Private Poll</span>
                         </div>
-
-                        <!-- Toggle switch -->
-                        <label class="switch">
-                            <input type="checkbox" id="toggleSwitch">
-                            <span class="slider"></span>
-                        </label>
+                    </div>
+                    
+                    <div class="buttonContainer" class="addOptionButtonContainer">
+                        <!-- Button to add recipient -->
+                        <button onclick="addRecipient()" id="addRecipientButton" class="D-recipient">+ Add
+                            Recipient</button>
                     </div>
 
 
-                    <button class="generateButton">Generate Link</button>
                 </div>
+
+
+                <div class="recipient-container-buttons">
+                    <div class="toggle-and-cancel-container">
+                        <!-- Action buttons -->
+                        <button class="cancelButton">Cancel</button>
+                    
+                        <!-- Toggle switch container -->
+                        <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
+                            <!-- Label for the toggle switch -->
+                            <div>
+                                <h4><span id="toggleLabel">Private Poll</span></h4>
+                            </div>
+                    
+                            <!-- Toggle switch -->
+                            <label class="switch">
+                                <input type="checkbox" id="toggleSwitch">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="generate-link-button">
+                        Generate Link
+                        <span class="separator"></span>
+                        <i class="icon-copy"></i>
+                    </button>
+                </div>
+                
+                
             </div>
 
 
