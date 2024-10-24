@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
 function addOption(value) {
     const optionContainer = document.createElement('div');
     optionContainer.classList.add('option-item');
@@ -21,39 +22,18 @@ function addOption(value) {
         <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)" />
         `;
     }
-    document.querySelector('.options-container-bottom').insertBefore(optionContainer, document.querySelector('.options-container button'));
+    document.querySelector('.options-container-none').insertAdjacentElement('afterend', optionContainer);
 }
 
 function removeOption(button) {
     button.parentElement.remove();
 }
 
-function addRecipient(value) {
-    const recipientContainer = document.createElement('div');
-    recipientContainer.classList.add('recipient-item');
-    recipientContainer.classList.add('D-white');
-    recipientContainer.innerHTML = `
-    <input type="email" value="abc@xyz" class="D-no-border">
-    <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
-    `;
-    document.querySelector('.recipients-container').insertBefore(recipientContainer, document.querySelector('.recipients-container button'));
-}
-
-function removeRecipient(button) {
-    button.parentElement.remove();
-}
-
-///////////////////////////////////
-
-
 function handleFile(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
 
-    // Clear previous error messages and card content
-    // document.getElementById('error-message').textContent = '';
-    // document.getElementById('options-container').innerHTML = '';
-
+    
     if (file && (file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || file.type === "application/vnd.ms-excel")) {
         reader.onload = function (e) {
             const data = new Uint8Array(e.target.result);
@@ -62,9 +42,15 @@ function handleFile(event) {
             // Assuming we want the first sheet
             const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
             const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+            
+            console.log(jsonData[0]);
+            console.log(jsonData[1]);
+
+           
+
 
             if (jsonData.length > 0) {
-                jsonData.forEach((row) => {
+                jsonData.slice(1).forEach((row) => {
                     if (row.length > 0) {
                         addOption(row[0]); // Assuming the first column contains the option value
                     }
