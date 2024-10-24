@@ -7,8 +7,14 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="D.css">
     <script src="script.js"></script>
+    <script src="script2.js"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="
+https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <style>
         .flatpickr-calendar {
             background-color: #0D2335;
@@ -46,89 +52,153 @@
 </head>
 
 <body>
-    <div class="heading">
-        <h2>Create a Poll</h2>
-    </div>
-    <div class="main-container">
-        <div class="main-container-left">
-
-            <input type="text" id="title" placeholder="Title" class="D-border D-small-field">
-
-            <textarea id="description" placeholder="Description" rows="3" class="D-border D-small-field"
-                style="resize: none;"></textarea>
-            <div class="main-container-left-date">
-                <div class="main-container-left-date-tile">
-                    <input type="date" id="datetimepicker" placeholder="Start Date and Time"
-                        class="D-border D-small-field">
-                </div>
-                <div class="main-container-left-date-tile">
-                    <input type="text" id="datetimepicker" placeholder="End Date and Time"
-                        class="D-border D-small-field">
-                </div>
+    <div class="mainDiv">
+        <div class="navBarDiv">
+            <div class="menuIconDiv">
+                <img src="../adminHistoryPage/adminHistoryImages/menuicon.png" alt="" class="menuIcon" />
+                <img src="../adminHistoryPage/adminHistoryImages/logoexpoll.png" alt="expoll" class="logo" />
             </div>
-            <div class="options-container D-border">
-                <div class="options-container-top">
-                    <label for="options">Options</label>
-                    <div class="D-import-excel button">
-                        <p>Import Excel</p>
-                        <img src="icons/import_icon.svg" alt="" class="D-small-icon"></img>
-                    </div>
-                </div>
-                <div class="options-container-bottom">
-                    <div class="option-item D-black">
-                        <input type="text" placeholder="Enter Option" class="D-no-border">
-                        <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
-                    </div>
-                    <div class="option-item D-black">
-                        <input type="text" placeholder="Enter Option" class="D-no-border">
-                        <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
-                    </div>
-                    <button onclick="addOption()" class="D-black">+ Add Option</button>
-                </div>
-            </div>
+            <img src="../adminHistoryPage/adminHistoryImages/icon-user-white.png" alt="" class="userIcon" />
         </div>
-        <div class="main-container-right">
-            <div class="recipients-container D-border">
-                <label for="recipients">Recipients</label>
-                <div class="recipient-item D-white">
-                    <input type="email" value="abc@xyz" class="D-no-border">
-                    <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
-                </div>
-                <div class="recipient-item D-white">
-                    <input type="email" value="abc@xyz" class="D-no-border">
-                    <img  src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
-                </div>
-                <button onclick="addRecipient()" class="D-white">+ Add Email</button>
-            </div>
-
-            <div class="private-poll-toggle">
-                <input type="checkbox" id="private-poll">
-                <label for="private-poll" class="toggle-label">Private Poll</label>
-            </div>
-
-            <div class="button-container">
-                <button>Cancel</button>
-                <button>Generate Link</button>
-            </div>
+        <div class="headingDiv">
+            <h2>Create Poll</h2>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        flatpickr("#datetimepicker", {
-            enableTime: true,          // Enable time selection
-            dateFormat: "Y-m-d H:i",   // Set date format
-            minDate: "today",          // Disable past dates
-            time_24hr: false,           // Use 24-hour format
-            minuteIncrement: 5,        // Increment minutes by 5
-            altInput: true,            // Show alternate input field
-            altFormat: "F j, Y h:i K", // Custom format for display (optional)
-            disableMobile: true,       // Force desktop version of picker on mobile
-            onOpen: function () {
-                console.log("Picker opened!");
-            }
-        });
-    </script>
+
+
+        <div class="main-container">
+            <div class="main-container-left">
+                <div class="pollOptions">
+                    <input type="text" id="title" placeholder="Title" class="D-border ">
+
+                    <textarea id="description" placeholder="Description" rows="3" class="D-border "
+                        style="resize: none;"></textarea>
+                    <div class="main-container-left-date">
+                        <div class="main-container-left-date-tile">
+                            <input type="date" id="datetimepicker" placeholder="Start Date " class="D-border">
+                        </div>
+                        <div class="main-container-left-date-tile">
+                            <input type="time" id="datetimepicker" placeholder="Start Time" class="D-border">
+                        </div>
+                        <div class="main-container-left-date-tile">
+                            <input type="date" id="datetimepicker" placeholder="End Date" class="D-border">
+                        </div>
+                        <div class="main-container-left-date-tile">
+                            <input type="time" id="datetimepicker" placeholder="End Date" class="D-border">
+                        </div>
+                    </div>
+                </div>
+                <div class="options">
+                </div>
+                <div class="options-container D-border">
+                    <div class="options-container-top">
+
+                        <div class="headingOption">
+                            <label for="upload-options" class="custom-label">Options</label>
+
+                        </div>
+
+
+                        <div id="downloadTemplate">
+                            <a href="templates/Poll Options Template.xlsx" download>
+                                <label class="custom-upload-button">
+                                    <img src="icons/import_icon.svg" alt="download" class="">
+                                    Download Template
+                                </label>
+                            </a>
+                        </div>
+                        <div id="upload2">
+                            <label for="upload-options" class="custom-upload-button">
+                                <img src="icons/importIcon.png" alt="Upload" class="">
+                                Import excel
+                            </label>
+                            <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
+                        </div>
+                    </div>
+                    <div class="options-container-bottom">
+                        <div class="options-container-none"></div>
+                        <!-- <div class="option-item D-black">
+                            <input type="text" placeholder="Enter Option" class="D-no-border">
+                            <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                        </div> -->
+                    </div>
+                    <button onclick="addOption()" class="D-black">+ Options</button>
+                </div>
+                <!-- <button onclick="addOption()" class="D-black">+ Add Option</button> -->
+            </div>
+
+
+
+
+
+            <div class="main-container-right">
+                <h4>Recipients</h4>
+                <div class="recipients-container D-border">
+
+
+                    <div class="recipientsButtonDiv">
+                        <div id="downloadTemplate">
+                            <a href="templates\User List Template.xlsx" download>
+                                <label class="custom-upload-button">
+                                    <img src="icons/import_icon.svg" alt="download" class="">
+                                    Download Template
+                                </label>
+                            </a>
+                        </div>
+                        <div id="upload">
+                            <label for="uploadUser" class="custom-upload-button">
+                                <img src="icons/importIcon.png" alt="Upload" class="">
+                                Import excel
+                            </label>
+                            <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
+                        </div>
+
+                    </div>
+
+
+                    <div class="recipient-item D-white">
+                        <input type="email" value="Enter Email" class="D-no-border">
+                        <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="buttonContainer">
+                    <!-- Button to add recipient -->
+                    <button onclick="addRecipient()" class="D-white">+ Add Email</button>
+
+
+
+                    <!-- Action buttons -->
+                    <button class="cancelButton">Cancel</button>
+
+                    <!-- Toggle switch container -->
+                    <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
+                        <!-- Label for the toggle switch -->
+                        <div>
+                            <span id="toggleLabel">Private Poll</span>
+                        </div>
+
+                        <!-- Toggle switch -->
+                        <label class="switch">
+                            <input type="checkbox" id="toggleSwitch">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+
+                    <button class="generateButton">Generate Link</button>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
 
 
 </body>
