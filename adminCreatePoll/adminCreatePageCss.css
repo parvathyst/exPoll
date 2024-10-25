@@ -96,7 +96,7 @@ body {
     height: 100%;
     padding: 10px;
     flex-direction: column;
-    border: 1.5px solid #0f5471;
+    /* border: 1.5px solid #0f5471; */
     border-radius: 8px;
     flex: 1;
 }
@@ -104,13 +104,9 @@ body {
 .options-floating-button {
     width: 2rem;
     position: absolute;
-    /* Makes the button float relative to the viewport */
     bottom: 20px;
-    /* Distance from the bottom of the viewport */
     right: 20px;
-    /* Distance from the right of the viewport */
     z-index: 10;
-    /* Ensures it's above other elements */
 }
 
 .private-poll-toggle {
@@ -132,7 +128,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #F2F5FA;
-    border: 1.5px solid #0D2335;
+    /* border: 1.5px solid #0D2335; */
     color: #0D2335;
     font-weight: 800;
     height: 2rem;
@@ -352,7 +348,7 @@ body {
     font-size: 14px;
     width: 50%;
     height: 70%;
-    /* margin-bottom: 2rem; */
+
 }
 
 .generateButton {
@@ -413,7 +409,7 @@ body {
 .custom-upload-button {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.1rem;
     background-color: #8D99AE;
     color: white;
     padding: 10px 20px;
@@ -456,7 +452,6 @@ input[type="file"] {
     display: none;
 }
 
-/* The switch container */
 .switch {
     position: relative;
     display: inline-block;
@@ -465,14 +460,14 @@ input[type="file"] {
     margin-left: 10px;
 }
 
-/* Hide the default checkbox */
+
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider */
+
 .slider {
     position: absolute;
     cursor: pointer;
@@ -485,7 +480,6 @@ input[type="file"] {
     transition: 0.4s;
 }
 
-/* The circle inside the slider */
 .slider:before {
     position: absolute;
     content: "";
@@ -496,6 +490,18 @@ input[type="file"] {
     background-color: white;
     border-radius: 50%;
     transition: 0.4s;
+}
+
+input:checked+.slider {
+    background-color: #001f2d;
+}
+
+input:checked+.slider:before {
+    transform: translateX(18px);
+}
+
+a {
+    text-decoration: none;
 }
 
 /* When checked, move the slider */
@@ -536,35 +542,28 @@ a {
     align-items: center;
     justify-content: center;
     background-color: #0f2a3f;
-    /* dark background color */
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
-    /* rounded corners */
     font-size: 14px;
     cursor: pointer;
     gap: 10px;
-    /* space between elements */
     width: 100%;
     height: 90%;
 }
 
 .separator {
     height: 24px;
-    /* adjust the height of the separator */
     width: 1px;
     background-color: white;
-    /* line color */
 }
 
 .icon-copy {
     content: url('icons/tabler_copy.svg');
-    /* or use a Unicode copy icon if preferred */
     font-size: 14px;
 }
 
-/* Optional: Add hover effect */
 .generate-link-button:hover {
     background-color: #132f47;
 }

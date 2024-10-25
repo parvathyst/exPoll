@@ -10,6 +10,7 @@
   const firebaseConfig = {
     apiKey: "AIzaSyC8MCo957ZjjgF5rQ47uzIi8BVa_SWfPeo",
     authDomain: "expoll-5cb6d.firebaseapp.com",
+    databaseURL: "https://expoll-5cb6d-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "expoll-5cb6d",
     storageBucket: "expoll-5cb6d.appspot.com",
     messagingSenderId: "676581762842",
@@ -22,4 +23,4 @@
   const analytics = getAnalytics(app);
   const database = getDatabase(app);
 
-  export{app,database,ref,set}
+  export{app,database}

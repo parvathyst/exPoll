@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     const uploadOptions = document.getElementById('upload-options');
     if (uploadOptions) {
-        console.log("sssss")
+        console.log("Document uploaded")
         uploadOptions.addEventListener('change', handleFile, false);
     }
 });
-
-
 function addOption(value) {
     const optionContainer = document.createElement('div');
     optionContainer.classList.add('option-item');
@@ -24,7 +22,6 @@ function addOption(value) {
     }
     document.querySelector('.options-container-none').insertAdjacentElement('afterend', optionContainer);
 }
-
 function removeOption(button) {
     button.parentElement.remove();
 }
@@ -74,7 +71,7 @@ function handleFile(event) {
             if (jsonData.length > 0) {
                 jsonData.slice(1).forEach((row) => {
                     if (row.length > 0) {
-                        addOption(row[0]); // Assuming the first column contains the option value
+                        addOption(row[0]);
                     }
                 });
             } else {
