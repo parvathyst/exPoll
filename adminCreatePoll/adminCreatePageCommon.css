@@ -25,9 +25,10 @@
     /* height: 30p; */
 }
 
-.D-black input::placeholder{
+.D-black input::placeholder {
     color: #ffffff9c
 }
+
 .D-black input {
     color: #FFFFFF;
 }
@@ -43,7 +44,7 @@
     height: 1rem;
 }
 
-.D-card{
+.D-card {
     height: 30px;
     padding: 5px;
     margin-bottom: 10px;
@@ -54,7 +55,7 @@
     width: 98%;
 }
 
-.D-small-icon{
+.D-small-icon {
     width: 24px;
     height: auto;
 }
@@ -73,13 +74,13 @@
     height: 28px;
 }
 
-.D-import-excel svg{
+.D-import-excel svg {
     fill: #FFFFFF;
     color: #FFFFFF;
     stroke: #FFFFFF;
 }
 
-.D-recipient{
+.D-recipient {
     height: 25px;
     padding: 5px;
     margin-bottom: 10px;
