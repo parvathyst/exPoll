@@ -64,21 +64,21 @@
         <div class="main-container">
             <div class="main-container-left">
                 <div class="pollOptions">
-                    <input type="text" id="title" placeholder="Title" class="D-border ">
+                    <input type="text" id="title" placeholder="Title" class="D-border">
                     <textarea id="description" placeholder="Description" rows="3" class="D-border "
                         style="resize: none;"></textarea>
                     <div class="main-container-left-date">
                         <div class="main-container-left-date-tile">
-                            <input type="date" id="datetimepicker" placeholder="Start Date " class="D-border">
+                            <input type="date" id="pollStartDate" placeholder="Start Date " class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="time" id="datetimepicker" placeholder="Start Time" class="D-border">
+                            <input type="time" id="pollStartTime" placeholder="Start Time" class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="date" id="datetimepicker" placeholder="End Date" class="D-border">
+                            <input type="date" id="pollEndDate" placeholder="End Date" class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="time" id="datetimepicker" placeholder="End Date" class="D-border">
+                            <input type="time" id="pollEndTime" placeholder="End Date" class="D-border">
                         </div>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                         </div>
                     </div>
 
-                    <button class="generate-link-button">
+                    <button class="generate-link-button" id="generate-link-button">
                         Generate Link
                         <span class="separator"></span>
                         <i class="icon-copy"></i>

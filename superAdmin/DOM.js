@@ -49,7 +49,7 @@ function getAdmins() {
 
 function displayAdmin(value) {
 
-    Object.values(value).forEach( data =>{
+    Object.values(value).forEach(data => {
 
 
         const adminItem = document.createElement('div');

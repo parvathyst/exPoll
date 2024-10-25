@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (uploadUser) {
         uploadUser.addEventListener('change', handleUser, false);
     }
+
+    document.getElementById('generate-link-button').addEventListener('click', fetchData);
+
 });
 
 function addRecipient(value) {
@@ -61,3 +64,52 @@ function handleUser(event) {
         alert('Please upload a valid Excel file (.xlsx or .xls).');
     }
 }
+
+
+function fetchData() {
+    // Get values from input fields
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const startDate = document.getElementById('pollStartDate').value;
+    const startTime = document.getElementById('pollStartTime').value;
+    const endDate = document.getElementById('pollEndDate').value;
+    const endTime = document.getElementById('pollEndTime').value;
+
+    // Get options (if you have them as input elements)
+    const options = [];
+    const optionInputs = document.querySelectorAll('.options-container-bottom input[type="text"]');
+    optionInputs.forEach(input => {
+        if (input.value) {
+            options.push(input.value);
+        }
+    });
+
+    // Get recipients (if you have them as input elements)
+    const recipients = [];
+    const recipientInputs = document.querySelectorAll('.recipient-container-bottom input[type="text"]');
+    recipientInputs.forEach(input => {
+        if (input.value) {
+            recipients.push(input.value);
+        }
+    });
+
+    // Get the toggle state
+    const isPrivatePoll = document.getElementById('toggleSwitch').checked;
+
+    // Compile the data into an object
+    const pollData = {
+        "title": title,
+        "description": description,
+        "startDate": startDate,
+        "startTime": startTime,
+        "endDate": endDate,
+        "endTime": endTime,
+        "isPrivate": isPrivatePoll,
+        options,
+        recipients,
+    };
+
+    console.log(pollData);
+    // You can now use pollData, e.g., send it to a server
+}
+
