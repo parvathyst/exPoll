@@ -1,4 +1,4 @@
-.D-border {
+.D-border{
     /* width: 100%; */
     padding: 8px 10px;
     margin-bottom: 10px;
@@ -22,6 +22,7 @@
     border: none;
     background-color: #0D2335;
     color: #FFFFFF;
+    /* height: 30p; */
 }
 
 .D-black input::placeholder{
@@ -42,6 +43,16 @@
     height: 1rem;
 }
 
+.D-card{
+    height: 30px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #F2F5FA;
+    color: #333333;
+    width: 98%;
+}
 
 .D-small-icon{
     width: 24px;
@@ -66,4 +77,14 @@
     fill: #FFFFFF;
     color: #FFFFFF;
     stroke: #FFFFFF;
+}
+
+.D-recipient{
+    height: 25px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #F2F5FA;
+    color: #333333;
 }
