@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     const uploadOptions = document.getElementById('upload-options');
     if (uploadOptions) {
-        console.log("sssss")
+        console.log("Document uploaded")
         uploadOptions.addEventListener('change', handleFile, false);
     }
 });
-
-
 function addOption(value) {
     const optionContainer = document.createElement('div');
     optionContainer.classList.add('option-item');
@@ -24,46 +22,34 @@ function addOption(value) {
     }
     document.querySelector('.options-container-none').insertAdjacentElement('afterend', optionContainer);
 }
-
 function removeOption(button) {
     button.parentElement.remove();
 }
-
 function handleFile(event) {
     const file = event.target.files[0];
-    const reader = new FileReader();
-
-    
+    const reader = new FileReader(); 
     if (file && (file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || file.type === "application/vnd.ms-excel")) {
         reader.onload = function (e) {
             const data = new Uint8Array(e.target.result);
             const workbook = XLSX.read(data, { type: 'array' });
-
-            // Assuming we want the first sheet
             const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
             const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
-            
-
             console.log(jsonData);
             console.log(jsonData[0]);
             console.log(jsonData[1]);
-
-           
-
-
             if (jsonData.length > 0) {
                 jsonData.slice(1).forEach((row) => {
                     if (row.length > 0) {
-                        addOption(row[0]); // Assuming the first column contains the option value
+                        addOption(row[0]);
                     }
                 });
             } else {
-                // document.getElementById('error-message').textContent = 'No data found in the Excel file.';
+                document.getElementById('error-message').textContent = 'No data found in the Excel file.';
             }
         };
 
         reader.readAsArrayBuffer(file);
     } else {
-        // document.getElementById('error-message').textContent = 'Please upload a valid Excel file (.xlsx or .xls).';
+        document.getElementById('error-message').textContent = 'Please upload a valid Excel file (.xlsx or .xls).';
     }
 }
