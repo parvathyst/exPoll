@@ -1,4 +1,12 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333333;
+    /* height: 100vh; */
 
+}
 
 .heading {
     margin: 0 5rem;
@@ -6,7 +14,6 @@
 }
 
 .main-container {
-    /* background-color: red; */
     height: 100%;
     margin: 0 5rem;
     display: flex;
@@ -20,8 +27,7 @@
 }
 
 .main-container-left {
-    /* background-color: #0D2335; */
-    height: 80%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     flex: 3;
@@ -29,11 +35,9 @@
 }
 
 .main-container-right {
-    /* background-color: blueviolet; */
     display: flex;
     flex-direction: column;
     flex: 2;
-    height: 100%;
 }
 
 .main-container-left-date {
@@ -70,29 +74,11 @@ button {
 }
 
 .options-container-top {
-    /* background-color: #333333; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-}
-
-
-.options-floating-button {
-    width: 2rem;
-    position: absolute; /* Makes the button float relative to the viewport */
-    bottom: 20px;    /* Distance from the bottom of the viewport */
-    right: 20px;     /* Distance from the right of the viewport */
-    z-index: 10;   /* Ensures it's above other elements */
-}
-
-.options-container{
-    max-height: 60%;
-    display: flex;
-    flex-direction: column;
-    /* background-color: chartreuse; */
-    /* margin-bottom: 2REM; */
 }
 
 .private-poll-toggle {
@@ -102,22 +88,6 @@ button {
 
 .toggle-label {
     margin-left: 10px;
-}
-.option-item, .options-container-bottom button{
-    width: 97%
-}
-
-.options-container button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #F2F5FA;
-    border: 1.5px solid #0D2335;
-    color: #0D2335;
-    font-weight: 800;
-    height: 2rem;
-    width: 10rem;
-   
 }
 
 .option-item,
@@ -142,345 +112,12 @@ button {
     padding: 5px;
 }
 
-.options-container-bottom {
-    height: 60%; 
-    overflow-y: auto;  
-    flex: 1;
-    /* background-color: darkblue;  */
-    margin-bottom: 0.5rem;
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
 
+.options-container-bottom{
+    overflow-y: auto;
     
 }
-
- 
-.options-container-bottom::-webkit-scrollbar {
-    width: 7px; 
-    
-}
-.options-container-bottom::-webkit-scrollbar-track {
-    background: #ffffff; 
-   
-}
-.options-container-bottom::-webkit-scrollbar-thumb {
-    background-color: #0D2335; 
-    border-radius: 6px;
-}
-
-.recipients-container{
-    height: 40%; 
-    overflow-y: auto;   
-}
-
-
-.recipients-container::-webkit-scrollbar {
-    width: 7px; 
-    
-}
-.recipients-container::-webkit-scrollbar-track {
-    background: #ffffff; 
-   
-}
-.recipients-container::-webkit-scrollbar-thumb {
-    background-color: #0D2335; 
-    border-radius: 6px;
-}
-
-
-
-
-
-
-
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; 
-}
-
-body {
-    font-family: "Montserrat", sans-serif;
-    height: 100vh;
-    overflow: hidden;
-  
-}
-
-.mainDiv{
-    width: 100%;
-    gap: 5%; 
-    height: 100%; 
-
-}
-
-.headingDiv{
-    margin-left: 5%;
-    margin-right:5%;
-    min-height: 10%;
-    display: flex;
-    align-items: center;
-
-}
-.navBarDiv{
-    background-color: #0D2335;
-    width: 100%;
-    height: 8%;   
-    display: flex;
-    align-items: center;
-    
-}
-
-
-.logoDiv{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    padding-left: 5%;
-}
-
-.logo{
-height: 20px;
-width: 100px;
-}
-
- .navBarDiv .userIcon{
-    height: 30px;
-    width: 30px;
- 
-  }
-
-  .menuIcon{
-    height: 20px;
-    width: 20px;
-
-  }
-
-  .container {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-}
-
-.menuIcon{
-    margin-left: 4rem;
-}
-
-.navBarDiv {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-}
-
-.menuIconDiv{
-    display: flex;
-    gap: 1rem;
-}
-
-.userIcon{
-   margin-right: 5%;
-}
-
-  .dropdown {
-    width: 100%;
-    padding: 10px;
-    margin-top: 2%;
-    background-color: #a3a9b8;
-    color: white;
-    border: none;
-    border-radius: 8px 8px 8px 8px;
-    appearance: none;
-    cursor: pointer;
-  }
-  
-  .dropdownContainer::after {
-    right: 10px;
-    transform: translateY(-50%);
-    color: white;
-    pointer-events: none;
-  }
-  
-  .sortingDiv {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem; 
-   
-  }
-
-
-.timePeriodContainer{
-    height: 40%;
-    width: 100%;
-    border-radius: 8px;
-    border: solid 1px #137dd3;
-    margin-top: 2%;
-}
-
-.buttonContainer {
-    /* background-color: #137dd3; */
-   display: flex;
-    width: 100%; 
-    margin: 0 auto;
-    flex-direction: column;
-    margin-top: 5%;
-    gap:0.5rem;
-    height: 20%;
-
-  }
-  
-  .cancelButton {
-    padding: 10px 20px;
-    background-color: #a3a9b8; 
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-     width: 50%;
-  }
-  
-  .generateButton {
-    padding: 10px 20px;
-    background-color: #0c1e31;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    width: 100%;
-
-  }
-  
-  .clearButton:hover, .applyButton:hover {
-    opacity: 0.9; 
-  }
-
-  .pollOptions{
-    /* background-color: coral; */
-    min-height: 35%;
-    display:flex;
-    flex-direction: column;
-  }
-.recipientsButtonDiv{
-    display: flex;
-    flex-direction: row;
-    gap: 5rem;
-    padding-bottom: 4%;
-}
-
-
-
-
-.headingOption{
-    padding-left: 0px;
-}
-
-
-
-
-  .options-container-top {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    gap: 0.1rem ;
-    padding: 10px;
-}
-
-.custom-label {
-    font-weight: bold;
-    margin-right: 20px;
-}
-
-#upload {
-    position: relative;
-    display: inline-block;
-}
-
-.custom-upload-button {
-    display: flex;
-    align-items: center;
-    background-color: #8D99AE;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 10px;
-    border: none;
-    transition: background-color 0.3s ease;
-    height: 28px;
-    width: 190px;
-}
-
-
-.custom-upload-button img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-
-#upload-options {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-}
-
-input[type="file"] {
-    display: none;
-}
-/* The switch container */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
-    margin-left: 10px;
-  }
-  
-  /* Hide the default checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    border-radius: 34px;
-    transition: 0.4s;
-  }
-  
-  /* The circle inside the slider */
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 12px;
-    width: 12px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    border-radius: 50%;
-    transition: 0.4s;
-  }
-  
-  /* When checked, move the slider */
-  input:checked + .slider {
-    background-color: #001f2d; /* Dark navy color */
-  }
-  
-  /* Move the circle when the switch is checked */
-  input:checked + .slider:before {
-    transform: translateX(18px);
-  }
-  
-  a{
-    text-decoration: none;
-  }
