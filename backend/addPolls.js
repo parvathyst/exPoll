@@ -1,4 +1,4 @@
-import {app,database} from './Firebase.js'
+import {app,database} from '.expoll/Firebase.js'
 import {  ref, set,push } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 // Reference to the 'users' node in the 
 
