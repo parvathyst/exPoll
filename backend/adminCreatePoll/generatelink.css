@@ -1,0 +1,58 @@
+#link-container{
+    width: 100%;
+    box-shadow: inset;
+    height: 42px;
+    display: flex;
+    flex-direction: row;
+    box-sizing: content-box;
+    border-radius: 10px;
+}
+#show{
+    text-decoration: none;
+    color: white;
+    box-shadow: none;
+    border: 0;
+    height: 30px;
+    width: 15rem;
+    box-sizing: border-box;
+    background-color: blue;
+    div{
+        color: white;
+    }
+}
+#generate-button{
+    text-decoration: none;
+    box-shadow: none;
+    border: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: blue;
+    color: white;
+    height: 30px;
+    width: 7rem;
+    cursor: pointer;
+    border-right: 1px solid white;
+}
+#copy-button{
+    text-decoration: none;
+    background-color: blue;
+    color: white;
+    border: 0;
+    box-shadow: none;
+    cursor: pointer;
+    height: 12px;
+    width: 1.5rem;
+    box-sizing: content-box;
+    img{
+        height: 15px;
+        width: 1rem;
+    }
+}
+
+.link-box {
+    padding: 2%;
+    /* border-radius: 5px; */
+    width: 14rem;
+    color:white;
+    font-size: small;
+}
