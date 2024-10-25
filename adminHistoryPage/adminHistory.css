@@ -1,0 +1,252 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+.mainDiv{
+    width: 100%;
+    gap: 5%; 
+    height: 100%; 
+
+}
+
+.headingDiv{
+    margin-left: 5%;
+    margin-right:5%;
+    min-height: 10%;
+    display: flex;
+    align-items: center;
+
+}
+.navBarDiv{
+    background-color: #0D2335;
+    width: 100%;
+    height: 8%;   
+    display: flex;
+    align-items: center;
+    
+}
+
+
+.logoDiv{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 5%;
+}
+
+.logo{
+height: 20px;
+width: 100px;
+}
+
+
+.adminHistoryDiv{
+    margin-left: 5%;
+    margin-right:5%;
+    height: 95%;
+    width: 90%;
+    display: flex;
+    gap:1%;
+}
+
+.activityBoxContainer{
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;  
+    direction: ltr;
+     
+}
+
+
+.sortingDiv{
+    height: 100%;
+    width: 50%;
+}
+
+
+.backgroundDiv{
+    height: 80%;
+    border: solid 1px #137dd3;
+    border-radius: 5px;
+    display: flex;
+    gap: 6rem;
+    padding: 10px;  
+    width: 100%;     
+   
+}
+.activityBox{   
+    background-color: #F2F5FA;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 98%;
+    display:flex;
+    padding: 10px 20px;
+    gap: 1rem; 
+
+}
+
+ 
+.activityBoxContainer::-webkit-scrollbar {
+    width: 7px; 
+    
+}
+.activityBoxContainer::-webkit-scrollbar-track {
+    background: #ffffff; 
+   
+}
+.activityBoxContainer::-webkit-scrollbar-thumb {
+    background-color: #0D2335; 
+    border-radius: 6px;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    border: 1px solid #137dd3;
+    border-radius: 8px;
+    padding: 5px 10px;
+    width: 100%;
+    background-color: #fff;
+  }
+  
+  .searchInput {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #6c757d;
+    width: 100%;
+  }
+  
+  .searchInput::placeholder {
+    color: #a6b0b3;
+  }
+  
+  .search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6c757d;
+    font-size: 16px;
+  }
+  
+  
+  
+  .search-button img {
+    height:  18px;
+    width: 18px;
+  }
+  
+ .navBarDiv .userIcon{
+    height: 30px;
+    width: 30px;
+ 
+  }
+
+  .menuIcon{
+    height: 20px;
+    width: 20px;
+
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.menuIcon{
+    margin-left: 4rem;
+}
+
+.navBarDiv {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.menuIconDiv{
+    display: flex;
+    gap: 1rem;
+}
+
+.userIcon{
+   margin-right: 5%;
+}
+
+  .dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-top: 2%;
+    background-color: #a3a9b8;
+    color: white;
+    border: none;
+    border-radius: 8px 8px 8px 8px;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  .dropdownContainer::after {
+    right: 10px;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none;
+  }
+  
+  .sortingDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem; 
+   
+  }
+
+
+.timePeriodContainer{
+    height: 40%;
+    width: 100%;
+    border-radius: 8px;
+    border: solid 1px #137dd3;
+    margin-top: 2%;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 10px; 
+    width: 30vw; 
+    margin: 0 auto;
+    margin-top: 2%;
+  }
+  
+  .clearButton {
+    padding: 10px 20px;
+    background-color: #a3a9b8; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+     width: 50%;
+  }
+  
+  .applyButton {
+    padding: 10px 20px;
+    background-color: #0c1e31;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 50%;
+
+  }
+  
+  .clearButton:hover, .applyButton:hover {
+    opacity: 0.9; 
+  }
