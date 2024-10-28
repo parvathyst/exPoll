@@ -40,7 +40,7 @@ function handleUser(event) {
             const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
             const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
 
-            if (jsonData.length > 1) { 
+            if (jsonData.length > 1) {
                 jsonData.slice(1).forEach((row) => { // Start from the second row (index 1)
                     if (row.length > 0) {
                         addRecipient(row[1]);
