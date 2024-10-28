@@ -346,12 +346,12 @@ body {
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
-     width: 50%;
-     height: 70%;
-     
-  }
-  
-  /* .generateButton {
+    width: 50%;
+    height: 70%;
+
+}
+
+/* .generateButton {
     padding: 10px 20px;
     background-color: #0c1e31;
     color: white;
@@ -362,10 +362,11 @@ body {
     width: 100%;
 
   } */
-  
-  .clearButton:hover, .applyButton:hover {
-    opacity: 0.9; 
-  }
+
+.clearButton:hover,
+.applyButton:hover {
+    opacity: 0.9;
+}
 
 .clearButton:hover,
 .applyButton:hover {
