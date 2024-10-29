@@ -55,10 +55,10 @@
     <div class="mainDiv">
         <div class="navBarDiv">
             <div class="menuIconDiv">
-                <img src="../adminHistoryPage/adminHistoryImages/menuicon.png" alt="" class="menuIcon" />
-                <img src="../adminHistoryPage/adminHistoryImages/logoexpoll.png" alt="expoll" class="logo" />
+                <img src="../../../assets/icons/menu.png" alt="" class="menuIcon" />
+                <img src="../../../assets/images/logo-white.png" alt="expoll" class="logo" />
             </div>
-            <img src="../adminHistoryPage/adminHistoryImages/icon-user-white.png" alt="" class="userIcon" />
+            <img src="../../../assets/icons/user-white.png" alt="" class="userIcon" />
         </div>
         <div class="headingDiv">
             <h2>Create Poll</h2>
@@ -71,16 +71,16 @@
                         style="resize: none;"></textarea>
                     <div class="main-container-left-date">
                         <div class="main-container-left-date-tile">
-                            <input type="date" id="datetimepicker" placeholder="Start Date " class="D-border">
+                            <input type="date" id="poll-start-date" placeholder="Start Date " class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="time" id="datetimepicker" placeholder="Start Time" class="D-border">
+                            <input type="time" id="poll-start-time" placeholder="Start Time" class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="date" id="datetimepicker" placeholder="End Date" class="D-border">
+                            <input type="date" id="poll-end-date" placeholder="End Date" class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="time" id="datetimepicker" placeholder="End Date" class="D-border">
+                            <input type="time" id="poll-end-time" placeholder="End Time" class="D-border">
                         </div>
                     </div>
                 </div>
@@ -94,16 +94,16 @@
                         </div>
                         <div class="uploadImportButtons">
                             <div id="downloadTemplate">
-                                <a href="templates/Poll Options Template.xlsx" download>
+                                <a href="../../../assets/templates/Poll Options Template.xlsx" download>
                                     <label class="custom-upload-button">
-                                        <img src="icons/downloadIcon.png" alt="download" class="">
+                                        <img src="../../../assets/icons/download.png" alt="download" class="">
                                         Template
                                     </label>
                                 </a>
                             </div>
                             <div id="upload2">
                                 <label for="upload-options" class="custom-upload-button">
-                                    <img src="icons/importIcon.png" alt="Upload" class="">
+                                    <img src="../../../assets/icons/importIcon.png" alt="Upload" class="">
                                     Import excel
                                 </label>
                                 <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
@@ -131,22 +131,22 @@
                 <div class="recipients-container D-border">
                     <div class="recipientsButtonDiv">
                         <div id="downloadTemplate">
-                            <a href="templates\User List Template.xlsx" download>
+                            <a href="../../../assets/templates/User List Template.xlsx" download>
                                 <label class="custom-upload-button">
-                                    <img src="icons/downloadIcon.png" alt="download" class="">
+                                    <img src="../../../assets/icons/download.png" alt="download" class="">
                                     Template
                                 </label>
                             </a>
                         </div>
                         <div id="upload">
                             <label for="uploadUser" class="custom-upload-button">
-                                <img src="icons/importIcon.png" alt="Upload" class="">
+                                <img src="../../../assets/icons/importIcon.png" alt="Upload" class="">
                                 Import excel
                             </label>
                             <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
                         </div>
                     </div>
-                    <div class="recipient-container-bottom">
+                    <div class="recipient-container-bottom" id="recipient-container-bottom">
                         <div class="recipient-container-none">
 
                         </div>
@@ -181,8 +181,8 @@
                         <span class="separator"></span>
                         <i class="icon-copy"></i>
                     </button> -->
-                    
-                    
+
+
                 </div>
                 <div id="link-container">
                     <div>
@@ -192,7 +192,7 @@
                         <!-- <input  type="url"> -->
                     </div>
                     <div>
-                        <button id="copy-button"><img src="imagesgeneratelink/icons8-copy-24.png" alt="hehe"></button>
+                        <button id="copy-button"><img src="../../../assets/icons/copy.png" alt="hehe"></button>
                     </div>
                 </div>
             </div>
@@ -200,4 +200,5 @@
     </div>
 </body>
 <script src="generatelink.js"></script>
+
 </html>
