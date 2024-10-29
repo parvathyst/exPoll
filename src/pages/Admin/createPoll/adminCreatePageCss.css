@@ -223,7 +223,7 @@ body {
     height: 100%;
 }
 
-.headingDiv {
+.heading-div {
     margin-left: 5%;
     margin-right: 5%;
     min-height: 10%;
@@ -326,7 +326,7 @@ body {
     margin-top: 2%;
 }
 
-.buttonContainer {
+.button-container {
     /* background-color: #137dd3; */
     display: flex;
     width: 100%;
@@ -338,7 +338,7 @@ body {
 
 }
 
-.cancelButton {
+.cancel-button {
     padding: 10px;
     background-color: #a3a9b8;
     color: white;
@@ -373,14 +373,14 @@ body {
     opacity: 0.9;
 }
 
-.pollOptions {
+.poll-options {
     /* background-color: coral; */
     min-height: 35%;
     display: flex;
     flex-direction: column;
 }
 
-.recipientsButtonDiv {
+.recipients-button-div {
     display: flex;
     flex-direction: row;
     gap: 5rem;
@@ -388,12 +388,7 @@ body {
     /* background-color: aquamarine; */
 
 }
-
-/* .recipient-container-bottom {
-    background-color: darkkhaki;
-} */
-
-.headingOption {
+.heading-option {
     padding-left: 0px;
 }
 
@@ -426,7 +421,8 @@ body {
     height: 28px;
 }
 
-.addOptionButtonContainer {
+.add-option-button-Container
+{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -438,7 +434,7 @@ body {
 
 }
 
-.uploadImportButtons {
+.upload-import-button-container {
     display: flex;
     gap: 1rem;
 }
@@ -536,27 +532,11 @@ a {
 
 
 
-.ButtonContainer {
+.Button-container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-/* .generate-link-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #0f2a3f;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    gap: 10px;
-    width: 100%;
-    height: 90%;
-} */
 
 .separator {
     height: 24px;
@@ -568,7 +548,3 @@ a {
     content: url('icons/tabler_copy.svg');
     font-size: 14px;
 }
-
-/* .generate-link-button:hover {
-    background-color: #132f47;
-} */
