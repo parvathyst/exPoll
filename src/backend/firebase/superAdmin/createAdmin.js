@@ -1,16 +1,15 @@
-import { db, auth } from '../../firebase/config.js'
+import { auth } from '../../firebase/config.js'
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
 const rtdb = getDatabase();
 
-function createAdmin(name, email, password) {
+async function createAdmin(fullName, email, password) {
 
-    createUserWithEmailAndPassword(auth, email, password)
+    await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
             const uid = user.uid;
-
             return set(ref(rtdb, 'admins/' + uid), {
                 "fullName": fullName,
                 "email": email
