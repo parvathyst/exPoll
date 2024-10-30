@@ -1,3 +1,8 @@
+import { createAdmin } from "../../../backend/firebase/superAdmin/createAdmin.js";
+import { displayAdmins } from "./displayAdmins.js";
+
+displayAdmins();
+
 document.addEventListener("DOMContentLoaded", () => {
     const addAdminPopup = document.getElementById("add-admin-popup");
     const editAdminPopup = document.getElementById("edit-admin-popup");
@@ -26,16 +31,16 @@ document.addEventListener("DOMContentLoaded", () => {
         popup.classList.remove("show");
         setTimeout(() => {
             popup.style.display = "none";
-        }, 300); 
+        }, 300);
     }
 
-    document.getElementById("add-admin-form").addEventListener("submit", (e) => {
+    document.getElementById('add-admin-form').addEventListener('submit', async function (e) {
         e.preventDefault();
-
-        
-
-        // hidePopup(addAdminPopup);
-
+        const fullName = document.getElementById('addAdminfullName').value;
+        const email = document.getElementById('addAdminemail').value;
+        const password = document.getElementById('AddAdminpassword').value;
+        await createAdmin(fullName, email, password);
+        displayAdmins();
     });
 
     document.getElementById("edit-admin-form").addEventListener("submit", (e) => {

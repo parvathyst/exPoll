@@ -1,6 +1,8 @@
 
 import { createPoll } from "../../../backend/firebase/admin/createPoll/createPoll.js"
 
+import { generateLink } from "./generatelink.js";
+
 document.addEventListener('DOMContentLoaded', function () {
     const uploadUser = document.getElementById('uploadUser');
     if (uploadUser) {
@@ -58,7 +60,7 @@ function handleUser(event) {
 }
 
 
-function fetchData() {
+async function fetchData() {
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
     const startDate = document.getElementById('poll-start-date').value;
@@ -106,7 +108,11 @@ function fetchData() {
         "createdAt": dateTime,
     };
 
-    const key = createPoll(pollData, pollOptions, pollRecipients);
-    
+    const key =  await createPoll(pollData, pollOptions, pollRecipients);
+
+    generateLink(key);
+
+
+
 }
 
