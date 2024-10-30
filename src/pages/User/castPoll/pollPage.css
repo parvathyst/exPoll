@@ -6,14 +6,6 @@ body {
   overflow: hidden;
 }
 
-.navBar {
-  background-color: #000000;
-  width: 100vw;
-  height: 68px;
-  display: flex;
-  align-items: center;
-}
-
 .logoImage {
   height: 20px;
   width: 100px;
@@ -27,44 +19,15 @@ body {
 }
 
 .poll-central-div {
+  display: flex;
+  flex-direction: row;
     border-radius: 8px;
     margin-left: 70px;
     margin-top: 20px;
     margin-right: 30px;
     background-color: white;
-    height: 380px;
-    padding-top: 30px;
+    height: 420px;
     padding-left: 40px;
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 8px; 
-    background-color: rgba(128, 97, 195, 0.35);
-    overflow: hidden;
-    width: fit-content;
-    height: 45px;
-    gap: 0;
-    padding-left: 5px;
-    padding-right: 10px;
-}
-
-.search-bar input {
-    border: none; 
-    width: 300px;
-    outline: none; 
-    background-color: transparent;
-}
-
-.search-bar input::placeholder {
-    color: #0D2335; 
-}
-
-.searchIcon{
-    height: 24px;
-    width: 24px;
 }
 
 .poll-central-inner-div{
@@ -73,23 +36,23 @@ body {
 }
 
 .poll-central-left-div{
-  width: 40%;
+  width: 50%;
 }
 
 .poll-central-right-div{
   display: flex;
   flex-direction: column;
   width: 50%;
+  height: 100%;
+  background-color: aqua;
 }
 
 .poll-description-container{
-  width: 90%;
-  max-height: 150px;
+  width: 100%;
+  max-height: 100%;
   background-color: rgba(128, 97, 195, 0.35);
   padding: 20px;
-  margin-top: 20px;
   border-radius: 8px;
-
 }
 
 .cast-poll-button button{
@@ -121,7 +84,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  /* background-color: #8061c3; */
 }
 
 
@@ -146,7 +108,6 @@ body {
   padding: 10px;
   border-radius: 5px;
   box-shadow: 1 0px 0px rgba(0, 0, 0, 1);
-  /* box-shadow: 4ch 4px 10px rgba(0, 0, 0, 0.2); */
   background-color: white;
   max-height: 70%;
   
@@ -165,6 +126,5 @@ body {
   flex-direction: column;
   gap: 4rem;
   margin-right: 5rem;
-  /* background-color: aqua; */
   height: 80%;
 }
