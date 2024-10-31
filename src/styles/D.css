@@ -1,0 +1,69 @@
+.D-border {
+    /* width: 100%; */
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1.5px solid #A1C3D1;
+}
+
+.D-white {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #F2F5FA;
+    color: #333333;
+}
+
+.D-black {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #0D2335;
+    color: #FFFFFF;
+}
+
+.D-black input::placeholder{
+    color: #ffffff9c
+}
+.D-black input {
+    color: #FFFFFF;
+}
+
+.D-no-border {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+}
+
+.D-small-field {
+    height: 1rem;
+}
+
+
+.D-small-icon{
+    width: 24px;
+    height: auto;
+}
+
+.D-import-excel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #8D99AE;
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+    color: #FFFFFF;
+    height: 28px;
+}
+
+.D-import-excel svg{
+    fill: #FFFFFF;
+    color: #FFFFFF;
+    stroke: #FFFFFF;
+}

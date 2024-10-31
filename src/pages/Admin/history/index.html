@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin History</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="adminHistory.css" />
+</head>
+
+<body>
+  <div id="sidebar" class="sidebar" class="">
+    <div class="logoDiv">
+      <img src="/exPoll/src/assets/images/logo-darkblue.png" alt="expoll" class="logo" />
+    </div>
+    <div class="menu-items">
+      <ul>
+        <li>
+          <button class="menu-button"><a href="/exPoll/src/pages/Admin/dashboard/index.html"><h3>Home</h3></a></button>
+        </li>
+        <li>
+          <button class="menu-button"><a href=""><h3>Create Poll</h3></a></button>
+        </li>
+        <li>
+          <button class="menu-button"><a href=""></a><h3>Create Rating</h3></button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="main-div">
+    <div class="nav-bar-div">
+      <div class="menuIconDiv">
+       
+        <button id="hamburger" class="hamburger" onclick="toggleSidebar()"> <img src="/exPoll/src/assets/icons/menuicon.png" alt="" class="menuIcon" /> </button>
+
+        <img src="../../../assets/images/logo-white.png" alt="expoll" class="logo" />
+      </div>
+      <img src="../../../assets/icons/user-white.png" alt="" class="userIcon" />
+    </div>
+
+
+   
+
+    <div class="headingDiv">
+      <h2>Activity History</h2>
+    </div>
+    <div class="adminHistoryDiv">
+      <div class="backgroundDiv">
+        <div class="activityBoxContainer">
+
+          <div class="activityBox">
+            <div class="icon">
+              <img src="/exPoll/src/assets/icons/poll-solid.png" alt="icon" />
+            </div>
+            <div class="content">
+              <h5>Leader of the day</h5>
+              <div class="date-and-time" id="date-and-time">
+                <img src="/exPoll/src/assets/icons/calender.png" alt="dfd">
+                <h6>17-06-2024</h6>
+                <img src="/exPoll/src/assets/icons/clock.png" alt="dfd">
+                <h6>14:20</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="activityBox">
+            <div class="icon">
+              <img src="/exPoll/src/assets/icons/rate-icon-solid.png" alt="icon" />
+            </div>
+            <div class="content">
+              <h5>Leader of the day</h5>
+              <div class="date-and-time" id="date-and-time">
+                <img src="/exPoll/src/assets/icons/calender.png" alt="dfd">
+                <h6>17-06-2024</h6>
+                <img src="/exPoll/src/assets/icons/clock.png" alt="dfd">
+                <h6>14:20</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sortingDiv">
+        <div class="searchBox">
+          <input type="text" placeholder="Search" class="searchInput" />
+          <button class="search-button">
+            <img src="/exPoll/src/assets/icons/isearch-icon-bold.png" alt="" />
+          </button>
+        </div>
+
+        <div class="dropdownContainer">
+          <select id="activityType" class="dropdown">
+            <option value="" disabled selected>Activity Type</option>
+            <option value="poll">Poll</option>
+            <option value="rate">Rate</option>
+          </select>
+        </div>
+        <div class="dropdownContainer">
+          <select id="activityType" class="dropdown">
+            <option value="" disabled selected>Sort By</option>
+            <option value="new">Newest</option>
+            <option value="old">Oldest</option>
+          </select>
+        </div>
+        <div class="timePeriodContainer">
+          <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
+            <div>
+              <h4><span id="toggleLabel">Time Period</span></h4>
+            </div>
+
+            <label class="switch">
+              <input type="checkbox" id="toggleSwitch">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="time-period-boxes">
+            <div class="date-input">
+              <h5>From</h5>
+              <div class="input-container">
+                <input type="date" id="from-date" />
+              </div>
+            </div>
+            <div class="date-input">
+              <h5>To</h5>
+              <div class="input-container">
+                <input type="date" id="to-date" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="buttonContainer">
+          <button class="clearButton">Clear Filters</button>
+          <button class="applyButton">Apply Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="displaySideBar.js">
+  </script>
+</body>
+</html>

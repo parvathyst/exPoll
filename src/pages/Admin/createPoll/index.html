@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="adminCreatePageCss.css">
+    <link rel="stylesheet" href="adminCreatePageCommon.css">
+    <script type="module" src="adminCreatePollDOM.js"></script>
+    <script src="adminCreatePoll.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="generatelink.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <title>Create a Poll</title>
+</head>
+<body>
+    <div class="mainDiv">
+        <div class="navBarDiv">
+            <div class="menuIconDiv">
+                <img src="/exPoll/src/assets/icons/menu.png" alt="" class="menuIcon" />
+                <img src="/exPoll/src/assets/images/logo-white.png" alt="expoll" class="logo" />
+            </div>
+            <img src="/exPoll/src/assets/icons/user-white.png" alt="" class="userIcon" />
+        </div>
+        <div class="heading-div">
+            <h2>Create Poll</h2>
+        </div>
+        <div class="main-container">
+            <div class="main-container-left">
+                <div class="poll-options">
+                    <input type="text" id="title" placeholder="Title" class="D-border ">
+                    <textarea id="description" placeholder="Description" rows="3" class="D-border "
+                        style="resize: none;"></textarea>
+                    <div class="main-container-left-date">
+                        <div class="main-container-left-date-tile">
+                            <input type="date" id="datetimepicker" placeholder="Start Date " class="D-border">
+                        </div>
+                        <div class="main-container-left-date-tile">
+                            <input type="time" id="datetimepicker" placeholder="Start Time" class="D-border">
+                        </div>
+                        <div class="main-container-left-date-tile">
+                            <input type="date" id="datetimepicker" placeholder="End Date" class="D-border">
+                        </div>
+                        <div class="main-container-left-date-tile">
+                            <input type="time" id="datetimepicker" placeholder="End Date" class="D-border">
+                        </div>
+                    </div>
+                </div>
+                <div class="options">
+                </div>
+                <div class="options-container D-border">
+                    <div class="options-container-top">
+                        <div class="heading-option">
+                            <h4>Options</h4>
+                        </div>
+                        <div class="upload-import-button-container">
+                            <div id="downloadTemplate">
+                                <a href="/exPoll/src/assets/templates/Poll Options Template.xlsx" download>
+                                    <label class="custom-upload-button">
+                                        <img src="/exPoll/src/assets/icons/download.png" alt="download" class="">
+                                        Template
+                                    </label>
+                                </a>
+                            </div>
+                            <div id="upload2">
+                                <label for="upload-options" class="custom-upload-button">
+                                    <img src="/exPoll/src/assets/icons/importIcon.png" alt="Upload" class="">
+                                    Import excel
+                                </label>
+                                <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-container-bottom">
+                        <div class="options-container-none"></div>
+                        <div class="option-item D-black">
+                            <input type="text" placeholder="Enter Option" class="D-no-border">
+                            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon"
+                                onclick="removeOption(this)"></img>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="Button-container">
+                            <button onclick="addOption()" class="D-black" id="addButton"> Add Options</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-container-right">
+                <h4>Recipients</h4>
+                <div class="recipients-container D-border">
+                    <div class="recipients-button-div">
+                        <div id="downloadTemplate">
+                            <a href="templates\User List Template.xlsx" download>
+                                <label class="custom-upload-button">
+                                    <img src="/exPoll/src/assets/icons/download.png" alt="download" class="">
+                                    Template
+                                </label>
+                            </a>
+                        </div>
+                        <div id="upload">
+                            <label for="uploadUser" class="custom-upload-button">
+                                <img src="/exPoll/src/assets/icons/importIcon.png" alt="Upload" class="">
+                                Import excel
+                            </label>
+                            <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
+                        </div>
+                    </div>
+            
+
+                    <div class="recipient-container-bottom">
+                        <div class="recipient-container-none">
+                            <div class="recipient-item D-white">
+                                <input type="email" placeholder="Enter Email" class="D-no-border">
+                                <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon"
+                                    onclick="removeOption(this)"></img>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container" class="add-option-button-container">
+                        <button onclick="addRecipient()" id="addRecipientButton" class="D-recipient">+ Add
+                            Recipient</button>
+                    </div>
+                </div>
+                <div class="recipient-container-buttons">
+                    <div class="toggle-and-cancel-container">
+                        <button class="cancel-button">Cancel</button>
+                        <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
+                            <div>
+                                <h4><span id="toggleLabel">Private Poll</span></h4>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="toggleSwitch">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="link-container">
+                    <div>
+                        <button id="generate-button">Generate Link</button>
+                    </div>
+                    <div id="show">
+                    </div>
+                    <div>
+                        <button id="copy-button"><img src="/exPoll/src/assets/icons/copy-link-icon.png"
+                                alt="generate-link"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="generatelink.js"></script>
+</html>
