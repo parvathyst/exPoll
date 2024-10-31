@@ -1,0 +1,183 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; 
+    font-family: "Montserrat", sans-serif;
+
+}
+a{
+    text-decoration: none;
+}
+body {
+     background-color: #ffff; 
+    height: 100vh;
+    overflow: hidden; 
+}
+
+.home {
+    display: flex;
+    margin-left: 5%;
+    gap: 5%; 
+    height: 100%; 
+}
+
+.menu-bar-div {
+    background-color: #0D2335; 
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; 
+}
+
+
+.menu-items {
+    display: flex;
+    padding-left: 4rem;
+    /* padding-left: 3rem; */
+    align-items: center;    
+}
+
+.menu-items ul{
+    list-style-type: none; 
+    padding: 0;          
+    margin: 0;   
+
+}
+
+.menu-items li{
+    margin-bottom: 3rem;
+    color: whitesmoke;
+}
+
+
+.logoDiv {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center;    /
+}
+
+.logo {
+    height: 30px;
+    width: 150px;
+    display: block;
+}
+
+.content-section-div {
+    width: 65%;
+    display: flex;
+    flex-direction: column; 
+}
+
+.iconNav {
+    height: 10%;
+    display: flex;
+    align-items: center;  
+    justify-content: flex-end;
+}
+
+.iconNav .user-icon-black{
+ padding-top: 2px;
+ height: 40px;
+ width: 40px;
+}
+
+.iconNav img{
+ margin-top: 5%;
+}
+.heading-section {
+    height: 10%;
+}
+
+.title-of-activity-section{
+    line-height: 5rem;
+    height: 10%;
+}
+
+
+.activity-section {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+   
+}
+
+.scrollable-div{
+    height: 80%;
+    border: solid 1px #137dd3;
+    border-radius: 5px;
+    gap: 1rem;
+    padding: 10px;       
+   
+}
+.activity-box-container{
+    height: 96%; 
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;   
+    direction: rtl; 
+    padding-top: 0;
+    
+}
+
+.activity-box{   
+    background-color: #F2F5FA;
+    border-radius: 5px;
+    height: 20%;
+    max-width: 98%;
+    display:flex;
+    justify-content:left;
+    padding: 10px 10px;
+    gap: 0.5rem; 
+
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+}
+
+.activity-box-container::-webkit-scrollbar {
+    width: 7px; 
+    
+}
+.activity-box-container::-webkit-scrollbar-track {
+    background: #ffffff; 
+   
+}
+.activity-box-container::-webkit-scrollbar-thumb {
+    background-color: #0D2335; 
+    border-radius: 6px;
+}
+
+.date-and-time{
+   
+}
+
+
+.menu-button {
+    background: none;        
+    border: none;             
+    padding: 8px 16px;        
+    cursor: pointer;          
+    transition: 0.3s;       
+  }
+  
+  .menu-button h3 {
+    margin: 0;               
+    color: rgb(255, 255, 255);             
+  }
+  
+  .menu-button:hover {
+    background-color: #ffffff; 
+    border-radius: 8px;
+  }
+  
+  .menu-button:hover h3 {
+    color: rgb(0, 0, 0);             
+  }
+  
+
