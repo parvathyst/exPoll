@@ -1,11 +1,46 @@
 const pollOptions = [
-  "Öption 1",
-  "Öption 2",
-  "Öption 3",
-  "Öption 4",
-  "Öption 5",
-  "Öption 6",
-  "Öption 7",
+  {
+    assignedEmployee: "",
+    name: "Öption 1",
+    selectedTime: "",
+    status: false,
+  },
+  {
+    assignedEmployee: "",
+    name: "Öption 2",
+    selectedTime: "",
+    status: true,
+  },
+  {
+    assignedEmployee: "",
+    name: "Öption 3",
+    selectedTime: "",
+    status: false,
+  },
+  {
+    assignedEmployee: "",
+    name: "Öption 4",
+    selectedTime: "",
+    status: false,
+  },
+  {
+    assignedEmployee: "",
+    name: "Öption 5",
+    selectedTime: "",
+    status: true,
+  },
+  {
+    assignedEmployee: "",
+    name: "Öption 6",
+    selectedTime: "",
+    status: false,
+  },
+  {
+    assignedEmployee: "",
+    name: "Öption 7",
+    selectedTime: "",
+    status: false,
+  },
 ];
 
 displayPollList();
@@ -16,28 +51,36 @@ function displaySelectedOption(value, pollItem) {
   //Change style of unselected cards
   const allPollCards = document.getElementsByClassName("poll-card");
   for (const pollCard of allPollCards) {
-     pollCard.classList.remove("selected-poll-card");
+    pollCard.classList.remove("selected-poll-card");
   }
 
   //Change style of selected card
   pollItem.classList.add("selected-poll-card");
 }
 
-function displayOption(value) {
+function displayOption(value, status) {
   const pollItem = document.createElement("button");
   pollItem.classList.add("poll-card");
   pollItem.onclick = function () {
     displaySelectedOption(value, pollItem);
   };
-  pollItem.innerHTML = `
+  if (status == false) {
+    pollItem.innerHTML = `
     <h2>${value}</h2>
     `;
+    pollItem.classList.add("unlocked-poll-card")
+  } else {
+    pollItem.innerHTML = `
+    <h2>${value}</h2><img src="/src/assets/icons/lock.svg">
+    `;
+    pollItem.classList.add("locked-poll-card")
+  }
   const pollList = document.getElementsByClassName("poll-options-list")[0];
   pollList.appendChild(pollItem);
 }
 
 function displayPollList() {
   for (const pollOption of pollOptions) {
-    displayOption(pollOption);
+    displayOption(pollOption.name, pollOption.status);
   }
 }
