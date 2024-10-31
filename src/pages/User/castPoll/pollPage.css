@@ -55,11 +55,21 @@ body {
   justify-content: space-between;
 }
 
-.cast-poll-button button {
+.cast-poll-button-disabled{
   border-radius: 8px;
   background-color: #8d99ae;
-  width: 80%;
+  width: 100%;
   color: #272626;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border: none;
+}
+
+.cast-poll-button{
+  border-radius: 8px;
+  background-color: #8061C3;
+  width: 100%;
+  color: white;
   padding-top: 13px;
   padding-bottom: 13px;
   border: none;

@@ -70,7 +70,10 @@ function displaySelectedOption(value, pollItem) {
 
   //Change style of selected card
   pollItem.classList.add("selected-poll-card");
-}
+  const castPollButton = document.getElementById("cast-poll-button")
+  castPollButton.disabled = false
+  castPollButton.classList.add("cast-poll-button")
+ }
 
 function displayOption(value, status) {
   const pollItem = document.createElement("button");
@@ -100,3 +103,7 @@ function displayPollList() {
     displayOption(pollOption.name, pollOption.status);
   }
 }
+
+function alert() {
+    alert("I am an alert box!");
+  }
