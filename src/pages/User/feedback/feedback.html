@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="feedback.css">
     <link rel="stylesheet" href="/src/styles/D.css" />
-    <link rel="stylesheet" href="ss.css">
+    <!-- <link rel="stylesheet" href="ss.css"> -->
     <style>
         body {
           font-family: "Montserrat";
@@ -29,13 +29,22 @@
     
 </header>
 <main>
-    <div class="container">
+    <div class="maincontainer">
         <div class="nav">
-           
+           <!-- Pagination -->
+            <div id="pagination" class="pagination"></div>
             
+        </div>
+        <div id="question-card" class="question-card">
+            <div id="question-text" class="question-text">Question text here</div>
+            <div class="card-controls">
+              <button onclick="previousQuestion()" class="card-btn">Previous</button>
+              <button onclick="nextQuestion()" class="card-btn">Next</button>
+            </div>
         </div>
     </div>
 </main>
 </body>
-<script src="script.js"></script>
+<script src="feedback.js"></script>
+<script src="page.js"></script>
 </html>
