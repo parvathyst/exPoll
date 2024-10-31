@@ -45,6 +45,21 @@ const pollOptions = [
 
 displayPollList();
 
+function sortPollOptions(pollOptions){
+    const selectedPollOptions = []
+    const sortedPollOptions = []
+    for(const pollOption of pollOptions){
+        if(pollOption.status==true){
+            selectedPollOptions.push(pollOption)
+        }
+        else{
+            sortedPollOptions.push(pollOption)
+        }
+    }
+    sortedPollOptions.push(...selectedPollOptions);
+    return sortedPollOptions;
+}
+
 function displaySelectedOption(value, pollItem) {
   const selectedPollOption = document.getElementById("selected-option");
   selectedPollOption.innerText = value;
@@ -80,7 +95,8 @@ function displayOption(value, status) {
 }
 
 function displayPollList() {
-  for (const pollOption of pollOptions) {
+const sortedPollOptions = sortPollOptions(pollOptions);
+  for (const pollOption of sortedPollOptions) {
     displayOption(pollOption.name, pollOption.status);
   }
 }
