@@ -2,11 +2,14 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box; 
-}
+    font-family: "Montserrat", sans-serif;
 
+}
+a{
+    text-decoration: none;
+}
 body {
      background-color: #ffff; 
-    font-family: "Montserrat", sans-serif;
     height: 100vh;
     overflow: hidden; 
 }
@@ -29,7 +32,8 @@ body {
 
 .menu-items {
     display: flex;
-    padding-left: 3rem;
+    padding-left: 4rem;
+    /* padding-left: 3rem; */
     align-items: center;    
 }
 
@@ -153,4 +157,27 @@ body {
    
 }
 
+
+.menu-button {
+    background: none;        
+    border: none;             
+    padding: 8px 16px;        
+    cursor: pointer;          
+    transition: 0.3s;       
+  }
+  
+  .menu-button h3 {
+    margin: 0;               
+    color: rgb(255, 255, 255);             
+  }
+  
+  .menu-button:hover {
+    background-color: #ffffff; 
+    border-radius: 8px;
+  }
+  
+  .menu-button:hover h3 {
+    color: rgb(0, 0, 0);             
+  }
+  
 

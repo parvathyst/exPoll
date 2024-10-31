@@ -2,10 +2,12 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box; 
+  font-family: "Montserrat", sans-serif;
+
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
   height: 100vh;
   overflow: hidden; 
 }
@@ -317,12 +319,6 @@ margin-bottom: 1rem;
 margin-top: 1rem;
 }
 
-/**/
-
-/* styles.css */
-body {
-font-family: Arial, sans-serif;
-}
 
 .date-input {
 display: flex;
@@ -362,7 +358,6 @@ padding-top: 10%
 
 .toggleContainer{
 display: flex;
-/* background-color: #137dd3; */
 justify-content: space-between;
 }
 
@@ -377,3 +372,102 @@ gap:0.5rem;
   width: 15px;
 }
 
+
+/* 30-10-2024 */
+
+.hamburger {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.title {
+  margin-left: 1em;
+  font-size: 1.2em;
+}
+
+.main-div{
+  position: relative;
+}
+
+
+.sidebar {
+ 
+  position: absolute;
+  z-index: 2;
+  width: 25%;
+  height: 100%;
+  background-color: #ffffff;
+  left: -25%;
+  transition: left 0.3s;
+  display: flex;
+  flex-direction: column; 
+  box-shadow: #001f2d;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  
+} 
+
+.sidebar h3{
+  color: black;
+}
+
+.show{
+  left: 0;
+}
+
+.menu-items ul{
+  list-style-type: none; 
+  padding: 0;          
+  margin: 0; 
+  padding-left: 5rem;  
+
+}
+
+.menu-items li{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: whitesmoke;
+}
+
+
+.logoDiv {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  margin-top: 15%;
+}
+
+.logo {
+  height: 30px;
+  width: 150px;
+  display: block;
+}
+
+.menu-button {
+
+  background: none;        
+  border: none;             
+  padding: 10px 10px;        
+
+  cursor: pointer;          
+  transition: 0.3s;  
+   
+}
+
+.menu-button h3 {
+  margin: 0;               
+  color: black;             
+}
+
+.menu-button:hover {
+  background-color: #001f2d; 
+  border-radius: 8px;
+}
+
+.menu-button:hover h3 {
+  color: white;             
+}

@@ -12,14 +12,39 @@
 </head>
 
 <body>
+  <div id="sidebar" class="sidebar" class="">
+    <div class="logoDiv">
+      <img src="/exPoll/src/assets/images/logo-darkblue.png" alt="expoll" class="logo" />
+    </div>
+    <div class="menu-items">
+      <ul>
+        <li>
+          <button class="menu-button"><a href="/exPoll/src/pages/Admin/dashboard/index.html"><h3>Home</h3></a></button>
+        </li>
+        <li>
+          <button class="menu-button"><a href=""><h3>Create Poll</h3></a></button>
+        </li>
+        <li>
+          <button class="menu-button"><a href=""></a><h3>Create Rating</h3></button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <div class="main-div">
     <div class="nav-bar-div">
       <div class="menuIconDiv">
-        <img src="/exPoll/src/assets/icons/menuicon.png" alt="" class="menuIcon" />
+       
+        <button id="hamburger" class="hamburger" onclick="toggleSidebar()"> <img src="/exPoll/src/assets/icons/menuicon.png" alt="" class="menuIcon" /> </button>
+
         <img src="../../../assets/images/logo-white.png" alt="expoll" class="logo" />
       </div>
       <img src="../../../assets/icons/user-white.png" alt="" class="userIcon" />
     </div>
+
+
+   
+
     <div class="headingDiv">
       <h2>Activity History</h2>
     </div>
@@ -68,16 +93,16 @@
 
         <div class="dropdownContainer">
           <select id="activityType" class="dropdown">
-            <option value="meeting">Activity Type</option>
-            <option value="workshop">Poll</option>
-            <option value="training">Rate</option>
+            <option value="" disabled selected>Activity Type</option>
+            <option value="poll">Poll</option>
+            <option value="rate">Rate</option>
           </select>
         </div>
         <div class="dropdownContainer">
           <select id="activityType" class="dropdown">
-            <option value="">Sort By</option>
-            <option value="">Newest</option>
-            <option value="">Oldest</option>
+            <option value="" disabled selected>Sort By</option>
+            <option value="new">Newest</option>
+            <option value="old">Oldest</option>
           </select>
         </div>
         <div class="timePeriodContainer">
@@ -112,5 +137,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <script src="displaySideBar.js">
+  </script>
 </body>
 </html>

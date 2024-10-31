@@ -14,12 +14,12 @@ function addRecipient(value) {
     if (value === undefined) {
         recipientContainer.innerHTML = `
             <input type="email" placeholder="Enter Email"  class="D-no-border">
-            <img src="/exPoll/src/assets/icons/trash.png" alt="delete icon" onclick="removeRecipient(this)" />
+            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     } else {
         recipientContainer.innerHTML = `
             <input type="email" value="${value}" class="D-no-border">
-            <img src="/exPoll/src/assets/icons/trash.png" alt="delete icon" onclick="removeRecipient(this)" />
+            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     }
     // document.querySelector('.recipients-container').insertBefore(recipientContainer, document.querySelector('.recipients-container button'));
