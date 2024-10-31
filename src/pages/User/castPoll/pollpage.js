@@ -45,6 +45,47 @@ const pollOptions = [
 
 displayPollList();
 
+confirmPopUpBox()
+cancelPopUpBox()
+
+function confirmPopUpBox() {
+  const confirmPopUpButton = document.getElementById("cast-poll-button");
+  confirmPopUpButton.onclick = () => {
+    // alert("hello");
+    const popUp = document.getElementById("pop-up-container")
+  popUp.classList.remove("pop-up-container-hidden")
+  popUp.classList.add("pop-up-container")
+  };
+  
+}
+
+function cancelPopUpBox() {
+    const cancelPopUpButton = document.getElementById("cancel");
+    cancelPopUpButton.onclick = () => {
+      // alert("hello");
+      const popUp = document.getElementById("pop-up-container")
+    popUp.classList.remove("pop-up-container")
+    popUp.classList.add("pop-up-container-hidden")
+    };
+    
+  }
+
+  resultPage();
+
+  function resultPage()
+  {
+    const confirmButton = document.getElementById("confirm")
+    confirmButton.onclick = () => {
+        const page1 = document.getElementById("page1");
+        page1.classList.remove("page")
+        page1.classList.add("page-hidden");
+
+        const page2 = document.getElementById("page2");
+        page2.classList.remove("page-hidden")
+        page2.classList.add("page")
+    }
+  }
+
 function sortPollOptions(pollOptions) {
   const selectedPollOptions = [];
   const sortedPollOptions = [];
@@ -70,10 +111,10 @@ function displaySelectedOption(value, pollItem) {
 
   //Change style of selected card
   pollItem.classList.add("selected-poll-card");
-  const castPollButton = document.getElementById("cast-poll-button")
-  castPollButton.disabled = false
-  castPollButton.classList.add("cast-poll-button")
- }
+  const castPollButton = document.getElementById("cast-poll-button");
+  castPollButton.disabled = false;
+  castPollButton.classList.add("cast-poll-button");
+}
 
 function displayOption(value, status) {
   const pollItem = document.createElement("button");
@@ -103,7 +144,3 @@ function displayPollList() {
     displayOption(pollOption.name, pollOption.status);
   }
 }
-
-function alert() {
-    alert("I am an alert box!");
-  }
