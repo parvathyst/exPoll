@@ -45,19 +45,18 @@ const pollOptions = [
 
 displayPollList();
 
-function sortPollOptions(pollOptions){
-    const selectedPollOptions = []
-    const sortedPollOptions = []
-    for(const pollOption of pollOptions){
-        if(pollOption.status==true){
-            selectedPollOptions.push(pollOption)
-        }
-        else{
-            sortedPollOptions.push(pollOption)
-        }
+function sortPollOptions(pollOptions) {
+  const selectedPollOptions = [];
+  const sortedPollOptions = [];
+  for (const pollOption of pollOptions) {
+    if (pollOption.status == true) {
+      selectedPollOptions.push(pollOption);
+    } else {
+      sortedPollOptions.push(pollOption);
     }
-    sortedPollOptions.push(...selectedPollOptions);
-    return sortedPollOptions;
+  }
+  sortedPollOptions.push(...selectedPollOptions);
+  return sortedPollOptions;
 }
 
 function displaySelectedOption(value, pollItem) {
@@ -83,19 +82,20 @@ function displayOption(value, status) {
     pollItem.innerHTML = `
     <h2>${value}</h2>
     `;
-    pollItem.classList.add("unlocked-poll-card")
+    pollItem.classList.add("unlocked-poll-card");
   } else {
     pollItem.innerHTML = `
     <h2>${value}</h2><img src="/src/assets/icons/lock.svg">
     `;
-    pollItem.classList.add("locked-poll-card")
+    pollItem.classList.add("locked-poll-card");
+    pollItem.disabled = true;
   }
   const pollList = document.getElementsByClassName("poll-options-list")[0];
   pollList.appendChild(pollItem);
 }
 
 function displayPollList() {
-const sortedPollOptions = sortPollOptions(pollOptions);
+  const sortedPollOptions = sortPollOptions(pollOptions);
   for (const pollOption of sortedPollOptions) {
     displayOption(pollOption.name, pollOption.status);
   }
