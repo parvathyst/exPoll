@@ -1,7 +1,7 @@
-#link-container{
-    /* width: 35%; */
+/* #link-container{
+    /* width: 35%; 
     box-shadow: inset;
-    /* height: 30px; */
+    /* height: 30px; 
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -9,7 +9,7 @@
     background-color: #0f2a3f; 
     box-sizing: content-box;
     border-radius: 10px;
-    /* gap: 10px;  */
+    /* gap: 10px;  
     width: 102%;
     height: 10%;
 }
@@ -62,9 +62,9 @@
 .link-box {
     padding: 2%;
     font-size: medium;
-    /* border-radius: 5px; */
+    /* border-radius: 5px; 
     width: 10rem;
     color:white;
 }
 
-   
+    */

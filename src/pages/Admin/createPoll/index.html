@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="adminCreatePageCss.css">
-    <link rel="stylesheet" href="adminCreatePageCommon.css">
+    <link rel="stylesheet" href="../../../styles/D.css">
+    <link rel="stylesheet" href="loader.css">
+
     <script type="module" src="adminCreatePollDOM.js"></script>
     <script src="adminCreatePoll.js"></script>
 
@@ -15,6 +17,8 @@
     <link rel="stylesheet" href="generatelink.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         .flatpickr-calendar {
             background-color: #0D2335;
@@ -89,7 +93,6 @@
                 <div class="options-container D-border">
                     <div class="options-container-top">
                         <div class="headingOption">
-                            <!-- <label for="upload-options" class="custom-label">Options</label> -->
                             <h4>Options</h4>
                         </div>
                         <div class="uploadImportButtons">
@@ -104,7 +107,7 @@
                             <div id="upload2">
                                 <label for="upload-options" class="custom-upload-button">
                                     <img src="../../../assets/icons/importIcon.png" alt="Upload" class="">
-                                    Import excel
+                                    Import Excel
                                 </label>
                                 <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
                             </div>
@@ -184,21 +187,28 @@
 
 
                 </div>
-                <div id="link-container">
+                <!-- <button id="generate-button" class="generate-link-button link-container">Generate Link</button> -->
+
+                <button id="generate-button" class="D-black" onclick="fetchDataAndGenerateLink()">
+                    <span id="button-icon"></span>
+                    <span id="button-text">Generate Link</span>
+                </button>
+
+                <!-- <div id="link-container">
                     <div>
-                        <button id="generate-button">Generate Link</button>
                     </div>
                     <div id="show">
-                        <!-- <input  type="url"> -->
+                        <input  type="url">
                     </div>
                     <div>
                         <button id="copy-button"><img src="../../../assets/icons/copy.png" alt="hehe"></button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
+    <!-- <script src="generatelink.js"></script>
+    <script src="adminCreatePollDOM.js"></script> -->
 </body>
-<script src="generatelink.js"></script>
 
 </html>
