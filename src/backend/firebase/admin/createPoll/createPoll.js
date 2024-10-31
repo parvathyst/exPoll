@@ -1,32 +1,19 @@
 import { getDatabase, ref, get, child, set, onValue, push } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
-import { db, app } from '../../config.js'
+import { db, app } from '../../../firebase/config.js'
 
 const rtdb = getDatabase();
 
-function createPoll(pollDetails, pollOptions, pollRecipients) {
+async function createPoll(pollDetails, pollOptions, pollRecipients) {
     const newPollRef = push(ref(rtdb, 'poll-details/'));
 
-    // Set the main poll details
-    set(newPollRef, {
-        "title": pollDetails.title,
-        "description": pollDetails.description,
-        "startDate": pollDetails.startDate,
-        "startTime": pollDetails.startTime,
-        "endDate": pollDetails.endDate,
-        "endTime": pollDetails.endTime,
-        // "isPrivatePoll": pollDetails.isPrivatePoll,
-    })
+    await set(newPollRef, pollDetails)
         .then(() => {
-            // After poll details are set, get the poll key
             const pollKey = newPollRef.key;
-
-            // Set poll options
             const optionsRef = ref(rtdb, 'poll-options/' + pollKey);
             return set(optionsRef, pollOptions);
         })
         .then(() => {
-            // After options are set, set poll recipients
-            const pollKey = newPollRef.key; // Get the same pollKey again
+            const pollKey = newPollRef.key;
             const recipientsRef = ref(rtdb, 'poll-recipients/' + pollKey);
             return set(recipientsRef, pollRecipients);
         })
@@ -37,6 +24,8 @@ function createPoll(pollDetails, pollOptions, pollRecipients) {
             console.error("Error adding poll:", err.message);
             alert("Error: " + err.message);
         });
+
+        return newPollRef.key;
 }
 
 

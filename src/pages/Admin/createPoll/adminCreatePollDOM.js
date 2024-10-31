@@ -1,13 +1,16 @@
 
-import { createPoll } from "../firebase/admin/createPoll/createPoll.js"
+import { createPoll } from "../../../backend/firebase/admin/createPoll/createPoll.js"
+
+import { generateLink } from "./generatelink.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     const uploadUser = document.getElementById('uploadUser');
     if (uploadUser) {
         uploadUser.addEventListener('change', handleUser, false);
     }
-    document.getElementById('generate-link-button').addEventListener('click', fetchData);
+    document.getElementById('generate-button').addEventListener('click', fetchData);
 });
+
 function addRecipient(value) {
     const recipientContainer = document.createElement('div');
     recipientContainer.classList.add('recipient-item', 'D-card');
@@ -57,31 +60,41 @@ function handleUser(event) {
 }
 
 
-function fetchData() {
+async function fetchData() {
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
-    const startDate = document.getElementById('pollStartDate').value;
-    const startTime = document.getElementById('pollStartTime').value;
-    const endDate = document.getElementById('pollEndDate').value;
-    const endTime = document.getElementById('pollEndTime').value;
+    const startDate = document.getElementById('poll-start-date').value;
+    const startTime = document.getElementById('poll-start-time').value;
+    const endDate = document.getElementById('poll-end-date').value;
+    const endTime = document.getElementById('poll-end-time').value;
 
-    const pollOptions = [];
+    let pollOptions = {};
     const optionInputs = document.querySelectorAll('.options-container-bottom input[type="text"]');
-    optionInputs.forEach(input => {
+
+    optionInputs.forEach((input, index) => {
         if (input.value) {
-            pollOptions.push(input.value);
+            pollOptions[index] = {
+                name: input.value,
+                assignedEmployee: "",
+                status: "false",
+                selectedTime: ""
+            };
         }
     });
 
-    const pollRecipients = [];
-    const recipientInputs = document.querySelectorAll('.recipient-container input[type="text"]');
-    recipientInputs.forEach(input => {
+    let pollRecipients = {};
+    const recipientInputs = document.querySelectorAll('.recipient-container-bottom input[type="email"]');
+    recipientInputs.forEach((input, index) => {
         if (input.value) {
-            pollRecipients.push(input.value);
+            pollRecipients[index] = {
+                name: "",
+                email: input.value,
+            };
         }
     });
 
-    const isPrivatePoll = document.getElementById('toggleSwitch').checked;
+    const isPrivatePoll = document.getElementById('toggleSwitch').checked.toString();
+    const dateTime = new Date().toLocaleString();
 
     const pollData = {
         "title": title,
@@ -90,13 +103,16 @@ function fetchData() {
         "startTime": startTime,
         "endDate": endDate,
         "endTime": endTime,
-        "isPrivate": isPrivatePoll,
+        "isPrivatePoll": isPrivatePoll,
+        "createdBy": "",
+        "createdAt": dateTime,
     };
 
+    const key =  await createPoll(pollData, pollOptions, pollRecipients);
 
-    console.log(pollOptions);
-    console.log(pollRecipients);
+    generateLink(key);
 
-    createPoll(pollData, pollOptions, pollRecipients);
+
+
 }
 

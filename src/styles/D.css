@@ -67,3 +67,11 @@
     color: #FFFFFF;
     stroke: #FFFFFF;
 }
+
+.D-navBar-employee {
+    background-color: #000000;
+    width: 100vw;
+    height: 8%;
+    display: flex;
+    align-items: center;
+  }

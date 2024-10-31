@@ -8,24 +8,37 @@
     <title>Admin Feedback</title>
 </head>
 <body>
-    <nav class="nav">
-        <div class="navLeft">
-            <img class="pollLogo" src="/images_adminFeedbackPage/expollsvg 3.png" alt="expollIcon">
-
-
+    <div class="navBarDiv">
+        <div class="menuIconDiv">
+            <img src="../adminHistoryPage/adminHistoryImages/menuicon.png" alt="" class="menuIcon" />
+            <img src="/images_adminFeedbackPage/expollsvg 3.png" alt="expoll" class="logo" />
         </div>
-        <div class="navRight">
+        <img src="../adminHistoryPage/adminHistoryImages/icon-user-white.png" alt="" class="userIcon" />
+    </div>
+    
+    <div class="containerHeading">
+        <h2>Create Feedback</h2>
+    </div>
+    
 
-        </div>
-    </nav>
     <div class="container">
+        
         <div class="leftSide">
-
+            
             <div><input class="titleInputBox" type="text" placeholder="Title"></div>
-            <div class="QuestionBox">
-                <div class="question1">
+            <div id="QuestionBox" class="QuestionBox">
+                <!-- <div class="question1">
+                    <input id="inputBoxQn1" class="inputBoxQn1" type="text" placeholder="Enter Question">
+                    <i onclick="removecontent()" class="fa-solid fa-trash" ></i>
+
+                </div> -->
+                <!-- <div class="question1">
                     <input class="inputBoxQn1" type="text" placeholder="Enter Question">
                     <i class="fa-solid fa-trash"></i>
+
+                </div> -->
+                <div class="addQuestion">
+                    <button class="addMore" onclick="addFn()"> Add more</button>
 
                 </div>
                 
@@ -33,10 +46,25 @@
             </div>
             <div class="scale">
                 <h5>Set a rating scale length:</h5>
-                <input class="scaleInBox" type="text" placeholder="1">
+                <div class="scaleArea">
+                    <button onclick="increase()" class="counter">+</button>
+                    <input id="scaleInBox" class="scaleInBox" type="text" placeholder="0" value="0">
+                    <button onclick="decrease()" class="counter">-</button>
+
+                </div>
+                
 
             </div>
-            <div class="addLegend"></div>
+            <div class="addLegend">
+                <div class="navigateBox">
+                    <button id="legendButn" class="legendButn">1</button>
+
+                </div>
+                <div class="legend">
+                    <input class="legendInput" type="text" placeholder="Legend">
+
+                </div>
+            </div>
 
         </div>  
         <div class="rightSide">
@@ -50,8 +78,24 @@
                 
                 
             </div>
-            <input class="startDate"  type="text"  placeholder="Start Date & Time" onfocus="(this.type='datetime-local')">
-            <input class="endDate"  type="text" placeholder="End Date & Time" onfocus="(this.type='datetime-local')">
+            <div class="start">
+                <input class="startDate"  type="text"  placeholder="Start Date" onfocus="(this.type='date')">
+                <input class="startTime"  type="text"  placeholder="Start Time" onfocus="(this.type='time')">
+            </div>
+            <div class="end">
+                <input class="endDate"  type="text" placeholder="End Date" onfocus="(this.type='date')">
+                <input class="endTime"  type="text" placeholder="End Time" onfocus="(this.type='time')">
+            </div>
+            <div class="rightSideButtns">
+                <div class="cancel">
+                    <button class="cancelBtn">Cancel</button>
+                </div>
+                <div class="generate">
+                    <button class="generateBtn">Genarate Link</button>
+                </div>
+            </div>
+            
+            
         
 
 
@@ -60,6 +104,6 @@
 
     </div>
     
-    
+    <script src="adminFeedback.js"></script>
 </body>
 </html>

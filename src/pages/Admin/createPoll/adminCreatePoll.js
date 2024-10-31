@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         uploadOptions.addEventListener('change', handleFile, false);
     }
 });
+
 function addOption(value) {
     const optionContainer = document.createElement('div');
     optionContainer.classList.add('option-item');
@@ -63,10 +64,6 @@ function handleFile(event) {
 
             const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
             const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
-
-            console.log(jsonData);
-            console.log(jsonData[0]);
-            console.log(jsonData[1]);
 
             if (jsonData.length > 0) {
                 jsonData.slice(1).forEach((row) => {
