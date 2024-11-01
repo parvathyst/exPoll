@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,22 +53,21 @@
     </style>
     <title>Create a Poll</title>
 </head>
-
 <body>
     <div class="mainDiv">
         <div class="navBarDiv">
             <div class="menuIconDiv">
-                <img src="../../../assets/icons/menu.png" alt="" class="menuIcon" />
-                <img src="../../../assets/images/logo-white.png" alt="expoll" class="logo" />
+                <img src="/exPoll/src/assets/icons/menu.png" alt="" class="menuIcon" />
+                <img src="/exPoll/src/assets/images/logo-white.png" alt="expoll" class="logo" />
             </div>
-            <img src="../../../assets/icons/user-white.png" alt="" class="userIcon" />
+            <img src="/exPoll/src/assets/icons/user-white.png" alt="" class="userIcon" />
         </div>
-        <div class="headingDiv">
+        <div class="heading-div">
             <h2>Create Poll</h2>
         </div>
         <div class="main-container">
             <div class="main-container-left">
-                <div class="pollOptions">
+                <div class="poll-options">
                     <input type="text" id="title" placeholder="Title" class="D-border ">
                     <textarea id="description" placeholder="Description" rows="3" class="D-border "
                         style="resize: none;"></textarea>
@@ -95,11 +93,11 @@
                         <div class="headingOption">
                             <h4>Options</h4>
                         </div>
-                        <div class="uploadImportButtons">
+                        <div class="upload-import-button-container">
                             <div id="downloadTemplate">
-                                <a href="../../../assets/templates/Poll Options Template.xlsx" download>
+                                <a href="/exPoll/src/assets/templates/Poll Options Template.xlsx" download>
                                     <label class="custom-upload-button">
-                                        <img src="../../../assets/icons/download.png" alt="download" class="">
+                                        <img src="/exPoll/src/assets/icons/download.png" alt="download" class="">
                                         Template
                                     </label>
                                 </a>
@@ -115,77 +113,68 @@
                     </div>
                     <div class="options-container-bottom">
                         <div class="options-container-none"></div>
-                        <!-- <div class="option-item D-black">
+                        <div class="option-item D-black">
                             <input type="text" placeholder="Enter Option" class="D-no-border">
-                            <img src="icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"></img>
-                        </div> -->
+                            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon"
+                                onclick="removeOption(this)"></img>
+                        </div>
                     </div>
                     <div>
-                        <div class="ButtonContainer">
+                        <div class="Button-container">
                             <button onclick="addOption()" class="D-black" id="addButton"> Add Options</button>
                         </div>
                     </div>
-
                 </div>
-                <!-- <button onclick="addOption()" class="D-black">+ Add Option</button> -->
             </div>
             <div class="main-container-right">
                 <h4>Recipients</h4>
                 <div class="recipients-container D-border">
-                    <div class="recipientsButtonDiv">
+                    <div class="recipients-button-div">
                         <div id="downloadTemplate">
                             <a href="../../../assets/templates/User List Template.xlsx" download>
                                 <label class="custom-upload-button">
-                                    <img src="../../../assets/icons/download.png" alt="download" class="">
+                                    <img src="/exPoll/src/assets/icons/download.png" alt="download" class="">
                                     Template
                                 </label>
                             </a>
                         </div>
                         <div id="upload">
                             <label for="uploadUser" class="custom-upload-button">
-                                <img src="../../../assets/icons/importIcon.png" alt="Upload" class="">
+                                <img src="/exPoll/src/assets/icons/importIcon.png" alt="Upload" class="">
                                 Import excel
                             </label>
                             <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
                         </div>
                     </div>
-                    <div class="recipient-container-bottom" id="recipient-container-bottom">
-                        <div class="recipient-container-none">
+            
 
+                    <div class="recipient-container-bottom">
+                        <div class="recipient-container-none">
+                            <div class="recipient-item D-white">
+                                <input type="email" placeholder="Enter Email" class="D-no-border">
+                                <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon"
+                                    onclick="removeOption(this)"></img>
+                            </div>
                         </div>
                     </div>
-                    <div class="buttonContainer" class="addOptionButtonContainer">
-                        <!-- Button to add recipient -->
+                    <div class="button-container" class="add-option-button-container">
                         <button onclick="addRecipient()" id="addRecipientButton" class="D-recipient">+ Add
                             Recipient</button>
                     </div>
                 </div>
                 <div class="recipient-container-buttons">
                     <div class="toggle-and-cancel-container">
-                        <!-- Action buttons -->
-                        <button class="cancelButton">Cancel</button>
-
-                        <!-- Toggle switch container -->
+                        <button class="cancel-button">Cancel</button>
                         <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
-                            <!-- Label for the toggle switch -->
                             <div>
                                 <h4><span id="toggleLabel">Private Poll</span></h4>
                             </div>
-
-                            <!-- Toggle switch -->
                             <label class="switch">
                                 <input type="checkbox" id="toggleSwitch">
                                 <span class="slider"></span>
                             </label>
                         </div>
                     </div>
-                    <!-- <button class="generate-link-button">
-                        Generate Link
-                        <span class="separator"></span>
-                        <i class="icon-copy"></i>
-                    </button> -->
-
-
                 </div>
                 <!-- <button id="generate-button" class="generate-link-button link-container">Generate Link</button> -->
 
@@ -201,7 +190,8 @@
                         <input  type="url">
                     </div>
                     <div>
-                        <button id="copy-button"><img src="../../../assets/icons/copy.png" alt="hehe"></button>
+                        <button id="copy-button"><img src="/exPoll/src/assets/icons/copy-link-icon.png"
+                                alt="generate-link"></button>
                     </div>
                 </div> -->
             </div>
