@@ -167,6 +167,7 @@ body {
 }
 
 .popup-form {
+    text-align: center;
     display: none; 
     position: fixed;
     top: 0;
@@ -220,4 +221,73 @@ body {
 .btn.add-admin {
     background-color: #1A2335;
     color: white;
+}
+
+
+/* Base styles for pop-ups */
+.popup-form {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    max-width: 80%;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Animation styles */
+.popup-form.show .popup-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* Buttons */
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.popup-buttons .btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cancel-button {
+    background: #ccc;
+    color: #333;
+}
+
+.add-admin {
+    background: #4CAF50;
+    color: #fff;
+}
+
+.cancel-button:hover,
+.add-admin:hover {
+    opacity: 0.9;
 }

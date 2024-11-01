@@ -1,47 +1,82 @@
-const addAdminPopupButton = document.getElementById('add-admin-button');
-const editAdminPopupButton = document.getElementById('edit-admin-button');
-const deleteAdminPopupButton = document.getElementById('delete-admin-button');
-const addAdminPopupMenu = document.getElementById('add-admin-popup');
-const editAdminPopupMenu = document.getElementById('edit-admin-popup');
-const deleteAdminPopupMenu = document.getElementById('delete-admin-popup');
-const cancelBtn = document.getElementById('cancelBtn');
+import { createAdmin } from "../../../backend/firebase/superAdmin/createAdmin.js";
+import { deleteAdmin } from "../../../backend/firebase/superAdmin/deleteAdmin.js"
+import { displayAdmins } from "./displayAdmins.js";
 
-addAdminPopupButton.addEventListener('click', function () {
-    addAdminPopupMenu.style.display = 'flex';
-});
 
-editAdminPopupButton.addEventListener('click', function () {
-    editAdminPopupMenu.style.display = 'flex';
-});
+document.addEventListener("DOMContentLoaded", () => {
+    const addAdminPopup = document.getElementById("add-admin-popup");
+    const editAdminPopup = document.getElementById("edit-admin-popup");
+    const deleteAdminPopup = document.getElementById("delete-admin-popup");
+    let emailid;
+    let adminName;
 
-deleteAdminPopupButton.addEventListener('click', function () {
-    deleteAdminPopupMenu.style.display = 'flex';
-});
+    document.getElementById("add-admin-button").addEventListener("click", () => {
+        showPopup(addAdminPopup);
+    });
 
-function cancel() {
 
-}
 
-window.addEventListener('click', function (event) {
-    if (event.target === popupForm) {
-        popupForm.style.display = 'none';
+    document.querySelectorAll(".cancel-button").forEach(button => {
+        button.addEventListener("click", () => {
+            hidePopup(addAdminPopup);
+            hidePopup(editAdminPopup);
+            hidePopup(deleteAdminPopup);
+        });
+    });
+
+    function showPopup(popup) {
+        popup.style.display = "flex";
+        setTimeout(() => {
+            popup.classList.add("show");
+        }, 10);
     }
+
+    function hidePopup(popup) {
+        popup.classList.remove("show");
+        setTimeout(() => {
+            popup.style.display = "none";
+        }, 300);
+    }
+
+    function showDeletePopUp() {
+        document.getElementById("confirm-delete-message-name").innerHTML = adminName
+        document.getElementById("confirm-delete-message-email").innerHTML = emailid
+        showPopup(deleteAdminPopup);
+    }
+
+    document.getElementById('add-admin-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const fullName = document.getElementById('addAdminfullName').value;
+        const email = document.getElementById('addAdminemail').value;
+        const password = document.getElementById('AddAdminpassword').value;
+        await createAdmin(fullName, email, password);
+        displayAdmins(attachDeleteListeners);
+
+    });
+
+    document.getElementById("edit-admin-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        hidePopup(editAdminPopup);
+    });
+
+    document.getElementById("delete-admin-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (document.getElementById("confirm-text").value.toLowerCase() === 'confirm') {
+            await deleteAdmin(emailid);
+            hidePopup(deleteAdminPopup);
+        }else{
+            alert("dfsdfsd")
+        }
+    });
+
+    function attachDeleteListeners() {
+        document.querySelectorAll(".delete-admin-button").forEach(button => {
+            button.addEventListener("click", (event) => {
+                emailid = event.target.closest('.admin-item').querySelector(".admin-email").textContent;
+                adminName = event.target.closest('.admin-item').querySelector(".admin-name").textContent;
+                showDeletePopUp();
+            });
+        });
+    }
+    displayAdmins(attachDeleteListeners);
 });
-
-// function displayAdmin(value) {
-//     const adminItem = document.createElement('div');
-//     adminItem.classList.add('admin-item');
-//     adminItem.innerHTML = `
-//         <div class="admin-details">
-//                     <strong>${value.name}</strong><br>
-//                     <span>${value.email}</span>
-//                 </div>
-//                 <div class="action-buttons">
-//                     <button class="view"><img src="icons/pen.png" alt="edit icon"></button>
-//                     <button class="delete"><img src="icons/trash.png" alt="delete icon"></button>
-//                 </div>
-//         `;
-//     document.querySelector('.options-container-bottom').insertBefore(optionContainer, document.querySelector('.options-container button'));
-// }
-
-// export default displayAdmin;

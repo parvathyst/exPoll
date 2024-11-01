@@ -15,6 +15,15 @@
     color: #333333;
 }
 
+
+.D-white-box {
+    /* padding: 10px;
+    margin-bottom: 10px; */
+    border-radius: 8px;
+    border: none;
+    background-color: #F2F5FA;
+    color: #333333;
+}
 .D-black {
     padding: 10px;
     margin-bottom: 10px;
@@ -36,6 +45,7 @@
 .D-no-border {
     border: none;
     outline: none;
+   
     background-color: transparent;
     width: 100%;
 }

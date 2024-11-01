@@ -3,10 +3,10 @@ import { db, app } from '../../../firebase/config.js'
 
 const rtdb = getDatabase();
 
-function createPoll(pollDetails, pollOptions, pollRecipients) {
+async function createPoll(pollDetails, pollOptions, pollRecipients) {
     const newPollRef = push(ref(rtdb, 'poll-details/'));
 
-    set(newPollRef, pollDetails)
+    await set(newPollRef, pollDetails)
         .then(() => {
             const pollKey = newPollRef.key;
             const optionsRef = ref(rtdb, 'poll-options/' + pollKey);

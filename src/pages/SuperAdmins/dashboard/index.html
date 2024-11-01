@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="D.css">
+    <link rel="stylesheet" href="superAdmin.css">
+    <link rel="stylesheet" href="../../../styles/D.css">
     <title>Admin List</title>
 </head>
 
@@ -28,7 +28,7 @@
             </button>
         </div>
 
-        <div class="super-admin-container-bottom D-border">
+        <div class="super-admin-container-bottom D-border" id="super-admin-container-bottom">
             <div class="admin-items-none"></div>
         </div>
     </div>
@@ -40,7 +40,7 @@
                 <input type="email" id="addAdminemail" name="email" placeholder="email">
                 <input type="password" id="AddAdminpassword" name="password" placeholder="default password">
                 <div class="popup-buttons">
-                    <button type="button" class="btn cancel-button" id="" onclick="cancel()">Cancel</button>
+                    <button type="button" class="btn cancel-button" id="">Cancel</button>
                     <button type="submit" class="btn add-admin">Add Admin</button>
                 </div>
             </form>
@@ -52,7 +52,7 @@
             <form id="edit-admin-form">
                 <input type="text" id="fullName" name="fullName" placeholder="Full Name">
                 <div class="popup-buttons">
-                    <button type="button" class="btn cancel" id="cancelBtn">Cancel</button>
+                    <button type="button" class="btn cancel-button" id="cancelBtn">Cancel</button>
                     <button type="submit" class="btn add-admin">Add Admin</button>
                 </div>
             </form>
@@ -62,19 +62,21 @@
     <div id="delete-admin-popup" class="popup-form">
         <div class="popup-content">
             <form id="delete-admin-form">
-                <input type="text" id="fullName" name="fullName" placeholder="confirm">
+                <h3>Delete Admin ?</h3>
+                <p id="confirm-delete-message-name"></p>
+                <p id="confirm-delete-message-email"></p>
+                <input type="text" id="confirm-text" name="fullName" placeholder="confirm">
                 <div class="popup-buttons">
-                    <button type="button" class="btn cancel" id="" onclick="cancel()">Cancel</button>
-                    <button type="submit" class="btn add-admin">Add Admin</button>
+                    <button type="button" class="btn cancel-button" id="">Cancel</button>
+                    <button type="submit" class="btn delete-admin">Delete Admin</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 
     <!-- <script type="module" src="../firebase/admin/insertAdmin.js"  ></script> -->
-    <script type="module" src="DOM.js"  ></script>
 
 </body>
 

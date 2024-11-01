@@ -1,108 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin History</title>
-    <link rel="stylesheet" href="adminHome.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="" />
-  </head>
-  <body>
-    <main class="home">
-      <section class="menuBar">
-        <div class="logoDiv">
-          <img src="adminDashboardImages/logoexpoll.png" alt="expoll" class="logo" />
-        </div>
-        <div class="menuItems">
-          <ul>
-            <li>
-              <h4>Create A Poll</h4>
-            </li>
-            <li>
-              <h4>Create Rating</h4>
-            </li>
-          </ul>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link rel="icon" sizes="100x300" href="/exPoll/src/assets/images/logo-white.png">
+  <link rel="stylesheet" href="adminHome.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="" />
+</head>
+
+<body>
+  <main class="home">
+    <section class="menu-bar-div">
+      <div class="logoDiv">
+        <img src="/exPoll/src/assets/images/logo-white.png" alt="expoll" class="logo" />
+      </div>
+      <div class="menu-items">
+        <ul>
+          <li>
+            <button class="menu-button"><h3>Create A Poll</h3></button>
+          </li>
+          <li>
+            <button class="menu-button"><h3>Create Rating</h3></button>
+          </li>
+          <li>
+            <button class="menu-button"><a href="/exPoll/src/pages/Admin/history/index.html"><h3>View History</h3></a></button>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="content-section-div">
+      <nav class="iconNav">
+        <img src="/exPoll/src/assets/icons/user-icon-black.png" class="user-icon-black" alt="" />
+      </nav>
+      <section class="heading-section">
       </section>
-      <section class="contentSection">
-        <nav class="iconNav">
-          <img src="adminDashboardImages/user-icon.png" class="userIcon" alt="" />
-        </nav>
-        <section class="headingSection">
-          <h3>Welcome</h3>
-          <h2>John Doe</h2>
-        </section>
-        <section class="titleOfActivitySection">
-          <h3>Your recent activities</h3>
-        </section>
-        <div class="activitySection">
-          <div class="scrollable-div">
-            <div class="activityBoxContainer">
-              <div class="activityBox">
-                <div class="content">
-                  <h5>Leader of the day</h5>
-                  <h6>17-06-2024</h6>
-                </div>
-                <div class="icon">
-                  <img src="adminDashboardImages/fa-solid_poll (1).png" alt="icon" />
-                </div>
+      <section class="title-of-activity-section">
+        <h3>Your recent activities</h3>
+      </section>
+      <div class="activity-section">
+        <div class="scrollable-div">
+          <div class="activity-box-container">
+            <div class="activity-box">
+              <div class="content">
+                <h5>Leader of the day</h5>
+                <h6>17-06-2024</h6>
               </div>
-              <div class="activityBox">
-                <div class="content">
-                  <h5>Leader of the day</h5>
-                  <h6>17-06-2024</h6>
-                </div>
-                <div class="icon">
-                  <img src="adminDashboardImages/fa-solid_poll (1).png" alt="icon" />
-                </div>
-              </div>
-              <div class="activityBox">
-                <div class="content">
-                  <h5>Leader of the day</h5>
-                  <h6>17-06-2024</h6>
-                </div>
-                <div class="icon">
-                  <img src="adminDashboardImages/fa-solid_poll (1).png" alt="icon" />
-                </div>
-              </div>
-              <div class="activityBox">
-                <div class="content">
-                  <h5>Leader of the day</h5>
-                  <h6>17-06-2024</h6>
-                </div>
-                <div class="icon">
-                  <img src="adminDashboardImages/fa-solid_poll (1).png" alt="icon" />
-                </div>
-              </div>
-              <div class="activityBox">
-                <div class="content">
-                  <h5>Leader of the day</h5>
-                  <h6>17-06-2024</h6>
-                </div>
-                <div class="icon">
-                  <img src="adminDashboardImages/fa-solid_poll (1).png" alt="icon" />
-                </div>
-              </div>
-              <div class="activityBox">
-                <div class="content">
-                  <h5>Leader of the day</h5>
-                  <h6>17-06-2024</h6>
-                </div>
-                <div class="icon">
-                  <img src="adminDashboardImages/fa-solid_poll (1).png" alt="icon" />
-                </div>
+              <div class="icon">
+                <img src="/exPoll/src/assets/icons/poll-solid.png" alt="icon" />
               </div>
             </div>
+            <div class="activity-box">
+              <div class="content">
+                <h5>Leader of the day</h5>
+                <h6>17-06-2024</h6>
+              </div>
+              <div class="icon">
+                <img src="/exPoll/src/assets/icons/rate-icon-solid.png" alt="icon" />
+              </div>
+            </div>
+            <div class="activity-box">
+              <div class="content">
+                <h5>Leader of the day</h5>
+                <h6>17-06-2024</h6>
+              </div>
+              <div class="icon">
+                <img src="/exPoll/src/assets/icons/poll-solid.png" alt="icon" />
+              </div>
+            </div>
+            <div class="activity-box">
+              <div class="content">
+                <h5>Leader of the day</h5>
+                <h6>17-06-2024</h6>
+              </div>
+              <div class="icon">
+                <img src="/exPoll/src/assets/icons/rate-icon-solid.png" alt="icon" />
+              </div>
+            </div>
+            <div class="activity-box">
+              <div class="content">
+                <h5>Leader of the day</h5>
+                <h6>17-06-2024</h6>
+              </div>
+              <div class="icon">
+                <img src="/exPoll/src/assets/icons/poll-solid.png" alt="icon" />
+              </div>
+            </div>
+            <div class="activity-box">
+              <div class="content">
+                <h5>Leader of the day</h5>
+                <h6>17-06-2024</h6>
+              </div>
+              <div class="icon">
+                <img src="/exPoll/src/assets/icons/poll-solid.png" alt="icon" />
+              </div>
+            </div>
+            <div class="activity-box">
+              <div class="content">
+                <h5>Leader of the day</h5>
+                <h6>17-06-2024</h6>
+              </div>
+              <div class="icon">
+                <img src="/exPoll/src/assets/icons/poll-solid.png" alt="icon" />
+              </div>
+            </div>
+
           </div>
-          <div></div>
         </div>
-      </section>
-    </main>
-  </body>
+        <div></div>
+      </div>
+    </section>
+  </main>
+</body>
+
 </html>

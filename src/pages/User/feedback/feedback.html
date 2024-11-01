@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="feedback.css">
+    <link rel="stylesheet" href="/src/styles/D.css" />
+    <!-- <link rel="stylesheet" href="ss.css"> -->
+    <style>
+        body {
+          font-family: "Montserrat";
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="D-navBar-employee">
+    <img
+      src="/src/assets/images/logo-white.png"
+      alt="exPoll"
+      class="logoImage"
+    />
+    </div>
+
+<header>
+    
+    <h1>ILP-BATCH 05-CSS TRAINING</h1>
+    
+</header>
+<main>
+    <div class="maincontainer">
+        <div class="nav">
+           <!-- Pagination -->
+            <div id="pagination" class="pagination"></div>
+            
+        </div>
+        <div id="question-card" class="question-card">
+            <div id="question-text" class="question-text">Question text here</div>
+            <div class="card-controls">
+              <button onclick="previousQuestion()" class="card-btn">Previous</button>
+              <button onclick="nextQuestion()" class="card-btn">Next</button>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+<script src="feedback.js"></script>
+<script src="page.js"></script>
+</html>
