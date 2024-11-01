@@ -81,7 +81,7 @@ async function fetchDataAndGenerateLink() {
     if (generatedLink) {
         copyToClipboard(generatedLink);
         buttonText.innerText = "Link Copied!";
-        setTimeout(() => buttonText.innerText = generatedLink, 4000); 
+        setTimeout(() => buttonText.innerText = generatedLink, 4000);
         return;
     }
 
@@ -120,7 +120,7 @@ async function fetchDataAndGenerateLink() {
             };
         }
     });
-
+    console.log(recipientInputs);
     const isPrivatePoll = document.getElementById('toggleSwitch').checked.toString();
     const dateTime = new Date().toLocaleString();
 
@@ -136,8 +136,12 @@ async function fetchDataAndGenerateLink() {
         "createdAt": dateTime,
     };
 
+    console.log(pollRecipients);
+
+
     try {
         const key = await createPoll(pollData, pollOptions, pollRecipients);
+        pop(pollData, pollRecipients);
         generatedLink = `expoll.com/poll/${key}`
         buttonIcon.className = 'copy-icon';
         buttonText.innerText = generatedLink;
@@ -164,4 +168,73 @@ function copyToClipboard(link) {
         alert('Link copied to clipboard!');
     });
 }
+
+
+
+// Function to send an email using EmailJS
+function sendEmail(toEmail, subject, message) {
+    const templateParams = {
+        to_email: toEmail,
+        subject: subject,
+        message: message
+    };
+
+    emailjs.send('service_bxt3eel', 'template_0mg1p1y', templateParams)
+        .then((response) => {
+            console.log('Email sent successfully!', response.status, response.text);
+        })
+        .catch((error) => {
+            console.error('Failed to send email:', error);
+        });
+}
+
+function showPopup() {
+    document.getElementById("myPopup").style.display = "block";
+}
+
+function hidePopup() {
+    document.getElementById("myPopup").style.display = "none";
+}
+
+function pop(pollData, pollRecipients) {
+    showPopup();
+    document.getElementById("send-email").addEventListener("click", function () {
+        hidePopup();
+        try {
+            const subject = pollData.title;
+            const message = `
+            ${pollData.description}
+        
+            Link to access poll: ${generatedLink}
+        
+            Poll will be open from:
+            ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]
+        `;
+        
+
+            Object.keys(pollRecipients).forEach(key => {
+                const data = pollRecipients[key];
+                if (data && data.email) {
+                    sendEmail(data.email, subject, message); // Calls sendEmail for each email
+                    console.log(`Email sent to: ${data.email}`);
+                } else {
+                    console.warn("Recipient data is missing an email:", data);
+                }
+            });
+
+
+
+
+        } catch (error) {
+            console.error('Error fetching recipients:', error);
+        }
+    });
+
+
+    document.getElementById("cancel-email").addEventListener("click", function () {
+        hidePopup();
+    });
+
+};
+
 
