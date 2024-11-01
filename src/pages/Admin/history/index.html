@@ -12,8 +12,32 @@
 </head>
 
 <body>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+            fetch("navbar.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("navbar").innerHTML = data;
+                })
+                .catch(error => console.error("Error loading navbar:", error));
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("sidebar.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("sidebar").innerHTML = data;
+                })
+                .catch(error => console.error("Error loading navbar:", error));
+        });
+  </script>
+
+
+
   <div id="sidebar" class="sidebar" class="">
-    <div class="logoDiv">
+    <!-- <div class="logoDiv">
       <img src="/exPoll/src/assets/images/logo-darkblue.png" alt="expoll" class="logo" />
     </div>
     <div class="menu-items">
@@ -28,20 +52,20 @@
           <button class="menu-button"><a href=""></a><h3>Create Rating</h3></button>
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 
   <div class="main-div">
-    <div class="nav-bar-div">
-      <div class="menuIconDiv">
+     <div class="nav-bar-div" id="navbar">
+      <!-- <div class="menuIconDiv">
        
         <button id="hamburger" class="hamburger" onclick="toggleSidebar()"> <img src="/exPoll/src/assets/icons/menuicon.png" alt="" class="menuIcon" /> </button>
 
         <img src="../../../assets/images/logo-white.png" alt="expoll" class="logo" />
-      </div>
-      <img src="../../../assets/icons/user-white.png" alt="" class="userIcon" />
-    </div>
-
+      </div> -->
+      <!-- <img src="../../../assets/icons/user-white.png" alt="" class="userIcon" /> -->
+    </div> 
+    
 
    
 
@@ -50,9 +74,9 @@
     </div>
     <div class="adminHistoryDiv">
       <div class="backgroundDiv">
-        <div class="activityBoxContainer">
+        <div class="activityBoxContainer" id="activity-box-container">
 
-          <div class="activityBox">
+          <!-- <div class="activityBox" >
             <div class="icon">
               <img src="/exPoll/src/assets/icons/poll-solid.png" alt="icon" />
             </div>
@@ -65,8 +89,8 @@
                 <h6>14:20</h6>
               </div>
             </div>
-          </div>
-
+          </div> -->
+<!-- 
           <div class="activityBox">
             <div class="icon">
               <img src="/exPoll/src/assets/icons/rate-icon-solid.png" alt="icon" />
@@ -80,14 +104,14 @@
                 <h6>14:20</h6>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="sortingDiv">
         <div class="searchBox">
           <input type="text" placeholder="Search" class="searchInput" />
           <button class="search-button">
-            <img src="/exPoll/src/assets/icons/isearch-icon-bold.png" alt="" />
+            <img src="/src/assets/icons/isearch-icon-bold.png" alt="" />
           </button>
         </div>
 
@@ -140,5 +164,10 @@
   </div>
   <script src="displaySideBar.js">
   </script>
+  <!-- <script src="/exPoll/src/backend/firebase/admin/loadHistory/loadHistory.js">
+  </script> -->
+
+  <script type="module" src="/src/backend/firebase/admin/loadHistory/loadHistory.js"></script>
+
 </body>
 </html>

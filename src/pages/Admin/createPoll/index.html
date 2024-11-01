@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="adminCreatePageCss.css">
-    <link rel="stylesheet" href="adminCreatePageCommon.css">
+    <link rel="stylesheet" href="../../../styles/D.css">
+    <link rel="stylesheet" href="loader.css">
+
     <script type="module" src="adminCreatePollDOM.js"></script>
     <script src="adminCreatePoll.js"></script>
 
@@ -14,6 +16,41 @@
     <link rel="stylesheet" href="generatelink.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        .flatpickr-calendar {
+            background-color: #0D2335;
+            border: 2px solid #FFFFFF;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #FFFFFF;
+            width: auto;
+        }
+
+        .flatpickr-day {
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 50%;
+        }
+
+        .flatpickr-day:hover {
+            background-color: #ffffff6e;
+            color: #0D2335;
+        }
+
+        .flatpickr-time {
+            background-color: #e9ecef;
+            border: none;
+        }
+
+        .flatpickr-hour,
+        .flatpickr-minute {
+            color: #333;
+            font-size: 12px;
+            padding: 5px;
+        }
+    </style>
     <title>Create a Poll</title>
 </head>
 <body>
@@ -53,7 +90,7 @@
                 </div>
                 <div class="options-container D-border">
                     <div class="options-container-top">
-                        <div class="heading-option">
+                        <div class="headingOption">
                             <h4>Options</h4>
                         </div>
                         <div class="upload-import-button-container">
@@ -67,8 +104,8 @@
                             </div>
                             <div id="upload2">
                                 <label for="upload-options" class="custom-upload-button">
-                                    <img src="/exPoll/src/assets/icons/importIcon.png" alt="Upload" class="">
-                                    Import excel
+                                    <img src="../../../assets/icons/importIcon.png" alt="Upload" class="">
+                                    Import Excel
                                 </label>
                                 <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
                             </div>
@@ -139,21 +176,40 @@
                         </div>
                     </div>
                 </div>
-                <div id="link-container">
+                <!-- <button id="generate-button" class="generate-link-button link-container">Generate Link</button> -->
+
+                <button id="generate-button" class="D-black" onclick="fetchDataAndGenerateLink()">
+                    <span id="button-icon"></span>
+                    <span id="button-text">Generate Link</span>
+                </button>
+
+                <!-- <div id="link-container">
                     <div>
-                        <button id="generate-button">Generate Link</button>
                     </div>
                     <div id="show">
+                        <input  type="url">
                     </div>
                     <div>
                         <button id="copy-button"><img src="/exPoll/src/assets/icons/copy-link-icon.png"
                                 alt="generate-link"></button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
+    <!-- <script src="generatelink.js"></script>
+    <script src="adminCreatePollDOM.js"></script> -->
 </body>
 <script src="generatelink.js"></script>
-
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "oJuPNylCuJvugpZ0v",
+      });
+   })();
+</script>
+<script type="module" src="mail.js"></script>
 </html>

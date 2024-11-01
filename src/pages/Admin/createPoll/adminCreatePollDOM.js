@@ -1,14 +1,22 @@
 
 import { createPoll } from "../../../backend/firebase/admin/createPoll/createPoll.js"
 
-import { generateLink } from "./generatelink.js";
+// import { generateLink } from "./generatelink.js";
+
+import { validateForm } from "./validation.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     const uploadUser = document.getElementById('uploadUser');
     if (uploadUser) {
         uploadUser.addEventListener('change', handleUser, false);
     }
-    document.getElementById('generate-button').addEventListener('click', fetchData);
+    document.getElementById('generate-button').addEventListener('click', function (event) {
+        if (validateForm()) {
+            fetchDataAndGenerateLink();
+        } else {
+            console.log("Form validation failed. Please fix the highlighted errors.");
+        }
+    });
 });
 
 function addRecipient(value) {
@@ -28,6 +36,7 @@ function addRecipient(value) {
     // document.querySelector('.recipients-container').insertBefore(recipientContainer, document.querySelector('.recipients-container button'));
     document.querySelector('.recipient-container-none').insertAdjacentElement('afterend', recipientContainer);
 }
+
 function removeRecipient(button) {
     button.parentElement.remove();
 }
@@ -60,7 +69,26 @@ function handleUser(event) {
 }
 
 
-async function fetchData() {
+let generatedLink = '';
+
+async function fetchDataAndGenerateLink() {
+
+
+    const generateLinkButton = document.getElementById("generate-button");
+    const buttonIcon = document.getElementById("button-icon");
+    const buttonText = document.getElementById("button-text");
+
+    if (generatedLink) {
+        copyToClipboard(generatedLink);
+        buttonText.innerText = "Link Copied!";
+        setTimeout(() => buttonText.innerText = generatedLink, 4000); 
+        return;
+    }
+
+    buttonIcon.className = 'loader';
+    buttonText.innerText = "Generating Link";
+    generateLinkButton.classList.remove("show-text", "show-icon-left");
+
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
     const startDate = document.getElementById('poll-start-date').value;
@@ -108,11 +136,32 @@ async function fetchData() {
         "createdAt": dateTime,
     };
 
-    const key =  await createPoll(pollData, pollOptions, pollRecipients);
+    try {
+        const key = await createPoll(pollData, pollOptions, pollRecipients);
+        generatedLink = `expoll.com/poll/${key}`
+        buttonIcon.className = 'copy-icon';
+        buttonText.innerText = generatedLink;
+        generateLinkButton.classList.add("show-text", "show-icon-left");
 
-    generateLink(key);
+    } catch (error) {
+        buttonIcon.className = 'retry-icon';
+        buttonText.innerText = "Retry";
+    }
+}
 
 
 
+function startLoader() {
+
+}
+
+function stopLoader() {
+
+}
+
+function copyToClipboard(link) {
+    navigator.clipboard.writeText(link).then(() => {
+        alert('Link copied to clipboard!');
+    });
 }
 
