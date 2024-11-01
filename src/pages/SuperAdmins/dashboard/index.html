@@ -40,7 +40,7 @@
                 <input type="email" id="addAdminemail" name="email" placeholder="email">
                 <input type="password" id="AddAdminpassword" name="password" placeholder="default password">
                 <div class="popup-buttons">
-                    <button type="button" class="btn cancel-button" id="" onclick="cancel()">Cancel</button>
+                    <button type="button" class="btn cancel-button" id="">Cancel</button>
                     <button type="submit" class="btn add-admin">Add Admin</button>
                 </div>
             </form>
@@ -52,7 +52,7 @@
             <form id="edit-admin-form">
                 <input type="text" id="fullName" name="fullName" placeholder="Full Name">
                 <div class="popup-buttons">
-                    <button type="button" class="btn cancel" id="cancelBtn">Cancel</button>
+                    <button type="button" class="btn cancel-button" id="cancelBtn">Cancel</button>
                     <button type="submit" class="btn add-admin">Add Admin</button>
                 </div>
             </form>
@@ -62,10 +62,13 @@
     <div id="delete-admin-popup" class="popup-form">
         <div class="popup-content">
             <form id="delete-admin-form">
-                <input type="text" id="fullName" name="fullName" placeholder="confirm">
+                <h3>Delete Admin ?</h3>
+                <p id="confirm-delete-message-name"></p>
+                <p id="confirm-delete-message-email"></p>
+                <input type="text" id="confirm-text" name="fullName" placeholder="confirm">
                 <div class="popup-buttons">
-                    <button type="button" class="btn cancel" id="" onclick="cancel()">Cancel</button>
-                    <button type="submit" class="btn add-admin">Add Admin</button>
+                    <button type="button" class="btn cancel-button" id="">Cancel</button>
+                    <button type="submit" class="btn delete-admin">Delete Admin</button>
                 </div>
             </form>
         </div>

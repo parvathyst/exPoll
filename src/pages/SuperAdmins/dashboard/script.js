@@ -1,16 +1,20 @@
 import { createAdmin } from "../../../backend/firebase/superAdmin/createAdmin.js";
+import { deleteAdmin } from "../../../backend/firebase/superAdmin/deleteAdmin.js"
 import { displayAdmins } from "./displayAdmins.js";
 
-displayAdmins();
 
 document.addEventListener("DOMContentLoaded", () => {
     const addAdminPopup = document.getElementById("add-admin-popup");
     const editAdminPopup = document.getElementById("edit-admin-popup");
     const deleteAdminPopup = document.getElementById("delete-admin-popup");
+    let emailid;
+    let adminName;
 
     document.getElementById("add-admin-button").addEventListener("click", () => {
         showPopup(addAdminPopup);
     });
+
+
 
     document.querySelectorAll(".cancel-button").forEach(button => {
         button.addEventListener("click", () => {
@@ -34,13 +38,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 300);
     }
 
+    function showDeletePopUp() {
+        document.getElementById("confirm-delete-message-name").innerHTML = adminName
+        document.getElementById("confirm-delete-message-email").innerHTML = emailid
+        showPopup(deleteAdminPopup);
+    }
+
     document.getElementById('add-admin-form').addEventListener('submit', async function (e) {
         e.preventDefault();
         const fullName = document.getElementById('addAdminfullName').value;
         const email = document.getElementById('addAdminemail').value;
         const password = document.getElementById('AddAdminpassword').value;
         await createAdmin(fullName, email, password);
-        displayAdmins();
+        displayAdmins(attachDeleteListeners);
+
     });
 
     document.getElementById("edit-admin-form").addEventListener("submit", (e) => {
@@ -48,8 +59,24 @@ document.addEventListener("DOMContentLoaded", () => {
         hidePopup(editAdminPopup);
     });
 
-    document.getElementById("delete-admin-form").addEventListener("submit", (e) => {
+    document.getElementById("delete-admin-form").addEventListener("submit", async (e) => {
         e.preventDefault();
-        hidePopup(deleteAdminPopup);
+        if (document.getElementById("confirm-text").value.toLowerCase() === 'confirm') {
+            await deleteAdmin(emailid);
+            hidePopup(deleteAdminPopup);
+        }else{
+            alert("dfsdfsd")
+        }
     });
+
+    function attachDeleteListeners() {
+        document.querySelectorAll(".delete-admin-button").forEach(button => {
+            button.addEventListener("click", (event) => {
+                emailid = event.target.closest('.admin-item').querySelector(".admin-email").textContent;
+                adminName = event.target.closest('.admin-item').querySelector(".admin-name").textContent;
+                showDeletePopUp();
+            });
+        });
+    }
+    displayAdmins(attachDeleteListeners);
 });
