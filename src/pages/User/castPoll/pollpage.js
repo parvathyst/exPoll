@@ -1,4 +1,41 @@
-const pollOptions = [
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC8MCo957ZjjgF5rQ47uzIi8BVa_SWfPeo",
+  authDomain: "expoll-5cb6d.firebaseapp.com",
+  databaseURL:
+    "https://expoll-5cb6d-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "expoll-5cb6d",
+  storageBucket: "expoll-5cb6d.firebasestorage.app",
+  messagingSenderId: "676581762842",
+  appId: "1:676581762842:web:88c56ced7b66a9d1762ea3",
+  measurementId: "G-J4DY55BWS7",
+};
+
+let selectedIndex = -1;
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig); 
+
+import {
+  getDatabase,
+  ref,
+  get,
+  child,
+  set,
+  onValue,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+const db = getDatabase(app);
+
+let pollOptions = [
   {
     assignedEmployee: "",
     name: "Öption 1",
@@ -43,54 +80,77 @@ const pollOptions = [
   },
 ];
 
-displayPollList();
 
-confirmPopUpBox()
-cancelPopUpBox()
+confirmPopUpBox();
+cancelPopUpBox();
+
+getAdmins();
 
 function confirmPopUpBox() {
   const confirmPopUpButton = document.getElementById("cast-poll-button");
   confirmPopUpButton.onclick = () => {
     // alert("hello");
-    const popUp = document.getElementById("pop-up-container")
-  popUp.classList.remove("pop-up-container-hidden")
-  popUp.classList.add("pop-up-container")
+    const popUp = document.getElementById("pop-up-container");
+    popUp.classList.remove("pop-up-container-hidden");
+    popUp.classList.add("pop-up-container");
   };
-  
 }
 
 function cancelPopUpBox() {
-    const cancelPopUpButton = document.getElementById("cancel");
-    cancelPopUpButton.onclick = () => {
-      // alert("hello");
-      const popUp = document.getElementById("pop-up-container")
-    popUp.classList.remove("pop-up-container")
-    popUp.classList.add("pop-up-container-hidden")
-    };
-    
-  }
+  const cancelPopUpButton = document.getElementById("cancel");
+  cancelPopUpButton.onclick = () => {
+    // alert("hello");
+    const popUp = document.getElementById("pop-up-container");
+    popUp.classList.remove("pop-up-container");
+    popUp.classList.add("pop-up-container-hidden");
+  };
+}
 
-  resultPage();
+resultPageListeners();
 
-  function resultPage()
-  {
-    const confirmButton = document.getElementById("confirm")
-    confirmButton.onclick = () => {
-        const page1 = document.getElementById("page1");
-        page1.classList.remove("page")
-        page1.classList.add("page-hidden");
+function getAdmins() {
 
-        const page2 = document.getElementById("page2");
-        page2.classList.remove("page-hidden")
-        page2.classList.add("page")
-    }
-  }
+    const starCountRef = ref(db, 'poll-options/-OAWezoSSchZ6uZUDxAz');
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      pollOptions = data;
+     displayPollList(data);
+
+     return data;
+    });
+}
+
+function resultPageListeners() {
+  const confirmButton = document.getElementById("confirm");
+  confirmButton.onclick = async () => {
+    const page1 = document.getElementById("page1");
+    page1.classList.remove("page");
+    page1.classList.add("page-hidden");
+
+    await submitResult();
+
+    const page2 = document.getElementById("page2");
+    page2.classList.remove("page-hidden");
+    page2.classList.add("page");
+  };
+}
+
+async function submitResult(){
+    console.log(pollOptions,selectedIndex,pollOptions[selectedIndex])
+    set(ref(db,'poll-options/-OAWezoSSchZ6uZUDxAz/'+selectedIndex), {
+        assignedEmployee: "he",
+        name: pollOptions[selectedIndex].name,
+        selectedTime: serverTimestamp(),
+        status: true,
+      },)
+
+}
 
 function sortPollOptions(pollOptions) {
   const selectedPollOptions = [];
   const sortedPollOptions = [];
   for (const pollOption of pollOptions) {
-    if (pollOption.status == true) {
+    if (pollOption.status==true) {
       selectedPollOptions.push(pollOption);
     } else {
       sortedPollOptions.push(pollOption);
@@ -100,8 +160,10 @@ function sortPollOptions(pollOptions) {
   return sortedPollOptions;
 }
 
-function displaySelectedOption(value, pollItem) {
+function displaySelectedOption(value, option,pollItem) {
   const selectedPollOption = document.getElementById("selected-option");
+  selectedIndex = pollOptions.indexOf(option);
+  console.log(selectedIndex)
   selectedPollOption.innerText = value;
   //Change style of unselected cards
   const allPollCards = document.getElementsByClassName("poll-card");
@@ -116,13 +178,14 @@ function displaySelectedOption(value, pollItem) {
   castPollButton.classList.add("cast-poll-button");
 }
 
-function displayOption(value, status) {
+function displayOption(value, status, pollOption){
   const pollItem = document.createElement("button");
   pollItem.classList.add("poll-card");
   pollItem.onclick = function () {
-    displaySelectedOption(value, pollItem);
+    displaySelectedOption(value, pollOption, pollItem);
   };
-  if (status == false) {
+  console.log(status,"ji",status===false,status===true,typeof(status))
+  if (status === false) {
     pollItem.innerHTML = `
     <h2>${value}</h2>
     `;
@@ -138,9 +201,13 @@ function displayOption(value, status) {
   pollList.appendChild(pollItem);
 }
 
-function displayPollList() {
+function displayPollList(pollOptions) {
   const sortedPollOptions = sortPollOptions(pollOptions);
+
+  const pollList = document.getElementsByClassName("poll-options-list")[0];
+  pollList.innerHTML = ""
+
   for (const pollOption of sortedPollOptions) {
-    displayOption(pollOption.name, pollOption.status);
+    displayOption(pollOption.name, pollOption.status, pollOption);
   }
 }
