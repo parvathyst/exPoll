@@ -81,7 +81,7 @@ async function fetchDataAndGenerateLink() {
     if (generatedLink) {
         copyToClipboard(generatedLink);
         buttonText.innerText = "Link Copied!";
-        setTimeout(() => buttonText.innerText = generatedLink, 2000); // Show feedback for 2 seconds
+        setTimeout(() => buttonText.innerText = generatedLink, 4000); 
         return;
     }
 
