@@ -7,6 +7,11 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
+
+const url = window.location.href;
+const urlParams = new URL(url);
+const id = urlParams.searchParams.get("id");
+
 const firebaseConfig = {
   apiKey: "AIzaSyC8MCo957ZjjgF5rQ47uzIi8BVa_SWfPeo",
   authDomain: "expoll-5cb6d.firebaseapp.com",
@@ -168,7 +173,7 @@ function displayOption(pollOption) {
 readData();
 
 function readData() {
-  const pollRef = ref(db, "/poll-options/-OAWezoSSchZ6uZUDxAz");
+  const pollRef = ref(db, `/poll-options/${id}`);
   onValue(pollRef, (snapshot) => {
     const data = snapshot.val();
     console.log(data);
