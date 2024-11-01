@@ -13,20 +13,20 @@ function validateForm() {
         isValid = false;
         alert('Title must be at least 5 characters.');
         title.classList.add('error');
+        return;
     } else {
         title.classList.remove('error');
     }
 
-    // Validate description
     if (description.value.trim().length < 10) {
         isValid = false;
         alert('Description must be at least 10 characters.');
         description.classList.add('error');
+        return;
     } else {
         description.classList.remove('error');
     }
 
-    // Validate date and time fields
     if (!startDate.value || !startTime.value || !endDate.value || !endTime.value) {
         isValid = false;
         alert('Start date, start time, end date, and end time are required.');
@@ -34,6 +34,7 @@ function validateForm() {
         startTime.classList.add('error');
         endDate.classList.add('error');
         endTime.classList.add('error');
+        return;
     } else {
         startDate.classList.remove('error');
         startTime.classList.remove('error');
@@ -41,7 +42,6 @@ function validateForm() {
         endTime.classList.remove('error');
     }
 
-    // Validate start and end date-time against each other and against the current date-time
     const startDateTime = new Date(`${startDate.value}T${startTime.value}`);
     const endDateTime = new Date(`${endDate.value}T${endTime.value}`);
     const currentDateTime = new Date();
@@ -51,6 +51,7 @@ function validateForm() {
         alert('Start date and time cannot be in the past.');
         startDate.classList.add('error');
         startTime.classList.add('error');
+        return;
     } else {
         startDate.classList.remove('error');
         startTime.classList.remove('error');
@@ -61,17 +62,18 @@ function validateForm() {
         alert('End date and time cannot be earlier than start date and time.');
         endDate.classList.add('error');
         endTime.classList.add('error');
+        return;
     } else {
         endDate.classList.remove('error');
         endTime.classList.remove('error');
     }
 
-    // Validate there are at least 2 options
     const filledOptions = Array.from(optionInputs).filter(input => input.value.trim() !== '');
     if (filledOptions.length < 2) {
         isValid = false;
         alert('Please add at least 2 options.');
         document.querySelector('.options-container-bottom').classList.add('error');
+        return;
     } else {
         document.querySelector('.options-container-bottom').classList.remove('error');
     }
@@ -79,5 +81,4 @@ function validateForm() {
     return isValid;
 }
 
-// Add an event listener to validate and proceed only if the form is valid
 export { validateForm }
