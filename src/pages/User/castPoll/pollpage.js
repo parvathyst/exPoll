@@ -1,12 +1,14 @@
+import { app, db } from "../../../backend/firebase/config.js";
 import {
-  getDatabase,
   set,
   ref,
   onValue,
-  serverTimestamp
+  serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
-import { app, db } from "../../../backend/firebase/config.js"
+const url = window.location.href;
+const urlParams = new URL(url);
+const id = urlParams.searchParams.get("id");
 
 let pollOptions = [
   {
@@ -114,7 +116,7 @@ function displaySelectedOption(pollOption, pollItem) {
   selectedPollOption.innerText = pollOption.name;
 
   selectedIndex = pollOptions.indexOf(pollOption);
-  
+
   //Change style of unselected cards
   const allPollCards = document.getElementsByClassName("poll-card");
   for (const pollCard of allPollCards) {
@@ -153,7 +155,7 @@ function displayOption(pollOption) {
 readData();
 
 function readData() {
-  const pollRef = ref(db, "/poll-options/-OAWezoSSchZ6uZUDxAz");
+  const pollRef = ref(db, `/poll-options/${id}`);
   onValue(pollRef, (snapshot) => {
     const data = snapshot.val();
     console.log(data);
@@ -163,22 +165,22 @@ function readData() {
   });
 }
 
-function writeData()
-{
-    // console.log("hello")
-    // console.log(selectedIndex)
-    set(ref(db, "/poll-options/-OAWezoSSchZ6uZUDxAz/"+selectedIndex),{
-        assignedEmployee: "",
-        name:pollOptions[selectedIndex].name,
-        selectedTime:serverTimestamp(),
-        status: true
-    })
+function writeData() {
+  // console.log("hello")
+  // console.log(selectedIndex)
+  set(ref(db, `/poll-options/${id}/` + selectedIndex), {
+    assignedEmployee: "",
+    name: pollOptions[selectedIndex].name,
+    selectedTime: serverTimestamp(),
+    status: true,
+  });
 }
 
 function displayPollList(pollOptions) {
   const sortedPollOptions = sortPollOptions(pollOptions);
 
-  const pollOptionsContainer = document.getElementsByClassName("poll-options-list")[0];
+  const pollOptionsContainer =
+    document.getElementsByClassName("poll-options-list")[0];
   pollOptionsContainer.innerHTML = "";
 
   for (const pollOption of sortedPollOptions) {
