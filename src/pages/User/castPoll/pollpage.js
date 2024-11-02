@@ -1,32 +1,14 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { app, db } from "../../../backend/firebase/config.js";
 import {
-  getDatabase,
   set,
   ref,
   onValue,
-  serverTimestamp
+  serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
-
 
 const url = window.location.href;
 const urlParams = new URL(url);
 const id = urlParams.searchParams.get("id");
-
-const firebaseConfig = {
-  apiKey: "AIzaSyC8MCo957ZjjgF5rQ47uzIi8BVa_SWfPeo",
-  authDomain: "expoll-5cb6d.firebaseapp.com",
-  databaseURL:
-    "https://expoll-5cb6d-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "expoll-5cb6d",
-  storageBucket: "expoll-5cb6d.firebasestorage.app",
-  messagingSenderId: "676581762842",
-  appId: "1:676581762842:web:88c56ced7b66a9d1762ea3",
-  measurementId: "G-J4DY55BWS7",
-};
-
-const app = initializeApp(firebaseConfig);
-
-const db = getDatabase(app);
 
 let pollOptions = [
   {
@@ -134,7 +116,7 @@ function displaySelectedOption(pollOption, pollItem) {
   selectedPollOption.innerText = pollOption.name;
 
   selectedIndex = pollOptions.indexOf(pollOption);
-  
+
   //Change style of unselected cards
   const allPollCards = document.getElementsByClassName("poll-card");
   for (const pollCard of allPollCards) {
@@ -183,22 +165,22 @@ function readData() {
   });
 }
 
-function writeData()
-{
-    // console.log("hello")
-    // console.log(selectedIndex)
-    set(ref(db, "/poll-options/-OAWezoSSchZ6uZUDxAz/"+selectedIndex),{
-        assignedEmployee: "",
-        name:pollOptions[selectedIndex].name,
-        selectedTime:serverTimestamp(),
-        status: true
-    })
+function writeData() {
+  // console.log("hello")
+  // console.log(selectedIndex)
+  set(ref(db, `/poll-options/${id}/` + selectedIndex), {
+    assignedEmployee: "",
+    name: pollOptions[selectedIndex].name,
+    selectedTime: serverTimestamp(),
+    status: true,
+  });
 }
 
 function displayPollList(pollOptions) {
   const sortedPollOptions = sortPollOptions(pollOptions);
 
-  const pollOptionsContainer = document.getElementsByClassName("poll-options-list")[0];
+  const pollOptionsContainer =
+    document.getElementsByClassName("poll-options-list")[0];
   pollOptionsContainer.innerHTML = "";
 
   for (const pollOption of sortedPollOptions) {
