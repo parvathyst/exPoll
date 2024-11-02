@@ -178,10 +178,15 @@
                 </div>
                 <!-- <button id="generate-button" class="generate-link-button link-container">Generate Link</button> -->
 
-                <button id="generate-button" class="D-black" onclick="fetchDataAndGenerateLink()">
+                <button id="generate-button" class="D-black">
                     <span id="button-icon"></span>
                     <span id="button-text">Generate Link</span>
                 </button>
+                <div id="myPopup" class="popup">
+                    <p>Do you want to send the mail to recipients ?</p>
+                    <button id="send-email">Yes</button>
+                    <button id="cancel-email">No</button>
+                </div>
 
                 <!-- <div id="link-container">
                     <div>
@@ -211,5 +216,5 @@
       });
    })();
 </script>
-<script type="module" src="mail.js"></script>
+<!-- <script type="module" src="email.js"></script> -->
 </html>
