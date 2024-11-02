@@ -1,27 +1,29 @@
 
 import { createPoll } from "../../../backend/firebase/admin/createPoll/createPoll.js"
 import { validateForm } from "./validation.js";
-
-
 import { authCheck } from "../../../functions/authentication/authCheck.js"
+
+
 
 let userUID;
 
 async function initialize() {
     try {
         userUID = await authCheck();
-        return 
+        return
     } catch (error) {
         console.error(error);
         window.location.href = "../../login/";
     }
 }
 
-await initialize();
 
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     const uploadUser = document.getElementById('uploadUser');
+
+    await initialize();
+
     if (uploadUser) {
         uploadUser.addEventListener('change', handleUser, false);
     }
@@ -212,12 +214,12 @@ function pop(pollData, pollRecipients) {
             Poll will be open from:
             ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]
         `;
-        
+
 
             Object.keys(pollRecipients).forEach(key => {
                 const data = pollRecipients[key];
                 if (data && data.email) {
-                    sendEmail(data.email, subject, message); 
+                    sendEmail(data.email, subject, message);
                     console.log(`Email sent to: ${data.email}`);
                 } else {
                     console.warn("Recipient data is missing an email:", data);
