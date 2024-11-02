@@ -1,73 +1,3 @@
-/* #link-container{
-    /* width: 35%; 
-    box-shadow: inset;
-    /* height: 30px; 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: #0f2a3f; 
-    box-sizing: content-box;
-    border-radius: 10px;
-    /* gap: 10px;  
-    width: 102%;
-    height: 10%;
-}
-#show{
-    text-decoration: none;
-    color: white;
-    box-shadow: none;
-    border: 0;
-    height: 30px;
-    width: 11rem;
-    box-sizing: border-box;
-    background-color: #0f2a3f;
-    div{
-        text-align: center;
-        width: 11rem;
-        margin-top: 3.5px;
-        font-size: x-small;
-        color: white;
-    }
-}
-#generate-button{
-    text-decoration: none;
-    box-shadow: none;
-    border: 0;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    background-color: #0f2a3f;
-    color: white;
-    height: 30px;
-    width: 7rem;
-    cursor: pointer;
-    border-right: 1px solid white;
-}
-#copy-button{
-    text-decoration: none;
-    background-color: #0f2a3f;
-    color: white;
-    border: 0;
-    box-shadow: none;
-    cursor: pointer;
-    height: 30px;
-    width: 1.5rem;
-    box-sizing: content-box;
-    img{
-        height: 17px;
-        width: 1rem;
-    }
-}
-
-.link-box {
-    padding: 2%;
-    font-size: medium;
-    /* border-radius: 5px; 
-    width: 10rem;
-    color:white;
-}
-
-    */
 
 /* Popup styling */
 .popup {
@@ -89,4 +19,9 @@
     margin: 5px;
     padding: 8px 16px;
     cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    height: 20px;
+    width: 100%;
 }
+

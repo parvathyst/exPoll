@@ -204,13 +204,13 @@ function pop(pollData, pollRecipients) {
             const subject = pollData.title;
             const message = `
             ${pollData.description}
-        
+
             Link to access poll: ${generatedLink}
-        
+
             Poll will be open from:
-            ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]
-        `;
-        
+
+            ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]`;
+
 
             Object.keys(pollRecipients).forEach(key => {
                 const data = pollRecipients[key];
@@ -236,5 +236,7 @@ function pop(pollData, pollRecipients) {
     });
 
 };
+
+
 
 
