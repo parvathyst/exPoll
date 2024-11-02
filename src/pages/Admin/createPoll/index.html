@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,50 +18,17 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <style>
-        .flatpickr-calendar {
-            background-color: #0D2335;
-            border: 2px solid #FFFFFF;
-            border-radius: 8px;
-            font-size: 12px;
-            color: #FFFFFF;
-            width: auto;
-        }
-
-        .flatpickr-day {
-            background-color: #000000;
-            color: #ffffff;
-            border-radius: 50%;
-        }
-
-        .flatpickr-day:hover {
-            background-color: #ffffff6e;
-            color: #0D2335;
-        }
-
-        .flatpickr-time {
-            background-color: #e9ecef;
-            border: none;
-        }
-
-        .flatpickr-hour,
-        .flatpickr-minute {
-            color: #333;
-            font-size: 12px;
-            padding: 5px;
-        }
-    </style>
     <title>Create a Poll</title>
 </head>
+
 <body>
     <div class="mainDiv">
         <div class="navBarDiv">
             <div class="menuIconDiv">
-                <img src="/exPoll/src/assets/icons/menu.png" alt="" class="menuIcon" />
-                <img src="/exPoll/src/assets/images/logo-white.png" alt="expoll" class="logo" />
+                <img src="/src/assets/icons/menu.png" alt="" class="menuIcon" />
+                <img src="/src/assets/images/logo-white.png" alt="expoll" class="logo" />
             </div>
-            <img src="/exPoll/src/assets/icons/user-white.png" alt="" class="userIcon" />
+            <img src="/src/assets/icons/user-white.png" alt="" class="userIcon" />
         </div>
         <div class="heading-div">
             <h2>Create Poll</h2>
@@ -76,13 +44,13 @@
                             <input type="date" id="poll-start-date" placeholder="Start Date " class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="time" id="poll-start-time" placeholder="Start Time" class="D-border">
+                            <input type="time" id="poll-start-time"   value="00:00" placeholder="Start Time" class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
                             <input type="date" id="poll-end-date" placeholder="End Date" class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="time" id="poll-end-time" placeholder="End Time" class="D-border">
+                            <input type="time" id="poll-end-time"  value="00:00" placeholder="End Time" class="D-border">
                         </div>
                     </div>
                 </div>
@@ -95,16 +63,16 @@
                         </div>
                         <div class="upload-import-button-container">
                             <div id="downloadTemplate">
-                                <a href="/exPoll/src/assets/templates/Poll Options Template.xlsx" download>
+                                <a href="/src/assets/templates/Poll Options Template.xlsx" download>
                                     <label class="custom-upload-button">
-                                        <img src="/exPoll/src/assets/icons/download.png" alt="download" class="">
+                                        <img src="/src/assets/icons/download.png" alt="download" class="">
                                         Template
                                     </label>
                                 </a>
                             </div>
                             <div id="upload2">
                                 <label for="upload-options" class="custom-upload-button">
-                                    <img src="../../../assets/icons/importIcon.png" alt="Upload" class="">
+                                    <img src="/src/assets/icons/importIcon.png" alt="Upload" class="">
                                     Import Excel
                                 </label>
                                 <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
@@ -115,7 +83,7 @@
                         <div class="options-container-none"></div>
                         <div class="option-item D-black">
                             <input type="text" placeholder="Enter Option" class="D-no-border">
-                            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon"
+                            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
                                 onclick="removeOption(this)"></img>
                         </div>
                     </div>
@@ -133,32 +101,32 @@
                         <div id="downloadTemplate">
                             <a href="../../../assets/templates/User List Template.xlsx" download>
                                 <label class="custom-upload-button">
-                                    <img src="/exPoll/src/assets/icons/download.png" alt="download" class="">
+                                    <img src="/src/assets/icons/download.png" alt="download" class="">
                                     Template
                                 </label>
                             </a>
                         </div>
                         <div id="upload">
                             <label for="uploadUser" class="custom-upload-button">
-                                <img src="/exPoll/src/assets/icons/importIcon.png" alt="Upload" class="">
+                                <img src="/src/assets/icons/importIcon.png" alt="Upload" class="">
                                 Import excel
                             </label>
                             <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
                         </div>
                     </div>
-            
+
 
                     <div class="recipient-container-bottom">
                         <div class="recipient-container-none">
                             <div class="recipient-item D-white">
                                 <input type="email" placeholder="Enter Email" class="D-no-border">
-                                <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon"
+                                <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
                                     onclick="removeOption(this)"></img>
                             </div>
                         </div>
                     </div>
                     <div class="button-container" class="add-option-button-container">
-                        <button onclick="addRecipient()" id="addRecipientButton" class="D-recipient">+ Add
+                        <button onclick="addRecipient()" id="addRecipientButton" class="D-white">+ Add
                             Recipient</button>
                     </div>
                 </div>
@@ -213,16 +181,15 @@
     <!-- <script src="generatelink.js"></script>
     <script src="adminCreatePollDOM.js"></script> -->
 </body>
-<script src="generatelink.js"></script>
-<script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
 <script type="text/javascript">
-   (function(){
-      emailjs.init({
-        publicKey: "oJuPNylCuJvugpZ0v",
-      });
-   })();
+    (function () {
+        emailjs.init({
+            publicKey: "oJuPNylCuJvugpZ0v",
+        });
+    })();
 </script>
 <!-- <script type="module" src="email.js"></script> -->
+
 </html>

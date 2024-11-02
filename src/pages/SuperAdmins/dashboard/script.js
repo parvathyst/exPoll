@@ -2,6 +2,19 @@ import { createAdmin } from "../../../backend/firebase/superAdmin/createAdmin.js
 import { deleteAdmin } from "../../../backend/firebase/superAdmin/deleteAdmin.js"
 import { displayAdmins } from "./displayAdmins.js";
 
+import { authCheck } from "../../../functions/authentication/authCheck.js"
+
+let userUID;
+
+authCheck()
+    .then((uid) => {
+        userUID = uid; 
+    })
+    .catch((error) => {
+        console.error(error); 
+        window.location.href = "/path/to/login.html";
+      });
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const addAdminPopup = document.getElementById("add-admin-popup");
@@ -13,8 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("add-admin-button").addEventListener("click", () => {
         showPopup(addAdminPopup);
     });
-
-
 
     document.querySelectorAll(".cancel-button").forEach(button => {
         button.addEventListener("click", () => {
@@ -64,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (document.getElementById("confirm-text").value.toLowerCase() === 'confirm') {
             await deleteAdmin(emailid);
             hidePopup(deleteAdminPopup);
-        }else{
+        } else {
             alert("dfsdfsd")
         }
     });
