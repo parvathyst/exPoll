@@ -14,7 +14,7 @@ body {
     height: 100%;   
 }
 .logoAndBox{
-    margin-top: 70px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     gap: 35px;
