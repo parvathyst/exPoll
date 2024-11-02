@@ -34,8 +34,6 @@
         });
   </script>
 
-
-
   <div id="sidebar" class="sidebar" class="">
     <!-- <div class="logoDiv">
       <img src="/exPoll/src/assets/images/logo-darkblue.png" alt="expoll" class="logo" />
@@ -75,41 +73,11 @@
     <div class="adminHistoryDiv">
       <div class="backgroundDiv">
         <div class="activityBoxContainer" id="activity-box-container">
-
-          <!-- <div class="activityBox" >
-            <div class="icon">
-              <img src="/exPoll/src/assets/icons/poll-solid.png" alt="icon" />
-            </div>
-            <div class="content">
-              <h5>Leader of the day</h5>
-              <div class="date-and-time" id="date-and-time">
-                <img src="/exPoll/src/assets/icons/calender.png" alt="dfd">
-                <h6>17-06-2024</h6>
-                <img src="/exPoll/src/assets/icons/clock.png" alt="dfd">
-                <h6>14:20</h6>
-              </div>
-            </div>
-          </div> -->
-<!-- 
-          <div class="activityBox">
-            <div class="icon">
-              <img src="/exPoll/src/assets/icons/rate-icon-solid.png" alt="icon" />
-            </div>
-            <div class="content">
-              <h5>Leader of the day</h5>
-              <div class="date-and-time" id="date-and-time">
-                <img src="/exPoll/src/assets/icons/calender.png" alt="dfd">
-                <h6>17-06-2024</h6>
-                <img src="/exPoll/src/assets/icons/clock.png" alt="dfd">
-                <h6>14:20</h6>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
       <div class="sortingDiv">
         <div class="searchBox">
-          <input type="text" placeholder="Search" class="searchInput" />
+          <input type="text" placeholder="Search" id="searchInput" class="searchInput" />
           <button class="search-button">
             <img src="/src/assets/icons/isearch-icon-bold.png" alt="" />
           </button>
@@ -119,14 +87,14 @@
           <select id="activityType" class="dropdown">
             <option value="" disabled selected>Activity Type</option>
             <option value="poll">Poll</option>
-            <option value="rate">Rate</option>
+            <option value="feedback">Feedback</option>
           </select>
         </div>
-        <div class="dropdownContainer">
-          <select id="activityType" class="dropdown">
+        <div class="dropdownContainer" id="sortOrder">
+          <select  id="sortOptions" class="dropdown">
             <option value="" disabled selected>Sort By</option>
-            <option value="new">Newest</option>
-            <option value="old">Oldest</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
           </select>
         </div>
         <div class="timePeriodContainer">
@@ -136,7 +104,8 @@
             </div>
 
             <label class="switch">
-              <input type="checkbox" id="toggleSwitch">
+              <input type="checkbox" id="dateFilterToggle">
+
               <span class="slider"></span>
             </label>
           </div>
@@ -144,30 +113,55 @@
             <div class="date-input">
               <h5>From</h5>
               <div class="input-container">
-                <input type="date" id="from-date" />
+                <input type="date" id="fromDate" />
               </div>
             </div>
             <div class="date-input">
               <h5>To</h5>
               <div class="input-container">
-                <input type="date" id="to-date" />
+                <input type="date" id="toDate" />
               </div>
             </div>
           </div>
         </div>
         <div class="buttonContainer">
           <button class="clearButton">Clear Filters</button>
-          <button class="applyButton">Apply Filters</button>
+          <!-- <button class="applyButton">Apply Filters</button> -->
         </div>
       </div>
     </div>
   </div>
   <script src="displaySideBar.js">
   </script>
-  <!-- <script src="/exPoll/src/backend/firebase/admin/loadHistory/loadHistory.js">
-  </script> -->
-
   <script type="module" src="/src/backend/firebase/admin/loadHistory/loadHistory.js"></script>
+<script>
+      
+       window.addEventListener('load', function() {
+            const fromDateInput = document.getElementById("fromDate");
+            const toDateInput = document.getElementById("toDate");
+            const toggle = document.getElementById("dateFilterToggle");
+            
+            // Function to enable/disable date inputs
+            function updateDateInputs() {
+                if (toggle.checked) {
+                    fromDateInput.disabled = false;
+                    toDateInput.disabled = false;
+                } else {
+                    fromDateInput.disabled = true;
+                    toDateInput.disabled = true;
+                     // Clear the date inputs
+                     fromDateInput.value = '';
+                    toDateInput.value = '';
+                    // fetchPollDetailsWithDateFilterAndSearch();
+                }
+            }
+            // Initial setup
+            updateDateInputs();
+
+            // Event listener for the toggle checkbox
+            toggle.addEventListener("change", updateDateInputs);
+        });
+    </script>
 
 </body>
 </html>

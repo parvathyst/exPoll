@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="loginAdmin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="loginPage1">
+        <div class="logoAndBox">
+            <img src="../../assets/images/logo-blue.png" alt="" width="150px" height="35px">
+            <form action="" method="post">
+                <div class="box">
+                    <input type="text" id="username" placeholder="username" required>
+                    <input type="password" id="password" name="password" placeholder="password" required>
+                    <div class="password-toggle">
+                        <img id="togglePassword" src="../../assets/icons/eyeclose.svg" alt="Show Password"
+                            onclick="togglePasswordVisibility()" />
+                    </div>
+                    <span id="error-password" class="error-password">Invalid email or password</span>
+                    <button id="login" class="login-btn">Log in</button>
+                </div>
+                <div class="forgot-password">
+                    <a href="/loginPage/forgotPassword.html">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script type="module" src="login.js"></script>
+<script src="togglepassword.js"></script>
+
+</html>
