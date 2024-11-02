@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,65 +18,11 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <style>
-        .flatpickr-calendar {
-            background-color: #0D2335;
-            border: 2px solid #FFFFFF;
-            border-radius: 8px;
-            font-size: 12px;
-            color: #FFFFFF;
-            width: auto;
-        }
-
-        .flatpickr-day {
-            background-color: #000000;
-            color: #ffffff;
-            border-radius: 50%;
-        }
-
-        .flatpickr-day:hover {
-            background-color: #ffffff6e;
-            color: #0D2335;
-        }
-
-        .flatpickr-time {
-            background-color: #e9ecef;
-            border: none;
-        }
-
-        .flatpickr-hour,
-        .flatpickr-minute {
-            color: #333;
-            font-size: 12px;
-            padding: 5px;
-        }
-    </style>
     <title>Create a Poll</title>
 </head>
+
 <body>
-    
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-            fetch("navbar.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("navbar").innerHTML = data;
-                })
-                .catch(error => console.error("Error loading navbar:", error));
-        });
-
-
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch("sidebar.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("sidebar").innerHTML = data;
-                })
-                .catch(error => console.error("Error loading navbar:", error));
-        });
-  </script>
-    <div class="mainDiv"> 
+    <div class="mainDiv">
         <div class="navBarDiv">
             <div class="menuIconDiv">
                 <img src="/src/assets/icons/menu.png" alt="" class="menuIcon" />
@@ -167,7 +114,7 @@
                             <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
                         </div>
                     </div>
-            
+
 
                     <div class="recipient-container-bottom">
                         <div class="recipient-container-none">
@@ -226,16 +173,15 @@
     <!-- <script src="generatelink.js"></script>
     <script src="adminCreatePollDOM.js"></script> -->
 </body>
-<script src="generatelink.js"></script>
-<script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
 <script type="text/javascript">
-   (function(){
-      emailjs.init({
-        publicKey: "oJuPNylCuJvugpZ0v",
-      });
-   })();
+    (function () {
+        emailjs.init({
+            publicKey: "oJuPNylCuJvugpZ0v",
+        });
+    })();
 </script>
 <!-- <script type="module" src="email.js"></script> -->
+
 </html>

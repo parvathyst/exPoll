@@ -1,10 +1,23 @@
 import { fetchNewestPollDetails } from "../../../backend/firebase/admin/loadDashboard/loadDashboard.js";
 import { authCheck } from "../../../functions/authentication/authCheck.js"
 
-const userUID = await authCheck();
+let userUID;
+
+async function initialize() {
+    try {
+        userUID = await authCheck();
+        return 
+    } catch (error) {
+        console.error(error);
+        window.location.href = "../../login/";
+    }
+}
+
+await initialize();
 
 async function displayPolls(userUID) {
 
+    console.log(userUID);
     
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
