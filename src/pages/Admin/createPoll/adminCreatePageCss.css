@@ -58,8 +58,15 @@ body {
 
 }
 
+#description::placeholder, #title::placeholder {
+    font-family: "Montserrat", sans-serif; /* Change to your desired font */
+    
+}
 
-
+::placeholder {
+    font-family: 'Montserrat', sans-serif; /* Change to your desired font */
+   
+}
 
 #addButton {
     width: 50%;
