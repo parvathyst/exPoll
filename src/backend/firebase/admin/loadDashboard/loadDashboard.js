@@ -1,59 +1,40 @@
-import { app } from '../../../firebase/config.js'; 
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js"; 
+// Import the necessary functions from Firebase
+import { db } from '../../../firebase/config.js';
+import { ref, get, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
-const database = getDatabase(app);
+async function fetchNewestPollDetails(uid) {
+  
+    try {
+        // Ensure uid is defined before proceeding
+        if (!uid) {
+            throw new Error("User UID is not defined");
+        }
 
-// Function to fetch and display poll details sorted by newest first
-async function fetchNewestPollDetails() {
-  const pollDetailsRef = ref(database, 'poll-details');
+        console.log(uid);
+        
 
-  try {
-    const snapshot = await get(pollDetailsRef);
-
-    if (snapshot.exists()) {
-      let data = snapshot.val();
-
-      // Sort data by newest first
-      const sortedData = Object.keys(data)
-        .map(key => ({ key, ...data[key] }))
-        .sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
-        .reduce((obj, item) => {
-          obj[item.key] = item;
-          return obj;
-        }, {});
-
-      displayPolls(sortedData);
-    } else {
-      console.log("No data available");
+        // Reference to the poll details in the database
+        const pollRef = ref(db, 'poll-details/');
+        const q = query(pollRef, orderByChild('createdBy'), equalTo(uid));
+        
+        // Fetch the data from the database
+        const snapshot = await get(q);
+        
+        // Check if any data was returned
+        if (snapshot.exists()) {
+            const results = [];
+            snapshot.forEach((childSnapshot) => {
+                results.push({ id: childSnapshot.key, ...childSnapshot.val() });
+            });
+            console.log("Fetched polls:", results);
+            return results;
+        } else {
+            console.log("No data available");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error fetching data:", error);
     }
-  } catch (error) {
-    console.error("Error fetching poll details:", error);
-  }
 }
 
-// Function to render polls in the HTML container
-// Function to render polls in the HTML container
-function displayPolls(polls) {
-    const container = document.getElementById("activity-box-container");
-    container.innerHTML = '';
-  
-    Object.keys(polls).forEach(key => {
-      const poll = polls[key];
-      const activityBox = document.createElement("div");
-      activityBox.className = "activity-box";  // Updated class name
-      activityBox.innerHTML = `
-        <div class="content">
-          <h5>${poll.title || 'Untitled Poll'}</h5>
-          <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Date not available'}</h6>
-        </div>
-        <div class="icon">
-          <img src="/src/assets/icons/poll-solid.png" alt="icon" />
-        </div>
-      `;
-      container.appendChild(activityBox);
-    });
-  }
-  
-
-// Initial fetch to display all polls in newest first order on page load
-fetchNewestPollDetails();
+export { fetchNewestPollDetails };
