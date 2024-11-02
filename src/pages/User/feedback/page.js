@@ -67,3 +67,52 @@ const questions = [
   // Initial display of the first question
   displayQuestion();
   
+
+
+  let currentPage = 1;
+  const totalPages = 5; // Adjust this to your total number of pages/questions
+
+  function updateButtons() {
+      const previousBtn = document.getElementById("previous-btn");
+      const nextBtn = document.getElementById("next-btn");
+
+      // Hide "Previous" button on the first page
+      if (currentPage === 1) {
+          previousBtn.style.display = "none";
+      } else {
+          previousBtn.style.display = "inline-block";
+      }
+
+      // Replace "Next" button with "Submit" button on the last page
+      if (currentPage === totalPages) {
+          nextBtn.textContent = "Submit";
+          nextBtn.onclick = submitForm; // Call submit function
+      } else {
+          nextBtn.textContent = "Next";
+          nextBtn.onclick = nextQuestion; // Reset to next question function
+      }
+  }
+
+  function previousQuestion() {
+      if (currentPage > 1) {
+          currentPage--;
+          // Load previous question or update question text here
+          updateButtons();
+      }
+  }
+
+  function nextQuestion() {
+      if (currentPage < totalPages) {
+          currentPage++;
+          // Load next question or update question text here
+          updateButtons();
+      }
+  }
+
+  function submitForm() {
+      alert("Form submitted!");
+      // Add form submission logic here
+  }
+
+  // Initialize buttons on page load
+  updateButtons();

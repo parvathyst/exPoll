@@ -83,6 +83,7 @@ resultPage();
 let selectedIndex = -1;
 
 function resultPage() {
+  // mail();
   const confirmButton = document.getElementById("confirm");
   confirmButton.onclick = () => {
     const page1 = document.getElementById("page1");
@@ -187,3 +188,55 @@ function displayPollList(pollOptions) {
     displayOption(pollOption);
   }
 }
+
+
+// Function to send an email using EmailJS
+// function sendEmail(toEmail, subject, message) {
+//   const templateParams = {
+//       to_email: toEmail,
+//       subject: subject,
+//       message: message
+//   };
+
+//   emailjs.send('service_bxt3eel', 'template_0mg1p1y', templateParams)
+//       .then((response) => {
+//           console.log('Email sent successfully!', response.status, response.text);
+//       })
+//       .catch((error) => {
+//           console.error('Failed to send email:', error);
+//       });
+// }
+
+// function mail(pollData, pollRecipients) {
+//   document.getElementById("confirm").addEventListener("click", function () {
+//       try {
+//           const subject = pollData.title;
+//           const message = `
+//           ${pollData.description}
+
+//           Link to access poll: ${generatedLink}
+
+//           Poll will be open from:
+          
+//           ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]`;
+
+
+//           Object.keys(pollRecipients).forEach(key => {
+//               const data = pollRecipients[key];
+//               if (data && data.email) {
+//                   sendEmail(data.email, subject, message); // Calls sendEmail for each email
+//                   console.log(`Email sent to: ${data.email}`);
+//               } else {
+//                   console.warn("Recipient data is missing an email:", data);
+//               }
+//           });
+
+
+
+
+//       } catch (error) {
+//           console.error('Error fetching recipients:', error);
+//       }
+//   });
+
+// };

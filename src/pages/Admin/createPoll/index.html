@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="adminCreatePageCss.css">
     <link rel="stylesheet" href="../../../styles/D.css">
     <link rel="stylesheet" href="loader.css">
+    <link rel="stylesheet" href="generatelink.css">
 
     <script type="module" src="adminCreatePollDOM.js"></script>
     <script src="adminCreatePoll.js"></script>
@@ -14,7 +15,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="generatelink.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -150,11 +150,19 @@
                     <span id="button-icon"></span>
                     <span id="button-text">Generate Link</span>
                 </button>
-                <div id="myPopup" class="popup">
-                    <p>Do you want to send the mail to recipients ?</p>
-                    <button id="send-email">Yes</button>
-                    <button id="cancel-email">No</button>
+                <div>
+                    <!-- Overlay for dimming effect -->
+                    <div id="overlay" class="overlay"></div>    
+
+                    <div id="myPopup" class="popup">
+                        <p>Do you want to send the mail to recipients ?</p>
+                        <div class="btn">
+                            <button id="send-email" class="confirm">Yes</button>
+                            <button id="cancel-email" class="cancel">No</button>
+                        </div>
+                    </div>
                 </div>
+                
 
                 <!-- <div id="link-container">
                     <div>

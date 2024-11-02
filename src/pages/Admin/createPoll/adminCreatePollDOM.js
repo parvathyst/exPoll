@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         uploadUser.addEventListener('change', handleUser, false);
     }
     document.getElementById('generate-button').addEventListener('click', function (event) {
-        if (validateForm()) {
+        // if (validateForm()) {
             fetchDataAndGenerateLink();
-        } else {
-            console.log("Form validation failed. Please fix the highlighted errors.");
-        }
+        // } else {
+            // console.log("Form validation failed. Please fix the highlighted errors.");
+        // }
     });
 });
 
@@ -194,10 +194,12 @@ function sendEmail(toEmail, subject, message) {
 
 function showPopup() {
     document.getElementById("myPopup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
 }
 
 function hidePopup() {
     document.getElementById("myPopup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
 }
 
 function pop(pollData, pollRecipients) {
@@ -208,12 +210,12 @@ function pop(pollData, pollRecipients) {
             const subject = pollData.title;
             const message = `
             ${pollData.description}
-        
+
             Link to access poll: ${generatedLink}
-        
+
             Poll will be open from:
-            ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]
-        `;
+
+            ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]`;
 
 
             Object.keys(pollRecipients).forEach(key => {
@@ -242,3 +244,27 @@ function pop(pollData, pollRecipients) {
 };
 
 
+
+
+// confirmPopUpBox();
+// cancelPopUpBox();
+
+// function confirmPopUpBox() {
+//   const confirmPopUpButton = document.getElementById("cast-poll-button");
+//   confirmPopUpButton.onclick = () => {
+//     // alert("hello");
+//     const popUp = document.getElementById("pop-up-container");
+//     popUp.classList.remove("pop-up-container-hidden");
+//     popUp.classList.add("pop-up-container");
+//   };
+// }
+
+// function cancelPopUpBox() {
+//   const cancelPopUpButton = document.getElementById("cancel");
+//   cancelPopUpButton.onclick = () => {
+//     // alert("hello");
+//     const popUp = document.getElementById("pop-up-container");
+//     popUp.classList.remove("pop-up-container");
+//     popUp.classList.add("pop-up-container-hidden");
+//   };
+// }
