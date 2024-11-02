@@ -6,7 +6,7 @@ import { authCheck } from "../../../functions/authentication/authCheck.js"
 
 let userUID;
 
-checkUserRole()
+authCheck()
     .then((uid) => {
         userUID = uid; 
     })
