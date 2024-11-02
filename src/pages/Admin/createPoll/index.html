@@ -54,13 +54,34 @@
     <title>Create a Poll</title>
 </head>
 <body>
-    <div class="mainDiv">
+    
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+            fetch("navbar.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("navbar").innerHTML = data;
+                })
+                .catch(error => console.error("Error loading navbar:", error));
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("sidebar.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("sidebar").innerHTML = data;
+                })
+                .catch(error => console.error("Error loading navbar:", error));
+        });
+  </script>
+    <div class="mainDiv"> 
         <div class="navBarDiv">
             <div class="menuIconDiv">
-                <img src="/exPoll/src/assets/icons/menu.png" alt="" class="menuIcon" />
-                <img src="/exPoll/src/assets/images/logo-white.png" alt="expoll" class="logo" />
+                <img src="/src/assets/icons/menu.png" alt="" class="menuIcon" />
+                <img src="/src/assets/images/logo-white.png" alt="expoll" class="logo" />
             </div>
-            <img src="/exPoll/src/assets/icons/user-white.png" alt="" class="userIcon" />
+            <img src="/src/assets/icons/user-white.png" alt="" class="userIcon" />
         </div>
         <div class="heading-div">
             <h2>Create Poll</h2>
@@ -95,16 +116,16 @@
                         </div>
                         <div class="upload-import-button-container">
                             <div id="downloadTemplate">
-                                <a href="/exPoll/src/assets/templates/Poll Options Template.xlsx" download>
+                                <a href="/src/assets/templates/Poll Options Template.xlsx" download>
                                     <label class="custom-upload-button">
-                                        <img src="/exPoll/src/assets/icons/download.png" alt="download" class="">
+                                        <img src="/src/assets/icons/download.png" alt="download" class="">
                                         Template
                                     </label>
                                 </a>
                             </div>
                             <div id="upload2">
                                 <label for="upload-options" class="custom-upload-button">
-                                    <img src="../../../assets/icons/importIcon.png" alt="Upload" class="">
+                                    <img src="/src/assets/icons/importIcon.png" alt="Upload" class="">
                                     Import Excel
                                 </label>
                                 <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
@@ -115,7 +136,7 @@
                         <div class="options-container-none"></div>
                         <div class="option-item D-black">
                             <input type="text" placeholder="Enter Option" class="D-no-border">
-                            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon"
+                            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
                                 onclick="removeOption(this)"></img>
                         </div>
                     </div>
@@ -133,14 +154,14 @@
                         <div id="downloadTemplate">
                             <a href="../../../assets/templates/User List Template.xlsx" download>
                                 <label class="custom-upload-button">
-                                    <img src="/exPoll/src/assets/icons/download.png" alt="download" class="">
+                                    <img src="/src/assets/icons/download.png" alt="download" class="">
                                     Template
                                 </label>
                             </a>
                         </div>
                         <div id="upload">
                             <label for="uploadUser" class="custom-upload-button">
-                                <img src="/exPoll/src/assets/icons/importIcon.png" alt="Upload" class="">
+                                <img src="/src/assets/icons/importIcon.png" alt="Upload" class="">
                                 Import excel
                             </label>
                             <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
@@ -152,13 +173,13 @@
                         <div class="recipient-container-none">
                             <div class="recipient-item D-white">
                                 <input type="email" placeholder="Enter Email" class="D-no-border">
-                                <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon"
+                                <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
                                     onclick="removeOption(this)"></img>
                             </div>
                         </div>
                     </div>
                     <div class="button-container" class="add-option-button-container">
-                        <button onclick="addRecipient()" id="addRecipientButton" class="D-recipient">+ Add
+                        <button onclick="addRecipient()" id="addRecipientButton" class="D-white">+ Add
                             Recipient</button>
                     </div>
                 </div>
