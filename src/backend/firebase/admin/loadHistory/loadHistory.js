@@ -10,7 +10,6 @@ async function fetchPollDetails() {
   try {
   
     const snapshot = await get(pollDetailsRef);
-
     if (snapshot.exists()) {
       const data = snapshot.val();
       console.log("Poll Details Data:", data);
@@ -27,7 +26,7 @@ async function fetchPollDetails() {
 
         // Construct inner HTML based on the template you provided
         activityBox.innerHTML = `
-          <div class="icon">
+          <div class="icon"> 
             <img src="/src/assets/icons/rate-icon-solid.png" alt="icon" />
           </div>
           <div class="content">

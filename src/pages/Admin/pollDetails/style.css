@@ -94,7 +94,26 @@ width: 100px;
     width: 100%;
     height: 450px;
     gap: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
 }
+
+
+
+
+.leftSideBox::-webkit-scrollbar {
+    width: 7px; 
+    
+  }
+  .leftSideBox::-webkit-scrollbar-track {
+    background: #ffffff; 
+   
+  }
+  .leftSideBox::-webkit-scrollbar-thumb {
+    background-color: #0D2335; 
+    border-radius: 6px;
+  }
 .downloadBtn{
     width: 100%;
     height: 44px;
