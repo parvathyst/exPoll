@@ -8,9 +8,10 @@ import {
 
 const url = window.location.href;
 const urlParams = new URL(url);
-const id = urlParams.searchParams.get("id");
+let id = urlParams.searchParams.get("id");
 
 let pollOptions;
+let pollDetails;
 
 confirmPopUpBox();
 cancelPopUpBox();
@@ -110,13 +111,14 @@ function displayOption(pollOption) {
   pollList.appendChild(pollItem);
 }
 
+readPollDetails();
 readData();
 
 function readData() {
   const pollRef = ref(db, `/poll-options/${id}`);
   onValue(pollRef, (snapshot) => {
     const data = snapshot.val();
-    console.log(data);
+    //console.log(data);
     pollOptions = data;
 
     displayPollList(data);
@@ -146,6 +148,28 @@ function displayPollList(pollOptions) {
   }
 }
 
+function readPollDetails() {
+  const pollRef = ref(db, `/poll-details/${id}`);
+  onValue(pollRef, (snapshot) => {
+    const data = snapshot.val();
+    // console.log(data);
+    pollDetails = data;
+    displayPollDetails(pollDetails);
+  });
+}
+
+function displayPollDetails(pollDetails) {
+  console.log(pollDetails)
+  document.querySelector('.poll-h-info h3').innerText = pollDetails.title;
+  document.querySelector('.poll-information h4').innerText = pollDetails.description;
+  const startDate = new Date(`${pollDetails.startDate} ${pollDetails.startTime}`);
+  const endDate = new Date(`${pollDetails.endDate} ${pollDetails.endTime}`);
+  
+  document.querySelector('.datetime').innerHTML = `
+    <p>Active from: ${startDate.toLocaleString()}</p>
+    <p>Closing at: ${endDate.toLocaleString()}</p>
+  `;
+}
 
 // Function to send an email using EmailJS
 // function sendEmail(toEmail, subject, message) {
@@ -174,9 +198,8 @@ function displayPollList(pollOptions) {
 //           Link to access poll: ${generatedLink}
 
 //           Poll will be open from:
-          
-//           ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]`;
 
+//           ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]`;
 
 //           Object.keys(pollRecipients).forEach(key => {
 //               const data = pollRecipients[key];
@@ -187,9 +210,6 @@ function displayPollList(pollOptions) {
 //                   console.warn("Recipient data is missing an email:", data);
 //               }
 //           });
-
-
-
 
 //       } catch (error) {
 //           console.error('Error fetching recipients:', error);
