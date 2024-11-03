@@ -158,17 +158,31 @@ function readPollDetails() {
 }
 
 function displayPollDetails(pollDetails) {
-  console.log(pollDetails)
+  console.log(pollDetails);
   document.querySelector('.poll-h-info h3').innerText = pollDetails.title;
   document.querySelector('.poll-information h4').innerText = pollDetails.description;
+
   const startDate = new Date(`${pollDetails.startDate} ${pollDetails.startTime}`);
   const endDate = new Date(`${pollDetails.endDate} ${pollDetails.endTime}`);
   
+  // Format date, hour, minute, and am/pm in lowercase
+  const formatTime = (date) => {
+    const hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const period = hours >= 12 ? 'pm' : 'am';
+    const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+    return `${date.toLocaleDateString()}  ${formattedHours}:${minutes} ${period}`;
+  };
+
+  const startDateFormatted = formatTime(startDate);
+  const endDateFormatted = formatTime(endDate);
+
   document.querySelector('.datetime').innerHTML = `
-    <h5><strong>Active from</strong>: ${startDate.toLocaleString()}</h5>
-    <h5><strong>Closing at:</strong> ${endDate.toLocaleString()}</h5>
+    <h5><strong>Active from:</strong> ${startDateFormatted}</h5>
+    <h5><strong>Closing at:</strong> ${endDateFormatted}</h5>
   `;
 }
+
 
 // Function to send an email using EmailJS
 // function sendEmail(toEmail, subject, message) {

@@ -55,6 +55,19 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  color: #0D2335;
+}
+
+.datetime{
+  line-height: 0;
+}
+
+.poll-description-container h4{
+  color: #0d2335ae;
+}
+
+.pollType{
+  color: #0d2335ae;
 }
 
 .cast-poll-button-disabled{
@@ -121,7 +134,7 @@ body {
 
 .poll-card h4 {
   font-size: 16px;
-  color: black;
+  color: #0D2335;
   margin: 0;
   padding: 0;
   text-align: left;
