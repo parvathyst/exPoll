@@ -12,6 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="" />
+  <style>
+  
+  </style>
 </head>
 
 <body>
@@ -30,6 +33,7 @@
           </li> -->
           <li>
             <button class="menu-button"><a href="/src/pages/Admin/history/index.html"><h3>View History</h3></a></button>
+            <!-- <button src="/src/pages/Admin/pollDetails/index.html"> </button> -->
           </li>
         </ul>
       </div>
@@ -37,6 +41,14 @@
     <section class="content-section-div">
       <nav class="iconNav">
         <!-- <img src="/src/assets/icons/user-icon-black.png" class="user-icon-black" alt="" /> -->
+        <div class="user-icon-container">
+          <img src="/src/assets/icons/user-icon-black.png" class="user-icon-black" alt="User Icon" onclick="toggleDropdown()" />
+          <div id="user-dropdown" class="dropdown-content">
+              <a href="#" onclick="logout()">Log Out</a>
+              <a href="#" onclick="changePassword()">Change Password</a>
+          </div>
+      </div>
+      
       </nav>
       <section class="heading-section">
       </section>
@@ -54,6 +66,8 @@
     </section>
   </main>
   <script type="module" src="script.js"></script>
+  <script src="profile.js"></script>
+  
 </body>
 
 </html>

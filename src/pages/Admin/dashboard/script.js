@@ -25,13 +25,17 @@ async function displayPolls(userUID) {
         if (polls) {
             const sortedPolls = Object.keys(polls)
                 .map(key => polls[key])
+                
                 .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
 
+
             sortedPolls.forEach(poll => {
+
+                console.log("keyyyyyyyy",poll.id)
                 const activityBox = document.createElement("div");
                 activityBox.className = "activity-box";
                 activityBox.innerHTML = `
-                    <div class="content">
+                    <div onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'" class="content">
                       <h5>${poll.title || 'Untitled Poll'}</h5>
                       <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Date not available'}</h6>
                     </div>
@@ -50,3 +54,4 @@ async function displayPolls(userUID) {
 }
 
 displayPolls(userUID);
+
