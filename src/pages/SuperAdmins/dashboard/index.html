@@ -40,7 +40,7 @@
                 <input type="email" id="addAdminemail" name="email" placeholder="Email">
                 <input type="password" id="AddAdminpassword" name="password" placeholder="Default Password">
                 <div class="popup-buttons">
-                    <button type="button" class="btn cancel-button" id="">Cancel</button>
+                    <button type="button" class="btn cancel-button">Cancel</button>
                     <button type="submit" class="btn add-admin">Add Admin</button>
                 </div>
             </form>
@@ -50,10 +50,13 @@
     <div id="edit-admin-popup" class="popup-form">
         <div class="popup-content">
             <form id="edit-admin-form">
-                <input type="text" id="fullName" name="fullName" placeholder="Full Name">
+                <h3>Edit Admin Name?</h3>
+                <p id="confirm-edit-message-name"></p>
+                <p id="confirm-edit-message-email"></p>
+                <input type="text" id="edit-admin-fullname" name="fullName" placeholder="Full Name">
                 <div class="popup-buttons">
-                    <button type="button" class="btn cancel-button" id="cancelBtn">Cancel</button>
-                    <button type="submit" class="btn add-admin">Update Admin</button>
+                    <button type="button" class="btn cancel-button">Cancel</button>
+                    <button type="submit" class="btn add-admin">Update</button>
                 </div>
             </form>
         </div>
@@ -68,7 +71,7 @@
                 <input type="text" id="confirm-text" name="confirmText" placeholder="Type 'DISABLE' to confirm"
                     required>
                 <div class="popup-buttons">
-                    <button type="button" class="btn cancel-button" id="">Cancel</button>
+                    <button type="button" class="btn cancel-button">Cancel</button>
                     <button type="submit" class="btn disable-admin">Disable Admin</button>
                 </div>
             </form>
@@ -84,7 +87,7 @@
                 <input type="text" id="confirm-enable-text" name="confirmEnableText"
                     placeholder="Type 'ENABLE' to confirm" required>
                 <div class="popup-buttons">
-                    <button type="button" class="btn cancel-button" id="">Cancel</button>
+                    <button type="button" class="btn cancel-button">Cancel</button>
                     <button type="submit" class="btn enable-admin">Enable Admin</button>
                 </div>
             </form>

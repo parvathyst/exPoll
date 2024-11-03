@@ -1,15 +1,14 @@
-import { ref, update } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+import { ref, get, query, orderByChild, equalTo, update } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 import { db } from "../config.js";
 
 async function updateAdminName(email, newFullName) {
     try {
-        const snapshot = await db.ref("userRecords").orderByChild("email").equalTo(email).once("value");
+        const userQuery = query(ref(db, "admins"), orderByChild("email"), equalTo(email));
+        const snapshot = await get(userQuery);
 
         if (snapshot.exists()) {
-            const userId = Object.keys(snapshot.val())[0];
-
-            await db.ref(`userRecords/${userId}`).update({ fullName: newFullName });
-
+            const uid = Object.keys(snapshot.val())[0];
+            await update(ref(db, `admins/${uid}`), { fullName: newFullName });
             console.log(`Admin account with email ${email} has been updated with new name: ${newFullName}`);
             return true;
         } else {

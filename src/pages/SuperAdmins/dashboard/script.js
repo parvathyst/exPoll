@@ -1,5 +1,5 @@
 import { createAdmin } from "../../../backend/firebase/superAdmin/createAdmin.js";
-import { disableAdminAccount } from "../../../backend/firebase/superAdmin/disableAdmin.js";
+import { changeAdminStatus } from "../../../backend/firebase/superAdmin/changeAdminStatus.js";
 import { displayAdmins } from "./displayAdmins.js";
 import { updateAdminName } from "../../../backend/firebase/superAdmin/updateAdminName.js";
 
@@ -13,14 +13,15 @@ superAdminAuthCheck()
     })
     .catch((error) => {
         console.error(error);
+        alert(error)
         window.location.href = "../../common/error";
     });
 
 document.addEventListener("DOMContentLoaded", () => {
     const addAdminPopup = document.getElementById("add-admin-popup");
     const editAdminPopup = document.getElementById("edit-admin-popup");
-    const disableAdminPopup = document.getElementById("disable-admin-popup"); 
-    const enableAdminPopup = document.getElementById("enable-admin-popup"); 
+    const disableAdminPopup = document.getElementById("disable-admin-popup");
+    const enableAdminPopup = document.getElementById("enable-admin-popup");
 
     let emailid;
     let adminName;
@@ -52,16 +53,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 300);
     }
 
-    function showDisablePopup() { 
-        document.getElementById("confirm-disable-message-name").innerHTML = adminName; 
-        document.getElementById("confirm-disable-message-email").innerHTML = emailid; 
-        showPopup(disableAdminPopup); 
+    function showDisablePopup() {
+        document.getElementById("confirm-disable-message-name").innerHTML = adminName;
+        document.getElementById("confirm-disable-message-email").innerHTML = emailid;
+        showPopup(disableAdminPopup);
     }
 
-    function showEnablePopup() { 
-        document.getElementById("confirm-enable-message-name").innerHTML = adminName; 
-        document.getElementById("confirm-enable-message-email").innerHTML = emailid; 
-        showPopup(enableAdminPopup); 
+    function showEnablePopup() {
+        document.getElementById("confirm-enable-message-name").innerHTML = adminName;
+        document.getElementById("confirm-enable-message-email").innerHTML = emailid;
+        showPopup(enableAdminPopup);
+    }
+
+    function showEditPopup() {
+        document.getElementById("confirm-edit-message-name").innerHTML = adminName;
+        document.getElementById("confirm-edit-message-email").innerHTML = emailid;
+        showPopup(editAdminPopup);
     }
 
     document.getElementById('add-admin-form').addEventListener('submit', async function (e) {
@@ -70,52 +77,71 @@ document.addEventListener("DOMContentLoaded", () => {
         const email = document.getElementById('addAdminemail').value;
         const password = document.getElementById('AddAdminpassword').value;
         await createAdmin(fullName, email, password);
-        displayAdmins(attachDisableListeners);
+        displayAdmins(attachListeners);
     });
 
-    document.getElementById("edit-admin-form").addEventListener("submit", (e) => {
+    document.getElementById("disable-admin-form").addEventListener("submit", async (e) => {
         e.preventDefault();
-        hidePopup(editAdminPopup);
-    });
-
-    document.getElementById("disable-admin-form").addEventListener("submit", async (e) => { 
-        e.preventDefault();
-        if (document.getElementById("confirm-text").value.toLowerCase() === 'disable') { 
-            await disableAdminAccount(emailid);
+        if (document.getElementById("confirm-text").value.toLowerCase() === 'disable') {
+            await changeAdminStatus(emailid, "disabled");
             hidePopup(disableAdminPopup);
+            displayAdmins(attachListeners);
         } else {
-            alert("Please type 'DISABLE' to confirm."); 
+            alert("Please type 'DISABLE' to confirm.");
         }
     });
 
-    document.getElementById("enable-admin-form").addEventListener("submit", async (e) => { // Add event listener for enabling admin
+    document.getElementById("enable-admin-form").addEventListener("submit", async (e) => {
         e.preventDefault();
-        if (document.getElementById("confirm-enable-text").value.toLowerCase() === 'enable') { 
-            await enableAdminAccount(emailid); // Call function to enable admin
+        if (document.getElementById("confirm-enable-text").value.toLowerCase() === 'enable') {
+            await changeAdminStatus(emailid, "enabled");
             hidePopup(enableAdminPopup);
-            displayAdmins(attachDisableListeners); // Refresh the admin list after enabling
+            displayAdmins(attachListeners);
         } else {
-            alert("Please type 'ENABLE' to confirm."); 
+            alert("Please type 'ENABLE' to confirm.");
         }
     });
 
-    function attachDisableListeners() {
-        document.querySelectorAll(".disable-admin-button").forEach(button => { 
+    document.getElementById("edit-admin-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const newFullName = document.getElementById("edit-admin-fullname").value;
+        if (!newFullName) {
+            alert("Please enter a new full name.");
+            return;
+        }
+        try {
+            await updateAdminName(emailid, newFullName);
+            hidePopup(editAdminPopup);
+            displayAdmins(attachListeners);
+        } catch (error) { console.error("Error updating admin name:", error); }
+    });
+
+
+    function attachListeners() {
+        document.querySelectorAll(".disable-admin-button").forEach(button => {
             button.addEventListener("click", (event) => {
                 emailid = event.target.closest('.admin-item').querySelector(".admin-email").textContent;
                 adminName = event.target.closest('.admin-item').querySelector(".admin-name").textContent;
-                showDisablePopup(); 
+                showDisablePopup();
             });
         });
 
-        document.querySelectorAll(".enable-admin-button").forEach(button => { // Add listeners for enabling admin
+        document.querySelectorAll(".enable-admin-button").forEach(button => {
             button.addEventListener("click", (event) => {
                 emailid = event.target.closest('.admin-item').querySelector(".admin-email").textContent;
                 adminName = event.target.closest('.admin-item').querySelector(".admin-name").textContent;
-                showEnablePopup(); 
+                showEnablePopup();
+            });
+        });
+
+        document.querySelectorAll(".edit-admin-button").forEach(button => {
+            button.addEventListener("click", (event) => {
+                emailid = event.target.closest('.admin-item').querySelector(".admin-email").textContent;
+                adminName = event.target.closest('.admin-item').querySelector(".admin-name").textContent;
+                showEditPopup();
             });
         });
     }
 
-    displayAdmins(attachDisableListeners); 
+    displayAdmins(attachListeners);
 });

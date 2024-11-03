@@ -20,7 +20,7 @@ async function displayAdmins(callback) {
             <span class="admin-email">${data.email}</span>
         </div>
         <div class="action-buttons">
-            <button class="view"><img src="../../../assets/icons/pen.png" alt="edit icon"></button>
+            <button class="edit-admin-button"><img src="../../../assets/icons/pen.png" alt="edit icon"></button>
             <button class="${buttonClass}">${buttonText}</button>
         </div>
         `;

@@ -1,5 +1,6 @@
-import { auth } from "../../backend/firebase/config.js";
+import { auth, db } from "../../backend/firebase/config.js";
 import { onAuthStateChanged, getIdTokenResult } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { ref, get } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
 
 function authCheck() {
@@ -12,10 +13,10 @@ function authCheck() {
 
           if (snapshot.exists()) {
             const userData = snapshot.val();
-            if (userData.status === "disabled") {
-              reject("User account is disabled");
+            if (userData.status === "enabled") {
+              resolve(user.uid);
             } else {
-              resolve(user.uid); 
+              reject("User account is disabled");
             }
           } else {
             reject("User data not found in database");
@@ -41,7 +42,7 @@ function superAdminAuthCheck() {
           if (idTokenResult.claims.role === 'superadmin') {
             resolve(user.uid);
             console.log(idTokenResult.claims.role);
-            
+
           } else {
             reject("User does not have superadmin privileges");
           }
