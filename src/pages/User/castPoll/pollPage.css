@@ -44,6 +44,8 @@ body {
   gap: 4rem;
   background-color: rgba(128, 97, 195, 0.35);
   border-radius: 0px 8px 8px 0px;
+  min-width: 35%;
+  max-width: 35%;
 }
 
 .poll-description-container {
@@ -83,7 +85,8 @@ body {
 }
 .poll-central-left-div {
   height: 100%;
-  width: 60%;
+  min-width: 65%;
+  max-width: 65%;
 }
 .poll-options-list {
   margin-top: 1rem;
@@ -113,15 +116,15 @@ body {
   border-radius: 5px;
   box-shadow: 1 0px 0px rgba(0, 0, 0, 1);
   background-color: white;
-  max-height: 70%;
+  height: 70%;
 }
 
-.poll-card h2 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #333;
+.poll-card h4 {
+  font-size: 16px;
+  color: black;
   margin: 0;
   padding: 0;
+  text-align: left;
 }
 
 .selected-poll-card {
@@ -203,4 +206,3 @@ body {
 {
   display: none;
 }
-
