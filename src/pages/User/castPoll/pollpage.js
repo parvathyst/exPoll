@@ -36,14 +36,40 @@ function cancelPopUpBox() {
   };
 }
 
-resultPage();
+
+const confirmButton = document.getElementById("confirm");
+confirmButton.onclick = () => {
+  const selectedOptionRef = ref(db, `/poll-options/${id}/${selectedIndex}`);
+  
+  runTransaction(selectedOptionRef, (currentOption) => {
+    if (currentOption && !currentOption.isSelected) {
+      // Option is available, mark it as selected and assign the employee
+      currentOption.isSelected = true;
+      currentOption.assignedEmployee = "parvathyst@gmail.com"; // replace "User Name" with actual unique user data
+      currentOption.selectedTime = serverTimestamp();
+      return currentOption;
+    } else {
+      // Option is already selected, abort transaction
+      return; // Returning undefined will abort the transaction
+    }
+  }).then((result) => {
+    if (result.committed) {
+      // Successfully selected, navigate to the success page
+      resultPage();
+    } else {
+      // Option was already taken, alert the user to retry
+      alert("This option has already been chosen. Please select another option.");
+    }
+  }).catch((error) => {
+    console.error("Transaction failed:", error);
+    alert("An error occurred. Please try again.");
+  });
+};
 
 let selectedIndex = -1;
 
 function resultPage() {
   // mail();
-  const confirmButton = document.getElementById("confirm");
-  confirmButton.onclick = () => {
     const page1 = document.getElementById("page1");
     page1.classList.remove("page");
     page1.classList.add("page-hidden");
@@ -53,7 +79,7 @@ function resultPage() {
     page2.classList.add("page");
 
     writeData();
-  };
+  
 }
 
 function sortPollOptions(pollOptions) {
