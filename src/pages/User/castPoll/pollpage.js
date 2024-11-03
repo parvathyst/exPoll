@@ -41,7 +41,7 @@ function cancelPopUpBox() {
 const confirmButton = document.getElementById("confirm");
 confirmButton.onclick = () => {
   const selectedOptionRef = ref(db, `/poll-options/${id}/${selectedIndex}`);
-  
+  console.log("Confirmed")
   runTransaction(selectedOptionRef, (currentOption) => {
     if (currentOption && !currentOption.isSelected) {
       // Option is available, mark it as selected and assign the employee
@@ -150,14 +150,13 @@ function readData() {
 }
 
 function writeData() {
-  // console.log("hello")
-  // console.log(selectedIndex)
-  set(ref(db, `/poll-options/${id}/` + selectedIndex), {
-    assignedEmployee: "",
-    content: pollOptions[selectedIndex].content,
-    selectedTime: serverTimestamp(),
-    isSelected: true,
-  });
+    if (selectedIndex === -1 || !pollOptions[selectedIndex]) return;
+    set(ref(db, `/poll-options/${id}/` + selectedIndex), {
+      ...pollOptions[selectedIndex],
+      assignedEmployee: "parvathyst@gmail.com", // Set dynamically
+      selectedTime: serverTimestamp(),
+      isSelected: true,
+    });
 }
 
 function displayPollList(pollOptions) {
