@@ -55,22 +55,22 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #0D2335;
+  color: #0d2335;
 }
 
-.datetime{
+.datetime {
   line-height: 0;
 }
 
-.poll-description-container h4{
+.poll-description-container h4 {
   color: #0d2335ae;
 }
 
-.pollType{
+.pollType {
   color: #0d2335ae;
 }
 
-.cast-poll-button-disabled{
+.cast-poll-button-disabled {
   border-radius: 8px;
   background-color: #8d99ae;
   width: 100%;
@@ -80,9 +80,9 @@ body {
   border: none;
 }
 
-.cast-poll-button{
+.cast-poll-button {
   border-radius: 8px;
-  background-color: #8061C3;
+  background-color: #8061c3;
   width: 100%;
   color: white;
   padding-top: 13px;
@@ -134,7 +134,7 @@ body {
 
 .poll-card h4 {
   font-size: 16px;
-  color: #0D2335;
+  color: #0d2335;
   margin: 0;
   padding: 0;
   text-align: left;
@@ -145,7 +145,7 @@ body {
   box-shadow: 0px 4px 4px 0px #0000002c;
 }
 
-.unlocked-poll-card{
+.unlocked-poll-card {
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -156,68 +156,89 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color:#8D99AE;
+  background-color: #8d99ae;
   gap: 10px;
 }
 
-.pop-up{
+.pop-up {
   position: absolute;
   top: 50%;
-  left:50%;
+  left: 50%;
   width: 300px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 4px 4px 0px #0000002c;
   padding: 30px;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
-.cancel-confirm-buttons{
+.cancel-confirm-buttons {
   display: flex;
   flex-direction: row;
   gap: 12px;
 }
 
-.pop-up button{
+.pop-up button {
   border: none;
   border-radius: 8px;
   height: 40px;
   width: 100%;
 }
 
-.cancel{
+.cancel {
   background-color: #0d2335;
   color: white;
 }
 
-.confirm{
-  background-color: #8061C3;
+.confirm {
+  background-color: #8061c3;
   color: white;
 }
 
-.pop-up-background{
+.pop-up-background {
   position: absolute;
   top: 0%;
   left: 0%;
   width: 100vw;
-  height:100vh;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.205);
 }
 
-.pop-up-container{
+.pop-up-container {
   display: block;
 }
 
-.pop-up-container-hidden{
+.pop-up-container-hidden {
   display: none;
 }
 
-.page
-{
+#page-2 {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.message-1 {
+  background-color: #8061c368;
+  color: #3e68b9;
+  height: 80px;
+  min-width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 0px;
+  font-weight: 900px;
+}
+
+.page {
   display: block;
 }
 
-.page-hidden
-{
+.page-hidden {
   display: none;
 }
