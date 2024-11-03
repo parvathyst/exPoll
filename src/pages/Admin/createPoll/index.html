@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../../styles/D.css">
     <link rel="stylesheet" href="loader.css">
     <link rel="stylesheet" href="generatelink.css">
+    <link rel="stylesheet" href="../../Admin/history/adminHistory.css">
 
     <script type="module" src="adminCreatePollDOM.js"></script>
     <script src="adminCreatePoll.js"></script>
@@ -22,14 +23,38 @@
 </head>
 
 <body>
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function () {
+                fetch("navbar.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("navbar").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading navbar:", error));
+            });
+    
+    
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("sidebar.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("sidebar").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading navbar:", error));
+            });
+    </script> -->
+    <div id="sidebar" class="sidebar" class=""></div>
     <div class="mainDiv">
-        <div class="navBarDiv">
+        <div class="nav-bar-div" id="navbar"></div>
+        
+
+        <!-- <div class="navBarDiv">
             <div class="menuIconDiv">
                 <img src="/src/assets/icons/menu.png" alt="" class="menuIcon" />
                 <img src="/src/assets/images/logo-white.png" alt="expoll" class="logo" />
             </div>
             <img src="/src/assets/icons/user-white.png" alt="" class="userIcon" />
-        </div>
+        </div> -->
         <div class="heading-div">
             <h2>Create Poll</h2>
         </div>
@@ -40,12 +65,14 @@
                     <textarea id="description" placeholder="Description" rows="3" class="D-border "
                         style="resize: none;"></textarea>
                     <div class="main-container-left-date">
+                        <p id="para">From :</p>
                         <div class="main-container-left-date-tile">
                             <input type="date" id="poll-start-date" placeholder="Start Date " class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
                             <input type="time" id="poll-start-time"   value="00:00" placeholder="Start Time" class="D-border">
                         </div>
+                        <p id="para">To :</p>
                         <div class="main-container-left-date-tile">
                             <input type="date" id="poll-end-date" placeholder="End Date" class="D-border">
                         </div>
@@ -62,6 +89,9 @@
                             <h4>Options</h4>
                         </div>
                         <div class="upload-import-button-container">
+                            <div>
+                                <label class="custom-upload-button" onclick="clearopt()">clear</label>
+                            </div>
                             <div id="downloadTemplate">
                                 <a href="/src/assets/templates/Poll Options Template.xlsx" download>
                                     <label class="custom-upload-button">
@@ -98,6 +128,9 @@
                 <h4>Recipients</h4>
                 <div class="recipients-container D-border">
                     <div class="recipients-button-div">
+                        <div>
+                            <label class="custom-upload-button" onclick="clearrec()">clear</label>
+                        </div>
                         <div id="downloadTemplate">
                             <a href="../../../assets/templates/User List Template.xlsx" download>
                                 <label class="custom-upload-button">
@@ -117,13 +150,12 @@
 
 
                     <div class="recipient-container-bottom">
-                        <div class="recipient-container-none">
+                        <div class="recipient-container-none"></div>
                             <div class="recipient-item D-white">
                                 <input type="email" placeholder="Enter Email" class="D-no-border">
                                 <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
                                     onclick="removeOption(this)"></img>
                             </div>
-                        </div>
                     </div>
                     <div class="button-container" class="add-option-button-container">
                         <button onclick="addRecipient()" id="addRecipientButton" class="D-white">+ Add
@@ -132,7 +164,10 @@
                 </div>
                 <div class="recipient-container-buttons">
                     <div class="toggle-and-cancel-container">
-                        <button class="cancel-button">Cancel</button>
+                        <button class="cancel-button" onclick="clearFields()">
+                            <span id="button-icon"></span>
+                            <span id="clear-button">clear</span>
+                        </button>
                         <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
                             <div>
                                 <h4><span id="toggleLabel">Private Poll</span></h4>
@@ -151,7 +186,7 @@
                     <span id="button-text">Generate Link</span>
                 </button>
                 <div>
-                    <!-- Overlay for dimming effect -->
+                    <!-- Overlay effect -->
                     <div id="overlay" class="overlay"></div>    
 
                     <div id="myPopup" class="popup">
@@ -190,6 +225,6 @@
         });
     })();
 </script>
-<!-- <script type="module" src="email.js"></script> -->
+<script src="../history/displaySideBar.js"></script>
 
 </html>

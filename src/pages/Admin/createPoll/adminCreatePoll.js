@@ -33,7 +33,7 @@ function addRecipient(value) {
 
     if (value === undefined) {
         recipientContainer.innerHTML = `
-            <input type="email" placeholder="Enter Email"  class="D-no-border" >
+            <input type="email" placeholder="Enter Email"  class="D-no-border">
             <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     } else {
@@ -77,4 +77,37 @@ function handleFile(event) {
         reader.readAsArrayBuffer(file);
     } else {
     }
+}
+
+
+function clearFields() {
+    const clearBtn = document.getElementById('clear-button');
+    const buttonIcon = document.getElementById('button-icon');
+    clearBtn.textContent = '';
+    buttonIcon.className = 'loader-clear';
+    
+    const recipientItems = document.querySelectorAll('.recipient-item');
+    recipientItems.forEach(item => item.remove());
+    const recipientItem = document.querySelectorAll('.option-item');
+    recipientItem.forEach(item => item.remove());
+    
+    
+     setTimeout(() => {
+        // Remove loader icon and change to 'New Poll' text
+        buttonIcon.className = ''; // Reset icon class
+        clearBtn.textContent = 'New Poll';
+
+        // Change button action to refresh the page on the next click
+        clearBtn.onclick = () => location.reload();
+    }, 1000); // Delay of 1000ms (1 second)
+}
+
+function clearopt(){
+    const recipientItem = document.querySelectorAll('.option-item');
+    recipientItem.forEach(item => item.remove());
+}
+
+function clearrec(){
+    const recipientItem = document.querySelectorAll('.recipient-item');
+    recipientItem.forEach(item => item.remove());
 }
