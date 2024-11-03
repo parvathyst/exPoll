@@ -4,56 +4,15 @@ import {
   ref,
   onValue,
   serverTimestamp,
+  runTransaction,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
 const url = window.location.href;
 const urlParams = new URL(url);
-const id = urlParams.searchParams.get("id");
+let id = urlParams.searchParams.get("id");
 
-let pollOptions = [
-  {
-    assignedEmployee: "",
-    name: "Öption 1",
-    selectedTime: "",
-    status: false,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 2",
-    selectedTime: "",
-    status: true,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 3",
-    selectedTime: "",
-    status: false,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 4",
-    selectedTime: "",
-    status: false,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 5",
-    selectedTime: "",
-    status: true,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 6",
-    selectedTime: "",
-    status: false,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 7",
-    selectedTime: "",
-    status: false,
-  },
-];
+let pollOptions;
+let pollDetails;
 
 confirmPopUpBox();
 cancelPopUpBox();
@@ -78,14 +37,38 @@ function cancelPopUpBox() {
   };
 }
 
-resultPage();
+
+const confirmButton = document.getElementById("confirm");
+confirmButton.onclick = () => {
+  const selectedOptionRef = ref(db, `/poll-options/${id}/${selectedIndex}`);
+  console.log("Confirmed")
+  runTransaction(selectedOptionRef, (currentOption) => {
+    if (currentOption && !currentOption.isSelected) {
+      // Option is available, mark it as selected and assign the employee
+      currentOption.isSelected = true;
+      currentOption.assignedEmployee = "parvathyst@gmail.com";
+      currentOption.selectedTime = serverTimestamp();
+      return currentOption;
+    } else {
+      // Option is already selected, abort transaction
+      return; // Returning undefined will abort the transaction
+    }
+  }).then((result) => {
+    if (result.committed) {
+      resultPage();
+    } else {
+      alert("This option has already been chosen. Please select another option.");
+    }
+  }).catch((error) => {
+    console.error("Transaction failed:", error);
+    alert("An error occurred. Please try again.");
+  });
+};
 
 let selectedIndex = -1;
 
 function resultPage() {
   // mail();
-  const confirmButton = document.getElementById("confirm");
-  confirmButton.onclick = () => {
     const page1 = document.getElementById("page1");
     page1.classList.remove("page");
     page1.classList.add("page-hidden");
@@ -95,14 +78,14 @@ function resultPage() {
     page2.classList.add("page");
 
     writeData();
-  };
+  
 }
 
 function sortPollOptions(pollOptions) {
   const selectedPollOptions = [];
   const sortedPollOptions = [];
   for (const pollOption of pollOptions) {
-    if (pollOption.status == true) {
+    if (pollOption.isSelected == true) {
       selectedPollOptions.push(pollOption);
     } else {
       sortedPollOptions.push(pollOption);
@@ -114,8 +97,7 @@ function sortPollOptions(pollOptions) {
 
 function displaySelectedOption(pollOption, pollItem) {
   const selectedPollOption = document.getElementById("selected-option");
-  selectedPollOption.innerText = pollOption.name;
-
+  selectedPollOption.innerHTML = `<strong>Selected Option:</strong> ${pollOption.content}`;
   selectedIndex = pollOptions.indexOf(pollOption);
 
   //Change style of unselected cards
@@ -137,14 +119,14 @@ function displayOption(pollOption) {
   pollItem.onclick = function () {
     displaySelectedOption(pollOption, pollItem);
   };
-  if (pollOption.status == false) {
+  if (pollOption.isSelected == false) {
     pollItem.innerHTML = `
-    <h2>${pollOption.name}</h2>
+    <h4>${pollOption.content}</h4>
     `;
     pollItem.classList.add("unlocked-poll-card");
   } else {
     pollItem.innerHTML = `
-    <h2>${pollOption.name}</h2><img src="/src/assets/icons/lock.svg">
+    <h4>${pollOption.content}</h4><img src="/src/assets/icons/lock.svg">
     `;
     pollItem.classList.add("locked-poll-card");
     pollItem.disabled = true;
@@ -153,13 +135,14 @@ function displayOption(pollOption) {
   pollList.appendChild(pollItem);
 }
 
+readPollDetails();
 readData();
 
 function readData() {
   const pollRef = ref(db, `/poll-options/${id}`);
   onValue(pollRef, (snapshot) => {
     const data = snapshot.val();
-    console.log(data);
+    //console.log(data);
     pollOptions = data;
 
     displayPollList(data);
@@ -167,14 +150,13 @@ function readData() {
 }
 
 function writeData() {
-  // console.log("hello")
-  // console.log(selectedIndex)
-  set(ref(db, `/poll-options/${id}/` + selectedIndex), {
-    assignedEmployee: "",
-    name: pollOptions[selectedIndex].name,
-    selectedTime: serverTimestamp(),
-    status: true,
-  });
+    if (selectedIndex === -1 || !pollOptions[selectedIndex]) return;
+    set(ref(db, `/poll-options/${id}/` + selectedIndex), {
+      ...pollOptions[selectedIndex],
+      assignedEmployee: "parvathyst@gmail.com", // Set dynamically
+      selectedTime: serverTimestamp(),
+      isSelected: true,
+    });
 }
 
 function displayPollList(pollOptions) {
@@ -187,6 +169,42 @@ function displayPollList(pollOptions) {
   for (const pollOption of sortedPollOptions) {
     displayOption(pollOption);
   }
+}
+
+function readPollDetails() {
+  const pollRef = ref(db, `/poll-details/${id}`);
+  onValue(pollRef, (snapshot) => {
+    const data = snapshot.val();
+    // console.log(data);
+    pollDetails = data;
+    displayPollDetails(pollDetails);
+  });
+}
+
+function displayPollDetails(pollDetails) {
+  console.log(pollDetails);
+  document.querySelector('.poll-h-info h3').innerText = pollDetails.title;
+  document.querySelector('.poll-information h4').innerText = pollDetails.description;
+
+  const startDate = new Date(`${pollDetails.startDate} ${pollDetails.startTime}`);
+  const endDate = new Date(`${pollDetails.endDate} ${pollDetails.endTime}`);
+  
+  // Format date, hour, minute, and am/pm in lowercase
+  const formatTime = (date) => {
+    const hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const period = hours >= 12 ? 'pm' : 'am';
+    const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+    return `${date.toLocaleDateString()}  ${formattedHours}:${minutes} ${period}`;
+  };
+
+  const startDateFormatted = formatTime(startDate);
+  const endDateFormatted = formatTime(endDate);
+
+  document.querySelector('.datetime').innerHTML = `
+    <h5><strong>Active from:</strong> ${startDateFormatted}</h5>
+    <h5><strong>Closing at:</strong> ${endDateFormatted}</h5>
+  `;
 }
 
 
@@ -217,9 +235,8 @@ function displayPollList(pollOptions) {
 //           Link to access poll: ${generatedLink}
 
 //           Poll will be open from:
-          
-//           ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]`;
 
+//           ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]`;
 
 //           Object.keys(pollRecipients).forEach(key => {
 //               const data = pollRecipients[key];
@@ -230,9 +247,6 @@ function displayPollList(pollOptions) {
 //                   console.warn("Recipient data is missing an email:", data);
 //               }
 //           });
-
-
-
 
 //       } catch (error) {
 //           console.error('Error fetching recipients:', error);

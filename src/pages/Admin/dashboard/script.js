@@ -1,5 +1,5 @@
 import { fetchNewestPollDetails } from "../../../backend/firebase/admin/loadDashboard/loadDashboard.js";
-import { authCheck } from "../../../functions/authentication/authCheck.js"
+import { authCheck } from "../../../functions/authentication/authCheck.js";
 
 let userUID;
 
@@ -24,7 +24,6 @@ async function displayPolls(userUID) {
         const polls = await fetchNewestPollDetails(userUID);
         console.log(polls);
 
-        // Check if polls exist and are not empty
         if (polls && Object.keys(polls).length > 0) {
             Object.keys(polls).forEach(key => {
                 const poll = polls[key];

@@ -37,18 +37,16 @@
           <div class="poll-description-container">
             <div class="details-and-option">
               <div class="poll-h-info">
-                <h3>Leader of the Day</h3>
+                <h3></h3>
                 <div class="poll-information">
-                  <h4>Select topic for your leader of the day presentation.</h4>
+                  <h4></h4>
                   <div class="datetime">
-                    <p>Active from:</p>
-                    <p>Closing at:</p>
+                    <h5></h5>
+                    <h5></h5>
                   </div>
-
-                  <p>Poll type: First Come First Served</p>
+                  <h5 class="pollType">Poll type: First Come First Served</h5>
                 </div>
               </div>
-
               <p id="selected-option"></p>
             </div>
             <button
@@ -73,18 +71,25 @@
       </div>
     </div>
     <div class="page-hidden" id="page2">
-      <p>Your response have been sent to your mail. </p>
+      <div class="poll-central-div" id="page-2">
+        <div class="message-1">
+          <h2>Cast Poll</h2>
+          <h3>Successfully</h3>
+        </div>
+        <h4>Your response have been sent to your email.</h4>
+      </div>
     </div>
   </body>
   <script type="module" src="./pollpage.js"></script>
-  <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-  </script>
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+  ></script>
   <script type="text/javascript">
-    (function(){
-        emailjs.init({
-          publicKey: "oJuPNylCuJvugpZ0v",
-        });
+    (function () {
+      emailjs.init({
+        publicKey: "oJuPNylCuJvugpZ0v",
+      });
     })();
   </script>
 </html>
