@@ -72,8 +72,7 @@ function sortPollOptions(pollOptions) {
 
 function displaySelectedOption(pollOption, pollItem) {
   const selectedPollOption = document.getElementById("selected-option");
-  selectedPollOption.innerText = pollOption.content;
-
+  selectedPollOption.innerHTML = `<strong>Selected Option:</strong> ${pollOption.content}`;
   selectedIndex = pollOptions.indexOf(pollOption);
 
   //Change style of unselected cards
@@ -166,8 +165,8 @@ function displayPollDetails(pollDetails) {
   const endDate = new Date(`${pollDetails.endDate} ${pollDetails.endTime}`);
   
   document.querySelector('.datetime').innerHTML = `
-    <p>Active from: ${startDate.toLocaleString()}</p>
-    <p>Closing at: ${endDate.toLocaleString()}</p>
+    <h5><strong>Active from</strong>: ${startDate.toLocaleString()}</h5>
+    <h5><strong>Closing at:</strong> ${endDate.toLocaleString()}</h5>
   `;
 }
 
