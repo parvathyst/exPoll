@@ -20,10 +20,9 @@ async function displayPolls(userUID) {
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
     try {
-        const polls = await fetchNewestPollDetails(userUID); // Await the function result
+        const polls = await fetchNewestPollDetails(userUID); 
         
         if (polls) {
-            // Convert polls to an array and sort by startDate (newest first)
             const sortedPolls = Object.keys(polls)
                 .map(key => polls[key])
                 .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
