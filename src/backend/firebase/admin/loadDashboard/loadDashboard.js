@@ -33,7 +33,7 @@ async function fetchNewestPollDetails(uid) {
             return [];
         }
     } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data:",error);
     }
 }
 

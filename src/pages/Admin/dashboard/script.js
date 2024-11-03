@@ -1,12 +1,11 @@
 import { fetchNewestPollDetails } from "../../../backend/firebase/admin/loadDashboard/loadDashboard.js";
-import { authCheck } from "../../../functions/authentication/authCheck.js"
+import { authCheck } from "../../../functions/authentication/authCheck.js";
 
 let userUID;
 
 async function initialize() {
     try {
         userUID = await authCheck();
-        return 
     } catch (error) {
         console.error(error);
         window.location.href = "../../login/";
@@ -16,17 +15,19 @@ async function initialize() {
 await initialize();
 
 async function displayPolls(userUID) {
-
     console.log(userUID);
     
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
     try {
-        const polls = await fetchNewestPollDetails(userUID); // Await the function result
+        const polls = await fetchNewestPollDetails(userUID); 
         
         if (polls) {
-            Object.keys(polls).forEach(key => {
-                const poll = polls[key];
+            const sortedPolls = Object.keys(polls)
+                .map(key => polls[key])
+                .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+
+            sortedPolls.forEach(poll => {
                 const activityBox = document.createElement("div");
                 activityBox.className = "activity-box";
                 activityBox.innerHTML = `

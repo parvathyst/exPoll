@@ -42,11 +42,11 @@ body {
 .main-container-left-date {
     display: flex;
     flex-direction: row;
-    gap: 2.7rem;
+    gap: 2rem;
     align-items: center;
     justify-content: center;
     #para{
-        width: 5rem;
+        width: 9rem;
         display: flex;
         justify-content: end;
     }
@@ -60,7 +60,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    width: 15%;
+    width: 20%;
     height: 10%;
 }
 
