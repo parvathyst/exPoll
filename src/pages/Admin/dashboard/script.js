@@ -6,9 +6,10 @@ let userUID;
 async function initialize() {
     try {
         userUID = await authCheck();
+        return
     } catch (error) {
         console.error(error);
-        window.location.href = "../../login/";
+        window.location.href = "../../common/error";
     }
 }
 
@@ -16,18 +17,16 @@ await initialize();
 
 async function displayPolls(userUID) {
     console.log(userUID);
-    
+
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
     try {
-        const polls = await fetchNewestPollDetails(userUID); 
-        
-        if (polls) {
-            const sortedPolls = Object.keys(polls)
-                .map(key => polls[key])
-                .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+        const polls = await fetchNewestPollDetails(userUID);
+        console.log(polls);
 
-            sortedPolls.forEach(poll => {
+        if (polls && Object.keys(polls).length > 0) {
+            Object.keys(polls).forEach(key => {
+                const poll = polls[key];
                 const activityBox = document.createElement("div");
                 activityBox.className = "activity-box";
                 activityBox.innerHTML = `
@@ -43,6 +42,11 @@ async function displayPolls(userUID) {
             });
         } else {
             console.log("No polls to display.");
+            container.style.display = "flex";
+            container.style.justifyContent = "center";
+            container.style.alignItems = "center";
+            container.style.height = "100%";
+            container.innerHTML = `<h5 style="text-align: center; color: #555;">No Activities Yet</h5>`;
         }
     } catch (error) {
         console.error("Error displaying polls:", error);
