@@ -16,17 +16,16 @@ async function initialize() {
 await initialize();
 
 async function displayPolls(userUID) {
-
     console.log(userUID);
 
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
     try {
-        const polls = await fetchNewestPollDetails(userUID); // Await the function result
+        const polls = await fetchNewestPollDetails(userUID);
         console.log(polls);
-        
 
-        if (polls) {
+        // Check if polls exist and are not empty
+        if (polls && Object.keys(polls).length > 0) {
             Object.keys(polls).forEach(key => {
                 const poll = polls[key];
                 const activityBox = document.createElement("div");
@@ -42,20 +41,13 @@ async function displayPolls(userUID) {
                 `;
                 container.appendChild(activityBox);
             });
-        } else if (poll.len) {
-            const activityBox = document.createElement("div");
-            activityBox.className = "activity-box";
-            activityBox.innerHTML = `
-                    <div class="content">
-                      <h5?Untitled Poll'}</h5>
-                      <h6> : 'Date not available'}</h6>
-                    </div>
-                    <div class="icon">
-                      <img src="/src/assets/icons/poll-solid.png" alt="icon" />
-                    </div>
-                `;
-            container.appendChild(activityBox);
+        } else {
             console.log("No polls to display.");
+            container.style.display = "flex";
+            container.style.justifyContent = "center";
+            container.style.alignItems = "center";
+            container.style.height = "100%";
+            container.innerHTML = `<h5 style="text-align: center; color: #555;">No Activities Yet</h5>`;
         }
     } catch (error) {
         console.error("Error displaying polls:", error);
