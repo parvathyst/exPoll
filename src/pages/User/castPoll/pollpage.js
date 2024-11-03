@@ -4,6 +4,7 @@ import {
   ref,
   onValue,
   serverTimestamp,
+  runTransaction,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
 const url = window.location.href;
@@ -36,14 +37,38 @@ function cancelPopUpBox() {
   };
 }
 
-resultPage();
+
+const confirmButton = document.getElementById("confirm");
+confirmButton.onclick = () => {
+  const selectedOptionRef = ref(db, `/poll-options/${id}/${selectedIndex}`);
+  console.log("Confirmed")
+  runTransaction(selectedOptionRef, (currentOption) => {
+    if (currentOption && !currentOption.isSelected) {
+      // Option is available, mark it as selected and assign the employee
+      currentOption.isSelected = true;
+      currentOption.assignedEmployee = "parvathyst@gmail.com";
+      currentOption.selectedTime = serverTimestamp();
+      return currentOption;
+    } else {
+      // Option is already selected, abort transaction
+      return; // Returning undefined will abort the transaction
+    }
+  }).then((result) => {
+    if (result.committed) {
+      resultPage();
+    } else {
+      alert("This option has already been chosen. Please select another option.");
+    }
+  }).catch((error) => {
+    console.error("Transaction failed:", error);
+    alert("An error occurred. Please try again.");
+  });
+};
 
 let selectedIndex = -1;
 
 function resultPage() {
   // mail();
-  const confirmButton = document.getElementById("confirm");
-  confirmButton.onclick = () => {
     const page1 = document.getElementById("page1");
     page1.classList.remove("page");
     page1.classList.add("page-hidden");
@@ -53,7 +78,7 @@ function resultPage() {
     page2.classList.add("page");
 
     writeData();
-  };
+  
 }
 
 function sortPollOptions(pollOptions) {
@@ -125,14 +150,13 @@ function readData() {
 }
 
 function writeData() {
-  // console.log("hello")
-  // console.log(selectedIndex)
-  set(ref(db, `/poll-options/${id}/` + selectedIndex), {
-    assignedEmployee: "",
-    content: pollOptions[selectedIndex].content,
-    selectedTime: serverTimestamp(),
-    isSelected: true,
-  });
+    if (selectedIndex === -1 || !pollOptions[selectedIndex]) return;
+    set(ref(db, `/poll-options/${id}/` + selectedIndex), {
+      ...pollOptions[selectedIndex],
+      assignedEmployee: "parvathyst@gmail.com", // Set dynamically
+      selectedTime: serverTimestamp(),
+      isSelected: true,
+    });
 }
 
 function displayPollList(pollOptions) {
