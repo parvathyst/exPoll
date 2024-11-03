@@ -155,7 +155,9 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   background-color:#8D99AE;
+  gap: 10px;
 }
 
 .pop-up{
