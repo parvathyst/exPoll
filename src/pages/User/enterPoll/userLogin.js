@@ -13,10 +13,29 @@ const url = window.location.href;
 const urlParams = new URL(url);
 let id = urlParams.searchParams.get("id");
 
-let pollDetails
-let pollRecipients
-readPollDetails();
+let pollDetails;
+let pollRecipients;
+// readPollDetails();
 // readPollRecipients(id);
+
+let fullName;
+document.getElementById("submit").addEventListener("click", () => {
+    // Retrieve the values from the input fields
+    
+    fullName = document.getElementById("fullName").value;
+    const email = document.getElementById("email").value;
+    readPollDetails();
+    // Store the values in an object (optional)
+    const userInfo = {
+        name: fullName,
+        email: email
+    };
+
+    // Log the values to the console
+    console.log("User Info:", userInfo);
+    console.log("Full Name:", fullName);
+    console.log("Email Address:", email);
+});
 
 function readPollDetails() {
     const pollRef = ref(db, `/poll-details/${id}`);
@@ -41,9 +60,12 @@ function readPollDetails() {
             } else if (now > endDateTime) {
                 alert("The poll has ended."); // Poll end time is in the past
             } else {
-                if(pollDetails.isPrivatePoll == True)
+                if(pollDetails.isPrivatePoll == true){
                     readPollRecipients(id);
-                
+                }
+                else{
+                    alert("public poll");
+                }
             }
         }
     });
@@ -74,9 +96,32 @@ function readPollDetails() {
             snapshot.forEach(sessionSnapshot => { // Iterate through each recipient
                 const recipient = sessionSnapshot.val();
                 pollRecipients = recipient
+                console.log(pollRecipients.hasDone);
                 console.log(pollRecipients.email);
+                console.log(pollRecipients.hasDone);
                 if(pollRecipients.hasDone == false){
-                
+                    // document.getElementById("login").addEventListener("click", (e) => {
+                    //     e.preventDefault();
+                        console.log(pollRecipients.hasDone);
+                        const email = document.getElementById("email").value.trim();
+                        const emailField = document.getElementById("email");
+                        emailField.style.borderColor = "#8061C3";
+                        
+                      
+                        if (isValidEmail(email)) {
+                          if(pollRecipients.email == email){
+                            pollRecipients.name = fullName;
+                            window.location.href = "../castPoll/index.html";
+                          }
+                          else{
+                            alert("no entry");
+                          }
+                        } else {
+                          emailField.style.borderColor = "red";
+                          document.getElementById("error-email").style.display = "block";
+                        }
+                    //   });
+                      
                 }
                 else{
                     alert("you already took the poll."); 
@@ -91,21 +136,12 @@ function readPollDetails() {
     });
 }
 
+function isValidEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+}
+
+
+
+
   
-
-document.getElementById("submit").addEventListener("click", () => {
-    // Retrieve the values from the input fields
-    const fullName = document.getElementById("fullName").value;
-    const email = document.getElementById("email").value;
-
-    // Store the values in an object (optional)
-    const userInfo = {
-        name: fullName,
-        email: email
-    };
-
-    // Log the values to the console
-    console.log("User Info:", userInfo);
-    console.log("Full Name:", fullName);
-    console.log("Email Address:", email);
-});
