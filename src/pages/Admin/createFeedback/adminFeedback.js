@@ -19,6 +19,11 @@ function increase() {
     
     // Increase the value and update the input box
     inputBox.value = currentValue + 1;
+
+    // if (currentValue){
+    //     let wizard = document.getElementById
+
+    // }
 }
 
 // Function to decrease the counter
@@ -43,5 +48,7 @@ function addFn() {
 
 `;
 }
+
+
 
 

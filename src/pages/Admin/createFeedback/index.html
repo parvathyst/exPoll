@@ -10,10 +10,10 @@
 <body>
     <div class="navBarDiv">
         <div class="menuIconDiv">
-            <img src="../adminHistoryPage/adminHistoryImages/menuicon.png" alt="" class="menuIcon" />
-            <img src="/images_adminFeedbackPage/expollsvg 3.png" alt="expoll" class="logo" />
+            <img src="/src/assets/icons/menu.png" alt="" class="menuIcon" />
+            <img src="/src/assets/images/logo-white.png" alt="expoll" class="logo" />
         </div>
-        <img src="../adminHistoryPage/adminHistoryImages/icon-user-white.png" alt="" class="userIcon" />
+        <img src="/src/assets/icons/user-white.png" alt="" class="userIcon" />
     </div>
     
     <div class="containerHeading">
@@ -64,17 +64,38 @@
                     <input class="legendInput" type="text" placeholder="Legend">
 
                 </div>
+                <div class="desc">
+                    <input class="DescriptionInput" type="text" placeholder="Description">
+
+                </div>
             </div>
 
         </div>  
         <div class="rightSide">
             <div class="rightSideTopBox">
-                <div class="memberSearch">
+                <!-- <div class="memberSearch">
                     <input class="searchTextBox" type="text" placeholder="Search email">
                     <i class="fa-solid fa-magnifying-glass"></i>
 
+                </div> -->
+                <!-- <div class="btn"><button>import excel</button></div> -->
+                <div class="recipientsButtonDiv">
+                    <div id="downloadTemplate">
+                        <a href="../../../assets/templates/User List Template.xlsx" download>
+                            <label class="custom-upload-button">
+                                <img src="../../../assets/icons/download.png" alt="download" class="">
+                                Template
+                            </label>
+                        </a>
+                    </div>
+                    <div id="upload">
+                        <label for="uploadUser" class="custom-upload-button">
+                            <img src="../../../assets/icons/importIcon.png" alt="Upload" class="">
+                            Import excel
+                        </label>
+                        <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
+                    </div>
                 </div>
-                <div class="btn"><button>import excel</button></div>
                 
                 
             </div>

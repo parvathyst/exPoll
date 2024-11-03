@@ -9,7 +9,6 @@ async function fetchPollDetailsWithDateFilterAndSearch(sortOrder = 'newest', tit
 
   try {
     const snapshot = await get(pollDetailsRef);
-
     if (snapshot.exists()) {
       let data = snapshot.val();
 
