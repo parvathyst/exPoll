@@ -14,16 +14,16 @@ async function initialize() {
 
 await initialize();
 
-let pollsCache = []; 
+let pollsCache = [];
 
 async function displayPolls(userUID) {
     console.log(userUID);
-    
+
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
     try {
         const polls = await fetchNewestPollDetails(userUID);
-        
+
         if (polls) {
             pollsCache = Object.keys(polls)
                 .map(key => polls[key])
@@ -40,7 +40,7 @@ async function displayPolls(userUID) {
 function renderPolls(polls) {
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
-    
+
     polls.forEach(poll => {
         const activityBox = document.createElement("div");
         activityBox.className = "activityBox";
@@ -69,14 +69,19 @@ function renderPolls(polls) {
 </div>
 
 `;
+
+        activityBox.onclick = () => {
+            location.href = `../pollDetails/index.html?poll-id=${poll.id}`;
+        };
+
         container.appendChild(activityBox);
     });
 }
 
 document.getElementById('searchInput').addEventListener('input', (event) => {
     const query = event.target.value.toLowerCase();
-    const filteredPolls = pollsCache.filter(poll => 
-        poll.title.toLowerCase().includes(query) || 
+    const filteredPolls = pollsCache.filter(poll =>
+        poll.title.toLowerCase().includes(query) ||
         (poll.startDate && new Date(poll.startDate).toLocaleDateString().includes(query))
     );
     renderPolls(filteredPolls);
@@ -94,7 +99,7 @@ document.getElementById('sortOptions').addEventListener('change', (event) => {
         sortedPolls.sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
     }
 
-    console.log("Sorted Polls:", sortedPolls); 
+    console.log("Sorted Polls:", sortedPolls);
     renderPolls(sortedPolls);
 });
 
@@ -102,7 +107,7 @@ document.getElementById('sortOptions').addEventListener('change', (event) => {
 
 function filterPollsByDateRange() {
     const dateFilterEnabled = document.getElementById("dateFilterToggle").checked;
-    let filteredPolls = [...pollsCache]; 
+    let filteredPolls = [...pollsCache];
 
     if (dateFilterEnabled) {
         const fromDateInput = document.getElementById("fromDate").value;
@@ -117,7 +122,7 @@ function filterPollsByDateRange() {
         });
     }
 
-    renderPolls(filteredPolls); 
+    renderPolls(filteredPolls);
 }
 
 
@@ -127,11 +132,11 @@ displayPolls(userUID);
 document.getElementById("filterButton").addEventListener("click", filterPollsByDateRange);
 
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     const fromDateInput = document.getElementById("fromDate");
     const toDateInput = document.getElementById("toDate");
     const toggle = document.getElementById("dateFilterToggle");
-    
+
     function updateDateInputs() {
         if (toggle.checked) {
             fromDateInput.disabled = false;
@@ -139,7 +144,7 @@ window.addEventListener('load', function() {
         } else {
             fromDateInput.disabled = true;
             toDateInput.disabled = true;
-             fromDateInput.value = '';
+            fromDateInput.value = '';
             toDateInput.value = '';
         }
     }
@@ -149,21 +154,21 @@ window.addEventListener('load', function() {
 });
 
 
-window.onload = function() {
-const now = new Date();
+window.onload = function () {
+    const now = new Date();
 
-const year = now.getFullYear();
-const month = String(now.getMonth() + 1).padStart(2, '0'); 
-const day = String(now.getDate()).padStart(2, '0');
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
 
-const defaultDateTime = `${year}-${month}-${day}T00:00`;
+    const defaultDateTime = `${year}-${month}-${day}T00:00`;
 
-document.getElementById('fromDate').value = defaultDateTime;
-document.getElementById('toDate').value = defaultDateTime;
+    document.getElementById('fromDate').value = defaultDateTime;
+    document.getElementById('toDate').value = defaultDateTime;
 };
 
-document.getElementById('refreshButton').addEventListener('click', function() {
-location.reload();
+document.getElementById('refreshButton').addEventListener('click', function () {
+    location.reload();
 
 
 });
