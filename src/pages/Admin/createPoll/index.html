@@ -23,38 +23,9 @@
 </head>
 
 <body>
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", function () {
-                fetch("navbar.html")
-                    .then(response => response.text())
-                    .then(data => {
-                        document.getElementById("navbar").innerHTML = data;
-                    })
-                    .catch(error => console.error("Error loading navbar:", error));
-            });
-    
-    
-            document.addEventListener("DOMContentLoaded", function () {
-                fetch("sidebar.html")
-                    .then(response => response.text())
-                    .then(data => {
-                        document.getElementById("sidebar").innerHTML = data;
-                    })
-                    .catch(error => console.error("Error loading navbar:", error));
-            });
-    </script> -->
     <div id="sidebar" class="sidebar" class=""></div>
     <div class="mainDiv">
         <div class="nav-bar-div" id="navbar"></div>
-        
-
-        <!-- <div class="navBarDiv">
-            <div class="menuIconDiv">
-                <img src="/src/assets/icons/menu.png" alt="" class="menuIcon" />
-                <img src="/src/assets/images/logo-white.png" alt="expoll" class="logo" />
-            </div>
-            <img src="/src/assets/icons/user-white.png" alt="" class="userIcon" />
-        </div> -->
         <div class="heading-div">
             <h2>Create Poll</h2>
         </div>
@@ -90,7 +61,7 @@
                         </div>
                         <div class="upload-import-button-container">
                             <div>
-                                <label class="custom-upload-button" onclick="clearopt()">clear</label>
+                                <label class="custom-upload-button" onclick="clearopt()">Clear</label>
                             </div>
                             <div id="downloadTemplate">
                                 <a href="/src/assets/templates/Poll Options Template.xlsx" download>
@@ -129,7 +100,7 @@
                 <div class="recipients-container D-border">
                     <div class="recipients-button-div">
                         <div>
-                            <label class="custom-upload-button" onclick="clearrec()">clear</label>
+                            <label class="custom-upload-button" onclick="clearrec()">Clear</label>
                         </div>
                         <div id="downloadTemplate">
                             <a href="../../../assets/templates/User List Template.xlsx" download>
@@ -170,7 +141,7 @@
                         </button>
                         <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
                             <div>
-                                <h4><span id="toggleLabel">Private Poll</span></h4>
+                                <h5><span id="toggleLabel">Private Poll</span></h5>
                             </div>
                             <label class="switch">
                                 <input type="checkbox" id="toggleSwitch">
@@ -179,14 +150,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- <button id="generate-button" class="generate-link-button link-container">Generate Link</button> -->
-
                 <button id="generate-button" class="D-black">
                     <span id="button-icon"></span>
                     <span id="button-text">Generate Link</span>
                 </button>
                 <div>
-                    <!-- Overlay effect -->
                     <div id="overlay" class="overlay"></div>    
 
                     <div id="myPopup" class="popup">
@@ -199,22 +167,11 @@
                 </div>
                 
 
-                <!-- <div id="link-container">
-                    <div>
-                    </div>
-                    <div id="show">
-                        <input  type="url">
-                    </div>
-                    <div>
-                        <button id="copy-button"><img src="/exPoll/src/assets/icons/copy-link-icon.png"
-                                alt="generate-link"></button>
-                    </div>
-                </div> -->
+                
             </div>
         </div>
     </div>
-    <!-- <script src="generatelink.js"></script>
-    <script src="adminCreatePollDOM.js"></script> -->
+   
 </body>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>

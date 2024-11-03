@@ -219,7 +219,7 @@ width: 80px;
 
 
 .timePeriodContainer{
-  height: 45%;
+  height: 50%;
   width: 100%;
   border-radius: 8px;
   border: solid 1px #137dd3;
@@ -233,7 +233,8 @@ width: 80px;
   width: 30vw; 
   margin: 0 auto;
   justify-content: end;
-  margin-top: 3.5rem;
+  margin-top: 0.5rem;
+
   
 }
 
