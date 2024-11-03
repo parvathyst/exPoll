@@ -4,6 +4,7 @@ import {
   ref,
   onValue,
   serverTimestamp,
+  runTransaction,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
 const url = window.location.href;
@@ -45,7 +46,7 @@ confirmButton.onclick = () => {
     if (currentOption && !currentOption.isSelected) {
       // Option is available, mark it as selected and assign the employee
       currentOption.isSelected = true;
-      currentOption.assignedEmployee = "parvathyst@gmail.com"; // replace "User Name" with actual unique user data
+      currentOption.assignedEmployee = "parvathyst@gmail.com";
       currentOption.selectedTime = serverTimestamp();
       return currentOption;
     } else {
@@ -54,10 +55,8 @@ confirmButton.onclick = () => {
     }
   }).then((result) => {
     if (result.committed) {
-      // Successfully selected, navigate to the success page
       resultPage();
     } else {
-      // Option was already taken, alert the user to retry
       alert("This option has already been chosen. Please select another option.");
     }
   }).catch((error) => {
