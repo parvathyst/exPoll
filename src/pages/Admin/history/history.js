@@ -30,14 +30,19 @@ async function displayPolls(userUID) {
 
             sortedPolls.forEach(poll => {
                 const activityBox = document.createElement("div");
-                activityBox.className = "activity-box";
+                activityBox.className = "activityBox";
                 activityBox.innerHTML = `
+                    <div class="icon">
+                      <img src="/src/assets/icons/rate-icon-solid.png" alt="icon" />
+                    </div>
                     <div class="content">
                       <h5>${poll.title || 'Untitled Poll'}</h5>
-                      <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Date not available'}</h6>
-                    </div>
-                    <div class="icon">
-                      <img src="/src/assets/icons/poll-solid.png" alt="icon" />
+                      <div class="date-and-time" id="date-and-time">
+                        <img src="/src/assets/icons/calender.png" alt="calendar">
+                        <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Date not available'}</h6>
+                        <img src="/src/assets/icons/clock.png" alt="clock">
+                        <h6>${poll.startTime || 'Time not available'}</h6>
+                      </div>
                     </div>
                 `;
                 container.appendChild(activityBox);
