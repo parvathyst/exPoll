@@ -8,52 +8,10 @@ import {
 
 const url = window.location.href;
 const urlParams = new URL(url);
-const id = urlParams.searchParams.get("id");
+let id = urlParams.searchParams.get("id");
 
-let pollOptions = [
-  {
-    assignedEmployee: "",
-    name: "Öption 1",
-    selectedTime: "",
-    status: false,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 2",
-    selectedTime: "",
-    status: true,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 3",
-    selectedTime: "",
-    status: false,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 4",
-    selectedTime: "",
-    status: false,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 5",
-    selectedTime: "",
-    status: true,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 6",
-    selectedTime: "",
-    status: false,
-  },
-  {
-    assignedEmployee: "",
-    name: "Öption 7",
-    selectedTime: "",
-    status: false,
-  },
-];
+let pollOptions;
+let pollDetails;
 
 confirmPopUpBox();
 cancelPopUpBox();
@@ -102,7 +60,7 @@ function sortPollOptions(pollOptions) {
   const selectedPollOptions = [];
   const sortedPollOptions = [];
   for (const pollOption of pollOptions) {
-    if (pollOption.status == true) {
+    if (pollOption.isSelected == true) {
       selectedPollOptions.push(pollOption);
     } else {
       sortedPollOptions.push(pollOption);
@@ -114,7 +72,7 @@ function sortPollOptions(pollOptions) {
 
 function displaySelectedOption(pollOption, pollItem) {
   const selectedPollOption = document.getElementById("selected-option");
-  selectedPollOption.innerText = pollOption.name;
+  selectedPollOption.innerText = pollOption.content;
 
   selectedIndex = pollOptions.indexOf(pollOption);
 
@@ -137,14 +95,14 @@ function displayOption(pollOption) {
   pollItem.onclick = function () {
     displaySelectedOption(pollOption, pollItem);
   };
-  if (pollOption.status == false) {
+  if (pollOption.isSelected == false) {
     pollItem.innerHTML = `
-    <h2>${pollOption.name}</h2>
+    <h4>${pollOption.content}</h4>
     `;
     pollItem.classList.add("unlocked-poll-card");
   } else {
     pollItem.innerHTML = `
-    <h2>${pollOption.name}</h2><img src="/src/assets/icons/lock.svg">
+    <h2>${pollOption.content}</h2><img src="/src/assets/icons/lock.svg">
     `;
     pollItem.classList.add("locked-poll-card");
     pollItem.disabled = true;
@@ -153,13 +111,14 @@ function displayOption(pollOption) {
   pollList.appendChild(pollItem);
 }
 
+readPollDetails();
 readData();
 
 function readData() {
   const pollRef = ref(db, `/poll-options/${id}`);
   onValue(pollRef, (snapshot) => {
     const data = snapshot.val();
-    console.log(data);
+    //console.log(data);
     pollOptions = data;
 
     displayPollList(data);
@@ -171,9 +130,9 @@ function writeData() {
   // console.log(selectedIndex)
   set(ref(db, `/poll-options/${id}/` + selectedIndex), {
     assignedEmployee: "",
-    name: pollOptions[selectedIndex].name,
+    content: pollOptions[selectedIndex].content,
     selectedTime: serverTimestamp(),
-    status: true,
+    isSelected: true,
   });
 }
 
@@ -189,6 +148,28 @@ function displayPollList(pollOptions) {
   }
 }
 
+function readPollDetails() {
+  const pollRef = ref(db, `/poll-details/${id}`);
+  onValue(pollRef, (snapshot) => {
+    const data = snapshot.val();
+    // console.log(data);
+    pollDetails = data;
+    displayPollDetails(pollDetails);
+  });
+}
+
+function displayPollDetails(pollDetails) {
+  console.log(pollDetails)
+  document.querySelector('.poll-h-info h3').innerText = pollDetails.title;
+  document.querySelector('.poll-information h4').innerText = pollDetails.description;
+  const startDate = new Date(`${pollDetails.startDate} ${pollDetails.startTime}`);
+  const endDate = new Date(`${pollDetails.endDate} ${pollDetails.endTime}`);
+  
+  document.querySelector('.datetime').innerHTML = `
+    <p>Active from: ${startDate.toLocaleString()}</p>
+    <p>Closing at: ${endDate.toLocaleString()}</p>
+  `;
+}
 
 // Function to send an email using EmailJS
 // function sendEmail(toEmail, subject, message) {
@@ -217,9 +198,8 @@ function displayPollList(pollOptions) {
 //           Link to access poll: ${generatedLink}
 
 //           Poll will be open from:
-          
-//           ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]`;
 
+//           ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]`;
 
 //           Object.keys(pollRecipients).forEach(key => {
 //               const data = pollRecipients[key];
@@ -230,9 +210,6 @@ function displayPollList(pollOptions) {
 //                   console.warn("Recipient data is missing an email:", data);
 //               }
 //           });
-
-
-
 
 //       } catch (error) {
 //           console.error('Error fetching recipients:', error);
