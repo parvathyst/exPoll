@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 function addRecipient(value) {
     const recipientContainer = document.createElement('div');
-    recipientContainer.classList.add('recipient-item', 'D-card');
+    recipientContainer.classList.add('recipient-item', 'D-white');
     if (value === undefined) {
         recipientContainer.innerHTML = `
             <input type="email" placeholder="Enter Email"  class="D-no-border">

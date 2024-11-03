@@ -65,12 +65,14 @@
                     <textarea id="description" placeholder="Description" rows="3" class="D-border "
                         style="resize: none;"></textarea>
                     <div class="main-container-left-date">
+                        <p id="para">From :</p>
                         <div class="main-container-left-date-tile">
                             <input type="date" id="poll-start-date" placeholder="Start Date " class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
                             <input type="time" id="poll-start-time"   value="00:00" placeholder="Start Time" class="D-border">
                         </div>
+                        <p id="para">To :</p>
                         <div class="main-container-left-date-tile">
                             <input type="date" id="poll-end-date" placeholder="End Date" class="D-border">
                         </div>
@@ -87,6 +89,9 @@
                             <h4>Options</h4>
                         </div>
                         <div class="upload-import-button-container">
+                            <div>
+                                <label class="custom-upload-button" onclick="clearopt()">clear</label>
+                            </div>
                             <div id="downloadTemplate">
                                 <a href="/src/assets/templates/Poll Options Template.xlsx" download>
                                     <label class="custom-upload-button">
@@ -123,6 +128,9 @@
                 <h4>Recipients</h4>
                 <div class="recipients-container D-border">
                     <div class="recipients-button-div">
+                        <div>
+                            <label class="custom-upload-button" onclick="clearrec()">clear</label>
+                        </div>
                         <div id="downloadTemplate">
                             <a href="../../../assets/templates/User List Template.xlsx" download>
                                 <label class="custom-upload-button">
@@ -142,13 +150,12 @@
 
 
                     <div class="recipient-container-bottom">
-                        <div class="recipient-container-none">
+                        <div class="recipient-container-none"></div>
                             <div class="recipient-item D-white">
                                 <input type="email" placeholder="Enter Email" class="D-no-border">
                                 <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
                                     onclick="removeOption(this)"></img>
                             </div>
-                        </div>
                     </div>
                     <div class="button-container" class="add-option-button-container">
                         <button onclick="addRecipient()" id="addRecipientButton" class="D-white">+ Add
@@ -157,7 +164,10 @@
                 </div>
                 <div class="recipient-container-buttons">
                     <div class="toggle-and-cancel-container">
-                        <button class="cancel-button">Cancel</button>
+                        <button class="cancel-button" onclick="clearFields()">
+                            <span id="button-icon"></span>
+                            <span id="clear-button">clear</span>
+                        </button>
                         <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
                             <div>
                                 <h4><span id="toggleLabel">Private Poll</span></h4>
