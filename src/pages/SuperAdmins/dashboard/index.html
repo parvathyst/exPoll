@@ -37,8 +37,8 @@
         <div class="popup-content">
             <form id="add-admin-form">
                 <input type="text" id="addAdminfullName" name="fullName" placeholder="Full Name">
-                <input type="email" id="addAdminemail" name="email" placeholder="email">
-                <input type="password" id="AddAdminpassword" name="password" placeholder="default password">
+                <input type="email" id="addAdminemail" name="email" placeholder="Email">
+                <input type="password" id="AddAdminpassword" name="password" placeholder="Default Password">
                 <div class="popup-buttons">
                     <button type="button" class="btn cancel-button" id="">Cancel</button>
                     <button type="submit" class="btn add-admin">Add Admin</button>
@@ -53,31 +53,45 @@
                 <input type="text" id="fullName" name="fullName" placeholder="Full Name">
                 <div class="popup-buttons">
                     <button type="button" class="btn cancel-button" id="cancelBtn">Cancel</button>
-                    <button type="submit" class="btn add-admin">Add Admin</button>
+                    <button type="submit" class="btn add-admin">Update Admin</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div id="delete-admin-popup" class="popup-form">
+    <div id="disable-admin-popup" class="popup-form">
         <div class="popup-content">
-            <form id="delete-admin-form">
-                <h3>Delete Admin ?</h3>
-                <p id="confirm-delete-message-name"></p>
-                <p id="confirm-delete-message-email"></p>
-                <input type="text" id="confirm-text" name="fullName" placeholder="confirm">
+            <form id="disable-admin-form">
+                <h3>Disable Admin?</h3>
+                <p id="confirm-disable-message-name"></p>
+                <p id="confirm-disable-message-email"></p>
+                <input type="text" id="confirm-text" name="confirmText" placeholder="Type 'DISABLE' to confirm"
+                    required>
                 <div class="popup-buttons">
                     <button type="button" class="btn cancel-button" id="">Cancel</button>
-                    <button type="submit" class="btn delete-admin">Delete Admin</button>
+                    <button type="submit" class="btn disable-admin">Disable Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="enable-admin-popup" class="popup-form">
+        <div class="popup-content">
+            <form id="enable-admin-form">
+                <h3>Enable Admin?</h3>
+                <p id="confirm-enable-message-name"></p>
+                <p id="confirm-enable-message-email"></p>
+                <input type="text" id="confirm-enable-text" name="confirmEnableText"
+                    placeholder="Type 'ENABLE' to confirm" required>
+                <div class="popup-buttons">
+                    <button type="button" class="btn cancel-button" id="">Cancel</button>
+                    <button type="submit" class="btn enable-admin">Enable Admin</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script type="module" src="script.js"></script>
-
-    <!-- <script type="module" src="../firebase/admin/insertAdmin.js"  ></script> -->
-
 </body>
 
 </html>
