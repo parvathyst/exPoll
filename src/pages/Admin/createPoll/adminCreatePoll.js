@@ -82,7 +82,7 @@ function handleFile(event) {
 
 function clearFields() {
     const clearBtn = document.getElementById('clear-button');
-    const buttonIcon = document.getElementById('button-icon');
+    const buttonIcon = document.getElementById('btn-icon');
     clearBtn.textContent = '';
     buttonIcon.className = 'loader-clear';
     
