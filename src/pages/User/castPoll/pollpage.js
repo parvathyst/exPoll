@@ -15,6 +15,7 @@ console.log(email);
 
 let pollOptions;
 let pollDetails;
+let pollRecipients;
 confirmPopUpBox();
 cancelPopUpBox();
 
@@ -158,10 +159,29 @@ function writeData() {
       selectedTime: serverTimestamp(),
       isSelected: true,
     }).then(() => {
+      pollRecipients = readRecipients();
+      setHasDone(pollRecipients,email);
       mail(pollOptions[selectedIndex].content); 
   }).catch((error) => {
       console.error("Failed to write data:", error);
   });
+}
+
+function readData() {
+  const pollRef = ref(db, `/poll-recipients/${id}`);
+  onValue(pollRef, (snapshot) => {
+    const data = snapshot.val();
+    //console.log(data);
+    pollRecipients = data;
+    return pollRecipients;
+  });
+}
+
+function setHasDone(pollRecipients,email){
+  set(ref(db, `/poll-recipients/${id}/`), {
+    ...pollRecipients[email],
+    hasDone: true,
+  })
 }
 
 function displayPollList(pollOptions) {
