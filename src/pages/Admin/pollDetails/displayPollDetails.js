@@ -1,8 +1,24 @@
 function displayPollOptions(pollOptions) {
+
+
     if (pollOptions && typeof pollOptions === 'object') {
+
+
         const pollOptionsContainer = document.getElementById("poll-options");
+        const responsesHeader = document.getElementById("poll-responces");
+
         console.log(pollOptions);
         pollOptionsContainer.innerHTML = "";
+
+        const selectedCount = Object.values(pollOptions).filter(poll => poll.isSelected).length;
+
+        responsesHeader.innerHTML = `
+        <h4 class="responses-header">
+            <i class="fa-solid fa-users"></i> 
+            Responses 
+            <span class="selected-count">( ${selectedCount} )</span>
+        </h4>`;
+    
         Object.keys(pollOptions).forEach((key) => {
             const poll = pollOptions[key];
             const pollContainer = document.createElement("div");
@@ -19,7 +35,7 @@ function displayPollOptions(pollOptions) {
             righ.classList.add("righ");
             righ.innerHTML = `
                 <h5>${poll.name || 'Unknown User'}</h5>
-                <p>${poll.assignedEmployee || 'example@gmail.com'}</p>
+                <p>${poll.assignedEmployee || '.'}</p>
             `;
             pollContainer.appendChild(lef);
             pollContainer.appendChild(righ);
@@ -46,4 +62,4 @@ function displayPollDetails(pollDetails) {
     }
 }
 
-export { displayPollOptions , displayPollDetails };
+export { displayPollOptions, displayPollDetails };
