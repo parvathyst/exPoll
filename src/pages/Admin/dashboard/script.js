@@ -1,3 +1,4 @@
+
 import { fetchNewestPollDetails } from "../../../backend/firebase/admin/loadDashboard/loadDashboard.js";
 import { authCheck } from "../../../functions/authentication/authCheck.js";
 
@@ -6,32 +7,33 @@ let userUID;
 async function initialize() {
     try {
         userUID = await authCheck();
+        await displayPolls(userUID); // Call displayPolls after userUID is set
     } catch (error) {
-        console.error(error);
+        console.error("Authentication error:", error);
         window.location.href = "../../login/";
     }
 }
 
-await initialize();
-
 async function displayPolls(userUID) {
-    console.log(userUID);
-    
+    if (!userUID) {
+        console.warn("User ID is undefined. Redirecting to login.");
+        window.location.href = "../../login/";
+        return;
+    }
+
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
+    
+
+
     try {
-        const polls = await fetchNewestPollDetails(userUID); 
-        
-        if (polls) {
-            const sortedPolls = Object.keys(polls)
-                .map(key => polls[key])
-                
+        const polls = await fetchNewestPollDetails(userUID);
+
+        if (polls && Object.keys(polls).length > 0) {
+            const sortedPolls = Object.values(polls)
                 .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
 
-
             sortedPolls.forEach(poll => {
-
-                console.log("keyyyyyyyy",poll.id)
                 const activityBox = document.createElement("div");
                 activityBox.className = "activity-box";
                 activityBox.innerHTML = `
@@ -53,5 +55,4 @@ async function displayPolls(userUID) {
     }
 }
 
-displayPolls(userUID);
-
+initialize();
