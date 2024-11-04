@@ -15,12 +15,16 @@ async function getPollData(pollID) {
         console.log(pollData);
 
         const pollOptionsAndRecipients = combinePollOptionsAndRecipients(pollData.pollOptions, pollData.pollRecipients)
-        
+
         console.log(pollOptionsAndRecipients);
-        
-        
+
+
         displayPollOptions(pollOptionsAndRecipients);
         displayPollDetails(pollData.pollDetails);
+
+        document.getElementById("download-excel-btn").addEventListener("click", () => {
+            downloadExcel(pollData.pollDetails, pollOptionsAndRecipients);
+        });
 
     } else {
         console.log("Failed to fetch poll data");
@@ -28,5 +32,45 @@ async function getPollData(pollID) {
     }
 }
 
+function downloadExcel(pollDetails, pollOptionsAndRecipients) {
+    const wb = XLSX.utils.book_new();
+
+    const data = [
+        ["Title", pollDetails.title],
+        ["Description", pollDetails.description],
+        [],
+        ["Content", "Name", "Email"]
+    ];
+
+    pollOptionsAndRecipients.forEach(option => {
+        data.push([option.content, option.name, option.email]);
+    });
+
+    const ws = XLSX.utils.aoa_to_sheet(data);
+
+    const colWidth = [
+        { wch: 20 },
+        { wch: 20 },
+        { wch: 30 }
+    ];
+    ws['!cols'] = colWidth;
+
+    ws['!rows'] = [];
+    for (let i = 0; i < data.length; i++) {
+        ws['!rows'][i] = { hpt: 15 };
+    }
+
+    XLSX.utils.book_append_sheet(wb, ws, "Poll Data");
+
+    const fileName = `${pollDetails.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.xlsx`;
+
+    XLSX.writeFile(wb, fileName);
+}
+
+
+
+
+
 getPollData(pollId)
+
 
