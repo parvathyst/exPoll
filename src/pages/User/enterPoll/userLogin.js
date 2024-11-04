@@ -111,7 +111,8 @@ function readPollDetails() {
                           if(pollRecipients.email === email){
                             console.log(pollDetails);
                             // pollRecipients.name = fullName;
-                            window.location.href = `../castPoll/?email=${encodeURIComponent(email)}&id=${id}`;
+                            // window.location.href = `../castPoll/?email=${encodeURIComponent(email)}&id=${id}`;
+                            window.location.href = `../castPoll/?email=${encodeURIComponent(email)}&id=${id}&name=${encodeURIComponent(fullName)}`;
                           }
                           else{
                             alert("no entry");

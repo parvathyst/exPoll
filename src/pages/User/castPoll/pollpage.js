@@ -12,6 +12,7 @@ const urlParams = new URL(url);
 let id = urlParams.searchParams.get("id");
 const email = urlParams.searchParams.get("email");
 console.log(email);
+const fullName = urlParams.searchParams.get("name");
 
 let pollOptions;
 let pollDetails;
@@ -180,6 +181,7 @@ function readData() {
 function setHasDone(pollRecipients,email){
   set(ref(db, `/poll-recipients/${id}/`), {
     ...pollRecipients[email],
+    name:fullName,
     hasDone: true,
   })
 }
