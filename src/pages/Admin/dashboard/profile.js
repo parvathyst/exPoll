@@ -1,23 +1,22 @@
-function toggleDropdown() {
-    const dropdown = document.getElementById("user-dropdown");
-    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+import { auth } from "../../../backend/firebase/config.js"; 
+import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+function handleLogout() {
+    signOut(auth)
+        .then(() => {
+            console.log("User signed out successfully");
+            window.location.href = "../../common/login"; 
+        })
+        .catch((error) => {
+            console.error("Error signing out:", error);
+        });
 }
 
-window.onclick = function(event) {
-    if (!event.target.matches('.user-icon-black')) {
-        const dropdown = document.getElementById("user-dropdown");
-        if (dropdown.style.display === "block") {
-            dropdown.style.display = "none";
-        }
+document.addEventListener("DOMContentLoaded", () => {
+    const logoutLink = document.getElementById("logout-link");
+    if (logoutLink) {
+        logoutLink.addEventListener("click", handleLogout);
+    } else {
+        console.error("Logout link not found");
     }
-}
-
-function logout() {
-    // Add logout functionality here
-    alert("Logging out...");
-}
-
-function changePassword() {
-    // Add change password functionality here
-    alert("Redirecting to change password...");
-}
+});
