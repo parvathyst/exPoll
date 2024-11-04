@@ -7,24 +7,17 @@ let userUID;
 async function initialize() {
     try {
         userUID = await authCheck();
-        await displayPolls(userUID); // Call displayPolls after userUID is set
+        await displayPolls(userUID); 
     } catch (error) {
         console.error("Authentication error:", error);
-        window.location.href = "../../login/";
+        window.location.href = "../../error/";
     }
 }
 
 async function displayPolls(userUID) {
-    if (!userUID) {
-        console.warn("User ID is undefined. Redirecting to login.");
-        window.location.href = "../../login/";
-        return;
-    }
 
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
-    
-
 
     try {
         const polls = await fetchNewestPollDetails(userUID);
@@ -36,8 +29,6 @@ async function displayPolls(userUID) {
             sortedPolls.forEach(poll => {
                 const activityBox = document.createElement("div");
                 activityBox.className = "activity-box";
-
-                console.log(key)
 
                 activityBox.innerHTML = `
                     <div onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'" class="content">

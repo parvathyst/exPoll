@@ -8,7 +8,7 @@ async function initialize() {
         userUID = await authCheck();
     } catch (error) {
         console.error(error);
-        window.location.href = "../../login/";
+        window.location.href = "../../error/";
     }
 }
 
@@ -38,44 +38,59 @@ async function displayPolls(userUID) {
 }
 
 function renderPolls(polls) {
+
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
 
-    polls.forEach(poll => {
-        const activityBox = document.createElement("div");
-        activityBox.className = "activityBox";
-        activityBox.innerHTML = `
-    <div class="icon">
-      <img src="/src/assets/icons/rate-icon-solid.png" alt="icon" />
+    try {
+        if (polls && Object.keys(polls).length > 0) {
+            const sortedPolls = Object.values(polls)
+                .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
 
-    </div>
-    <div  onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'">
-     <h5>${poll.title || 'Untitled Poll'}</h5>
+            sortedPolls.forEach(poll => {
+                const activityBox = document.createElement("div");
+                activityBox.className = "activity-box";
 
-    <div class="content"  >
-      <div class="date-and-time" id="date-and-time">
-        <img src="/src/assets/icons/calender.png" alt="calendar">
-        <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Start Date not available'}</h6>
-        <img src="/src/assets/icons/clock.png" alt="clock">
-        <h6>${poll.startTime || 'Start Time not available'}</h6>
-      </div>
-      <div class="date-and-time" id="end-date-and-time">
-        <img src="/src/assets/icons/calender.png" alt="calendar">
-        <h6>${poll.endDate ? new Date(poll.endDate).toLocaleDateString() : 'End Date not available'}</h6>
-        <img src="/src/assets/icons/clock.png" alt="clock">
-        <h6>${poll.endTime || 'End Time not available'}</h6>
-      </div>
-    </div>
-</div>
+                activityBox.innerHTML = `
+                    <div class="icon">
+                        <img src="/src/assets/icons/rate-icon-solid.png" alt="icon" />
+                    </div>
+                    <div onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'" class="content">
+                        <h5>${poll.title || 'Untitled Poll'}</h5>
+                        <div class="content">
+                            <div class="date-and-time" id="date-and-time">
+                                <img src="/src/assets/icons/calender.png" alt="calendar">
+                                <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Start Date not available'}</h6>
+                                <img src="/src/assets/icons/clock.png" alt="clock">
+                                <h6>${poll.startTime || 'Start Time not available'}</h6>
+                            </div>
+                            <div class="date-and-time" id="end-date-and-time">
+                                <img src="/src/assets/icons/calender.png" alt="calendar">
+                                <h6>${poll.endDate ? new Date(poll.endDate).toLocaleDateString() : 'End Date not available'}</h6>
+                                <img src="/src/assets/icons/clock.png" alt="clock">
+                                <h6>${poll.endTime || 'End Time not available'}</h6>
+                            </div>
+                        </div>
+                    </div>
+                `;
 
-`;
+                activityBox.onclick = () => {
+                    location.href = `../pollDetails/index.html?poll-id=${poll.id}`;
+                };
 
-        activityBox.onclick = () => {
-            location.href = `../pollDetails/index.html?poll-id=${poll.id}`;
-        };
-
-        container.appendChild(activityBox);
-    });
+                container.appendChild(activityBox);
+            });
+        } else {
+            console.log("No polls to display.");
+            container.style.display = "flex";
+            container.style.justifyContent = "center";
+            container.style.alignItems = "center";
+            container.style.height = "100%";
+            container.innerHTML = `<h5 style="text-align: center; color: #555;">No Activities Yet</h5>`;
+        }
+    } catch (error) {
+        console.error("Error displaying polls:", error);
+    }
 }
 
 document.getElementById('searchInput').addEventListener('input', (event) => {
