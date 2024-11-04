@@ -8,7 +8,7 @@ async function initialize() {
         userUID = await authCheck();
     } catch (error) {
         console.error(error);
-        window.location.href = "../../error/";
+        window.location.href = "../../Common/error/";
     }
 }
 
@@ -49,12 +49,13 @@ function renderPolls(polls) {
 
             sortedPolls.forEach(poll => {
                 const activityBox = document.createElement("div");
-                activityBox.className = "activity-box";
+                activityBox.className = "activityBox";
 
                 activityBox.innerHTML = `
                     <div class="icon">
                         <img src="/src/assets/icons/rate-icon-solid.png" alt="icon" />
                     </div>
+                    <div>
                     <div onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'" class="content">
                         <h5>${poll.title || 'Untitled Poll'}</h5>
                         <div class="content">
@@ -72,6 +73,7 @@ function renderPolls(polls) {
                             </div>
                         </div>
                     </div>
+                     </div>
                 `;
 
                 activityBox.onclick = () => {

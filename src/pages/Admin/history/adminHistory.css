@@ -37,6 +37,7 @@ body {
 
 .content{
   display: flex;
+  flex-direction: column;
 
 }
 .logoDiv{
@@ -99,7 +100,7 @@ width: 80px;
   display:flex;
   padding: 10px 20px;
   gap: 1rem; 
-  height: 15%;
+  height: 19%;
 
 }
 
