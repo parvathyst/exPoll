@@ -98,7 +98,6 @@ function readPollDetails() {
                 pollRecipients = recipient
                 console.log(pollRecipients.hasDone);
                 console.log(pollRecipients.email);
-                console.log(pollRecipients.hasDone);
                 if(pollRecipients.hasDone == false){
                     // document.getElementById("login").addEventListener("click", (e) => {
                     //     e.preventDefault();
@@ -106,12 +105,13 @@ function readPollDetails() {
                         const email = document.getElementById("email").value.trim();
                         const emailField = document.getElementById("email");
                         emailField.style.borderColor = "#8061C3";
-                        
+                        console.log(pollRecipients.email);
                       
                         if (isValidEmail(email)) {
-                          if(pollRecipients.email == email){
-                            pollRecipients.name = fullName;
-                            window.location.href = "../castPoll/index.html";
+                          if(pollRecipients.email === email){
+                            console.log(pollDetails);
+                            // pollRecipients.name = fullName;
+                            window.location.href = `../castPoll/?email=${encodeURIComponent(email)}&id=${id}`;
                           }
                           else{
                             alert("no entry");
