@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -20,7 +21,7 @@
     </div>
     <div class="container">
         <div class="leftSide">
-            <h5 class="responses"><i class="fa-solid fa-users"></i> Responses </h5>
+            <h5 class="responses" id="poll-responces"><i class="fa-solid fa-users"></i> Responses </h5>
             <div class="leftSideBox" id="poll-options">
                 <div id="none" class="none"></div>
             </div>
@@ -49,7 +50,7 @@
 
             </div>
             <div class="downloadbtndiv">
-                <button class="downloadBtn">
+                <button class="downloadBtn" id="download-excel-btn">
                     <p>Download Excel</p> <img src="/src/assets/icons/download.png" alt="">
                 </button>
             </div>
