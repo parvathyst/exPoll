@@ -1,3 +1,4 @@
+
 import { fetchNewestPollDetails } from "../../../backend/firebase/admin/loadDashboard/loadDashboard.js";
 import { authCheck } from "../../../functions/authentication/authCheck.js";
 
@@ -6,31 +7,37 @@ let userUID;
 async function initialize() {
     try {
         userUID = await authCheck();
-        return
+        await displayPolls(userUID); // Call displayPolls after userUID is set
     } catch (error) {
-        console.error(error);
-        window.location.href = "../../common/error";
+        console.error("Authentication error:", error);
+        window.location.href = "../../login/";
     }
 }
 
-await initialize();
-
 async function displayPolls(userUID) {
-    console.log(userUID);
+    if (!userUID) {
+        console.warn("User ID is undefined. Redirecting to login.");
+        window.location.href = "../../login/";
+        return;
+    }
 
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
+    
+
+
     try {
         const polls = await fetchNewestPollDetails(userUID);
-        console.log(polls);
 
         if (polls && Object.keys(polls).length > 0) {
-            Object.keys(polls).forEach(key => {
-                const poll = polls[key];
+            const sortedPolls = Object.values(polls)
+                .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+
+            sortedPolls.forEach(poll => {
                 const activityBox = document.createElement("div");
                 activityBox.className = "activity-box";
                 activityBox.innerHTML = `
-                    <div class="content">
+                    <div onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'" class="content">
                       <h5>${poll.title || 'Untitled Poll'}</h5>
                       <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Date not available'}</h6>
                     </div>
@@ -53,4 +60,4 @@ async function displayPolls(userUID) {
     }
 }
 
-displayPolls(userUID);
+initialize();
