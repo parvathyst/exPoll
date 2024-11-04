@@ -28,7 +28,6 @@ async function getPollData(pollID) {
 
     } else {
         console.log("Failed to fetch poll data");
-
     }
 }
 
@@ -66,10 +65,6 @@ function downloadExcel(pollDetails, pollOptionsAndRecipients) {
 
     XLSX.writeFile(wb, fileName);
 }
-
-
-
-
 
 getPollData(pollId)
 
