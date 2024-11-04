@@ -7,7 +7,6 @@
 }
 
 body {
-  /* font-family: "Montserrat", sans-serif; */
   height: 100vh;
   overflow: hidden; 
 }
@@ -36,19 +35,27 @@ body {
   
 }
 
+.content{
+  display: flex;
 
+}
 .logoDiv{
   display: flex;
   align-items: center;
   justify-content: start;
   padding-left: 5%;
 }
-
+/* 
 .logo{
-height: 20px;
-width: 100px;
+height:15px;
+width: 80px;
 }
 
+.logo img{
+  height:15px;
+  width: 80px;
+  } */
+  
 
 .adminHistoryDiv{
   margin-left: 5%;
@@ -212,7 +219,7 @@ width: 100px;
 
 
 .timePeriodContainer{
-  height: 40%;
+  height: 50%;
   width: 100%;
   border-radius: 8px;
   border: solid 1px #137dd3;
@@ -226,7 +233,8 @@ width: 100px;
   width: 30vw; 
   margin: 0 auto;
   justify-content: end;
-  margin-top: 3.5rem;
+  margin-top: 0.5rem;
+
   
 }
 
@@ -238,7 +246,7 @@ width: 100px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-   width: 50%;
+   width: 70%;
 }
 
 .applyButton {
@@ -249,7 +257,8 @@ width: 100px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-  width: 50%;
+  width: 25%;
+  margin-left: 70%;
 
 }
 
@@ -320,14 +329,14 @@ margin-top: 1rem;
 }
 
 
-.date-input {
+.datetime-local-input {
 display: flex;
 flex-direction: column;
 font-size: 16px;
 color: #333;
 }
 
-.date-input label {
+.datetime-local-input label {
 margin-bottom: 4px;
 font-weight: 600;
 }
@@ -344,13 +353,12 @@ margin-top: 3%;
 margin-bottom: 3%;
 }
 
-.input-container input[type="date"] {
+.input-container input[type="datetime-local"] {
 border: none;
 outline: none;
 font-size: 16px;
 
 width: 90%;
-color: #333;
 }
 .time-period-boxes{
 padding-top: 10%
@@ -442,8 +450,8 @@ gap:0.5rem;
 }
 
 .logo {
-  height: 30px;
-  width: 150px;
+  height: 25px;
+  width: 120px;
   display: block;
 }
 

@@ -1,30 +1,59 @@
 
-import { createPoll } from "../firebase/admin/createPoll/createPoll.js"
+import { createPoll } from "../../../backend/firebase/admin/createPoll/createPoll.js"
+import { validateForm } from "./validation.js";
+import { authCheck } from "../../../functions/authentication/authCheck.js"
 
-document.addEventListener('DOMContentLoaded', function () {
+
+
+let userUID;
+
+async function initialize() {
+    try {
+        userUID = await authCheck();
+        return
+    } catch (error) {
+        console.error(error);
+        window.location.href = "../../common/error";
+    }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', async function () {
     const uploadUser = document.getElementById('uploadUser');
+
+    await initialize();
+
     if (uploadUser) {
         uploadUser.addEventListener('change', handleUser, false);
     }
-    document.getElementById('generate-link-button').addEventListener('click', fetchData);
+    document.getElementById('generate-button').addEventListener('click', function (event) {
+        if (validateForm()) {
+            fetchDataAndGenerateLink();
+        } else {
+            console.log("Form validation failed. Please fix the highlighted errors.");
+        }
+    });
 });
+
 function addRecipient(value) {
     const recipientContainer = document.createElement('div');
-    recipientContainer.classList.add('recipient-item', 'D-card');
+    recipientContainer.classList.add('recipient-item', 'D-white');
     if (value === undefined) {
         recipientContainer.innerHTML = `
             <input type="email" placeholder="Enter Email"  class="D-no-border">
-            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
+            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     } else {
         recipientContainer.innerHTML = `
             <input type="email" value="${value}" class="D-no-border">
-            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
+            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     }
     // document.querySelector('.recipients-container').insertBefore(recipientContainer, document.querySelector('.recipients-container button'));
     document.querySelector('.recipient-container-none').insertAdjacentElement('afterend', recipientContainer);
 }
+
 function removeRecipient(button) {
     button.parentElement.remove();
 }
@@ -57,46 +86,165 @@ function handleUser(event) {
 }
 
 
-function fetchData() {
+let generatedLink = '';
+
+async function fetchDataAndGenerateLink() {
+
+
+    const generateLinkButton = document.getElementById("generate-button");
+    const buttonIcon = document.getElementById("button-icon");
+    const buttonText = document.getElementById("button-text");
+
+    if (generatedLink) {
+        copyToClipboard(generatedLink);
+        buttonText.innerText = "Link Copied!";
+        setTimeout(() => buttonText.innerText = generatedLink, 4000);
+        return;
+    }
+
+    buttonIcon.className = 'loader';
+    buttonText.innerText = "Generating Link";
+    generateLinkButton.classList.remove("show-text", "show-icon-left");
+
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
-    const startDate = document.getElementById('pollStartDate').value;
-    const startTime = document.getElementById('pollStartTime').value;
-    const endDate = document.getElementById('pollEndDate').value;
-    const endTime = document.getElementById('pollEndTime').value;
+    const startDate = document.getElementById('poll-start-date').value;
+    const startTime = document.getElementById('poll-start-time').value;
+    const endDate = document.getElementById('poll-end-date').value;
+    const endTime = document.getElementById('poll-end-time').value;
 
-    const pollOptions = [];
+    let pollOptions = {};
     const optionInputs = document.querySelectorAll('.options-container-bottom input[type="text"]');
-    optionInputs.forEach(input => {
+
+    optionInputs.forEach((input, index) => {
         if (input.value) {
-            pollOptions.push(input.value);
+            pollOptions[index] = {
+                content: input.value,
+                assignedEmployee: "",
+                isSelected: false,
+                selectedTime: ""
+            };
         }
     });
 
-    const pollRecipients = [];
-    const recipientInputs = document.querySelectorAll('.recipient-container input[type="text"]');
-    recipientInputs.forEach(input => {
+    let pollRecipients = {};
+    const recipientInputs = document.querySelectorAll('.recipient-container-bottom input[type="email"]');
+    recipientInputs.forEach((input, index) => {
         if (input.value) {
-            pollRecipients.push(input.value);
+            pollRecipients[index] = {
+                name: "",
+                email: input.value,
+                hasDone: false,
+            };
         }
     });
-
+    console.log(recipientInputs);
     const isPrivatePoll = document.getElementById('toggleSwitch').checked;
+    const dateTime = new Date().toLocaleString();
 
     const pollData = {
-        "title": title,
-        "description": description,
-        "startDate": startDate,
-        "startTime": startTime,
-        "endDate": endDate,
-        "endTime": endTime,
-        "isPrivate": isPrivatePoll,
+        title: title,
+        description: description,
+        startDate: startDate,
+        startTime: startTime,
+        endDate: endDate,
+        endTime: endTime,
+        isPrivatePoll: isPrivatePoll,
+        createdBy: userUID,
+        createdAt: dateTime,
     };
 
+    try {
+        const key = await createPoll(pollData, pollOptions, pollRecipients);
+        pop(pollData, pollRecipients);
+        generatedLink = `expoll.com/poll/?id=${key}`
+        buttonIcon.className = 'copy-icon';
+        buttonText.innerText = generatedLink;
+        generateLinkButton.classList.add("show-text", "show-icon-left");
 
-    console.log(pollOptions);
-    console.log(pollRecipients);
-
-    createPoll(pollData, pollOptions, pollRecipients);
+    } catch (error) {
+        buttonIcon.className = 'retry-icon';
+        buttonText.innerText = "Retry";
+    }
 }
+
+
+function copyToClipboard(link) {
+    navigator.clipboard.writeText(link).then(() => {
+        alert('Link copied to clipboard!');
+    });
+}
+
+
+function sendEmail(toEmail, subject, message) {
+    const templateParams = {
+        to_email: toEmail,
+        subject: subject,
+        message: message
+    };
+
+    emailjs.send('service_bxt3eel', 'template_0mg1p1y', templateParams)
+        .then((response) => {
+            console.log('Email sent successfully!', response.status, response.text);
+        })
+        .catch((error) => {
+            console.error('Failed to send email:', error);
+        });
+}
+
+function showPopup() {
+    document.getElementById("myPopup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
+
+function hidePopup() {
+    document.getElementById("myPopup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
+
+function pop(pollData, pollRecipients) {
+    showPopup();
+    document.getElementById("send-email").addEventListener("click", function () {
+        hidePopup();
+        try {
+            const subject = pollData.title;
+            const message = `
+            ${pollData.description}
+
+            Link to access poll: ${generatedLink}
+
+            Poll will be open 
+
+            from: ${pollData.startDate} [${pollData.startTime}] 
+            
+            to : ${pollData.endDate} [${pollData.endTime}]`;
+
+
+            Object.keys(pollRecipients).forEach(key => {
+                const data = pollRecipients[key];
+                if (data && data.email) {
+                    sendEmail(data.email, subject, message);
+                    console.log(`Email sent to: ${data.email}`);
+                } else {
+                    console.warn("Recipient data is missing an email:", data);
+                }
+            });
+
+
+
+
+        } catch (error) {
+            console.error('Error fetching recipients:', error);
+        }
+    });
+
+
+    document.getElementById("cancel-email").addEventListener("click", function () {
+        hidePopup();
+    });
+
+};
+
+
+
 

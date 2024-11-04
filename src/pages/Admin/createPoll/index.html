@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="adminCreatePageCss.css">
-    <link rel="stylesheet" href="adminCreatePageCommon.css">
+    <link rel="stylesheet" href="../../../styles/D.css">
+    <link rel="stylesheet" href="loader.css">
+    <link rel="stylesheet" href="generatelink.css">
+    <link rel="stylesheet" href="../../Admin/history/adminHistory.css">
+
     <script type="module" src="adminCreatePollDOM.js"></script>
     <script src="adminCreatePoll.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="generatelink.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Create a Poll</title>
 </head>
+
 <body>
+    <div id="sidebar" class="sidebar" class=""></div>
     <div class="mainDiv">
-        <div class="navBarDiv">
-            <div class="menuIconDiv">
-                <img src="/exPoll/src/assets/icons/menu.png" alt="" class="menuIcon" />
-                <img src="/exPoll/src/assets/images/logo-white.png" alt="expoll" class="logo" />
-            </div>
-            <img src="/exPoll/src/assets/icons/user-white.png" alt="" class="userIcon" />
-        </div>
+        <div class="nav-bar-div" id="navbar"></div>
         <div class="heading-div">
             <h2>Create Poll</h2>
         </div>
@@ -35,17 +36,19 @@
                     <textarea id="description" placeholder="Description" rows="3" class="D-border "
                         style="resize: none;"></textarea>
                     <div class="main-container-left-date">
+                        <p id="para">From :</p>
                         <div class="main-container-left-date-tile">
-                            <input type="date" id="datetimepicker" placeholder="Start Date " class="D-border">
+                            <input type="date" id="poll-start-date" placeholder="Start Date " class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="time" id="datetimepicker" placeholder="Start Time" class="D-border">
+                            <input type="time" id="poll-start-time"   value="00:00" placeholder="Start Time" class="D-border">
+                        </div>
+                        <p id="para">To :</p>
+                        <div class="main-container-left-date-tile">
+                            <input type="date" id="poll-end-date" placeholder="End Date" class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="date" id="datetimepicker" placeholder="End Date" class="D-border">
-                        </div>
-                        <div class="main-container-left-date-tile">
-                            <input type="time" id="datetimepicker" placeholder="End Date" class="D-border">
+                            <input type="time" id="poll-end-time"  value="00:00" placeholder="End Time" class="D-border">
                         </div>
                     </div>
                 </div>
@@ -53,22 +56,25 @@
                 </div>
                 <div class="options-container D-border">
                     <div class="options-container-top">
-                        <div class="heading-option">
+                        <div class="headingOption">
                             <h4>Options</h4>
                         </div>
                         <div class="upload-import-button-container">
+                            <div>
+                                <label class="custom-upload-button" onclick="clearopt()">Clear</label>
+                            </div>
                             <div id="downloadTemplate">
-                                <a href="/exPoll/src/assets/templates/Poll Options Template.xlsx" download>
+                                <a href="/src/assets/templates/Poll Options Template.xlsx" download>
                                     <label class="custom-upload-button">
-                                        <img src="/exPoll/src/assets/icons/download.png" alt="download" class="">
+                                        <img src="/src/assets/icons/download.png" alt="download" class="">
                                         Template
                                     </label>
                                 </a>
                             </div>
                             <div id="upload2">
                                 <label for="upload-options" class="custom-upload-button">
-                                    <img src="/exPoll/src/assets/icons/importIcon.png" alt="Upload" class="">
-                                    Import excel
+                                    <img src="/src/assets/icons/importIcon.png" alt="Upload" class="">
+                                    Import Excel
                                 </label>
                                 <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
                             </div>
@@ -78,7 +84,7 @@
                         <div class="options-container-none"></div>
                         <div class="option-item D-black">
                             <input type="text" placeholder="Enter Option" class="D-no-border">
-                            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon"
+                            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
                                 onclick="removeOption(this)"></img>
                         </div>
                     </div>
@@ -93,44 +99,49 @@
                 <h4>Recipients</h4>
                 <div class="recipients-container D-border">
                     <div class="recipients-button-div">
+                        <div>
+                            <label class="custom-upload-button" onclick="clearrec()">Clear</label>
+                        </div>
                         <div id="downloadTemplate">
-                            <a href="templates\User List Template.xlsx" download>
+                            <a href="../../../assets/templates/User List Template.xlsx" download>
                                 <label class="custom-upload-button">
-                                    <img src="/exPoll/src/assets/icons/download.png" alt="download" class="">
+                                    <img src="/src/assets/icons/download.png" alt="download" class="">
                                     Template
                                 </label>
                             </a>
                         </div>
                         <div id="upload">
                             <label for="uploadUser" class="custom-upload-button">
-                                <img src="/exPoll/src/assets/icons/importIcon.png" alt="Upload" class="">
+                                <img src="/src/assets/icons/importIcon.png" alt="Upload" class="">
                                 Import excel
                             </label>
                             <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
                         </div>
                     </div>
-            
+
 
                     <div class="recipient-container-bottom">
-                        <div class="recipient-container-none">
+                        <div class="recipient-container-none"></div>
                             <div class="recipient-item D-white">
                                 <input type="email" placeholder="Enter Email" class="D-no-border">
-                                <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon"
+                                <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
                                     onclick="removeOption(this)"></img>
                             </div>
-                        </div>
                     </div>
                     <div class="button-container" class="add-option-button-container">
-                        <button onclick="addRecipient()" id="addRecipientButton" class="D-recipient">+ Add
+                        <button onclick="addRecipient()" id="addRecipientButton" class="D-white">+ Add
                             Recipient</button>
                     </div>
                 </div>
                 <div class="recipient-container-buttons">
                     <div class="toggle-and-cancel-container">
-                        <button class="cancel-button">Cancel</button>
+                        <button class="cancel-button" onclick="clearFields()">
+                            <span id="btn-icon"></span>
+                            <span id="clear-button">clear</span>
+                        </button>
                         <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
                             <div>
-                                <h4><span id="toggleLabel">Private Poll</span></h4>
+                                <h5><span id="toggleLabel">Private Poll</span></h5>
                             </div>
                             <label class="switch">
                                 <input type="checkbox" id="toggleSwitch">
@@ -139,20 +150,38 @@
                         </div>
                     </div>
                 </div>
-                <div id="link-container">
-                    <div>
-                        <button id="generate-button">Generate Link</button>
-                    </div>
-                    <div id="show">
-                    </div>
-                    <div>
-                        <button id="copy-button"><img src="/exPoll/src/assets/icons/copy-link-icon.png"
-                                alt="generate-link"></button>
+                <button id="generate-button" class="D-black">
+                    <span id="button-icon"></span>
+                    <span id="button-text">Generate Link</span>
+                </button>
+                <div>
+                    <div id="overlay" class="overlay"></div>    
+
+                    <div id="myPopup" class="popup">
+                        <p>Do you want to send the mail to recipients ?</p>
+                        <div class="btn">
+                            <button id="send-email" class="confirm">Yes</button>
+                            <button id="cancel-email" class="cancel">No</button>
+                        </div>
                     </div>
                 </div>
+                
+
+                
             </div>
         </div>
     </div>
+   
 </body>
-<script src="generatelink.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+    (function () {
+        emailjs.init({
+            publicKey: "oJuPNylCuJvugpZ0v",
+        });
+    })();
+</script>
+<script src="../history/displaySideBar.js"></script>
+
 </html>

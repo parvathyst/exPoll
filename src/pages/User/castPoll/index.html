@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css?family=Montserrat"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/src/styles/D.css" />
     <style>
       body {
         font-family: "Montserrat";
@@ -16,77 +17,79 @@
     </style>
   </head>
   <body>
-    <div class="navBar">
+    <div class="D-navBar-employee">
       <img
-        src="employeePollPageImages/logoexpoll.png"
+        src="/src/assets/images/logo-white.png"
         alt="exPoll"
         class="logoImage"
       />
     </div>
-    <h2 class="pollHeading">Decision Time: Cast your Poll!</h2>
-    <div class="poll-central-div">
-        <div class="search-bar">
-          <input type="text" id="search-input" placeholder="Search" />
-          <div class="searchIcon" id="search-icon">
-            <img
-              src="employeePollPageImages/searchIcon.png"
-              alt="Search"
-              class="searchIcon"
-            />
+    <div class="page1" id="page1">
+      <h2 class="pollHeading">Decision Time: Cast your Poll!</h2>
+      <div class="poll-central-div">
+        <div class="poll-central-left-div">
+          <h3 class="poll-option-heading">Poll Options</h3>
+          <div class="poll-central-left-div-inner">
+            <div class="poll-options-list"></div>
           </div>
         </div>
-        <div class="poll-central-inner-div">
-            <div class="poll-central-left-div" >
-              <div class="poll-central-left-div-inner">
-                <div class="poll-central-left-div-inner-container">
-                  <div class="card">
-                    <h2>About Experion - What we are + Our Journey till date</h2>
+        <div class="poll-central-right-div">
+          <div class="poll-description-container">
+            <div class="details-and-option">
+              <div class="poll-h-info">
+                <h3></h3>
+                <div class="poll-information">
+                  <h4></h4>
+                  <div class="datetime">
+                    <h5></h5>
+                    <h5></h5>
                   </div>
-                  <div class="card">
-                    <h2>About Experion - What we are + Our Journey till date</h2>
-                  </div>
-                  <div class="card">
-                    <h2>About Experion - What we are + Our Journey till date</h2>
-                  </div>
-                  <div class="card">
-                    <h2>About Experion - What we are + Our Journey till date</h2>
-                  </div>
-                  <div class="card">
-                    <h2>About Experion - What we are + Our Journey till date</h2>
-                  </div>
-                  <div class="card">
-                    <h2>About Experion - What we are + Our Journey till date</h2>
-                  </div>
-                  <div class="card">
-                    <h2>About Experion - What we are + Our Journey till date</h2>
-                  </div>
-                  <div class="card">
-                    <h2>About Experion - What we are + Our Journey till date</h2>
-                  </div>
-                  <!-- <div class="card">
-                    <h2>About Experion - What we are + Our Journey till date</h2>
-                  </div>
-                  <div class="card">
-                    <h2>About Experion - What we are + Our Journey till date</h2>
-                  </div> -->
+                  <h5 class="pollType">Poll type: First Come First Served</h5>
                 </div>
-
               </div>
-
-
+              <p id="selected-option"></p>
             </div>
-            <div class="poll-central-right-div">
-              <div class="poll-description-container">
-                <h3>Leader of the Day</h3>
-                <p>Poll type: First Come First Served</p>
-                <h4>Select topic for your leader of the day presentation.</h4>
-              </div>
-              <div class="cast-poll-button">
-                  <button>Cast Poll</button>
-              </div>
-            </div>
+            <button
+              class="cast-poll-button-disabled"
+              id="cast-poll-button"
+              disabled
+            >
+              Cast Poll
+            </button>
+          </div>
         </div>
+      </div>
+      <div class="pop-up-container-hidden" id="pop-up-container">
+        <div class="pop-up-background" id="pop-up-background"></div>
+        <div class="pop-up">
+          <h3>Confirm your selection to submit the poll!</h3>
+          <div class="cancel-confirm-buttons">
+            <button class="cancel" id="cancel">Cancel</button>
+            <button class="confirm" id="confirm">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-hidden" id="page2">
+      <div class="poll-central-div" id="page-2">
+        <div class="message-1">
+          <h2>Cast Poll</h2>
+          <h3>Successfully</h3>
+        </div>
+        <h4>Your response have been sent to your email.</h4>
+      </div>
     </div>
   </body>
-  <script type="module" src="../backend/addPolls.js"></script>
+  <script type="module" src="./pollpage.js"></script>
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+  ></script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init({
+        publicKey: "oJuPNylCuJvugpZ0v",
+      });
+    })();
+  </script>
 </html>

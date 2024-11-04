@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         uploadOptions.addEventListener('change', handleFile, false);
     }
 });
+
 function addOption(value) {
     const optionContainer = document.createElement('div');
     optionContainer.classList.add('option-item');
@@ -12,12 +13,12 @@ function addOption(value) {
     if (value === undefined) {
         optionContainer.innerHTML = `
         <input type="text" placeholder="Enter Option"  class="D-no-border">
-        <img src="/exPoll/src/assets/icons/trash.png" alt="delete icon" onclick="removeOption(this)" />
+        <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)" />
         `;
     } else {
         optionContainer.innerHTML = `
         <input type="text" placeholder="Enter Option" value="${value}" class="D-no-border">
-        <img src="/exPoll/src/assets/icons/trash.png" alt="delete icon" onclick="removeOption(this)" />
+        <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)" />
         `;
     }
     document.querySelector('.options-container-none').insertAdjacentElement('afterend', optionContainer);
@@ -28,17 +29,17 @@ function removeOption(button) {
 
 function addRecipient(value) {
     const recipientContainer = document.createElement('div');
-    recipientContainer.classList.add('recipient-item', 'D-card');
+    recipientContainer.classList.add('recipient-item', 'D-white');
 
     if (value === undefined) {
         recipientContainer.innerHTML = `
             <input type="email" placeholder="Enter Email"  class="D-no-border">
-            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
+            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     } else {
         recipientContainer.innerHTML = `
             <input type="email" value="${value}" class="D-no-border">
-            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
+            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     }
 
@@ -64,10 +65,6 @@ function handleFile(event) {
             const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
             const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
 
-            console.log(jsonData);
-            console.log(jsonData[0]);
-            console.log(jsonData[1]);
-
             if (jsonData.length > 0) {
                 jsonData.slice(1).forEach((row) => {
                     if (row.length > 0) {
@@ -80,4 +77,37 @@ function handleFile(event) {
         reader.readAsArrayBuffer(file);
     } else {
     }
+}
+
+
+function clearFields() {
+    const clearBtn = document.getElementById('clear-button');
+    const buttonIcon = document.getElementById('btn-icon');
+    clearBtn.textContent = '';
+    buttonIcon.className = 'loader-clear';
+    
+    const recipientItems = document.querySelectorAll('.recipient-item');
+    recipientItems.forEach(item => item.remove());
+    const recipientItem = document.querySelectorAll('.option-item');
+    recipientItem.forEach(item => item.remove());
+    
+    
+     setTimeout(() => {
+        // Remove loader icon and change to 'New Poll' text
+        buttonIcon.className = ''; // Reset icon class
+        clearBtn.textContent = 'New Poll';
+
+        // Change button action to refresh the page on the next click
+        clearBtn.onclick = () => location.reload();
+    }, 1000); // Delay of 1000ms (1 second)
+}
+
+function clearopt(){
+    const recipientItem = document.querySelectorAll('.option-item');
+    recipientItem.forEach(item => item.remove());
+}
+
+function clearrec(){
+    const recipientItem = document.querySelectorAll('.recipient-item');
+    recipientItem.forEach(item => item.remove());
 }
