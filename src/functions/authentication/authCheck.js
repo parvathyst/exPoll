@@ -2,7 +2,6 @@ import { auth, db } from "../../backend/firebase/config.js";
 import { onAuthStateChanged, getIdTokenResult } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import { ref, get } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
-
 function authCheck() {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(auth, async (user) => {
@@ -31,8 +30,6 @@ function authCheck() {
   });
 }
 
-
-
 function superAdminAuthCheck() {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(auth, async (user) => {
@@ -55,6 +52,5 @@ function superAdminAuthCheck() {
     });
   });
 }
-
 
 export { authCheck, superAdminAuthCheck };
