@@ -13,6 +13,7 @@ let id = urlParams.searchParams.get("id");
 const email = urlParams.searchParams.get("email");
 console.log(email);
 const fullName = urlParams.searchParams.get("name");
+console.log(fullName);
 
 let pollOptions;
 let pollDetails;
@@ -172,19 +173,25 @@ function readRecipients() {
   const pollRef = ref(db, `/poll-recipients/${id}`);
   onValue(pollRef, (snapshot) => {
     const data = snapshot.val();
-    //console.log(data);
+    console.log(data);
     pollRecipients = data;
-    return pollRecipients;
   });
 }
 
-function setHasDone(pollRecipients,email){
-  set(ref(db, `/poll-recipients/${id}/`), {
-    ...pollRecipients[email],
-    name:fullName,
-    hasDone: true,
-  })
+function setHasDone(pollRecipients, email, fullName, id) {
+  // Check if the recipient exists
+  if (pollRecipients && pollRecipients[email]) {
+    // Update the specific recipient's data
+    set(ref(db, `/poll-recipients/${id}/${email}`), {
+      ...pollRecipients[email],
+      name: fullName,
+      hasDone: true,
+    });
+  } else {
+    console.error(`Recipient with email ${email} does not exist in pollRecipients.`);
+  }
 }
+
 
 function displayPollList(pollOptions) {
   const sortedPollOptions = sortPollOptions(pollOptions);
