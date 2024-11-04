@@ -86,6 +86,8 @@ function clearFields() {
     clearBtn.textContent = '';
     buttonIcon.className = 'loader-clear';
     
+    document.getElementById('title').value = '';
+    document.getElementById('description').value = '';
     const recipientItems = document.querySelectorAll('.recipient-item');
     recipientItems.forEach(item => item.remove());
     const recipientItem = document.querySelectorAll('.option-item');
