@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="adminCreatePageCss.css">
     <link rel="stylesheet" href="../../../styles/D.css">
     <link rel="stylesheet" href="loader.css">
+    <link rel="stylesheet" href="generatelink.css">
+    <link rel="stylesheet" href="../../Admin/history/adminHistory.css">
 
     <script type="module" src="adminCreatePollDOM.js"></script>
     <script src="adminCreatePoll.js"></script>
@@ -13,76 +16,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="generatelink.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <style>
-        .flatpickr-calendar {
-            background-color: #0D2335;
-            border: 2px solid #FFFFFF;
-            border-radius: 8px;
-            font-size: 12px;
-            color: #FFFFFF;
-            width: auto;
-        }
-
-        .flatpickr-day {
-            background-color: #000000;
-            color: #ffffff;
-            border-radius: 50%;
-        }
-
-        .flatpickr-day:hover {
-            background-color: #ffffff6e;
-            color: #0D2335;
-        }
-
-        .flatpickr-time {
-            background-color: #e9ecef;
-            border: none;
-        }
-
-        .flatpickr-hour,
-        .flatpickr-minute {
-            color: #333;
-            font-size: 12px;
-            padding: 5px;
-        }
-    </style>
     <title>Create a Poll</title>
 </head>
+
 <body>
-    
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-            fetch("navbar.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("navbar").innerHTML = data;
-                })
-                .catch(error => console.error("Error loading navbar:", error));
-        });
-
-
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch("sidebar.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("sidebar").innerHTML = data;
-                })
-                .catch(error => console.error("Error loading navbar:", error));
-        });
-  </script>
-    <div class="mainDiv"> 
-        <div class="navBarDiv">
-            <div class="menuIconDiv">
-                <img src="/src/assets/icons/menu.png" alt="" class="menuIcon" />
-                <img src="/src/assets/images/logo-white.png" alt="expoll" class="logo" />
-            </div>
-            <img src="/src/assets/icons/user-white.png" alt="" class="userIcon" />
-        </div>
+    <div id="sidebar" class="sidebar" class=""></div>
+    <div class="mainDiv">
+        <div class="nav-bar-div" id="navbar"></div>
         <div class="heading-div">
             <h2>Create Poll</h2>
         </div>
@@ -93,12 +36,14 @@
                     <textarea id="description" placeholder="Description" rows="3" class="D-border "
                         style="resize: none;"></textarea>
                     <div class="main-container-left-date">
+                        <p id="para">From :</p>
                         <div class="main-container-left-date-tile">
                             <input type="date" id="poll-start-date" placeholder="Start Date " class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
                             <input type="time" id="poll-start-time"   value="00:00" placeholder="Start Time" class="D-border">
                         </div>
+                        <p id="para">To :</p>
                         <div class="main-container-left-date-tile">
                             <input type="date" id="poll-end-date" placeholder="End Date" class="D-border">
                         </div>
@@ -115,6 +60,9 @@
                             <h4>Options</h4>
                         </div>
                         <div class="upload-import-button-container">
+                            <div>
+                                <label class="custom-upload-button" onclick="clearopt()">Clear</label>
+                            </div>
                             <div id="downloadTemplate">
                                 <a href="/src/assets/templates/Poll Options Template.xlsx" download>
                                     <label class="custom-upload-button">
@@ -151,6 +99,9 @@
                 <h4>Recipients</h4>
                 <div class="recipients-container D-border">
                     <div class="recipients-button-div">
+                        <div>
+                            <label class="custom-upload-button" onclick="clearrec()">Clear</label>
+                        </div>
                         <div id="downloadTemplate">
                             <a href="../../../assets/templates/User List Template.xlsx" download>
                                 <label class="custom-upload-button">
@@ -167,16 +118,15 @@
                             <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
                         </div>
                     </div>
-            
+
 
                     <div class="recipient-container-bottom">
-                        <div class="recipient-container-none">
+                        <div class="recipient-container-none"></div>
                             <div class="recipient-item D-white">
                                 <input type="email" placeholder="Enter Email" class="D-no-border">
                                 <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
                                     onclick="removeOption(this)"></img>
                             </div>
-                        </div>
                     </div>
                     <div class="button-container" class="add-option-button-container">
                         <button onclick="addRecipient()" id="addRecipientButton" class="D-white">+ Add
@@ -185,10 +135,13 @@
                 </div>
                 <div class="recipient-container-buttons">
                     <div class="toggle-and-cancel-container">
-                        <button class="cancel-button">Cancel</button>
+                        <button class="cancel-button" onclick="clearFields()">
+                            <span id="btn-icon"></span>
+                            <span id="clear-button">clear</span>
+                        </button>
                         <div class="toggleContainer" style="display: flex; align-items: center; gap: 10px;">
                             <div>
-                                <h4><span id="toggleLabel">Private Poll</span></h4>
+                                <h5><span id="toggleLabel">Private Poll</span></h5>
                             </div>
                             <label class="switch">
                                 <input type="checkbox" id="toggleSwitch">
@@ -197,45 +150,38 @@
                         </div>
                     </div>
                 </div>
-                <!-- <button id="generate-button" class="generate-link-button link-container">Generate Link</button> -->
-
                 <button id="generate-button" class="D-black">
                     <span id="button-icon"></span>
                     <span id="button-text">Generate Link</span>
                 </button>
-                <div id="myPopup" class="popup">
-                    <p>Do you want to send the mail to recipients ?</p>
-                    <button id="send-email">Yes</button>
-                    <button id="cancel-email">No</button>
-                </div>
+                <div>
+                    <div id="overlay" class="overlay"></div>    
 
-                <!-- <div id="link-container">
-                    <div>
+                    <div id="myPopup" class="popup">
+                        <p>Do you want to send the mail to recipients ?</p>
+                        <div class="btn">
+                            <button id="send-email" class="confirm">Yes</button>
+                            <button id="cancel-email" class="cancel">No</button>
+                        </div>
                     </div>
-                    <div id="show">
-                        <input  type="url">
-                    </div>
-                    <div>
-                        <button id="copy-button"><img src="/exPoll/src/assets/icons/copy-link-icon.png"
-                                alt="generate-link"></button>
-                    </div>
-                </div> -->
+                </div>
+                
+
+                
             </div>
         </div>
     </div>
-    <!-- <script src="generatelink.js"></script>
-    <script src="adminCreatePollDOM.js"></script> -->
+   
 </body>
-<script src="generatelink.js"></script>
-<script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
 <script type="text/javascript">
-   (function(){
-      emailjs.init({
-        publicKey: "oJuPNylCuJvugpZ0v",
-      });
-   })();
+    (function () {
+        emailjs.init({
+            publicKey: "oJuPNylCuJvugpZ0v",
+        });
+    })();
 </script>
-<!-- <script type="module" src="email.js"></script> -->
+<script src="../history/displaySideBar.js"></script>
+
 </html>

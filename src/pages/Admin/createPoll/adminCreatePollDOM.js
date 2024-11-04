@@ -1,12 +1,29 @@
 
 import { createPoll } from "../../../backend/firebase/admin/createPoll/createPoll.js"
-
-// import { generateLink } from "./generatelink.js";
-
 import { validateForm } from "./validation.js";
+import { authCheck } from "../../../functions/authentication/authCheck.js"
 
-document.addEventListener('DOMContentLoaded', function () {
+
+
+let userUID;
+
+async function initialize() {
+    try {
+        userUID = await authCheck();
+        return
+    } catch (error) {
+        console.error(error);
+        window.location.href = "../../common/error";
+    }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', async function () {
     const uploadUser = document.getElementById('uploadUser');
+
+    await initialize();
+
     if (uploadUser) {
         uploadUser.addEventListener('change', handleUser, false);
     }
@@ -21,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function addRecipient(value) {
     const recipientContainer = document.createElement('div');
-    recipientContainer.classList.add('recipient-item', 'D-card');
+    recipientContainer.classList.add('recipient-item', 'D-white');
     if (value === undefined) {
         recipientContainer.innerHTML = `
             <input type="email" placeholder="Enter Email"  class="D-no-border">
@@ -102,9 +119,9 @@ async function fetchDataAndGenerateLink() {
     optionInputs.forEach((input, index) => {
         if (input.value) {
             pollOptions[index] = {
-                name: input.value,
+                content: input.value,
                 assignedEmployee: "",
-                status: false,
+                isSelected: false,
                 selectedTime: ""
             };
         }
@@ -117,6 +134,7 @@ async function fetchDataAndGenerateLink() {
             pollRecipients[index] = {
                 name: "",
                 email: input.value,
+                hasDone: false,
             };
         }
     });
@@ -125,24 +143,21 @@ async function fetchDataAndGenerateLink() {
     const dateTime = new Date().toLocaleString();
 
     const pollData = {
-        "title": title,
-        "description": description,
-        "startDate": startDate,
-        "startTime": startTime,
-        "endDate": endDate,
-        "endTime": endTime,
-        "isPrivatePoll": isPrivatePoll,
-        "createdBy": "",
-        "createdAt": dateTime,
+        title: title,
+        description: description,
+        startDate: startDate,
+        startTime: startTime,
+        endDate: endDate,
+        endTime: endTime,
+        isPrivatePoll: isPrivatePoll,
+        createdBy: userUID,
+        createdAt: dateTime,
     };
-
-    console.log(pollRecipients);
-
 
     try {
         const key = await createPoll(pollData, pollOptions, pollRecipients);
         pop(pollData, pollRecipients);
-        generatedLink = `expoll.com/poll/${key}`
+        generatedLink = `expoll.com/poll/?id=${key}`
         buttonIcon.className = 'copy-icon';
         buttonText.innerText = generatedLink;
         generateLinkButton.classList.add("show-text", "show-icon-left");
@@ -154,15 +169,6 @@ async function fetchDataAndGenerateLink() {
 }
 
 
-
-function startLoader() {
-
-}
-
-function stopLoader() {
-
-}
-
 function copyToClipboard(link) {
     navigator.clipboard.writeText(link).then(() => {
         alert('Link copied to clipboard!');
@@ -170,8 +176,6 @@ function copyToClipboard(link) {
 }
 
 
-
-// Function to send an email using EmailJS
 function sendEmail(toEmail, subject, message) {
     const templateParams = {
         to_email: toEmail,
@@ -190,10 +194,12 @@ function sendEmail(toEmail, subject, message) {
 
 function showPopup() {
     document.getElementById("myPopup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
 }
 
 function hidePopup() {
     document.getElementById("myPopup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
 }
 
 function pop(pollData, pollRecipients) {
@@ -204,18 +210,20 @@ function pop(pollData, pollRecipients) {
             const subject = pollData.title;
             const message = `
             ${pollData.description}
-        
+
             Link to access poll: ${generatedLink}
-        
-            Poll will be open from:
-            ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]
-        `;
-        
+
+            Poll will be open 
+
+            from: ${pollData.startDate} [${pollData.startTime}] 
+            
+            to : ${pollData.endDate} [${pollData.endTime}]`;
+
 
             Object.keys(pollRecipients).forEach(key => {
                 const data = pollRecipients[key];
                 if (data && data.email) {
-                    sendEmail(data.email, subject, message); // Calls sendEmail for each email
+                    sendEmail(data.email, subject, message);
                     console.log(`Email sent to: ${data.email}`);
                 } else {
                     console.warn("Recipient data is missing an email:", data);
@@ -236,5 +244,7 @@ function pop(pollData, pollRecipients) {
     });
 
 };
+
+
 
 

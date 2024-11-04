@@ -15,26 +15,38 @@
 <body>
     <div class="loginPage1">
         <div class="logoAndBox">
-            <img src="../../assets/images/logo-blue.png" alt="" width="150px" height="35px">
+            <img src="../../../assets/images/logo-blue.png" alt="" width="150px" height="35px">
             <form action="" method="post">
                 <div class="box">
+                   
                     <input type="text" id="username" placeholder="username" required>
                     <input type="password" id="password" name="password" placeholder="password" required>
                     <div class="password-toggle">
-                        <img id="togglePassword" src="../../assets/icons/eyeclose.svg" alt="Show Password"
+                        <img id="togglePassword" src="../../../assets/icons/eyeclose.svg" alt="Show Password"
                             onclick="togglePasswordVisibility()" />
                     </div>
                     <span id="error-password" class="error-password">Invalid email or password</span>
                     <button id="login" class="login-btn">Log in</button>
+                </form>
                 </div>
                 <div class="forgot-password">
                     <a href="/loginPage/forgotPassword.html">Forgot Password?</a>
                 </div>
-            </form>
+            
+            </div>
+                
         </div>
-    </div>
+   
 </body>
 <script type="module" src="login.js"></script>
 <script src="togglepassword.js"></script>
 
 </html>
+
+
+
+
+
+
+
+

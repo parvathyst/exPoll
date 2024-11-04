@@ -1,4 +1,4 @@
-import { app, db } from '../../config.js';
+import { db } from '../../config.js';
 import { ref, get } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
 async function fetchPollData(pollID) {

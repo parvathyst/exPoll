@@ -32,12 +32,12 @@ function displayPollOptions(pollOptions) {
 
 function displayPollDetails(pollDetails) {
     if (pollDetails && typeof pollDetails === 'object') {
-        document.getElementById("poll-title").textContent = pollDetails.title || 'Leader Of the day';
+        document.getElementById("poll-title").textContent = pollDetails.title || 'poll title';
 
-        document.getElementById("start-date").textContent = pollDetails.startDate || '17-08-24';
-        document.getElementById("srat-time").textContent = pollDetails.startTime || '14:20';
-        document.getElementById("end-date").textContent = pollDetails.endDate || '20-08-24';
-        document.getElementById("end-time").textContent = pollDetails.endTime || '14:00';
+        document.getElementById("start-date").textContent = pollDetails.startDate || 'start date';
+        document.getElementById("srat-time").textContent = pollDetails.startTime || 'start time';
+        document.getElementById("end-date").textContent = pollDetails.endDate || 'end date';
+        document.getElementById("end-time").textContent = pollDetails.endTime || 'ed time';
 
         document.getElementById("poll-description").textContent = pollDetails.description || 'No description';
 

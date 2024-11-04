@@ -30,7 +30,6 @@ body {
     /* background-color: #2684d1; */
     height: 80%;
     width: 70%;
-
 }
 
 .main-container-right {
@@ -46,16 +45,23 @@ body {
     gap: 2rem;
     align-items: center;
     justify-content: center;
+    #para{
+        width: 9rem;
+        display: flex;
+        justify-content: end;
+    }
+    p{
+        font-weight: 500;
+        padding-bottom: 1rem;
+    }
 }
 
 .main-container-left-date-tile {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    width: 15%;
+    width: 20%;
     height: 10%;
-    /* background-color: darkorange; */
-
 }
 
 #description::placeholder, #title::placeholder {
@@ -390,7 +396,7 @@ body {
 .recipients-button-div {
     display: flex;
     flex-direction: row;
-    gap: 5rem;
+    gap: .5rem;
     padding-bottom: 4%;
     /* background-color: aquamarine; */
 
@@ -402,7 +408,7 @@ body {
 .options-container-top {
     display: flex;
     align-items: center;
-    gap: 25rem;
+    gap: 18rem;
     padding: 10px;
     height: 15%;
 }
