@@ -36,18 +36,27 @@ async function displayPolls(userUID) {
             sortedPolls.forEach(poll => {
                 const activityBox = document.createElement("div");
                 activityBox.className = "activity-box";
+
+                console.log(key)
+
                 activityBox.innerHTML = `
                     <div onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'" class="content">
                       <h5>${poll.title || 'Untitled Poll'}</h5>
                       <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Date not available'}</h6>
                     </div>
                     <div class="icon">
-                      <img src="/src/assets/icons/poll-solid.png" alt="icon" />
+                        <img src="/src/assets/icons/poll-solid.png" alt="icon" />
                     </div>
                 `;
+
+                activityBox.onclick = () => {
+                    location.href = `../pollDetails/index.html?poll-id=${poll.id}`;
+                };
+
                 container.appendChild(activityBox);
             });
-        } else {
+        }
+        else {
             console.log("No polls to display.");
             container.style.display = "flex";
             container.style.justifyContent = "center";
