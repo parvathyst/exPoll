@@ -15,7 +15,6 @@ console.log(email);
 
 let pollOptions;
 let pollDetails;
-
 confirmPopUpBox();
 cancelPopUpBox();
 
@@ -48,7 +47,7 @@ confirmButton.onclick = () => {
     if (currentOption && !currentOption.isSelected) {
       // Option is available, mark it as selected and assign the employee
       currentOption.isSelected = true;
-      currentOption.assignedEmployee = "parvathyst@gmail.com";
+      currentOption.assignedEmployee = email;
       currentOption.selectedTime = serverTimestamp();
       return currentOption;
     } else {
@@ -57,7 +56,7 @@ confirmButton.onclick = () => {
     }
   }).then((result) => {
     if (result.committed) {
-      resultPage();
+      resultPage(selectedOptionRef);
     } else {
       alert("This option has already been chosen. Please select another option.");
     }
@@ -69,8 +68,8 @@ confirmButton.onclick = () => {
 
 let selectedIndex = -1;
 
-function resultPage() {
-  // mail();
+function resultPage(selectedOptionRef) {
+    // mail(selectedOptionRef)
     const page1 = document.getElementById("page1");
     page1.classList.remove("page");
     page1.classList.add("page-hidden");
@@ -158,7 +157,11 @@ function writeData() {
       assignedEmployee: email,
       selectedTime: serverTimestamp(),
       isSelected: true,
-    });
+    }).then(() => {
+      mail(pollOptions[selectedIndex].content); 
+  }).catch((error) => {
+      console.error("Failed to write data:", error);
+  });
 }
 
 function displayPollList(pollOptions) {
@@ -191,12 +194,12 @@ function displayPollDetails(pollDetails) {
   const startDate = new Date(`${pollDetails.startDate} ${pollDetails.startTime}`);
   const endDate = new Date(`${pollDetails.endDate} ${pollDetails.endTime}`);
   
-  // Format date, hour, minute, and am/pm in lowercase
+  
   const formatTime = (date) => {
     const hours = date.getHours();
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const period = hours >= 12 ? 'pm' : 'am';
-    const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+    const formattedHours = hours % 12 || 12;
     return `${date.toLocaleDateString()}  ${formattedHours}:${minutes} ${period}`;
   };
 
@@ -210,49 +213,43 @@ function displayPollDetails(pollDetails) {
 }
 
 
-// Function to send an email using EmailJS
-// function sendEmail(toEmail, subject, message) {
-//   const templateParams = {
-//       to_email: toEmail,
-//       subject: subject,
-//       message: message
-//   };
 
-//   emailjs.send('service_bxt3eel', 'template_0mg1p1y', templateParams)
-//       .then((response) => {
-//           console.log('Email sent successfully!', response.status, response.text);
-//       })
-//       .catch((error) => {
-//           console.error('Failed to send email:', error);
-//       });
-// }
+function sendEmail(toEmail, subject, message) {
+  const templateParams = {
+      to_email: toEmail,
+      subject: subject,
+      message: message
+  };
 
-// function mail(pollData, pollRecipients) {
-//   document.getElementById("confirm").addEventListener("click", function () {
-//       try {
-//           const subject = pollData.title;
-//           const message = `
-//           ${pollData.description}
+  emailjs.send('service_bxt3eel', 'template_0mg1p1y', templateParams)
+      .then((response) => {
+          console.log('Email sent successfully!', response.status, response.text);
+      })
+      .catch((error) => {
+          console.error('Failed to send email:', error);
+      });
+}
 
-//           Link to access poll: ${generatedLink}
+function mail(selectedPollOption) {
+      console.log(selectedPollOption);
+      try {
+          const subject = "Your poll";
+          const message = `
+           
+          Your poll option : ${selectedPollOption}
 
-//           Poll will be open from:
+          `;
+          const toemail = email;
+          if (toemail) {
+            sendEmail(toemail, subject, message); 
+            console.log(`Email sent to: ${toemail}`);
+        } else {
+            console.warn("Recipient data is missing an email:", toemail);
+        }
 
-//           ${pollData.startDate} [${pollData.startTime}] to ${pollData.endDate} [${pollData.endTime}]`;
+      } catch (error) {
+          console.error('Error fetching recipients:', error);
+      }
+  
 
-//           Object.keys(pollRecipients).forEach(key => {
-//               const data = pollRecipients[key];
-//               if (data && data.email) {
-//                   sendEmail(data.email, subject, message); // Calls sendEmail for each email
-//                   console.log(`Email sent to: ${data.email}`);
-//               } else {
-//                   console.warn("Recipient data is missing an email:", data);
-//               }
-//           });
-
-//       } catch (error) {
-//           console.error('Error fetching recipients:', error);
-//       }
-//   });
-
-// };
+};

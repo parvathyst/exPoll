@@ -46,7 +46,7 @@ body {
     align-items: center;
     justify-content: center;
     #para{
-        width: 9rem;
+        width: 8rem;
         display: flex;
         justify-content: end;
     }
