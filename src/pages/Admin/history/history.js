@@ -49,10 +49,10 @@ function renderPolls(polls) {
       <img src="/src/assets/icons/rate-icon-solid.png" alt="icon" />
 
     </div>
-    <div>
+    <div  onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'">
      <h5>${poll.title || 'Untitled Poll'}</h5>
 
-    <div class="content" >
+    <div class="content"  >
       <div class="date-and-time" id="date-and-time">
         <img src="/src/assets/icons/calender.png" alt="calendar">
         <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Start Date not available'}</h6>

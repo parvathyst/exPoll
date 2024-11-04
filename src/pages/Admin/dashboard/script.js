@@ -1,3 +1,4 @@
+
 import { fetchNewestPollDetails } from "../../../backend/firebase/admin/loadDashboard/loadDashboard.js";
 import { authCheck } from "../../../functions/authentication/authCheck.js";
 
@@ -6,32 +7,37 @@ let userUID;
 async function initialize() {
     try {
         userUID = await authCheck();
+        await displayPolls(userUID); // Call displayPolls after userUID is set
     } catch (error) {
-        console.error(error);
+        console.error("Authentication error:", error);
         window.location.href = "../../login/";
     }
 }
 
-await initialize();
-
 async function displayPolls(userUID) {
-    console.log(userUID);
-    
+    if (!userUID) {
+        console.warn("User ID is undefined. Redirecting to login.");
+        window.location.href = "../../login/";
+        return;
+    }
+
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
+    
+
+
     try {
-        const polls = await fetchNewestPollDetails(userUID); 
-        
-        if (polls) {
-            const sortedPolls = Object.keys(polls)
-                .map(key => polls[key])
+        const polls = await fetchNewestPollDetails(userUID);
+
+        if (polls && Object.keys(polls).length > 0) {
+            const sortedPolls = Object.values(polls)
                 .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
 
             sortedPolls.forEach(poll => {
                 const activityBox = document.createElement("div");
                 activityBox.className = "activity-box";
                 activityBox.innerHTML = `
-                    <div class="content">
+                    <div onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'" class="content">
                       <h5>${poll.title || 'Untitled Poll'}</h5>
                       <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Date not available'}</h6>
                     </div>
@@ -43,10 +49,15 @@ async function displayPolls(userUID) {
             });
         } else {
             console.log("No polls to display.");
+            container.style.display = "flex";
+            container.style.justifyContent = "center";
+            container.style.alignItems = "center";
+            container.style.height = "100%";
+            container.innerHTML = `<h5 style="text-align: center; color: #555;">No Activities Yet</h5>`;
         }
     } catch (error) {
         console.error("Error displaying polls:", error);
     }
 }
 
-displayPolls(userUID);
+initialize();

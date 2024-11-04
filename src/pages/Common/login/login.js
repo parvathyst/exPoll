@@ -3,7 +3,7 @@ import {
   getIdTokenResult,
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-import { auth } from "../../backend/firebase/config.js"
+import { auth } from "../../../backend/firebase/config.js"
 
 document.getElementById("login").addEventListener("click", (e) => {
   e.preventDefault();
@@ -24,9 +24,9 @@ document.getElementById("login").addEventListener("click", (e) => {
         const user = userCredential.user;
         const idTokenResult = await getIdTokenResult(user);
         if (idTokenResult.claims.role === 'superadmin') {
-          window.location.href = "../SuperAdmins/dashboard";
+          window.location.href = "../../SuperAdmins/dashboard";
         } else {
-          window.location.href = "../Admin/dashboard";
+          window.location.href = "../../Admin/dashboard";
         }
       })
       .catch((error) => {

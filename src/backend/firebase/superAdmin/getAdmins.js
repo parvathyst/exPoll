@@ -1,8 +1,9 @@
-import { getDatabase, ref, get, child, } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+import { get, child, ref } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js"; // Added 'ref'
+import { db } from "../config.js"; // Ensure db is correctly initialized
 
 function getAdmins() {
-    const dbRef = ref(getDatabase());
-    return get(child(dbRef, `admins/`))
+    // Use 'ref' to get a reference to the 'admins/' path
+    return get(child(ref(db), 'admins'))
         .then((snapshot) => {
             if (snapshot.exists()) {
                 return snapshot.val();
@@ -12,7 +13,7 @@ function getAdmins() {
             }
         })
         .catch((error) => {
-            console.error(error);
+            console.error("Error fetching data:", error);
             return [{ fullName: "Error", email: "Failed to fetch data" }];
         });
 }
