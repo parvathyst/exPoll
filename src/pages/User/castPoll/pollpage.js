@@ -168,7 +168,7 @@ function writeData() {
   });
 }
 
-function readData() {
+function readRecipients() {
   const pollRef = ref(db, `/poll-recipients/${id}`);
   onValue(pollRef, (snapshot) => {
     const data = snapshot.val();
