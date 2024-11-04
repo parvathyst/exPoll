@@ -49,6 +49,11 @@ async function displayPolls(userUID) {
             });
         } else {
             console.log("No polls to display.");
+            container.style.display = "flex";
+            container.style.justifyContent = "center";
+            container.style.alignItems = "center";
+            container.style.height = "100%";
+            container.innerHTML = `<h5 style="text-align: center; color: #555;">No Activities Yet</h5>`;
         }
     } catch (error) {
         console.error("Error displaying polls:", error);
