@@ -20,3 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Logout link not found");
     }
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const change = document.getElementById("change-password-link");
+    if (change) {
+        change.addEventListener("click", () => {
+            const htmlPath = "../../Common/changePassword"; // Path to your HTML file
+            window.location.href = htmlPath; // Redirect to the new HTML page
+        });
+    } else {
+        console.error("Change link not found");
+    }
+});
+
