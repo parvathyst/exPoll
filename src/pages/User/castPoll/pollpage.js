@@ -155,7 +155,7 @@ function writeData() {
     if (selectedIndex === -1 || !pollOptions[selectedIndex]) return;
     set(ref(db, `/poll-options/${id}/` + selectedIndex), {
       ...pollOptions[selectedIndex],
-      assignedEmployee: "parvathyst@gmail.com", // Set dynamically
+      assignedEmployee: email,
       selectedTime: serverTimestamp(),
       isSelected: true,
     });
