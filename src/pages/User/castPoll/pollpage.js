@@ -10,6 +10,8 @@ import {
 const url = window.location.href;
 const urlParams = new URL(url);
 let id = urlParams.searchParams.get("id");
+const email = urlParams.searchParams.get("email");
+console.log(email);
 
 let pollOptions;
 let pollDetails;
