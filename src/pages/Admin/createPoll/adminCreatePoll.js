@@ -43,7 +43,6 @@ function addRecipient(value) {
         `;
     }
 
-    // document.querySelector('.recipients-container').insertBefore(recipientContainer, document.querySelector('.recipients-container button'));
     document.querySelector('.recipient-container-none').insertAdjacentElement('afterend', recipientContainer);
 }
 
@@ -72,10 +71,13 @@ function handleFile(event) {
                     }
                 });
             } else {
+                console.log("Excel sheet is empty")
             }
         };
         reader.readAsArrayBuffer(file);
     } else {
+        alert("Excel sheet must be in xlsx format")
+
     }
 }
 
@@ -93,13 +95,11 @@ function clearFields() {
     
     
      setTimeout(() => {
-        // Remove loader icon and change to 'New Poll' text
-        buttonIcon.className = ''; // Reset icon class
+        buttonIcon.className = ''; 
         clearBtn.textContent = 'New Poll';
 
-        // Change button action to refresh the page on the next click
         clearBtn.onclick = () => location.reload();
-    }, 1000); // Delay of 1000ms (1 second)
+    }, 1000); 
 }
 
 function clearopt(){

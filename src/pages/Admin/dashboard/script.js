@@ -37,7 +37,6 @@ async function displayPolls(userUID) {
                 const activityBox = document.createElement("div");
                 activityBox.className = "activity-box";
 
-                console.log(key)
 
                 activityBox.innerHTML = `
                     <div onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'" class="content">
