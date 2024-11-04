@@ -1,85 +1,91 @@
-*{
+* {
     margin: 0%;
     padding: 0%;
-    font-family: "Montserrat" , sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
-.navigateBox{
+.navigateBox {
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
 }
-.navBarDiv{
+
+.navBarDiv {
     background-color: #0D2335;
     width: 100%;
-    height: 50px;   
+    height: 50px;
     display: flex;
     align-items: center;
-    
+
 }
-.logoDiv{
+
+.logoDiv {
     display: flex;
     align-items: center;
     justify-content: start;
     padding-left: 5%;
 }
 
-.logo{
-height: 20px;
-width: 100px;
+.logo {
+    height: 20px;
+    width: 100px;
 }
 
- .navBarDiv .userIcon{
+.navBarDiv .userIcon {
     height: 30px;
     width: 30px;
- 
-  }
 
-  .menuIcon{
+}
+
+.menuIcon {
     height: 20px;
     width: 20px;
 
-  }
+}
 
- 
 
-.menuIcon{
+
+.menuIcon {
     margin-left: 4rem;
 }
 
 .navBarDiv {
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: space-between;
+    align-items: center;
 }
 
-.menuIconDiv{
+.menuIconDiv {
     display: flex;
     gap: 1rem;
 }
 
-.userIcon{
-   margin-right: 5%;
+.userIcon {
+    margin-right: 5%;
 }
-.container{
+
+.container {
     display: flex;
     margin-left: 70px;
     margin-top: 30px;
 }
-.leftSide{
+
+.leftSide {
     width: 676px;
     height: 500px;
 
 
 
 }
-.rightSide{
+
+.rightSide {
     width: 444px;
     margin-left: 18px;
 }
-.elements{
+
+.elements {
     display: flex;
-    
+
     height: 40px;
     width: 95%;
     padding: 8px;
@@ -88,7 +94,7 @@ width: 100px;
     border-radius: 10px;
 }
 
-.leftSideBox{
+.leftSideBox {
     border: 1.5px solid #A1C3D1;
     border-radius: 10px;
     width: 100%;
@@ -103,18 +109,21 @@ width: 100px;
 
 
 .leftSideBox::-webkit-scrollbar {
-    width: 7px; 
-    
-  }
-  .leftSideBox::-webkit-scrollbar-track {
-    background: #ffffff; 
-   
-  }
-  .leftSideBox::-webkit-scrollbar-thumb {
-    background-color: #0D2335; 
+    width: 7px;
+
+}
+
+.leftSideBox::-webkit-scrollbar-track {
+    background: #ffffff;
+
+}
+
+.leftSideBox::-webkit-scrollbar-thumb {
+    background-color: #0D2335;
     border-radius: 6px;
-  }
-.downloadBtn{
+}
+
+.downloadBtn {
     width: 100%;
     height: 44px;
     background-color: #8D99AE;
@@ -126,44 +135,50 @@ width: 100px;
     padding-left: 8px; */
     align-items: center;
     justify-content: center;
-   
+
 }
 
-.downloadbtndiv{
+.downloadbtndiv {
     /* padding-top: 269px; */
 }
 
-.downloadbtndiv img{
+.downloadbtndiv img {
     padding-top: 0;
-  
+
 }
-.fa-solid{
+
+.fa-solid {
     color: #8D99AE;
     margin-left: 8px;
     margin-right: 3px;
 }
-.timeZone{
+
+.timeZone {
     display: flex;
     justify-content: space-between;
 }
-.discription{
+
+.discription {
     /* background-color: rgb(0, 255, 47); */
     height: 330px;
 }
-.responses{
+
+.responses {
     margin-bottom: 10px;
 
 }
-.lef{
+
+.lef {
     width: 70%;
-    
+
 }
 
-.elements .fa-solid{
+.elements .fa-solid {
     margin-left: 0;
 
 }
-.righ{
+
+.righ {
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -175,16 +190,16 @@ width: 100px;
     display: flex;
     align-items: center;
     font-size: 14px;
-    color: #333; /* Adjust the color as needed */
+    color: #333;
     margin-bottom: 10px;
 }
 
 .responses-header .selected-count {
-    font-weight: 600; /* Make the count bold */
-    color: #8D99AE; /* Adjust color to match your theme */
-    margin-left: 8px; /* Space between text and count */
+    font-weight: 600;
+    color: #8D99AE;
+    margin-left: 8px;
 }
 
 .responses-header i {
-    margin-right: 8px; /* Space between icon and text */
+    margin-right: 8px;
 }
