@@ -170,3 +170,21 @@ width: 100px;
     padding-left: 50px;
 
 }
+
+.responses-header {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333; /* Adjust the color as needed */
+    margin-bottom: 10px;
+}
+
+.responses-header .selected-count {
+    font-weight: 600; /* Make the count bold */
+    color: #8D99AE; /* Adjust color to match your theme */
+    margin-left: 8px; /* Space between text and count */
+}
+
+.responses-header i {
+    margin-right: 8px; /* Space between icon and text */
+}
