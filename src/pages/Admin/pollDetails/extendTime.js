@@ -1,6 +1,6 @@
 
 
-function extendTime() {
+function extendTime(pollID) {
 
 }
 

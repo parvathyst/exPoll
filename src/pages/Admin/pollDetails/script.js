@@ -14,18 +14,20 @@ async function getPollData(pollID) {
     if (pollData) {
         const { pollDetails, pollOptions } = pollData;
 
-        displayPollOptions(pollData.pollOptions);
-        displayPollDetails(pollData.pollDetails);
+        const sortedPollOptions = [...pollOptions].sort((a, b) => {
+            return (b.isSelected ? 1 : 0) - (a.isSelected ? 1 : 0);
+        });
 
+        displayPollOptions(sortedPollOptions);
+        displayPollDetails(pollDetails);
         document.getElementById("download-excel-btn").addEventListener("click", () => {
-            downloadExcel(pollData.pollDetails, pollOptionsAndRecipients);
+            downloadExcel(pollDetails, pollOptions);
         });
 
     } else {
         console.log("Failed to fetch poll data");
     }
 }
-
 
 getPollData(pollId)
 

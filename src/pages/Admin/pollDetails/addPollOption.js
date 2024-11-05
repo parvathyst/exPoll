@@ -1,6 +1,6 @@
 
 
-function addPollOption() {
+function addPollOption(pollID) {
 
 }
 

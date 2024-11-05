@@ -1,12 +1,13 @@
-
 function downloadExcel(pollDetails, pollOptionsAndRecipients) {
     const wb = XLSX.utils.book_new();
 
     const data = [
-        ["Title", pollDetails.title],
-        ["Description", pollDetails.description],
+        [pollDetails.title, "", ""],
+        [pollDetails.description, "", ""],
         [],
-        ["Content", "Name", "Email"]
+        [],
+        ["Content", "Name", "Email"],
+        [],
     ];
 
     pollOptionsAndRecipients.forEach(option => {
@@ -16,11 +17,24 @@ function downloadExcel(pollDetails, pollOptionsAndRecipients) {
     const ws = XLSX.utils.aoa_to_sheet(data);
 
     const colWidth = [
-        { wch: 20 },
+        { wch: 30 },
         { wch: 20 },
         { wch: 30 }
     ];
     ws['!cols'] = colWidth;
+
+    ws['A1'].s = { alignment: { horizontal: "center", vertical: "center" } };
+    ws['A2'].s = { alignment: { horizontal: "center", vertical: "center" } };
+
+    ws['!merges'] = [
+        { s: { r: 0, c: 0 }, e: { r: 0, c: 2 } },
+        { s: { r: 1, c: 0 }, e: { r: 1, c: 2 } }
+    ];
+
+    const headerCells = ['A4', 'B4', 'C4'];
+    headerCells.forEach(cell => {
+        ws[cell].s = { font: { bold: true } };
+    });
 
     ws['!rows'] = [];
     for (let i = 0; i < data.length; i++) {
