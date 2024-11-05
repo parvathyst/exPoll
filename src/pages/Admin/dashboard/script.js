@@ -10,7 +10,7 @@ async function initialize() {
         await displayPolls(userUID); 
     } catch (error) {
         console.error("Authentication error:", error);
-        window.location.href = "../../error/";
+        window.location.href = "../../Common/error/";
     }
 }
 
