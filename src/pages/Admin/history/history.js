@@ -14,16 +14,16 @@ async function initialize() {
 
 await initialize();
 
-let pollsCache = [];
+let pollsCache = []; 
 
 async function displayPolls(userUID) {
     console.log(userUID);
-
+    
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
     try {
         const polls = await fetchNewestPollDetails(userUID);
-
+        
         if (polls) {
             pollsCache = Object.keys(polls)
                 .map(key => polls[key])
@@ -38,67 +38,45 @@ async function displayPolls(userUID) {
 }
 
 function renderPolls(polls) {
-
     const container = document.getElementById("activity-box-container");
     container.innerHTML = '';
+    
+    polls.forEach(poll => {
+        const activityBox = document.createElement("div");
+        activityBox.className = "activityBox";
+        activityBox.innerHTML = `
+    <div class="icon">
+      <img src="../../../assets/icons/poll-solid.png" alt="icon" />
 
-    try {
-        if (polls && Object.keys(polls).length > 0) {
-            const sortedPolls = Object.values(polls)
-                .sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+    </div>
+    <div  onclick="window.location.href='../pollDetails/index.html?poll-id=${poll.id}'">
+     <h5>${poll.title || 'Untitled Poll'}</h5>
 
-            sortedPolls.forEach(poll => {
-                const activityBox = document.createElement("div");
-                activityBox.className = "activityBox";
+    <div class="content"  >
+      <div class="date-and-time" id="date-and-time">
+        <img src="../../../assets/icons/calender.png" alt="calendar">
+        <p>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Start Date not available'}</p>
+        <img src="../../../assets/icons/clock.png" alt="clock">
+        <p>${poll.startTime || 'Start Time not available'}</p>
+      </div>
+      <div class="date-and-time" id="end-date-and-time">
+        <img src="../../../assets/icons/calender.png" alt="calendar">
+        <p>${poll.endDate ? new Date(poll.endDate).toLocaleDateString() : 'End Date not available'}</p>
+        <img src="../../../assets/icons/clock.png" alt="clock">
+        <p>${poll.endTime || 'End Time not available'}</p>
+      </div>
+    </div>
+</div>
 
-                activityBox.innerHTML = `
-                    <div class="icon">
-                        <img src="/src/assets/icons/rate-icon-solid.png" alt="icon" />
-                    </div>
-                    <div>
-                    <div onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'" class="content">
-                        <h5>${poll.title || 'Untitled Poll'}</h5>
-                        <div class="content">
-                            <div class="date-and-time" id="date-and-time">
-                                <img src="/src/assets/icons/calender.png" alt="calendar">
-                                <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Start Date not available'}</h6>
-                                <img src="/src/assets/icons/clock.png" alt="clock">
-                                <h6>${poll.startTime || 'Start Time not available'}</h6>
-                            </div>
-                            <div class="date-and-time" id="end-date-and-time">
-                                <img src="/src/assets/icons/calender.png" alt="calendar">
-                                <h6>${poll.endDate ? new Date(poll.endDate).toLocaleDateString() : 'End Date not available'}</h6>
-                                <img src="/src/assets/icons/clock.png" alt="clock">
-                                <h6>${poll.endTime || 'End Time not available'}</h6>
-                            </div>
-                        </div>
-                    </div>
-                     </div>
-                `;
-
-                activityBox.onclick = () => {
-                    location.href = `../pollDetails/index.html?poll-id=${poll.id}`;
-                };
-
-                container.appendChild(activityBox);
-            });
-        } else {
-            console.log("No polls to display.");
-            container.style.display = "flex";
-            container.style.justifyContent = "center";
-            container.style.alignItems = "center";
-            container.style.height = "100%";
-            container.innerHTML = `<h5 style="text-align: center; color: #555;">No Activities Yet</h5>`;
-        }
-    } catch (error) {
-        console.error("Error displaying polls:", error);
-    }
+`;
+        container.appendChild(activityBox);
+    });
 }
 
 document.getElementById('searchInput').addEventListener('input', (event) => {
     const query = event.target.value.toLowerCase();
-    const filteredPolls = pollsCache.filter(poll =>
-        poll.title.toLowerCase().includes(query) ||
+    const filteredPolls = pollsCache.filter(poll => 
+        poll.title.toLowerCase().includes(query) || 
         (poll.startDate && new Date(poll.startDate).toLocaleDateString().includes(query))
     );
     renderPolls(filteredPolls);
@@ -116,7 +94,7 @@ document.getElementById('sortOptions').addEventListener('change', (event) => {
         sortedPolls.sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
     }
 
-    console.log("Sorted Polls:", sortedPolls);
+    console.log("Sorted Polls:", sortedPolls); 
     renderPolls(sortedPolls);
 });
 
@@ -124,8 +102,8 @@ document.getElementById('sortOptions').addEventListener('change', (event) => {
 
 function filterPollsByDateRange() {
     const dateFilterEnabled = document.getElementById("dateFilterToggle").checked;
-    let filteredPolls = [...pollsCache];
-
+    let filteredPolls = [...pollsCache]; 
+    
     if (dateFilterEnabled) {
         const fromDateInput = document.getElementById("fromDate").value;
         const toDateInput = document.getElementById("toDate").value;
@@ -139,7 +117,7 @@ function filterPollsByDateRange() {
         });
     }
 
-    renderPolls(filteredPolls);
+    renderPolls(filteredPolls); 
 }
 
 
@@ -149,43 +127,75 @@ displayPolls(userUID);
 document.getElementById("filterButton").addEventListener("click", filterPollsByDateRange);
 
 
-window.addEventListener('load', function () {
+window.addEventListener('load', function() {
     const fromDateInput = document.getElementById("fromDate");
     const toDateInput = document.getElementById("toDate");
     const toggle = document.getElementById("dateFilterToggle");
+    const button = document.getElementById("filterButton");
+   
 
     function updateDateInputs() {
         if (toggle.checked) {
             fromDateInput.disabled = false;
             toDateInput.disabled = false;
+
         } else {
             fromDateInput.disabled = true;
             toDateInput.disabled = true;
-            fromDateInput.value = '';
+             fromDateInput.value = '';
             toDateInput.value = '';
         }
     }
-    updateDateInputs();
 
+   
+
+
+    updateDateInputs();
+  
     toggle.addEventListener("change", updateDateInputs);
+
 });
 
 
-window.onload = function () {
-    const now = new Date();
 
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
 
-    const defaultDateTime = `${year}-${month}-${day}T00:00`;
 
-    document.getElementById('fromDate').value = defaultDateTime;
-    document.getElementById('toDate').value = defaultDateTime;
+
+window.onload = function() {
+const now = new Date();
+
+const year = now.getFullYear();
+const month = String(now.getMonth() + 1).padStart(2, '0'); 
+const day = String(now.getDate()).padStart(2, '0');
+
+const defaultDateTime = `${year}-${month}-${day}T00:00`;
+
+document.getElementById('fromDate').value = defaultDateTime;
+document.getElementById('toDate').value = defaultDateTime;
 };
 
-document.getElementById('refreshButton').addEventListener('click', function () {
-    location.reload();
+document.getElementById('refreshButton').addEventListener('click', function() {
+location.reload();
 
 
 });
+
+const toggleSwitch = document.getElementById("dateFilterToggle");
+const filterButton = document.getElementById("filterButton");
+
+function handleToggleChange() {
+    if (toggleSwitch.checked) {
+        filterButton.style.backgroundColor = "#0c1e31";
+
+    } else {
+        filterButton.style.backgroundColor = "#a3a9b8";
+    }
+}
+
+toggleSwitch.addEventListener("change", handleToggleChange);
+
+    
+    
+
+   
+  
