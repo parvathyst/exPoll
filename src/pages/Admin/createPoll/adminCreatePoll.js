@@ -71,7 +71,7 @@ function handleFile(event) {
                     }
                 });
             } else {
-                console.log("Excel sheet is empty")
+                alert("Excel sheet is empty")
             }
         };
         reader.readAsArrayBuffer(file);

@@ -3,14 +3,6 @@ import { fetchNewestPollDetails } from "../../../backend/firebase/admin/loadDash
 import { authCheck } from "../../../functions/authentication/authCheck.js";
 import { auth } from "../../../backend/firebase/config.js";
 
-
-// const user = auth.currentUser;
-// if (user) {
-//     console.log("User is signed in:", user.email);
-// } else {
-//     console.log("No user is signed in");
-// }
-
 let userUID;
 
 async function initialize() {

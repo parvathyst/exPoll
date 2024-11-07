@@ -58,3 +58,12 @@ function isValidEmail(email) {
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return emailRegex.test(email);
 }
+
+
+const user = auth.currentUser;
+if (user) {
+    console.log("User is signed in:", user.email);
+} else {
+    console.log("No user is signed in");
+}
+
