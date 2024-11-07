@@ -1,76 +1,141 @@
 import { fetchPollData } from "../../../backend/firebase/admin/loadPollHistory/fetchPollData.js";
 import { displayPollOptions, displayPollDetails } from "./displayPollDetails.js";
-import { combinePollOptionsAndRecipients } from "./combinePollOptionsAndRecipients.js";
+import { downloadExcel } from "./downloadExcel.js";
+import { changePollEndTime } from "./changePollEndTime.js";
+import { addPollOption } from "./addPollOption.js";
+import { authCheck } from "../../../functions/authentication/authCheck.js";
+
 
 const url = window.location.href;
 const urlParams = new URL(url);
 const pollId = urlParams.searchParams.get("poll-id");
 
+let userUID;
+
+async function initialize() {
+    try {
+        userUID = await authCheck();
+    } catch (error) {
+        console.error("Authentication error:", error);
+        window.location.href = "../../Common/error/";
+    }
+}
+
+await initialize();
+
 async function getPollData(pollID) {
     const pollData = await fetchPollData(pollID);
 
     if (pollData) {
-        const { pollDetails, pollOptions, pollRecipients } = pollData;
+        const { pollDetails, pollOptions } = pollData;
 
-        console.log(pollData);
+        if (pollDetails.createdBy !== userUID) {
+            console.error("Authentication error: User is not authorized to access this poll");
+            window.location.href = "../../Common/error/";
+            return;
+        }
 
-        const pollOptionsAndRecipients = combinePollOptionsAndRecipients(pollData.pollOptions, pollData.pollRecipients)
+        const sortedPollOptions = [...pollOptions].sort((a, b) => {
+            return (b.isSelected ? 1 : 0) - (a.isSelected ? 1 : 0);
+        });
 
-        console.log(pollOptionsAndRecipients);
-
-
-        displayPollOptions(pollOptionsAndRecipients);
-        displayPollDetails(pollData.pollDetails);
-
+        displayPollOptions(sortedPollOptions);
+        displayPollDetails(pollDetails);
         document.getElementById("download-excel-btn").addEventListener("click", () => {
-            downloadExcel(pollData.pollDetails, pollOptionsAndRecipients);
+            downloadExcel(pollDetails, pollOptions);
         });
 
     } else {
         console.log("Failed to fetch poll data");
-
     }
 }
 
-function downloadExcel(pollDetails, pollOptionsAndRecipients) {
-    const wb = XLSX.utils.book_new();
+await getPollData(pollId);
 
-    const data = [
-        ["Title", pollDetails.title],
-        ["Description", pollDetails.description],
-        [],
-        ["Content", "Name", "Email"]
-    ];
 
-    pollOptionsAndRecipients.forEach(option => {
-        data.push([option.content, option.name, option.email]);
+const popups = {
+    extendPollPopup: document.getElementById("extendPollModal"),
+    stopPollPopup: document.getElementById("stopPollModal"),
+    addOptionPopup: document.getElementById("addOptionModal"),
+};
+
+const popupButtons = {
+    extendPollBtn: document.getElementById("extend-poll-btn"),
+    stopPollBtn: document.getElementById("stop-poll-btn"),
+    addOptionBtn: document.getElementById("end-poll-btn"),
+};
+
+const openPopup = (popup) => { popup.style.display = "flex"; };
+const closePopup = (popup) => { popup.style.display = "none"; };
+
+popupButtons.extendPollBtn.addEventListener("click", () => openPopup(popups.extendPollPopup));
+popupButtons.stopPollBtn.addEventListener("click", () => openPopup(popups.stopPollPopup));
+popupButtons.addOptionBtn.addEventListener("click", () => openPopup(popups.addOptionPopup));
+
+document.querySelectorAll(".popup .close").forEach(closeElem => {
+    closeElem.addEventListener("click", (e) => {
+        const popup = e.target.closest(".popup");
+        if (popup) closePopup(popup);
     });
+});
 
-    const ws = XLSX.utils.aoa_to_sheet(data);
+const saveNewEnd = async () => {
+    const newEndDate = document.getElementById("new-end-date").value;
+    const newEndTime = document.getElementById("new-end-time").value;
+    if (newEndDate && newEndTime) {
+        const endDateTimeString = `${newEndDate}T${newEndTime}`;
+        const endDateTime = new Date(endDateTimeString).getTime();
 
-    const colWidth = [
-        { wch: 20 },
-        { wch: 20 },
-        { wch: 30 }
-    ];
-    ws['!cols'] = colWidth;
+        if (endDateTime > Time.now() && endDateTime > pollDetails.startTime) {
+            try {
+                await changePollEndTime(pollId, endDateTime);
+                closePopup(popups.extendPollPopup);
 
-    ws['!rows'] = [];
-    for (let i = 0; i < data.length; i++) {
-        ws['!rows'][i] = { hpt: 15 };
+            } catch (error) {
+                console.error("error:", error);
+                closePopup(popups.extendPollPopup);
+            }
+        } else {
+            alert("Date and time cannot be in the past or before start date and time");
+        }
+    } else {
+        alert("Please select both a date and a time.");
+    }
+};
+
+const confirmStopPoll = () => {
+
+    const endDateTime = Date.now();
+    try {
+        changePollEndTime(pollId, endDateTime);
+    } catch (error) {
+        console.error("error:", error);
     }
 
-    XLSX.utils.book_append_sheet(wb, ws, "Poll Data");
+    closePopup(popups.stopPollPopup);
+};
 
-    const fileName = `${pollDetails.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.xlsx`;
+const saveNewOption = async () => {
+    const newOption = document.getElementById("new-option").value;
+    if (newOption) {
+        try {
+            await addPollOption(pollId, newOption);
+            closePopup(popups.addOptionPopup);
+        } catch (error) {
+            console.error("error:", error);
+        }
+    } else {
+        alert("Please enter a new option");
+    }
+};
 
-    XLSX.writeFile(wb, fileName);
-}
 
+document.getElementById("save-new-end").addEventListener("click", saveNewEnd);
+document.getElementById("confirm-stop-poll").addEventListener("click", confirmStopPoll);
+document.getElementById("save-option").addEventListener("click", saveNewOption);
 
-
-
-
-getPollData(pollId)
-
-
+window.addEventListener("click", (event) => {
+    Object.values(popups).forEach(popup => {
+        if (event.target === popup) closePopup(popup);
+    });
+});
