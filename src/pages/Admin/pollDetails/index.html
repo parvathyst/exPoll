@@ -6,11 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="popup.css">
     <link rel="stylesheet" href="../../../styles/D.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
+    <style>
+        .modal {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,38 +31,35 @@
             <h5 class="responses" id="poll-responces"><i class="fa-solid fa-users"></i> Responses </h5>
         </div>
         <div class="container-bottom">
-
-
             <div class="leftSide">
                 <div class="leftSideBox" id="poll-options">
                     <div id="none" class="none"></div>
                 </div>
-
             </div>
             <div class="rightSide">
-                    <h2 id="poll-title">---</h2>
-                    <div class="timeZone">
-                        <div class="timezone-items">
-                            <p>From: </p> <i class="fa-solid fa-calendar"></i>
-                            <p id="start-date">-- --</p> <i class="fa-solid fa-clock"></i>
-                            <P id="srat-time">-- --</p>
-                        </div>
-                        <div class="timezone-items">
-                            <p>To: </p> <i class="fa-solid fa-calendar"></i>
-                            <p id="end-date">-- --</p> <i class="fa-solid fa-clock"></i>
-                            <P id="end-time">-- --</p>
-                        </div>
+                <h2 id="poll-title">---</h2>
+                <div class="timeZone">
+                    <div class="timezone-items">
+                        <p>From: </p> <i class="fa-solid fa-calendar"></i>
+                        <p id="start-date">-- --</p> <i class="fa-solid fa-clock"></i>
+                        <p id="srat-time">-- --</p>
                     </div>
-                    <br>
-                    <p>Poll Type - FCFS</p>
-                    <br>
-                    <div class="discription">
-                        <h4>Description</h4>
-                        <p id="poll-description" class="poll-description">.</p>
+                    <div class="timezone-items">
+                        <p>To: </p> <i class="fa-solid fa-calendar"></i>
+                        <p id="end-date">-- --</p> <i class="fa-solid fa-clock"></i>
+                        <p id="end-time">-- --</p>
                     </div>
+                </div>
+                <br>
+                <p>Poll Type - FCFS</p>
+                <br>
+                <div class="discription">
+                    <h4>Description</h4>
+                    <p id="poll-description" class="poll-description">.</p>
+                </div>
                 <div class="downloadbtndiv">
                     <div class="bottom">
-                        <button class="D-black" id="extend-poll-btn">
+                        <button class="D-black" id="extend-poll-btn" >
                             <p>Extend Poll</p> <img src="/src/assets/icons/download.png" alt="">
                         </button>
                         <button class="D-black" id="stop-poll-btn">
@@ -75,8 +78,41 @@
             </div>
         </div>
     </div>
-    <script type="module" src="script.js"></script>
 
+    <!-- Extend Poll Modal -->
+    <div id="extendPollModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Select New End Date and Time</h3>
+            <label for="new-end-date">New End Date:</label>
+            <input type="date" id="new-end-date">
+            <label for="new-end-time">New End Time:</label>
+            <input type="time" id="new-end-time">
+            <button id="save-new-end" class="modal-button">Save</button>
+        </div>
+    </div>
+
+    <!-- Stop Poll Confirmation Modal -->
+    <div id="stopPollModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Are you sure you want to stop the poll?</h3>
+            <button id="confirm-stop-poll" class="modal-button">Yes, Stop Poll</button>
+        </div>
+    </div>
+
+    <!-- Add Option Modal -->
+    <div id="addOptionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Add a New Option</h3>
+            <input type="text" id="new-option" placeholder="Enter option text">
+            <button id="save-option" class="modal-button">Add Option</button>
+        </div>
+    </div>
+
+
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>

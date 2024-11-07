@@ -25,7 +25,6 @@ function displayPollOptions(pollOptions) {
             lef.classList.add("lef");
 
             const date = new Date(poll.selectedTime);
-            
             lef.innerHTML = `
                 <h4>${poll.content || 'Untitled Poll'}</h4>
                 <p>

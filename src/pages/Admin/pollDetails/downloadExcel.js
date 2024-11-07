@@ -31,10 +31,6 @@ function downloadExcel(pollDetails, pollOptionsAndRecipients) {
         { s: { r: 1, c: 0 }, e: { r: 1, c: 2 } }
     ];
 
-    const headerCells = ['A4', 'B4', 'C4'];
-    headerCells.forEach(cell => {
-        ws[cell].s = { font: { bold: true } };
-    });
 
     ws['!rows'] = [];
     for (let i = 0; i < data.length; i++) {
