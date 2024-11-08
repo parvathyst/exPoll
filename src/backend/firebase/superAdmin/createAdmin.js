@@ -17,10 +17,12 @@ async function createAdmin(fullName, email, password) {
         .then(() => {
             alert("Admin added successfully!");
             document.getElementById('add-admin-popup').style.display = 'none';
+            return true;
         })
         .catch((error) => {
             console.error("Error adding admin:", error.message);
             alert("Error: " + error.message);
+            return false;
         });
 }
 

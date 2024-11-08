@@ -8,11 +8,18 @@ async function changePollEndTime(pollID, newDateTime) {
         const snapshot = await get(pollRef);
 
         if (snapshot.exists()) {
-            const poll = Object.keys(snapshot.val())[0];
-            await update(ref(db, `poll-details/${pollID}`), { startTime: newDateTime });
-            console.log(`Poll Time Changed`);
-            return true;
-        } else {
+            const poll = snapshot.val();
+
+            if (newDateTime > poll.startTime) {
+                await update(ref(db, `poll-details/${pollID}`), { endTime: newDateTime });
+                console.log(`Poll Time Changed`);
+                return true;
+            } else {
+                console.log("Poll is still active or endTime is missing.");
+                return false;
+            }
+        }
+        else {
             console.log(`No poll found with id - ${pollID}.`);
             return false;
         }
