@@ -19,11 +19,12 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <title>Create a Poll</title>
 </head>
 
 <body>
-    <div id="sidebar" class="sidebar" class=""></div>
+    <div id="sidebar" class="sidebar"></div>
     <div class="mainDiv">
         <div class="nav-bar-div" id="navbar"></div>
         <div class="heading-div">
@@ -32,28 +33,28 @@
         <div class="main-container">
             <div class="main-container-left">
                 <div class="poll-options">
-                    <input type="text" id="title" placeholder="Title" class="D-border ">
-                    <textarea id="description" placeholder="Description" rows="3" class="D-border "
+                    <input type="text" id="title" placeholder="Title" class="D-border">
+                    <textarea id="description" placeholder="Description" rows="3" class="D-border"
                         style="resize: none;"></textarea>
                     <div class="main-container-left-date">
                         <p id="para">From</p>
                         <div class="main-container-left-date-tile">
-                            <input type="date" id="poll-start-date" placeholder="Start Date " class="D-border">
+                            <input type="date" id="poll-start-date" placeholder="Start Date" class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="time" id="poll-start-time"   value="00:00" placeholder="Start Time" class="D-border">
+                            <input type="time" id="poll-start-time" value="00:00" placeholder="Start Time"
+                                class="D-border">
                         </div>
                         <p id="para">To</p>
                         <div class="main-container-left-date-tile">
                             <input type="date" id="poll-end-date" placeholder="End Date" class="D-border">
                         </div>
                         <div class="main-container-left-date-tile">
-                            <input type="time" id="poll-end-time"  value="00:00" placeholder="End Time" class="D-border">
+                            <input type="time" id="poll-end-time" value="00:00" placeholder="End Time" class="D-border">
                         </div>
                     </div>
                 </div>
-                <div class="options">
-                </div>
+                <div class="options"></div>
                 <div class="options-container D-border">
                     <div class="options-container-top">
                         <div class="headingOption">
@@ -66,17 +67,17 @@
                             <div id="downloadTemplate">
                                 <a href="/src/assets/templates/Poll Options Template.xlsx" download>
                                     <label class="custom-upload-button">
-                                        <img src="/src/assets/icons/download.png" alt="download" class="">
+                                        <img src="/src/assets/icons/download.png" alt="download">
                                         Template
                                     </label>
                                 </a>
                             </div>
                             <div id="upload2">
                                 <label for="upload-options" class="custom-upload-button">
-                                    <img src="/src/assets/icons/importIcon.png" alt="Upload" class="">
+                                    <img src="/src/assets/icons/importIcon.png" alt="Upload">
                                     Import Excel
                                 </label>
-                                <input type="file" id="upload-options" class="" accept=".xlsx, .xls" />
+                                <input type="file" id="upload-options" accept=".xlsx, .xls" />
                             </div>
                         </div>
                     </div>
@@ -84,13 +85,12 @@
                         <div class="options-container-none"></div>
                         <div class="option-item D-black">
                             <input type="text" placeholder="Enter Option" class="D-no-border">
-                            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
-                                onclick="removeOption(this)"></img>
+                            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)">
                         </div>
                     </div>
                     <div>
                         <div class="Button-container">
-                            <button onclick="addOption()" class="D-black" id="addButton"> Add Options</button>
+                            <button onclick="addOption()" class="D-black" id="addButton">Add Options</button>
                         </div>
                     </div>
                 </div>
@@ -102,33 +102,31 @@
                         <div>
                             <label class="custom-upload-button" onclick="clearrec()">Clear</label>
                         </div>
+
                         <div id="downloadTemplate">
                             <a href="../../../assets/templates/User List Template.xlsx" download>
                                 <label class="custom-upload-button">
-                                    <img src="/src/assets/icons/download.png" alt="download" class="">
+                                    <img src="/src/assets/icons/download.png" alt="download">
                                     Template
                                 </label>
                             </a>
                         </div>
                         <div id="upload">
                             <label for="uploadUser" class="custom-upload-button">
-                                <img src="/src/assets/icons/importIcon.png" alt="Upload" class="">
-                                Import excel
+                                <img src="/src/assets/icons/importIcon.png" alt="Upload">
+                                Import Excel
                             </label>
-                            <input type="file" id="uploadUser" class="" accept=".xlsx, .xls" />
+                            <input type="file" id="uploadUser" accept=".xlsx, .xls" />
                         </div>
                     </div>
-
-
                     <div class="recipient-container-bottom">
                         <div class="recipient-container-none"></div>
-                            <div class="recipient-item D-white">
-                                <input type="email" placeholder="Enter Email" class="D-no-border">
-                                <img src="/src/assets/icons/trash_icon.svg" alt="delete icon"
-                                    onclick="removeOption(this)"></img>
-                            </div>
+                        <div class="recipient-item D-white">
+                            <input type="email" placeholder="Enter Email" class="D-no-border">
+                            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)">
+                        </div>
                     </div>
-                    <div class="button-container" class="add-option-button-container">
+                    <div class="button-container add-option-button-container">
                         <button onclick="addRecipient()" id="addRecipientButton" class="D-white">+ Add
                             Recipient</button>
                     </div>
@@ -155,26 +153,21 @@
                     <span id="button-text">Generate Link</span>
                 </button>
                 <div>
-                    <div id="overlay" class="overlay"></div>    
-
+                    <div id="overlay" class="overlay"></div>
                     <div id="myPopup" class="popup">
-                        <p>Do you want to send the mail to recipients ?</p>
+                        <p>Do you want to send the mail to recipients?</p>
                         <div class="btn">
                             <button id="send-email" class="confirm">Yes</button>
                             <button id="cancel-email" class="cancel">No</button>
                         </div>
                     </div>
                 </div>
-                
-
-                
             </div>
         </div>
     </div>
-   
 </body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script type="text/javascript">
     (function () {
         emailjs.init({

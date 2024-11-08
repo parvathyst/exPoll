@@ -7,6 +7,30 @@ body {
     margin-top: 2rem;
 }
 
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 200px;
+    height: 100px;
+    font-size: small;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #cac7c7;
+}
+
+
 .super-admin-container{
     height: 90vh;
     display: flex;

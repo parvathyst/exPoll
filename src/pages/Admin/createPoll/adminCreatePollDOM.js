@@ -2,7 +2,7 @@
 import { createPoll } from "../../../backend/firebase/admin/createPoll/createPoll.js"
 import { validateForm } from "./validation.js";
 import { authCheck } from "../../../functions/authentication/authCheck.js"
-
+import { copyToClipboard } from "../../../functions/common/copyToClipBoard.js";
 
 
 let userUID;
@@ -50,7 +50,6 @@ function addRecipient(value) {
             <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     }
-    // document.querySelector('.recipients-container').insertBefore(recipientContainer, document.querySelector('.recipients-container button'));
     document.querySelector('.recipient-container-none').insertAdjacentElement('afterend', recipientContainer);
 }
 
@@ -70,7 +69,7 @@ function handleUser(event) {
             const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
 
             if (jsonData.length > 1) {
-                jsonData.slice(1).forEach((row) => { // Start from the second row (index 1)
+                jsonData.slice(1).forEach((row) => {
                     if (row.length > 0) {
                         addRecipient(row[1]);
                     }
@@ -108,10 +107,15 @@ async function fetchDataAndGenerateLink() {
 
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
+    
     const startDate = document.getElementById('poll-start-date').value;
-    const startTime = document.getElementById('poll-start-time').value;
+    const startTimeInput = document.getElementById('poll-start-time').value;
     const endDate = document.getElementById('poll-end-date').value;
-    const endTime = document.getElementById('poll-end-time').value;
+    const endTimeInput = document.getElementById('poll-end-time').value;
+    
+    const startDateTime = new Date(`${startDate}T${startTimeInput}`);
+    const endDateTime = new Date(`${endDate}T${endTimeInput}`);
+    
 
     let pollOptions = {};
     const optionInputs = document.querySelectorAll('.options-container-bottom input[type="text"]');
@@ -120,8 +124,9 @@ async function fetchDataAndGenerateLink() {
         if (input.value) {
             pollOptions[index] = {
                 content: input.value,
-                assignedEmployee: "",
                 isSelected: false,
+                selectedUserEmail: "",
+                selectedUserName: "",
                 selectedTime: ""
             };
         }
@@ -132,7 +137,6 @@ async function fetchDataAndGenerateLink() {
     recipientInputs.forEach((input, index) => {
         if (input.value) {
             pollRecipients[index] = {
-                name: "",
                 email: input.value,
                 hasDone: false,
             };
@@ -145,10 +149,8 @@ async function fetchDataAndGenerateLink() {
     const pollData = {
         title: title,
         description: description,
-        startDate: startDate,
-        startTime: startTime,
-        endDate: endDate,
-        endTime: endTime,
+        startDateTime: startDateTime,
+        endDateTime: endDateTime,
         isPrivatePoll: isPrivatePoll,
         createdBy: userUID,
         createdAt: dateTime,
@@ -166,13 +168,6 @@ async function fetchDataAndGenerateLink() {
         buttonIcon.className = 'retry-icon';
         buttonText.innerText = "Retry";
     }
-}
-
-
-function copyToClipboard(link) {
-    navigator.clipboard.writeText(link).then(() => {
-        alert('Link copied to clipboard!');
-    });
 }
 
 

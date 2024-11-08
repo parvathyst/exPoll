@@ -13,7 +13,7 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="" />
   <style>
-  
+
   </style>
 </head>
 
@@ -26,29 +26,28 @@
       <div class="menu-items">
         <ul>
           <li>
-            <button class="menu-button" onclick="window.location.href='../createPoll/';"><h3>Create Poll</h3></button>
+            <button class="menu-button" onclick="window.location.href='../createPoll/';">
+              <h3>Create Poll</h3>
+            </button>
           </li>
-          <!-- <li>
-            <button class="menu-button"><h3>Create Rating</h3></button>
-          </li> -->
           <li>
-            <button class="menu-button"><a href="/src/pages/Admin/history/index.html"><h3>View History</h3></a></button>
-            <!-- <button src="/src/pages/Admin/pollDetails/index.html"> </button> -->
+            <button class="menu-button"><a href="/src/pages/Admin/history/index.html">
+                <h3>View History</h3>
+              </a></button>
           </li>
         </ul>
       </div>
     </section>
     <section class="content-section-div">
       <nav class="iconNav">
-        <!-- <img src="/src/assets/icons/user-icon-black.png" class="user-icon-black" alt="" /> -->
         <div class="user-icon-container">
-          <img src="/src/assets/icons/user-icon-black.png" class="user-icon-black" alt="User Icon" onclick="toggleDropdown()" />
+          <img src="/src/assets/icons/user-icon-black.png" class="user-icon-black" alt="User Icon"
+            onclick="toggleDropdown()" />
           <div id="user-dropdown" class="dropdown-content">
-              <a href="#" onclick="logout()">Log Out</a>
-              <a href="#" onclick="changePassword()">Change Password</a>
+            <a id="logout-link" href="javascript:void(0);" onclick="handleLogout()">Log Out</a>
+            <a id="change-password-link" href="javascript:void(0);" >Change Password</a>
           </div>
-      </div>
-      
+        </div>
       </nav>
       <section class="heading-section">
       </section>
@@ -58,7 +57,6 @@
       <div class="activity-section">
         <div class="scrollable-div">
           <div class="activity-box-container" id="activity-box-container">
-
           </div>
         </div>
         <div></div>
@@ -66,8 +64,19 @@
     </section>
   </main>
   <script type="module" src="script.js"></script>
-  <script src="profile.js"></script>
-  
-</body>
+  <script type="module" src="profile.js"></script>
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("user-dropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
 
+    window.onclick = function (event) {
+      const dropdown = document.getElementById("user-dropdown");
+      if (!event.target.matches('.user-icon-black') && !dropdown.contains(event.target)) {
+        dropdown.style.display = "none"; // Close dropdown if clicking outside
+      }
+    }
+  </script>
+</body>
 </html>

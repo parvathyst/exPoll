@@ -57,7 +57,7 @@ function readPollDetails() {
 
 function checkPrivatePollRecipients(id) {
     const pollRef = ref(db, `/poll-recipients/${id}`);
-    
+   
     get(pollRef).then(snapshot => {
         if (snapshot.exists()) {
             let found = false;

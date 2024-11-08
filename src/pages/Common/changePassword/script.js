@@ -56,3 +56,12 @@ import {
     }
   });
   
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const logoutLink = document.getElementById("change-password-link");
+    if (logoutLink) {
+        logoutLink.addEventListener("click", handleLogout);
+    } else {
+        console.error("Logout link not found");
+    }
+  });

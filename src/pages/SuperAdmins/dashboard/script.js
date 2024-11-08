@@ -78,10 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const fullName = document.getElementById('addAdminfullName').value;
         const email = document.getElementById('addAdminemail').value;
         const password = document.getElementById('AddAdminpassword').value;
-        await createAdmin(fullName, email, password);
-        // if(yes){
-        //     mail(email,password);
-        // }
+        const adminCreated = await createAdmin(fullName, email, password);
+        if (adminCreated) {
+////////////////////////////////////////////////
+        }
         displayAdmins(attachListeners);
        
     });

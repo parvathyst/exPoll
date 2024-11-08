@@ -1,10 +1,10 @@
 function displayPollOptions(pollOptions) {
+
     if (pollOptions && typeof pollOptions === 'object') {
         const pollOptionsContainer = document.getElementById("poll-options");
         const responsesHeader = document.getElementById("poll-responces");
-
+        console.log(pollOptions);
         pollOptionsContainer.innerHTML = "";
-
         const selectedCount = Object.values(pollOptions).filter(poll => poll.isSelected).length;
 
         responsesHeader.innerHTML = `
@@ -19,18 +19,27 @@ function displayPollOptions(pollOptions) {
             const pollContainer = document.createElement("div");
             pollContainer.classList.add("elements");
 
+
+            if (!poll.isSelected) { pollContainer.classList.add("not-selected"); }
+
             const lef = document.createElement("div");
             lef.classList.add("lef");
+
+            const date = new Date(poll.selectedTime);
             lef.innerHTML = `
                 <h4>${poll.content || 'Untitled Poll'}</h4>
-                <p><i class="fa-solid fa-calendar"></i> ${poll.selectedDate || 'Unknown Date'} <i class="fa-solid fa-clock"></i> ${poll.selectedTime || 'Unknown Time'}</p>
+                <p>
+                    <i class="fa-solid fa-calendar"></i> ${date instanceof Date && !isNaN(date) ? date.toLocaleDateString() : '--'} 
+                    <i class="fa-solid fa-clock"></i> ${date instanceof Date && !isNaN(date) ? date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '--'}
+                </p>
             `;
+
 
             const righ = document.createElement("div");
             righ.classList.add("righ");
             righ.innerHTML = `
-                <h5>${poll.assignment || 'Unknown Assignment'}</h5>
-                <p>${poll.assignedEmployee || '.'}</p>
+                <h5>${poll.selectedUserName || 'Not Selected'}</h5>
+                <p>${poll.selectedUserEmail || '.'}</p>
             `;
             pollContainer.appendChild(lef);
             pollContainer.appendChild(righ);
@@ -47,8 +56,10 @@ function displayPollDetails(pollDetails) {
         document.getElementById("start-date").textContent = pollDetails.startDate || 'start date';
         document.getElementById("srat-time").textContent = pollDetails.startTime || 'start time';
         document.getElementById("end-date").textContent = pollDetails.endDate || 'end date';
-        document.getElementById("end-time").textContent = pollDetails.endTime || 'end time';
+        document.getElementById("end-time").textContent = pollDetails.endTime || 'ed time';
+
         document.getElementById("poll-description").textContent = pollDetails.description || 'No description';
+
     } else {
         console.log("Poll details are unavailable or data format is incorrect");
     }

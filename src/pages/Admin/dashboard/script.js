@@ -1,6 +1,15 @@
 
 import { fetchNewestPollDetails } from "../../../backend/firebase/admin/loadDashboard/loadDashboard.js";
 import { authCheck } from "../../../functions/authentication/authCheck.js";
+import { auth } from "../../../backend/firebase/config.js";
+
+
+// const user = auth.currentUser;
+// if (user) {
+//     console.log("User is signed in:", user.email);
+// } else {
+//     console.log("No user is signed in");
+// }
 
 let userUID;
 
@@ -10,7 +19,7 @@ async function initialize() {
         await displayPolls(userUID); 
     } catch (error) {
         console.error("Authentication error:", error);
-        window.location.href = "../../error/";
+        window.location.href = "../../Common/error/";
     }
 }
 
@@ -33,7 +42,7 @@ async function displayPolls(userUID) {
                 activityBox.innerHTML = `
                     <div onclick="window.location.href='/src/pages/Admin/pollDetails/index.html/?id=${poll.id}'" class="content">
                       <h5>${poll.title || 'Untitled Poll'}</h5>
-                      <h6>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Date not available'}</h6>
+                      <p>${poll.startDate ? new Date(poll.startDate).toLocaleDateString() : 'Date not available'}</p>
                     </div>
                     <div class="icon">
                         <img src="/src/assets/icons/poll-solid.png" alt="icon" />

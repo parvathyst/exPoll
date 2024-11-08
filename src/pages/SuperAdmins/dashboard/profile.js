@@ -33,4 +33,3 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Change link not found");
     }
 });
-
