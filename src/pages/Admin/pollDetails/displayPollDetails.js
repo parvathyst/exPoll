@@ -28,11 +28,11 @@ function displayPollOptions(pollOptions) {
             lef.innerHTML = `
                 <h4>${poll.content || 'Untitled Poll'}</h4>
                 <p>
-                    <i class="fa-solid fa-calendar"></i> ${date.toLocaleDateString()} 
-                    <i class="fa-solid fa-clock"></i> ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    <i class="fa-solid fa-calendar"></i> ${date instanceof Date && !isNaN(date) ? date.toLocaleDateString() : '--'} 
+                    <i class="fa-solid fa-clock"></i> ${date instanceof Date && !isNaN(date) ? date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '--'}
                 </p>
             `;
-            
+
 
             const righ = document.createElement("div");
             righ.classList.add("righ");

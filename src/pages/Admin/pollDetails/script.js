@@ -86,9 +86,10 @@ const saveNewEnd = async () => {
         const endDateTimeString = `${newEndDate}T${newEndTime}`;
         const endDateTime = new Date(endDateTimeString).getTime();
 
-        if (endDateTime > Time.now() && endDateTime > pollDetails.startTime) {
+        if (endDateTime > Date.now()) {
             try {
                 await changePollEndTime(pollId, endDateTime);
+                getPollData(pollId);
                 closePopup(popups.extendPollPopup);
 
             } catch (error) {
@@ -103,11 +104,14 @@ const saveNewEnd = async () => {
     }
 };
 
-const confirmStopPoll = () => {
+const confirmStopPoll = async () => {
 
-    const endDateTime = Date.now();
+    const date = Date.now();
+    const endDateTime = new Date(date);
+
     try {
-        changePollEndTime(pollId, endDateTime);
+        await changePollEndTime(pollId, endDateTime);
+        getPollData(pollId);
     } catch (error) {
         console.error("error:", error);
     }
@@ -121,6 +125,7 @@ const saveNewOption = async () => {
         try {
             await addPollOption(pollId, newOption);
             closePopup(popups.addOptionPopup);
+            getPollData(pollId);
         } catch (error) {
             console.error("error:", error);
         }
@@ -128,7 +133,6 @@ const saveNewOption = async () => {
         alert("Please enter a new option");
     }
 };
-
 
 document.getElementById("save-new-end").addEventListener("click", saveNewEnd);
 document.getElementById("confirm-stop-poll").addEventListener("click", confirmStopPoll);

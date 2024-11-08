@@ -6,7 +6,6 @@ import { copyToClipboard } from "../../../functions/common/copyToClipBoard.js";
 let userUID;
 let generatedLink = '';
 
-// Initialize user authentication
 async function initialize() {
     try {
         userUID = await authCheck();
@@ -16,7 +15,6 @@ async function initialize() {
     }
 }
 
-// On page load
 document.addEventListener('DOMContentLoaded', async function () {
     const uploadUser = document.getElementById('uploadUser');
     await initialize();
@@ -108,10 +106,15 @@ async function fetchDataAndGenerateLink() {
 
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
+    
     const startDate = document.getElementById('poll-start-date').value;
-    const startTime = document.getElementById('poll-start-time').value;
+    const startTimeInput = document.getElementById('poll-start-time').value;
     const endDate = document.getElementById('poll-end-date').value;
-    const endTime = document.getElementById('poll-end-time').value;
+    const endTimeInput = document.getElementById('poll-end-time').value;
+    
+    const startDateTime = new Date(`${startDate}T${startTimeInput}`);
+    const endDateTime = new Date(`${endDate}T${endTimeInput}`);
+    
 
     let pollOptions = {};
     const optionInputs = document.querySelectorAll('.options-container-bottom input[type="text"]');
@@ -119,9 +122,9 @@ async function fetchDataAndGenerateLink() {
         if (input.value) {
             pollOptions[index] = {
                 content: input.value,
+                isSelected: false,
                 selectedUserEmail: "",
                 selectedUserName: "",
-                isSelected: false,
                 selectedTime: ""
             };
         }
@@ -142,8 +145,13 @@ async function fetchDataAndGenerateLink() {
     const dateTime = new Date().toLocaleString();
 
     const pollData = {
-        title, description, startDate, startTime, endDate, endTime,
-        isPrivatePoll, createdBy: userUID, createdAt: dateTime,
+        title: title,
+        description: description,
+        startDateTime: startDateTime,
+        endDateTime: endDateTime,
+        isPrivatePoll: isPrivatePoll,
+        createdBy: userUID,
+        createdAt: dateTime,
     };
 
     try {
