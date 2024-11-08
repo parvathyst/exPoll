@@ -17,20 +17,24 @@
             <img src="/src/assets/images/logo-purple.png" alt="" width="160px" height="35px">
             <form id="loginForm" method="post">
                 <div class="box">
-                    <input type="text" id="fullName" required placeholder="Full Name">
-                    <input type="email" id="email" required placeholder="Email Address">
-                    <button  type="button" id="submit" class="startbutton">Start</button>
-
-                    
+                    <input type="text" id="fullName" required placeholder="Full Name">                
+                    <div class="validate">
+                        <input type="email" id="email" required placeholder="Email Address">
+                        <div>
+                        <span id="errorEmail" class="error-message">Please enter a valid email address.</span>
+                        </div>
+                    </div>
+                    <button  type="button" id="submit" class="startbutton">Start</button>  
+                </div>
             </form>
         </div>
     </div>
     </div>
-
-
-
+    <script type="module" src="userLogin.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
 </body>
-<script type="module" src="userLogin.js"></script>
+<!-- <script type="module" src="userLogin.js"></script>
 <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script> -->
 </html>

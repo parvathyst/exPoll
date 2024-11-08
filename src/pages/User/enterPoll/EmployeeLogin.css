@@ -29,6 +29,10 @@ body {
     /* D9D9D9 20% */
     border-radius:5px;
 }
+.validate{
+    margin: 0;
+    padding: 0;
+}
 .box input{
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -51,6 +55,7 @@ body {
     font-weight: 500;
 }
 .startbutton {
+    position: relative;
     width: 330px;
     height: 30px;
     font-size: 16px;
@@ -71,4 +76,26 @@ body {
 }
 .forgot-password{
     margin-top: -25px;
+}
+
+
+
+
+/* error */
+input.error {
+    border-color: red;
+}
+
+.error-message {
+    color: #e74c3c; /* Red color for error */
+    font-size: 10px;
+    visibility: hidden;
+    margin-top: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    text-align: left;
+}
+/* Show error message */
+.error-message.show {
+    visibility: visible;
 }
