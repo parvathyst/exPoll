@@ -157,7 +157,7 @@ async function fetchDataAndGenerateLink() {
     try {
         const key = await createPoll(pollData, pollOptions, pollRecipients);
         pop(pollData, pollRecipients);
-        generatedLink = `expoll.com/poll/?id=${key}`
+        generatedLink = `http://127.0.0.1:5502/src/pages/User/enterPoll/?id=${key}`
         buttonIcon.className = 'copy-icon';
         buttonText.innerText = generatedLink;
         generateLinkButton.classList.add("show-text", "show-icon-left");

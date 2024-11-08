@@ -68,6 +68,15 @@ confirmButton.onclick = () => {
 
 let selectedIndex = -1;
 
+// Get name and email here
+const fromemail = sessionStorage.getItem("userEmail");
+const fromName = sessionStorage.getItem("userName");
+if (fromemail) {
+    console.log("User's email:", fromemail);
+    console.log("User's email:", fromName);
+}
+
+
 function resultPage(selectedOptionRef) {
     // mail(selectedOptionRef)
     const page1 = document.getElementById("page1");

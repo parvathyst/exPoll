@@ -7,6 +7,8 @@ import { superAdminAuthCheck } from "../../../functions/authentication/authCheck
 
 let userUID;
 
+let generatedLink;
+
 superAdminAuthCheck()
     .then((uid) => {
         userUID = uid;
@@ -77,7 +79,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const email = document.getElementById('addAdminemail').value;
         const password = document.getElementById('AddAdminpassword').value;
         await createAdmin(fullName, email, password);
+        // if(yes){
+        //     mail(email,password);
+        // }
         displayAdmins(attachListeners);
+       
     });
 
     document.getElementById("disable-admin-form").addEventListener("submit", async (e) => {
@@ -145,3 +151,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
     displayAdmins(attachListeners);
 });
+
+
+//mail
+
+function sendEmail(toEmail, subject, message) {
+    const templateParams = {
+        to_email: toEmail,
+        subject: subject,
+        message: message
+    };
+  
+    emailjs.send('service_bxt3eel', 'template_0mg1p1y', templateParams)
+        .then((response) => {
+            console.log('Email sent successfully!', response.status, response.text);
+        })
+        .catch((error) => {
+            console.error('Failed to send email:', error);
+        });
+  }
+  
+  function mail(email,password) {
+        generatedLink = `http://127.0.0.1:5502/src/pages/Common/login`
+
+        console.log(password);
+        try {
+            const subject = "You are now an admin";
+            const message = `
+
+            Welcome to ExPoll !!
+             
+
+            Your password to access : ${password}
+
+
+            Click here --> ${generatedLink} to create new polls.`;
+            const toemail = email;
+            if (toemail) {
+              sendEmail(toemail, subject, message); 
+              console.log(`Email sent to: ${toemail}`);
+          } else {
+              console.warn("Recipient data is missing an email:", toemail);
+          }
+  
+        } catch (error) {
+            console.error('Error fetching recipients:', error);
+        }
+    
+  
+  };
+  

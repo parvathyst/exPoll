@@ -1,6 +1,6 @@
 import { fetchPollData } from "../../../backend/firebase/admin/loadPollHistory/fetchPollData.js";
 import { displayPollOptions, displayPollDetails } from "./displayPollDetails.js";
-import { combinePollOptionsAndRecipients } from "./combinePollOptionsAndRecipients.js";
+// import { combinePollOptionsAndRecipients } from "./combinePollOptionsAndRecipients.js";
 
 const url = window.location.href;
 const urlParams = new URL(url);
@@ -10,25 +10,18 @@ async function getPollData(pollID) {
     const pollData = await fetchPollData(pollID);
 
     if (pollData) {
-        const { pollDetails, pollOptions, pollRecipients } = pollData;
+        const { pollDetails, pollOptions } = pollData;
 
-        console.log(pollData);
+        // const pollOptionsAndRecipients = combinePollOptionsAndRecipients(pollOptions, pollData.pollRecipients);
 
-        const pollOptionsAndRecipients = combinePollOptionsAndRecipients(pollData.pollOptions, pollData.pollRecipients)
-
-        console.log(pollOptionsAndRecipients);
-
-
-        displayPollOptions(pollOptionsAndRecipients);
-        displayPollDetails(pollData.pollDetails);
+        displayPollOptions(pollOptions);
+        displayPollDetails(pollDetails);
 
         document.getElementById("download-excel-btn").addEventListener("click", () => {
-            downloadExcel(pollData.pollDetails, pollOptionsAndRecipients);
+            downloadExcel(pollDetails, pollOptionsAndRecipients);
         });
-
     } else {
         console.log("Failed to fetch poll data");
-
     }
 }
 
@@ -39,7 +32,7 @@ function downloadExcel(pollDetails, pollOptionsAndRecipients) {
         ["Title", pollDetails.title],
         ["Description", pollDetails.description],
         [],
-        ["Content", "Name", "Email"]
+        ["Content", "Email"]
     ];
 
     pollOptionsAndRecipients.forEach(option => {
@@ -49,7 +42,6 @@ function downloadExcel(pollDetails, pollOptionsAndRecipients) {
     const ws = XLSX.utils.aoa_to_sheet(data);
 
     const colWidth = [
-        { wch: 20 },
         { wch: 20 },
         { wch: 30 }
     ];
@@ -61,16 +53,8 @@ function downloadExcel(pollDetails, pollOptionsAndRecipients) {
     }
 
     XLSX.utils.book_append_sheet(wb, ws, "Poll Data");
-
     const fileName = `${pollDetails.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.xlsx`;
-
     XLSX.writeFile(wb, fileName);
 }
 
-
-
-
-
-getPollData(pollId)
-
-
+getPollData(pollId);
