@@ -49,14 +49,13 @@ function displayPollOptions(pollOptions) {
         console.log("No poll options available or data format is incorrect");
     }
 }
-
 function displayPollDetails(pollDetails) {
     if (pollDetails && typeof pollDetails === 'object') {
-        document.getElementById("poll-title").textContent = pollDetails.title || 'poll title';
-        document.getElementById("start-date").textContent = pollDetails.startDate || 'start date';
-        document.getElementById("srat-time").textContent = pollDetails.startTime || 'start time';
-        document.getElementById("end-date").textContent = pollDetails.endDate || 'end date';
-        document.getElementById("end-time").textContent = pollDetails.endTime || 'ed time';
+        document.getElementById("poll-title").textContent = pollDetails.title || '--- ---';
+        document.getElementById("start-date").textContent = pollDetails.startDate || '-- --';
+        document.getElementById("srat-time").textContent = pollDetails.startTime || '-- --';
+        document.getElementById("end-date").textContent = pollDetails.endDate || '-- --';
+        document.getElementById("end-time").textContent = pollDetails.endTime || '-- --';
 
         document.getElementById("poll-description").textContent = pollDetails.description || 'No description';
 
