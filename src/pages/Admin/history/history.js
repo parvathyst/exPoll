@@ -158,28 +158,6 @@ window.addEventListener('load', function() {
 
 
 
-
-
-
-window.onload = function() {
-const now = new Date();
-
-const year = now.getFullYear();
-const month = String(now.getMonth() + 1).padStart(2, '0'); 
-const day = String(now.getDate()).padStart(2, '0');
-
-const defaultDateTime = `${year}-${month}-${day}T00:00`;
-
-document.getElementById('fromDate').value = defaultDateTime;
-document.getElementById('toDate').value = defaultDateTime;
-};
-
-document.getElementById('refreshButton').addEventListener('click', function() {
-location.reload();
-
-
-});
-
 const toggleSwitch = document.getElementById("dateFilterToggle");
 const filterButton = document.getElementById("filterButton");
 
