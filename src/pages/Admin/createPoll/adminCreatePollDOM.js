@@ -167,3 +167,68 @@ async function fetchDataAndGenerateLink() {
         buttonText.innerText = "Retry";
     }
 }
+
+function sendEmail(toEmail, subject, message) {
+    const templateParams = {
+        to_email: toEmail,
+        subject: subject,
+        message: message
+    };
+
+    emailjs.send('service_bxt3eel', 'template_0mg1p1y', templateParams)
+        .then((response) => {
+            console.log('Email sent successfully!', response.status, response.text);
+        })
+        .catch((error) => {
+            console.error('Failed to send email:', error);
+        });
+}
+
+function showPopup() {
+    document.getElementById("myPopup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
+
+function hidePopup() {
+    document.getElementById("myPopup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
+
+function pop(pollData, pollRecipients) {
+    showPopup();
+
+    document.getElementById("send-email").addEventListener("click", function () {
+        hidePopup();
+        try {
+            const subject = pollData.title;
+            const message = `
+                ${pollData.description}
+
+                Link to access poll: ${generatedLink}
+
+                Poll will be open 
+
+                from: ${pollData.startDate} [${pollData.startTime}] 
+                
+                to: ${pollData.endDate} [${pollData.endTime}]
+            `;
+
+            Object.keys(pollRecipients).forEach(key => {
+                const data = pollRecipients[key];
+                if (data && data.email) {
+                    sendEmail(data.email, subject, message);
+                    console.log(`Email sent to: ${data.email}`);
+                } else {
+                    console.warn("Recipient data is missing an email:", data);
+                }
+            });
+
+        } catch (error) {
+            console.error('Error fetching recipients:', error);
+        }
+    });
+
+    document.getElementById("cancel-email").addEventListener("click", function () {
+        hidePopup();
+    });
+}
