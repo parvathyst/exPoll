@@ -17,23 +17,22 @@ let pollRecipients;
 let fullName;
 let email;
 
+
 document.getElementById("submit").addEventListener("click", () => {
-    // Retrieve the values from the input fields
     fullName = document.getElementById("fullName").value;
     email = document.getElementById("email").value;
     const emailField = document.getElementById("email");
     const errorEmail = document.getElementById("errorEmail");
     if (isValidEmail(email)) {
-        // Valid email
         emailField.classList.remove("error");
         errorEmail.classList.remove("show");
     } else {
-        // Invalid email
         emailField.classList.add("error");
         errorEmail.classList.add("show");
     }
     sessionStorage.setItem("userEmail", email);
     sessionStorage.setItem("userName", fullName);
+    sessionStorage.setItem("id",id);
     readPollDetails();
 });
 
@@ -47,26 +46,25 @@ function readPollDetails() {
             pollDetails = data;
             const now = new Date();
 
-            const startDateTime = new Date(`${pollDetails.startDate}:00`);
-            const endDateTime = new Date(`${pollDetails.endDate}:00`);
+            const startDateTime = new Date(`${pollDetails.startDateTime}:00`);
+            const endDateTime = new Date(`${pollDetails.endDateTime}:00`);
 
             if (now < startDateTime) {
-                alert("The poll has not started yet."); // Poll start time is in the future
-                window.location.href = "../../common/error";
+                alert("The poll has not started yet.");
+                window.location.href = "../accessDenied/pleasewait.html";
             } else if (now > endDateTime) {
-                alert("The poll has ended."); // Poll end time is in the past
-                window.location.href = "../../common/error";
+                alert("The poll has ended."); 
+                window.location.href = "../accessDenied/timeisup.html";
             } else {
                 if(isValidEmail(email))
                 {
                     emailField.classList.remove("error");
                     errorEmail.classList.remove("show"); 
                     if (pollDetails.isPrivatePoll) {
-                        // Check for private poll
-                        checkPrivatePollRecipients(id);
+                      checkPrivatePollRecipients(id);
                     } else {
-                        // Check for public poll
-                        checkPublicPollRecipients(id);
+                       checkPublicPollRecipients(id);
+                        console.log(id);
                     }
                  }
                 else{
@@ -79,8 +77,9 @@ function readPollDetails() {
 }
 
 function checkPrivatePollRecipients(id) {
+    
     const pollRef = ref(db, `/poll-recipients/${id}`);
-   
+    
     get(pollRef).then(snapshot => {
         if (snapshot.exists()) {
             let found = false;
@@ -90,26 +89,26 @@ function checkPrivatePollRecipients(id) {
                 
                 if (recipient.email === email) {
                     found = true;
-                    // window.location.href = `../castPoll/?email=${encodeURIComponent(email)}&id=${id}`;
                     window.location.href = `../castPoll/?id=${id}`;
                    
                 }
             });
             if (!found) {
                 alert("You are not a recipient of this poll.");
-                window.location.href = "../../common/error";
+                window.location.href = "../accessDenied/notRecipient.html";
             }
         } else {
             console.log("No data available");
             alert("No recipients found for this poll.");
-            window.location.href = "../../common/error";
+            window.location.href = "./accessDenied/notRecipient.html";
         }
     }).catch(error => {
         console.error("Error reading poll recipients:", error);
     });
 }
 
-function checkPublicPollRecipients(id) {
+function  checkPublicPollRecipients(id) {
+    console.log(id);
     const pollRef = ref(db, `/poll-recipients/${id}`);
     
     get(pollRef).then(snapshot => {
@@ -119,80 +118,17 @@ function checkPublicPollRecipients(id) {
             snapshot.forEach(sessionSnapshot => {
                 const recipient = sessionSnapshot.val();
                 if (recipient.email === email) {
-                    found = true; // Email exists in recipients
-                    // Update the recipient with the entered name
-                    const userRef = ref(db, `/poll-recipients/${id}/${sessionSnapshot.key}`); // Reference to the specific recipient
-                    set(userRef, {
-                        ...recipient, // Retain existing data
-                        name: fullName // Update name
-                    }).then(() => {
-                        console.log("Recipient updated successfully.");
-                        // Redirect to castPoll page
-                        // window.location.href = `../castPoll/?email=${encodeURIComponent(email)}&id=${id}`;
-                        window.location.href = `../castPoll/?id=${id}`;
-
-                    }).catch(error => {
-                        console.error("Error updating recipient:", error);
-                    });
-                }
-                else {
-                    // Email does not exist, create new recipient
-                    // const newRecipientRef = ref(db, `/poll-recipients/${id}/${sessionSnapshot.key}`).push(); // Create a new record
-                    // set(newRecipientRef, {
-                    //     name: fullName,
-                    //     email: email,
-                    //     hasDone: false
-                    // }).then(() => {
-                    //     console.log("New recipient added successfully.");
-                    //     // Redirect to castPoll page
-                    //     // window.location.href = `../castPoll/?email=${encodeURIComponent(email)}&id=${id}`;
-                    //     window.location.href = `../castPoll/?id=${id}`;
-        
-                    // }).catch(error => {
-                    //     console.error("Error adding new recipient:", error);
-                    // });
-
-
-
-
-                   
-                    const newRecipientRef = ref(db, `/poll-recipients/${id}`);
-                    
-                    const snapshot = get(newRecipientRef);
-                    const recipientCount = snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
-                    
-                    const newID = recipientCount;
-                    const newRef = child(newRecipientRef, newID.toString());
-                    const newData = {
-                        email: email,
-                        hasDone: false
-                    };
-                    set(newRef, newData);
-                    console.log(`New poll option added under poll-options/${id} with ID ${newID}`);
-                    
-
-
+                    found = true; 
+                    window.location.href = `../castPoll/?id=${id}`;
                 }
             });
+            if(found == false){
+        
+                    getrecipient(id);
+            }
+
+          
         } 
-
-        // if (!found) {
-        //     // Email does not exist, create new recipient
-        //     const newRecipientRef = ref(db, `/poll-recipients/${id}/${sessionSnapshot.key}`).push(); // Create a new record
-        //     set(newRecipientRef, {
-        //         name: fullName,
-        //         email: email,
-        //         hasDone: false
-        //     }).then(() => {
-        //         console.log("New recipient added successfully.");
-        //         // Redirect to castPoll page
-        //         // window.location.href = `../castPoll/?email=${encodeURIComponent(email)}&id=${id}`;
-        //         window.location.href = `../castPoll/?id=${id}`;
-
-        //     }).catch(error => {
-        //         console.error("Error adding new recipient:", error);
-        //     });
-        // }
     }).catch(error => {
         console.error("Error reading poll recipients:", error);
     });
@@ -201,4 +137,22 @@ function checkPublicPollRecipients(id) {
 function isValidEmail(email) {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
+}
+
+async function getrecipient(id){
+    const newRecipientRef = ref(db, `/poll-recipients/${id}`);
+    
+    const snapshot = await get(newRecipientRef);
+    console.log(snapshot);
+    const recipientCount = Object.keys(snapshot.val()).length;
+    console.log(recipientCount);
+    const newID = recipientCount;
+    const newRef = child(newRecipientRef, newID.toString());
+    const newData = {
+        email: email,
+        name :fullName,
+        hasDone: false
+    };
+    set(newRef, newData);
+    console.log(`New poll option added under poll-recipients/${id} with ID ${newID}`);
 }

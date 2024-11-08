@@ -14,7 +14,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #f2f2f2;
+            background-color: #eeeeee;
             color: #333;
             text-align: center;
         }
@@ -32,7 +32,7 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 20px;
-            color: #d9534f; /* Bootstrap danger color */
+            color: #962bc0; /* Bootstrap danger color */
         }
 
         .error-message {
@@ -43,7 +43,7 @@
         .login-button {
             padding: 12px 20px;
             font-size: 16px;
-            background-color: #007bff;
+            background-color: #962bc0;
             color: white;
             border: none;
             border-radius: 5px;
@@ -60,16 +60,17 @@
 <body>
 
     <div class="error-container">
-        <div class="error-title">Access Denied</div>
+        <div class="error-title">Time’s Up! ⏰</div>
+        
         <div class="error-message">
-            Error: You are not authenticated or do not have permission.
-        </div>
+            The poll has ended and is no longer accepting responses. Thank you for your interest!        </div>
         <button class="login-button" onclick="navigateToLogin()">Login</button>
     </div>
 
     <script>
+        const id = sessionStorage.getItem("id");
         function navigateToLogin() {
-            window.location.href = '../login';
+            window.location.href = `../enterPoll/?id=${id}`;
         }
     </script>
 
