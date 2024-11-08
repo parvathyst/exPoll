@@ -1,4 +1,4 @@
-import { createPoll } from "../../../backend/firebase/admin/createPoll/createPoll.js";
+import { createPoll } from "../../../backend/firebase/admin/createPoll/createPoll.js"
 import { validateForm } from "./validation.js";
 import { authCheck } from "../../../functions/authentication/authCheck.js";
 import { copyToClipboard } from "../../../functions/common/copyToClipBoard.js";
@@ -106,15 +106,15 @@ async function fetchDataAndGenerateLink() {
 
     const title = document.getElementById('title').value;
     const description = document.getElementById('description').value;
-    
+
     const startDate = document.getElementById('poll-start-date').value;
     const startTimeInput = document.getElementById('poll-start-time').value;
     const endDate = document.getElementById('poll-end-date').value;
     const endTimeInput = document.getElementById('poll-end-time').value;
-    
-    const startDateTime = new Date(`${startDate}T${startTimeInput}`);
-    const endDateTime = new Date(`${endDate}T${endTimeInput}`);
-    
+
+    const startDateTime = new Date(`${startDate}T${startTimeInput}`).toLocaleString();
+    const endDateTime = new Date(`${endDate}T${endTimeInput}`).toLocaleString();
+
 
     let pollOptions = {};
     const optionInputs = document.querySelectorAll('.options-container-bottom input[type="text"]');
@@ -153,6 +153,8 @@ async function fetchDataAndGenerateLink() {
         createdBy: userUID,
         createdAt: dateTime,
     };
+
+    console.log(pollData);
 
     try {
         const key = await createPoll(pollData, pollOptions, pollRecipients);
