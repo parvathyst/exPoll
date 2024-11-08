@@ -48,14 +48,22 @@ function displayPollOptions(pollOptions) {
         console.log("No poll options available or data format is incorrect");
     }
 }
-
 function displayPollDetails(pollDetails) {
     if (pollDetails && typeof pollDetails === 'object') {
+        const startDate = new Date(pollDetails.startDateTime);
+        const endDate = new Date(pollDetails.endDateTime);
+
+        const extractDate = (dateTimeString) => {
+            return dateTimeString ? dateTimeString.split(',')[0] : '-- --';
+        };
+
         document.getElementById("poll-title").textContent = pollDetails.title || '--- ---';
-        document.getElementById("start-date").textContent = pollDetails.startDate || '-- --';
-        document.getElementById("srat-time").textContent = pollDetails.startTime || '-- --';
-        document.getElementById("end-date").textContent = pollDetails.endDate || '-- --';
-        document.getElementById("end-time").textContent = pollDetails.endTime || '-- --';
+
+        document.getElementById("start-date").textContent = extractDate(pollDetails.startDateTime);
+        document.getElementById("end-date").textContent = extractDate(pollDetails.endDateTime);
+
+        document.getElementById("start-time").textContent = startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || '-- --';
+        document.getElementById("end-time").textContent = endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || '-- --';
 
         document.getElementById("poll-description").textContent = pollDetails.description || '.';
     } else {
