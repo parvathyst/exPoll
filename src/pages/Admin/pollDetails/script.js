@@ -44,6 +44,7 @@ async function getPollData(pollID) {
         document.getElementById("download-excel-btn").addEventListener("click", () => {
             downloadExcel(pollDetails, pollOptions);
         });
+
     } else {
         console.log("Failed to fetch poll data");
     }

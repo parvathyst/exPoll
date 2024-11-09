@@ -76,7 +76,7 @@ function readPollDetails() {
     });
 }
 
-function checkPrivatePollRecipients(id) {
+async function checkPrivatePollRecipients(id) {
     
     const pollRef = ref(db, `/poll-recipients/${id}`);
     
@@ -89,18 +89,24 @@ function checkPrivatePollRecipients(id) {
                 
                 if (recipient.email === email) {
                     found = true;
-                    window.location.href = `../castPoll/?id=${id}`;
+                    const hasDone = isSelected(id);
+                    console.log(hasDone);
+                    
+                    if(hasDone){
+                        window.location.href = "../accessDenied/timeisup.html";
+                    }
+                    else{
+                        window.location.href = `../castPoll/?id=${id}`;
+                    }
                    
                 }
             });
             if (!found) {
                 alert("You are not a recipient of this poll.");
-                window.location.href = "../accessDenied/notRecipient.html";
             }
         } else {
             console.log("No data available");
             alert("No recipients found for this poll.");
-            window.location.href = "./accessDenied/notRecipient.html";
         }
     }).catch(error => {
         console.error("Error reading poll recipients:", error);
@@ -119,7 +125,15 @@ function  checkPublicPollRecipients(id) {
                 const recipient = sessionSnapshot.val();
                 if (recipient.email === email) {
                     found = true; 
-                    window.location.href = `../castPoll/?id=${id}`;
+                    const hasDone = isSelected(id);
+                    console.log(hasDone);
+
+                    if(hasDone){
+                        window.location.href = "../accessDenied/nomore.html";
+                    }
+                    else{
+                        window.location.href = `../castPoll/?id=${id}`;
+                    }
                 }
             });
             if(found == false){
@@ -156,3 +170,32 @@ async function getrecipient(id){
     set(newRef, newData);
     console.log(`New poll option added under poll-recipients/${id} with ID ${newID}`);
 }
+
+function isSelected(id) {
+    const newOptionRef = ref(db, `/poll-options/${id}`);
+    
+    return get(newOptionRef).then(snapshot => {
+        if (snapshot.exists()) {
+            let found = false;
+            let isSelected = false;
+
+            snapshot.forEach(sessionSnapshot => {
+                const option = sessionSnapshot.val();
+                if (option.email === email) {
+                    found = true;
+                    isSelected = option.isSelected;
+                }
+            });
+
+            return found ? isSelected : false;
+        } else {
+            return false;
+        }
+    }).catch(error => {
+        console.error("Error reading poll options:", error);
+        return false; 
+    });
+}
+
+
+

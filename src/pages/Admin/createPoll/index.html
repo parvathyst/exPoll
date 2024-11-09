@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="adminCreatePageCss.css">
-    <link rel="stylesheet" href="../../../styles/D.css">
+    <link rel="stylesheet" href="../createPoll/adminCreatePageCommon.css">
     <link rel="stylesheet" href="loader.css">
     <link rel="stylesheet" href="generatelink.css">
     <link rel="stylesheet" href="../../Admin/history/adminHistory.css">
@@ -83,14 +83,16 @@
                     </div>
                     <div class="options-container-bottom">
                         <div class="options-container-none"></div>
-                        <div class="option-item D-black">
-                            <input type="text" placeholder="Enter Option" class="D-no-border">
-                            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)">
+                        <div class="option-item D-white">
+                            <input type="text" placeholder="Enter Option"  class="D-no-border">
+                            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)" />
+                            <!-- <input type="text" placeholder="Enter Option" class="D-no-border">
+                            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)"> -->
                         </div>
                     </div>
                     <div>
                         <div class="Button-container">
-                            <button onclick="addOption()" class="D-black" id="addButton">Add Options</button>
+                            <button onclick="addOption()" class="D-black" id="addButton">+ Add Options</button>
                         </div>
                     </div>
                 </div>
@@ -126,8 +128,8 @@
                             <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)">
                         </div>
                     </div>
-                    <div class="button-container add-option-button-container">
-                        <button onclick="addRecipient()" id="addRecipientButton" class="D-white">+ Add
+                    <div class="button-container add-option-button">
+                        <button onclick="addRecipient()" id="addRecipientButton" class="D-white D-no-border">+ Add
                             Recipient</button>
                     </div>
                 </div>

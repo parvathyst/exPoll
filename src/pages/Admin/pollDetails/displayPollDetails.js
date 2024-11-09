@@ -3,7 +3,6 @@ function displayPollOptions(pollOptions) {
     if (pollOptions && typeof pollOptions === 'object') {
         const pollOptionsContainer = document.getElementById("poll-options");
         const responsesHeader = document.getElementById("poll-responces");
-        console.log(pollOptions);
         pollOptionsContainer.innerHTML = "";
         const selectedCount = Object.values(pollOptions).filter(poll => poll.isSelected).length;
 
@@ -51,17 +50,27 @@ function displayPollOptions(pollOptions) {
 }
 function displayPollDetails(pollDetails) {
     if (pollDetails && typeof pollDetails === 'object') {
+        const startDate = new Date(pollDetails.startDateTime);
+        const endDate = new Date(pollDetails.endDateTime);
+
+        const extractDate = (dateTimeString) => {
+            return dateTimeString ? dateTimeString.split(',')[0] : '-- --';
+        };
+
         document.getElementById("poll-title").textContent = pollDetails.title || '--- ---';
-        document.getElementById("start-date").textContent = pollDetails.startDate || '-- --';
-        document.getElementById("srat-time").textContent = pollDetails.startTime || '-- --';
-        document.getElementById("end-date").textContent = pollDetails.endDate || '-- --';
-        document.getElementById("end-time").textContent = pollDetails.endTime || '-- --';
 
-        document.getElementById("poll-description").textContent = pollDetails.description || 'No description';
+        document.getElementById("start-date").textContent = extractDate(pollDetails.startDateTime);
+        document.getElementById("end-date").textContent = extractDate(pollDetails.endDateTime);
 
+        document.getElementById("start-time").textContent = startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || '-- --';
+        document.getElementById("end-time").textContent = endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) || '-- --';
+
+        document.getElementById("poll-description").textContent = pollDetails.description || '.';
     } else {
         console.log("Poll details are unavailable or data format is incorrect");
     }
 }
+
+
 
 export { displayPollOptions, displayPollDetails };

@@ -7,11 +7,24 @@ import {
   runTransaction,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
+function preventBackNavigation() {
+  // Push two states into history
+  history.pushState(null, null, window.location.href);
+  history.pushState(null, null, window.location.href);
+
+  // Handle the back button by moving forward immediately
+  window.onpopstate = function () {
+      history.go(1); // Go forward if back is pressed
+  };
+}
+
+// Call preventBackNavigation when the page loads
+window.onload = preventBackNavigation;
+
+
 const url = window.location.href;
 const urlParams = new URL(url);
 let id = urlParams.searchParams.get("id");
-const email = urlParams.searchParams.get("email");
-console.log(email);
 
 let pollOptions;
 let pollDetails;
@@ -41,55 +54,75 @@ function cancelPopUpBox() {
 
 const confirmButton = document.getElementById("confirm");
 confirmButton.onclick = () => {
-  const selectedOptionRef = ref(db, `/poll-options/${id}/${selectedIndex}`);
-  console.log("Confirmed")
-  runTransaction(selectedOptionRef, (currentOption) => {
-    if (currentOption && !currentOption.isSelected) {
-      // Option is available, mark it as selected and assign the employee
-      currentOption.isSelected = true;
-      currentOption.assignedEmployee = email;
-      currentOption.selectedTime = serverTimestamp();
-      return currentOption;
-    } else {
-      // Option is already selected, abort transaction
-      return; // Returning undefined will abort the transaction
-    }
-  }).then((result) => {
-    if (result.committed) {
-      resultPage(selectedOptionRef);
-    } else {
-      alert("This option has already been chosen. Please select another option.");
-    }
-  }).catch((error) => {
-    console.error("Transaction failed:", error);
-    alert("An error occurred. Please try again.");
-  });
+  const endDateTime = pollDetails.endDateTime;
+  console.log(endDateTime);
+  const currentDateTime = new Date();
+
+  if (currentDateTime >= endDateTime) {
+    alert("The poll has ended.");
+  } else {
+    const selectedOptionRef = ref(db, `/poll-options/${id}/${selectedIndex}`);
+    console.log("Confirmed")
+    runTransaction(selectedOptionRef, (currentOption) => {
+      if (currentOption && !currentOption.isSelected) {
+        // Option is available, mark it as selected and assign the employee
+        currentOption.isSelected = true;
+        currentOption.assignedEmployee = employeeEmail;
+        currentOption.selectedTime = serverTimestamp();
+        return currentOption;
+      } else {
+        // Option is already selected, abort transaction
+        return; // Returning undefined will abort the transaction
+      }
+    }).then((result) => {
+      if (result.committed) {
+        resultPage(selectedOptionRef);
+      } else {
+        alert("This option has already been chosen. Please select another option.");
+      }
+    }).catch((error) => {
+      console.error("Transaction failed:", error);
+      alert("An error occurred. Please try again.");
+    });
+  }
 };
 
 let selectedIndex = -1;
 
 // Get name and email here
-const fromemail = sessionStorage.getItem("userEmail");
-const fromName = sessionStorage.getItem("userName");
-if (fromemail) {
-    console.log("User's email:", fromemail);
-    console.log("User's email:", fromName);
+const employeeEmail = sessionStorage.getItem("userEmail");
+const employeeName = sessionStorage.getItem("userName");
+if (employeeEmail) {
+  console.log("User's email:", employeeEmail);
+  console.log("User's email:", employeeName);
 }
 
 
 function resultPage(selectedOptionRef) {
-    // mail(selectedOptionRef)
-    const page1 = document.getElementById("page1");
-    page1.classList.remove("page");
-    page1.classList.add("page-hidden");
+  // mail(selectedOptionRef)
+  const page1 = document.getElementById("page1");
+  page1.classList.remove("page");
+  page1.classList.add("page-hidden");
 
-    const page2 = document.getElementById("page2");
-    page2.classList.remove("page-hidden");
-    page2.classList.add("page");
+  const page2 = document.getElementById("page2");
+  page2.classList.remove("page-hidden");
+  page2.classList.add("page");
 
-    writeData();
-  
+  disableBackButton();
+
+
+  writeData();
+
 }
+
+function disableBackButton() {
+  history.pushState(null, null, window.location.href);
+
+  window.onpopstate = function () {
+    history.go(1); 
+  };
+}
+
 
 function sortPollOptions(pollOptions) {
   const selectedPollOptions = [];
@@ -160,16 +193,17 @@ function readData() {
 }
 
 function writeData() {
-    if (selectedIndex === -1 || !pollOptions[selectedIndex]) return;
-    set(ref(db, `/poll-options/${id}/` + selectedIndex), {
-      ...pollOptions[selectedIndex],
-      assignedEmployee: email,
-      selectedTime: serverTimestamp(),
-      isSelected: true,
-    }).then(() => {
-      mail(pollOptions[selectedIndex].content); 
+  if (selectedIndex === -1 || !pollOptions[selectedIndex]) return;
+  set(ref(db, `/poll-options/${id}/` + selectedIndex), {
+    ...pollOptions[selectedIndex],
+    selectedUserEmail: employeeEmail,
+    selectedUserName: employeeName,
+    selectedTime: serverTimestamp(),
+    isSelected: true,
+  }).then(() => {
+    mail(pollOptions[selectedIndex].content);
   }).catch((error) => {
-      console.error("Failed to write data:", error);
+    console.error("Failed to write data:", error);
   });
 }
 
@@ -200,10 +234,10 @@ function displayPollDetails(pollDetails) {
   document.querySelector('.poll-h-info h3').innerText = pollDetails.title;
   document.querySelector('.poll-information h4').innerText = pollDetails.description;
 
-  const startDate = new Date(`${pollDetails.startDate} ${pollDetails.startTime}`);
-  const endDate = new Date(`${pollDetails.endDate} ${pollDetails.endTime}`);
-  
-  
+  const startDate = new Date(`${pollDetails.startDateTime}`);
+  const endDate = new Date(`${pollDetails.endDateTime}`);
+
+
   const formatTime = (date) => {
     const hours = date.getHours();
     const minutes = String(date.getMinutes()).padStart(2, '0');
@@ -225,40 +259,40 @@ function displayPollDetails(pollDetails) {
 
 function sendEmail(toEmail, subject, message) {
   const templateParams = {
-      to_email: toEmail,
-      subject: subject,
-      message: message
+    to_email: toEmail,
+    subject: subject,
+    message: message
   };
 
   emailjs.send('service_bxt3eel', 'template_0mg1p1y', templateParams)
-      .then((response) => {
-          console.log('Email sent successfully!', response.status, response.text);
-      })
-      .catch((error) => {
-          console.error('Failed to send email:', error);
-      });
+    .then((response) => {
+      console.log('Email sent successfully!', response.status, response.text);
+    })
+    .catch((error) => {
+      console.error('Failed to send email:', error);
+    });
 }
 
 function mail(selectedPollOption) {
-      console.log(selectedPollOption);
-      try {
-          const subject = "Your poll";
-          const message = `
+  console.log(selectedPollOption);
+  try {
+    const subject = "Your poll";
+    const message = `
            
           Your poll option : ${selectedPollOption}
 
           `;
-          const toemail = email;
-          if (toemail) {
-            sendEmail(toemail, subject, message); 
-            console.log(`Email sent to: ${toemail}`);
-        } else {
-            console.warn("Recipient data is missing an email:", toemail);
-        }
+    const toemail = employeeEmail;
+    if (toemail) {
+      sendEmail(toemail, subject, message);
+      console.log(`Email sent to: ${toemail}`);
+    } else {
+      console.warn("Recipient data is missing an email:", toemail);
+    }
 
-      } catch (error) {
-          console.error('Error fetching recipients:', error);
-      }
-  
+  } catch (error) {
+    console.error('Error fetching recipients:', error);
+  }
+
 
 };

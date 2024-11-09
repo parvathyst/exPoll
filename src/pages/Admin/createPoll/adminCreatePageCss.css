@@ -29,15 +29,16 @@ body {
 .main-container-left {
     /* background-color: #2684d1; */
     height: 80%;
-    width: 70%;
+    width: 65%;
 }
 
 .main-container-right {
     /* background-color: blueviolet; */
-    width: 30%;
+    width: 35%;
     height: 80%;
 
 }
+
 
 .main-container-left-date {
     display: flex;
@@ -131,6 +132,8 @@ body {
     margin-left: 10px;
 }
 
+
+
 .option-item,
 .options-container-bottom button {
     width: 98%
@@ -155,6 +158,7 @@ body {
     justify-content: space-between;
     gap: 0.5rem;
     margin-bottom: 5px;
+    border: 1px solid #137dd3;
 }
 
 .option-item img,
@@ -165,6 +169,9 @@ body {
     height: auto;
 
 }
+
+
+
 
 .option-item button,
 .recipient-item button {
@@ -212,7 +219,10 @@ body {
     /* background-color: rgb(83, 220, 20); */
 }
 
-/* #addRecipientButton {} */
+#addRecipientButton, #addButton {
+    font-weight: 600;
+    background-color: #cacbcd;
+}
 
 .recipient-container-bottom::-webkit-scrollbar {
     width: 7px;
@@ -353,7 +363,7 @@ body {
 
 .cancel-button {
     padding: 10px;
-    background-color: #a3a9b8;
+    background-color: #0D2335;
     color: white;
     border: none;
     border-radius: 8px;
@@ -396,9 +406,9 @@ body {
 .recipients-button-div {
     display: flex;
     flex-direction: row;
+    justify-content: end;
     gap: .5rem;
     padding-bottom: 4%;
-    /* background-color: aquamarine; */
 
 }
 .heading-option {
@@ -423,7 +433,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.1rem;
-    background-color: #8D99AE;
+    background-color: #0D2335;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -449,6 +459,8 @@ body {
 
 .upload-import-button-container {
     display: flex;
+    justify-content: end;
+    width: 270px;
     gap: 1rem;
 }
 

@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
 function addOption(value) {
     const optionContainer = document.createElement('div');
     optionContainer.classList.add('option-item');
-    optionContainer.classList.add('D-black');
+    optionContainer.classList.add('D-white');
+
     if (value === undefined) {
         optionContainer.innerHTML = `
         <input type="text" placeholder="Enter Option"  class="D-no-border">
@@ -51,7 +52,6 @@ function removeRecipient(button) {
 }
 
 
-
 function handleFile(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -71,7 +71,7 @@ function handleFile(event) {
                     }
                 });
             } else {
-                console.log("Excel sheet is empty")
+                alert("Excel sheet is empty")
             }
         };
         reader.readAsArrayBuffer(file);

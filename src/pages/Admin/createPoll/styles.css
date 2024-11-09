@@ -32,6 +32,9 @@ body {
     justify-content: space-between;
 }
 
+#active{
+    border: 1px solid darkblue;
+}
 .main-container-right {
     display: flex;
     flex-direction: column;
@@ -102,7 +105,7 @@ button {
     background-color: transparent;
     width: 24px;
     height: auto;
-
+    
 }
 
 .option-item button,

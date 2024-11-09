@@ -1,4 +1,4 @@
-.D-border{
+.D-border {
     /* width: 100%; */
     padding: 8px 10px;
     margin-bottom: 10px;
@@ -10,20 +10,10 @@
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 8px;
-    border: none;
     background-color: #F2F5FA;
     color: #333333;
 }
 
-
-.D-white-box {
-    /* padding: 10px;
-    margin-bottom: 10px; */
-    border-radius: 8px;
-    border: none;
-    background-color: #F2F5FA;
-    color: #333333;
-}
 .D-black {
     padding: 10px;
     margin-bottom: 10px;
@@ -31,13 +21,11 @@
     border: none;
     background-color: #0D2335;
     color: #FFFFFF;
-    /* height: 30p; */
 }
 
-.D-black input::placeholder {
+.D-black input::placeholder{
     color: #ffffff9c
 }
-
 .D-black input {
     color: #FFFFFF;
 }
@@ -45,7 +33,6 @@
 .D-no-border {
     border: none;
     outline: none;
-   
     background-color: transparent;
     width: 100%;
 }
@@ -54,18 +41,8 @@
     height: 1rem;
 }
 
-.D-card {
-    height: 30px;
-    padding: 5px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: none;
-    background-color: #F2F5FA;
-    color: #333333;
-    width: 98%;
-}
 
-.D-small-icon {
+.D-small-icon{
     width: 24px;
     height: auto;
 }
@@ -84,18 +61,16 @@
     height: 28px;
 }
 
-.D-import-excel svg {
+.D-import-excel svg{
     fill: #FFFFFF;
     color: #FFFFFF;
     stroke: #FFFFFF;
 }
 
-.D-recipient {
-    height: 25px;
-    padding: 5px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: none;
-    background-color: #F2F5FA;
-    color: #333333;
-}
+.D-navBar-employee {
+    background-color: #000000;
+    width: 100vw;
+    height: 8%;
+    display: flex;
+    align-items: center;
+  }
