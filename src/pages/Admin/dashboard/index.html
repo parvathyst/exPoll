@@ -45,7 +45,7 @@
             onclick="toggleDropdown()" />
           <div id="user-dropdown" class="dropdown-content">
             <a id="logout-link" href="javascript:void(0);" onclick="handleLogout()">Log Out</a>
-            <a id="change-password-link" href="javascript:void(0);" >Change Password</a>
+            <a id="change-password-link" href="javascript:void(0);">Change Password</a>
           </div>
         </div>
       </nav>
@@ -74,9 +74,10 @@
     window.onclick = function (event) {
       const dropdown = document.getElementById("user-dropdown");
       if (!event.target.matches('.user-icon-black') && !dropdown.contains(event.target)) {
-        dropdown.style.display = "none"; // Close dropdown if clicking outside
+        dropdown.style.display = "none";
       }
     }
   </script>
 </body>
+
 </html>
