@@ -10,23 +10,23 @@
 </head>
 
 <body>
+    <div class="super-admin-container-top">
+        <div class="logo">
+            <img src="../../../assets/images/logo-white.png" alt="">
+        </div>
+        <div class="user-icon-container">
+            <img src="/src/assets/icons/user-white.png" class="user-icon-black" alt="User Icon"
+              onclick="toggleDropdown()" />
+            <div id="user-dropdown" class="dropdown-content">
+              <a id="logout-link" href="javascript:void(0);">Log Out</a>
+              <a id="change-password-link" href="javascript:void(0);">Change Password</a>
+
+            </div>
+          </div>
+    </div>
+    
     <div class="super-admin-container">
        
-        <div class="super-admin-container-top">
-            <div class="logo">
-                <img src="../../../assets/images/logo-darkblue.png" alt="">
-            </div>
-            <div class="user-icon-container">
-                <img src="/src/assets/icons/user-icon-black.png" class="user-icon-black" alt="User Icon"
-                  onclick="toggleDropdown()" />
-                <div id="user-dropdown" class="dropdown-content">
-                  <a id="logout-link" href="javascript:void(0);">Log Out</a>
-                  <a id="change-password-link" href="javascript:void(0);">Change Password</a>
-
-                </div>
-              </div>
-      
-        </div>
         <div class="super-admin-container-middle">
             <h2>Admins</h2>
             <button class="add-admin-btn" id="add-admin-button">
