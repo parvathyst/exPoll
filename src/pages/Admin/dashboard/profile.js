@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const change = document.getElementById("change-password-link");
     if (change) {
         change.addEventListener("click", () => {
-            const htmlPath = "../../../Common/changePassword"; // Path to your HTML file
+            const htmlPath = "https://parvathyst.github.io/exPoll/src/pages/Common/changePassword"; // Path to your HTML file
             window.location.href = htmlPath; // Redirect to the new HTML page
         });
     } else {
