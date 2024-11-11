@@ -36,6 +36,50 @@ document.getElementById("submit").addEventListener("click", () => {
     readPollDetails();
 });
 
+function isSelected(id) {
+    const newOptionRef = ref(db, `/poll-options/${id}`);
+    
+    return get(newOptionRef).then(snapshot => {
+        if (snapshot.exists()) {
+            let found = false;
+            let isSelected = false;
+
+            snapshot.forEach(sessionSnapshot => {
+                const option = sessionSnapshot.val();
+                if (option.selectedUserEmail === email) {
+                    found = true;
+                    isSelected = option.isSelected;
+                    console.log(isSelected)
+                }
+            });
+            console.log(isSelected)
+            return found ? isSelected : false;
+        } else {
+            return false;
+        }
+    }).catch(error => {
+        console.error("Error reading poll options:", error);
+        return false; 
+    });
+}
+
+async function getrecipient(id){
+    const newRecipientRef = ref(db, `/poll-recipients/${id}`);
+    
+    const snapshot = await get(newRecipientRef);
+    console.log(snapshot);
+    const recipientCount = Object.keys(snapshot.val()).length;
+    console.log(recipientCount);
+    const newID = recipientCount;
+    const newRef = child(newRecipientRef, newID.toString());
+    const newData = {
+        email: email,
+        name :fullName
+    };
+    set(newRef, newData);
+    console.log(`New poll option added under poll-recipients/${id} with ID ${newID}`);
+}
+
 function readPollDetails() {
     const pollRef = ref(db, `/poll-details/${id}`);
     const emailField = document.getElementById("email");
@@ -60,11 +104,11 @@ function readPollDetails() {
                 {
                     emailField.classList.remove("error");
                     errorEmail.classList.remove("show"); 
+
                     if (pollDetails.isPrivatePoll) {
                       checkPrivatePollRecipients(id);
                     } else {
                        checkPublicPollRecipients(id);
-                        console.log(id);
                     }
                  }
                 else{
@@ -93,6 +137,7 @@ async function checkPrivatePollRecipients(id) {
                     console.log(hasDone);
                     
                     if(hasDone){
+                      
                         window.location.href = "../accessDenied/timeisup.html";
                     }
                     else{
@@ -118,6 +163,7 @@ function  checkPublicPollRecipients(id) {
     const pollRef = ref(db, `/poll-recipients/${id}`);
     
     get(pollRef).then(snapshot => {
+
         let found = false;
 
         if (snapshot.exists()) {
@@ -126,22 +172,24 @@ function  checkPublicPollRecipients(id) {
                 if (recipient.email === email) {
                     found = true; 
                     const hasDone = isSelected(id);
-                    console.log(hasDone);
-
+                    console.log(isSelected(id));
+                    // isSelected(id);
                     if(hasDone){
                         window.location.href = "../accessDenied/nomore.html";
+
                     }
                     else{
                         window.location.href = `../castPoll/?id=${id}`;
+                        
+
                     }
                 }
             });
             if(found == false){
         
                     getrecipient(id);
+                    window.location.href = `../castPoll/?id=${id}`;  
             }
-
-          
         } 
     }).catch(error => {
         console.error("Error reading poll recipients:", error);
@@ -151,50 +199,6 @@ function  checkPublicPollRecipients(id) {
 function isValidEmail(email) {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
-}
-
-async function getrecipient(id){
-    const newRecipientRef = ref(db, `/poll-recipients/${id}`);
-    
-    const snapshot = await get(newRecipientRef);
-    console.log(snapshot);
-    const recipientCount = Object.keys(snapshot.val()).length;
-    console.log(recipientCount);
-    const newID = recipientCount;
-    const newRef = child(newRecipientRef, newID.toString());
-    const newData = {
-        email: email,
-        name :fullName,
-        hasDone: false
-    };
-    set(newRef, newData);
-    console.log(`New poll option added under poll-recipients/${id} with ID ${newID}`);
-}
-
-function isSelected(id) {
-    const newOptionRef = ref(db, `/poll-options/${id}`);
-    
-    return get(newOptionRef).then(snapshot => {
-        if (snapshot.exists()) {
-            let found = false;
-            let isSelected = false;
-
-            snapshot.forEach(sessionSnapshot => {
-                const option = sessionSnapshot.val();
-                if (option.email === email) {
-                    found = true;
-                    isSelected = option.isSelected;
-                }
-            });
-
-            return found ? isSelected : false;
-        } else {
-            return false;
-        }
-    }).catch(error => {
-        console.error("Error reading poll options:", error);
-        return false; 
-    });
 }
 
 
