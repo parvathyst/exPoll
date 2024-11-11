@@ -19,12 +19,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     const uploadUser = document.getElementById('uploadUser');
     await initialize();
 
-    // Handle Excel file upload
     if (uploadUser) {
         uploadUser.addEventListener('change', handleUser, false);
     }
 
-    // Generate poll link
     document.getElementById('generate-button').addEventListener('click', async function () {
         if (validateForm()) {
             await fetchDataAndGenerateLink();
@@ -34,7 +32,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 });
 
-// Function to add recipients from input or Excel file
 function addRecipient(value) {
     const recipientContainer = document.createElement('div');
     recipientContainer.classList.add('recipient-item', 'D-white');
@@ -45,12 +42,10 @@ function addRecipient(value) {
     document.querySelector('.recipient-container-none').insertAdjacentElement('afterend', recipientContainer);
 }
 
-// Remove recipient
 function removeRecipient(button) {
     button.parentElement.remove();
 }
 
-// Handle Excel file upload and extract emails
 function handleUser(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -64,7 +59,7 @@ function handleUser(event) {
 
             if (jsonData.length > 1) {
                 jsonData.slice(1).forEach((row, index) => {
-                    const email = row[1]; // Assuming the second column contains the email
+                    const email = row[1]; 
                     if (isValidEmail(email)) {
                         addRecipient(email);
                     } else {
@@ -81,13 +76,11 @@ function handleUser(event) {
     }
 }
 
-// Validate email format
 function isValidEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
 }
 
-// Generate poll link and send emails
 async function fetchDataAndGenerateLink() {
     const generateLinkButton = document.getElementById("generate-button");
     const buttonIcon = document.getElementById("button-icon");
@@ -159,7 +152,7 @@ async function fetchDataAndGenerateLink() {
     try {
         const key = await createPoll(pollData, pollOptions, pollRecipients);
         pop(pollData, pollRecipients);
-        generatedLink = `expoll.com/poll/?id=${key}`;
+        generatedLink = `https://parvathyst.github.io/exPoll/src/pages/User/enterPoll/?id=${key}`;
         buttonIcon.className = 'copy-icon';
         buttonText.innerText = generatedLink;
         generateLinkButton.classList.add("show-text", "show-icon-left");

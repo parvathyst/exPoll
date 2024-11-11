@@ -21,17 +21,17 @@
   <main class="home">
     <section class="menu-bar-div">
       <div class="logoDiv">
-        <img src="exPoll/src/assets/images/logo-white.png" alt="expoll" class="logo" />
+        <img src="/exPoll/src/assets/images/logo-white.png" alt="expoll" class="logo" />
       </div>
       <div class="menu-items">
         <ul>
           <li>
-            <button class="menu-button" onclick="window.location.href='exPoll/src/pages/createPoll/';">
+            <button class="menu-button" onclick="window.location.href='/exPoll/src/pages/Admin/createPoll/';">
               <h3>Create Poll</h3>
             </button>
           </li>
           <li>
-            <button class="menu-button"><a href="exPoll/src/pages/Admin/history/">
+            <button class="menu-button"><a href="/exPoll/src/pages/Admin/history/">
                 <h3>View History</h3>
               </a></button>
           </li>
@@ -41,11 +41,11 @@
     <section class="content-section-div">
       <nav class="iconNav">
         <div class="user-icon-container">
-          <img src="exPoll/src/assets/icons/user-icon-black.png" class="user-icon-black" alt="User Icon"
+          <img src="/exPoll/src/assets/icons/user-icon-black.png" class="user-icon-black" alt="User Icon"
             onclick="toggleDropdown()" />
           <div id="user-dropdown" class="dropdown-content">
             <a id="logout-link" href="javascript:void(0);" onclick="handleLogout()">Log Out</a>
-            <a id="change-password-link" href="javascript:void(0);" >Change Password</a>
+            <a id="change-password-link" href="javascript:void(0);">Change Password</a>
           </div>
         </div>
       </nav>
@@ -79,4 +79,5 @@
     }
   </script>
 </body>
+
 </html>

@@ -14,12 +14,12 @@ function addOption(value) {
     if (value === undefined) {
         optionContainer.innerHTML = `
         <input type="text" placeholder="Enter Option"  class="D-no-border">
-        <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)" />
+        <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)" />
         `;
     } else {
         optionContainer.innerHTML = `
         <input type="text" placeholder="Enter Option" value="${value}" class="D-no-border">
-        <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)" />
+        <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeOption(this)" />
         `;
     }
     document.querySelector('.options-container-none').insertAdjacentElement('afterend', optionContainer);
@@ -35,12 +35,12 @@ function addRecipient(value) {
     if (value === undefined) {
         recipientContainer.innerHTML = `
             <input type="email" placeholder="Enter Email"  class="D-no-border">
-            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
+            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     } else {
         recipientContainer.innerHTML = `
             <input type="email" value="${value}" class="D-no-border">
-            <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
+            <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
         `;
     }
 

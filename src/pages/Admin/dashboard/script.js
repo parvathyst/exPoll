@@ -100,7 +100,7 @@ async function initialize() {
         await displayPolls(userUID);
     } catch (error) {
         console.error("Authentication error:", error);
-        window.location.href = "../../Common/error/";
+        window.location.href = "/exPoll/src/pages/Common/error";
     }
 }
 
@@ -136,12 +136,12 @@ async function displayPolls(userUID) {
                 activityBox.className = "activity-box";
 
                 activityBox.innerHTML = `
-                    <div onclick="window.location.href='../pollDetails/index.html?poll-id=${poll.id}'" class="content">
+                    <div onclick="window.location.href='exPoll/src/pages/Admin/pollDetails/index.html?poll-id=${poll.id}'" class="content">
                         <h5>${poll.title || 'Untitled Poll'}</h5>
                         <p>${startDateTime}</p>
                     </div>
                     <div class="icon">
-                        <img src="/src/assets/icons/poll-solid.png" alt="icon" />
+                        <img src="/exPoll/src/assets/icons/poll-solid.png" alt="icon" />
                     </div>
                 `;
 
@@ -166,5 +166,4 @@ async function displayPolls(userUID) {
     }
 }
 
-// Initialize the application
 initialize();
