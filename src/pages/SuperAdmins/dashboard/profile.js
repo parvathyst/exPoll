@@ -1,11 +1,11 @@
 import { auth } from "../../../backend/firebase/config.js"; 
-import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 function handleLogout() {
     signOut(auth)
         .then(() => {
             console.log("User signed out successfully");
-            window.location.href = "../../common/login"; 
+            window.location.href = "/exPoll/src/pages/Common/login/"; 
         })
         .catch((error) => {
             console.error("Error signing out:", error);
@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const change = document.getElementById("change-password-link");
     if (change) {
         change.addEventListener("click", () => {
-            const htmlPath = "../../Common/changePassword"; // Path to your HTML file
-            window.location.href = htmlPath; // Redirect to the new HTML page
+            const htmlPath = "/exPoll/src/pages/Common/changePassword/";
+            window.location.href = htmlPath;
         });
     } else {
         console.error("Change link not found");

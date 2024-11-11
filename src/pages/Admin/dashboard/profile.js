@@ -5,7 +5,7 @@ function handleLogout() {
     signOut(auth)
         .then(() => {
             console.log("User signed out successfully");
-            window.location.href = "/exPoll/src/pages/common/login/"; 
+            window.location.href = "/exPoll/src/pages/Common/login/"; 
         })
         .catch((error) => {
             console.error("Error signing out:", error);
