@@ -169,7 +169,7 @@ function displayOption(pollOption) {
     pollItem.classList.add("unlocked-poll-card");
   } else {
     pollItem.innerHTML = `
-    <h4>${pollOption.content}</h4><img src="/src/assets/icons/lock.svg">
+    <h4>${pollOption.content}</h4><img src="/exPoll/src/assets/icons/lock.svg">
     `;
     pollItem.classList.add("locked-poll-card");
     pollItem.disabled = true;
