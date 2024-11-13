@@ -39,7 +39,7 @@ document.getElementById("submit").addEventListener("click", () => {
 function isSelected(id) {
     const newOptionRef = ref(db, `/poll-options/${id}`);
     
-    return get(newOptionRef).then(snapshot => {
+    get(newOptionRef).then(snapshot => {
         if (snapshot.exists()) {
             let found = false;
             let isSelected = false;
@@ -90,15 +90,15 @@ function readPollDetails() {
             pollDetails = data;
             const now = new Date();
 
-            const startDateTime = new Date(`${pollDetails.startDateTime}:00`);
-            const endDateTime = new Date(`${pollDetails.endDateTime}:00`);
-
+            const startDateTime = new Date(`${pollDetails.startDateTime}`);
+            const endDateTime = new Date(`${pollDetails.endDateTime}`);
+            console.log(now);
             if (now < startDateTime) {
                 alert("The poll has not started yet.");
                 window.location.href = "../accessDenied/pleasewait.html";
             } else if (now > endDateTime) {
                 alert("The poll has ended."); 
-                window.location.href = "../accessDenied/timeisup.html";
+                // window.location.href = "../accessDenied/timeisup.html";
             } else {
                 if(isValidEmail(email))
                 {
@@ -107,6 +107,7 @@ function readPollDetails() {
 
                     if (pollDetails.isPrivatePoll) {
                       checkPrivatePollRecipients(id);
+
                     } else {
                        checkPublicPollRecipients(id);
                     }
@@ -134,11 +135,11 @@ async function checkPrivatePollRecipients(id) {
                 if (recipient.email === email) {
                     found = true;
                     const hasDone = isSelected(id);
-                    console.log(hasDone);
+                    console.log(isSelected(id));
                     
                     if(hasDone){
                       
-                        window.location.href = "../accessDenied/timeisup.html";
+                        // window.location.href = "../accessDenied/nomore.html";
                     }
                     else{
                         window.location.href = `../castPoll/?id=${id}`;
