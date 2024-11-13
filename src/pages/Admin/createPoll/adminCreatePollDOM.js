@@ -132,6 +132,12 @@ async function fetchDataAndGenerateLink() {
                 hasDone: false,
             };
         }
+        else{
+            pollRecipients[index] = {
+                email: "",
+                hasDone: false,
+            };
+        }
     });
 
     const isPrivatePoll = document.getElementById('toggleSwitch').checked;

@@ -162,14 +162,16 @@ async function checkPrivatePollRecipients(id) {
 function  checkPublicPollRecipients(id) {
     console.log(id);
     const pollRef = ref(db, `/poll-recipients/${id}`);
-    
+    console.log(pollRef);
     get(pollRef).then(snapshot => {
-
+        
         let found = false;
 
         if (snapshot.exists()) {
+            console.log(id);
             snapshot.forEach(sessionSnapshot => {
                 const recipient = sessionSnapshot.val();
+                
                 if (recipient.email === email) {
                     found = true; 
                     const hasDone = isSelected(id);
