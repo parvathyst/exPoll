@@ -39,7 +39,7 @@ document.getElementById("submit").addEventListener("click", () => {
 function isSelected(id) {
     const newOptionRef = ref(db, `/poll-options/${id}`);
     
-    get(newOptionRef).then(snapshot => {
+    return get(newOptionRef).then(snapshot => {
         if (snapshot.exists()) {
             let found = false;
             let isSelected = false;
@@ -52,7 +52,6 @@ function isSelected(id) {
                     console.log(isSelected)
                 }
             });
-            console.log(isSelected)
             return found ? isSelected : false;
         } else {
             return false;
@@ -62,6 +61,7 @@ function isSelected(id) {
         return false; 
     });
 }
+
 
 async function getrecipient(id){
     const newRecipientRef = ref(db, `/poll-recipients/${id}`);
@@ -125,7 +125,7 @@ async function checkPrivatePollRecipients(id) {
     
     const pollRef = ref(db, `/poll-recipients/${id}`);
     
-    get(pollRef).then(snapshot => {
+    await get(pollRef).then(snapshot => {
         if (snapshot.exists()) {
             let found = false;
             snapshot.forEach(sessionSnapshot => {
@@ -134,17 +134,16 @@ async function checkPrivatePollRecipients(id) {
                 
                 if (recipient.email === email) {
                     found = true;
-                    const hasDone = isSelected(id);
-                    console.log(isSelected(id));
-                    
-                    if(hasDone){
+                    isSelected(id).then(has => {
+                        console.log(has);
+                        if(has){
                       
-                        window.location.href = "../accessDenied/nomore.html";
-                    }
-                    else{
-                        window.location.href = `../castPoll/?id=${id}`;
-                    }
-                   
+                            window.location.href = "../accessDenied/nomore.html";
+                        }
+                        else{
+                            window.location.href = `../castPoll/?id=${id}`;
+                        }
+                    });
                 }
             });
             if (!found) {
@@ -159,11 +158,11 @@ async function checkPrivatePollRecipients(id) {
     });
 }
 
-function  checkPublicPollRecipients(id) {
+async function  checkPublicPollRecipients(id) {
     console.log(id);
     const pollRef = ref(db, `/poll-recipients/${id}`);
     console.log(pollRef);
-    get(pollRef).then(snapshot => {
+    await get(pollRef).then(snapshot => {
         
         let found = false;
 
@@ -174,18 +173,19 @@ function  checkPublicPollRecipients(id) {
                 
                 if (recipient.email === email) {
                     found = true; 
-                    const hasDone = isSelected(id);
-                    console.log(isSelected(id));
-                    // isSelected(id);
-                    if(hasDone){
-                        window.location.href = "../accessDenied/nomore.html";
-
-                    }
-                    else{
-                        window.location.href = `../castPoll/?id=${id}`;
-                        
-
-                    }
+                    isSelected(id).then(has => {
+                        console.log(has);
+                        if(has){
+                            window.location.href = "../accessDenied/nomore.html";
+    
+                        }
+                        else{
+                            window.location.href = `../castPoll/?id=${id}`;
+                            
+    
+                        }
+                    });
+                    
                 }
             });
             if(found == false){

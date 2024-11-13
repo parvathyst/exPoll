@@ -21,7 +21,6 @@ function preventBackNavigation() {
 // Call preventBackNavigation when the page loads
 window.onload = preventBackNavigation;
 
-
 const url = window.location.href;
 const urlParams = new URL(url);
 let id = urlParams.searchParams.get("id");
@@ -30,6 +29,7 @@ let pollOptions;
 let pollDetails;
 confirmPopUpBox();
 cancelPopUpBox();
+
 
 function confirmPopUpBox() {
   const confirmPopUpButton = document.getElementById("cast-poll-button");
@@ -53,9 +53,7 @@ function cancelPopUpBox() {
 
 
 const confirmButton = document.getElementById("confirm");
-confirmButton.onclick = (event) => {
-  event.preventDefault(); 
-  console.log("Confirm button clicked");
+confirmButton.onclick = () => {
   const endDateTime = pollDetails.endDateTime;
   console.log(endDateTime);
   const currentDateTime = new Date();
@@ -112,10 +110,19 @@ function resultPage(selectedOptionRef) {
 
   disableBackButton();
 
+  sessionStorage.setItem("isOnPage2", "true");
+
 
   writeData();
 
 }
+
+window.onload = function() {
+  if (sessionStorage.getItem("isOnPage2")) {
+    window.location.href = `../enterPoll/?id=${id}` ;
+  }
+};
+
 
 function disableBackButton() {
   history.pushState(null, null, window.location.href);
@@ -237,7 +244,7 @@ function displayPollDetails(pollDetails) {
   document.querySelector('.poll-information h4').innerText = pollDetails.description;
 
   const startDate = new Date(`${pollDetails.startDateTime}`);
-
+  
   console.log(pollDetails.startDateTime);
 
   const endDate = new Date(`${pollDetails.endDateTime}`);
