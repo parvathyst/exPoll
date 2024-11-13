@@ -236,6 +236,8 @@ function displayPollDetails(pollDetails) {
 
   const startDate = new Date(`${pollDetails.startDateTime}`);
 
+  console.log(pollDetails.startDateTime);
+
   const endDate = new Date(`${pollDetails.endDateTime}`);
 
 
@@ -288,9 +290,9 @@ function displayPollDetails(pollDetails) {
 
   document.querySelector(".datetime").innerHTML = `
 
-  <h5><strong>Active from:</strong> ${startDateFormatted}</h5>
+  <h5><strong>Active from:</strong> ${pollDetails.startDateTime}</h5>
 
-  <h5><strong>Closing at:</strong> ${endDateFormatted}</h5>
+  <h5><strong>Closing at:</strong> ${pollDetails.endDateTime}</h5>
 
 `;
 }
