@@ -14,7 +14,7 @@ function preventBackNavigation() {
 
   // Handle the back button by moving forward immediately
   window.onpopstate = function () {
-      history.go(1); // Go forward if back is pressed
+    history.go(1); // Go forward if back is pressed
   };
 }
 
@@ -119,7 +119,7 @@ function disableBackButton() {
   history.pushState(null, null, window.location.href);
 
   window.onpopstate = function () {
-    history.go(1); 
+    history.go(1);
   };
 }
 
@@ -235,24 +235,64 @@ function displayPollDetails(pollDetails) {
   document.querySelector('.poll-information h4').innerText = pollDetails.description;
 
   const startDate = new Date(`${pollDetails.startDateTime}`);
+
   const endDate = new Date(`${pollDetails.endDateTime}`);
 
 
+
   const formatTime = (date) => {
+
     const hours = date.getHours();
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const period = hours >= 12 ? 'pm' : 'am';
-    const formattedHours = hours % 12 || 12;
-    return `${date.toLocaleDateString()}  ${formattedHours}:${minutes} ${period}`;
+
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    let period;
+
+    let formattedHours;
+
+
+
+    if (hours === 0) {
+
+      period = "am";
+
+      formattedHours = 12; // Midnight
+
+    } else if (hours === 12) {
+
+      period = "pm";
+
+      formattedHours = 12; // Noon
+
+    } else {
+
+      period = hours >= 12 ? "pm" : "am";
+
+      formattedHours = hours % 12 || 12; // Converts 13–23 hours to 1–11, keeping 12 as-is
+
+    }
+
+
+
+    return `${date.toLocaleDateString()} ${formattedHours}:${minutes} ${period}`;
+
   };
 
+
+
   const startDateFormatted = formatTime(startDate);
+
   const endDateFormatted = formatTime(endDate);
 
-  document.querySelector('.datetime').innerHTML = `
-    <h5><strong>Active from:</strong> ${startDateFormatted}</h5>
-    <h5><strong>Closing at:</strong> ${endDateFormatted}</h5>
-  `;
+
+
+  document.querySelector(".datetime").innerHTML = `
+
+  <h5><strong>Active from:</strong> ${startDateFormatted}</h5>
+
+  <h5><strong>Closing at:</strong> ${endDateFormatted}</h5>
+
+`;
 }
 
 
