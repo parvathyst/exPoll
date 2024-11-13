@@ -98,7 +98,7 @@ function readPollDetails() {
                 window.location.href = "../accessDenied/pleasewait.html";
             } else if (now > endDateTime) {
                 alert("The poll has ended."); 
-                // window.location.href = "../accessDenied/timeisup.html";
+                window.location.href = "../accessDenied/timeisup.html";
             } else {
                 if(isValidEmail(email))
                 {
@@ -139,7 +139,7 @@ async function checkPrivatePollRecipients(id) {
                     
                     if(hasDone){
                       
-                        // window.location.href = "../accessDenied/nomore.html";
+                        window.location.href = "../accessDenied/nomore.html";
                     }
                     else{
                         window.location.href = `../castPoll/?id=${id}`;
