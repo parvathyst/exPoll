@@ -55,6 +55,7 @@ function cancelPopUpBox() {
 const confirmButton = document.getElementById("confirm");
 confirmButton.onclick = (event) => {
   event.preventDefault(); 
+  console.log("Confirm button clicked");
   const endDateTime = pollDetails.endDateTime;
   console.log(endDateTime);
   const currentDateTime = new Date();
