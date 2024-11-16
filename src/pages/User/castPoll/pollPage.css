@@ -252,8 +252,6 @@ body {
 }
 
 
-/* media query */
-
 /* Responsive styles */
 @media screen and (max-width: 800px) {
   .pollHeading {
@@ -264,7 +262,7 @@ body {
   .poll-central-div {
     padding: 5px;
     flex-direction: column;
-    height: 85vh; /* Full screen height */
+    height: 85%; /* Full screen height */
     gap: 10px; /* Space between the left and right divs */
     display: flex;
     margin: 10px;
