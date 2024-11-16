@@ -143,3 +143,11 @@ window.addEventListener("click", (event) => {
         if (event.target === popup) closePopup(popup);
     });
 });
+document.querySelectorAll(" .close").forEach(closeElem => {
+    closeElem.addEventListener("click", (e) => {
+        const popup = e.target.closest(".modal");
+        if (popup) {
+            closePopup(popup);
+        }
+    });
+});
