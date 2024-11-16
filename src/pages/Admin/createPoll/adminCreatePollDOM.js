@@ -37,7 +37,7 @@ function addRecipient(value) {
     recipientContainer.classList.add('recipient-item', 'D-white');
     recipientContainer.innerHTML = `
         <input type="email" value="${value || ''}" placeholder="Enter Email" class="D-no-border">
-        <img src="/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
+        <img src="/exPoll/src/assets/icons/trash_icon.svg" alt="delete icon" onclick="removeRecipient(this)" />
     `;
     document.querySelector('.recipient-container-none').insertAdjacentElement('afterend', recipientContainer);
 }
