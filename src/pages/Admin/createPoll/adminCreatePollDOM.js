@@ -209,9 +209,9 @@ function pop(pollData, pollRecipients) {
 
                 Poll will be open 
 
-                from: ${pollData.startDate} [${pollData.startTime}] 
+                from: ${pollData.startDateTime}
                 
-                to: ${pollData.endDate} [${pollData.endTime}]
+                to: ${pollData.endDateTime} 
             `;
 
             Object.keys(pollRecipients).forEach(key => {
