@@ -1,10 +1,19 @@
 function downloadExcel(pollDetails, pollOptionsAndRecipients) {
     const wb = XLSX.utils.book_new();
 
+    // const data = [
+    //     [pollDetails.title, "", ""],
+    //     [pollDetails.description, "", ""],
+    //     [],
+    //     [],
+    //     ["Content", "Name", "Email"],
+    //     [],
+    // ];
     const data = [
         [pollDetails.title, "", ""],
         [pollDetails.description, "", ""],
         [],
+        ["From -", pollDetails.startDateTime, "To -", pollDetails.endDateTime],
         [],
         ["Content", "Name", "Email"],
         [],
