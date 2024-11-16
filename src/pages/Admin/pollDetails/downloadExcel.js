@@ -9,11 +9,20 @@ function downloadExcel(pollDetails, pollOptionsAndRecipients) {
     //     ["Content", "Name", "Email"],
     //     [],
     // ];
+    // const data = [
+    //     [pollDetails.title, "", ""],
+    //     [pollDetails.description, "", ""],
+    //     [],
+    //     ["From -", pollDetails.startDateTime, "To -", pollDetails.endDateTime],
+    //     [],
+    //     ["Content", "Name", "Email"],
+    //     [],
+    // ];
     const data = [
         [pollDetails.title, "", ""],
         [pollDetails.description, "", ""],
         [],
-        ["From -", pollDetails.startDateTime, "To -", pollDetails.endDateTime],
+        [`From - ${pollDetails.startDateTime}`, `To - ${pollDetails.endDateTime}`],
         [],
         ["Content", "Name", "Email"],
         [],
