@@ -176,7 +176,7 @@ function sendEmail(toEmail, subject, message) {
         message: message
     };
 
-    emailjs.send('service_bxt3eel', 'template_0mg1p1y', templateParams)
+    emailjs.send('service_3oe3rm8', 'template_w6t6b5h', templateParams)
         .then((response) => {
             console.log('Email sent successfully!', response.status, response.text);
         })
