@@ -202,26 +202,26 @@ function pop(pollData, pollRecipients) {
         hidePopup();
         try {
             const subject = pollData.title;
+        //     const message = `
+        //     <p>${pollData.description}</p>
+        //     <p><strong>Link to access poll:</strong> <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>
+        //     <p>Poll will be open:</p>
+        //     <ul>
+        //         <li><strong>From:</strong> ${pollData.startDateTime}</li>
+        //         <li><strong>To:</strong> ${pollData.endDateTime}</li>
+        //     </ul>
+        // `;
             const message = `
-            <p>${pollData.description}</p>
-            <p><strong>Link to access poll:</strong> <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>
-            <p>Poll will be open:</p>
-            <ul>
-                <li><strong>From:</strong> ${pollData.startDateTime}</li>
-                <li><strong>To:</strong> ${pollData.endDateTime}</li>
-            </ul>
-        `;
-            // const message = `
-            //     ${pollData.description}
+                ${pollData.description}
 
-            //     Link to access poll: ${generatedLink}
+                Link to access poll: ${generatedLink}
 
-            //     Poll will be open 
+                Poll will be open 
 
-            //     from: ${pollData.startDateTime}
+                from: ${pollData.startDateTime}
                 
-            //     to: ${pollData.endDateTime} 
-            // `;
+                to: ${pollData.endDateTime} 
+            `;
 
             Object.keys(pollRecipients).forEach(key => {
                 const data = pollRecipients[key];
